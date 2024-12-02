@@ -188,7 +188,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addcategory' %}show{% endif %}" id="category">
+            <div class="collapse {% if request.path == '/addcategory' or  request.path == '/viewcategory' %}show{% endif %}" id="category">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addcategory' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_category" %}">
@@ -196,8 +196,8 @@
                     <span class="sidebar-normal"> Add Category </span>
                   </a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/rtl.html">
+                <li class="nav-item {% if request.path == '/viewcategory' %}active{% endif %} ">
+                  <a class="nav-link" href="{% url "view_category" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Category </span>
                   </a>
@@ -362,23 +362,23 @@
             </div>
           </li>
 
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#language">
               <i class="material-icons">language</i>
               <p> Manage Languages
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse" id="language">
+            <div class="collapse {% if request.path == '/addlanguage' or request.path == '/viewlanguage' %}show{% endif %}" id="language">
               <ul class="nav">
-                <li class="nav-item ">
+                <li class="nav-item {% if request.path == '/addlanguage' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_language" %}">
                     <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
                     <span class="sidebar-normal"> Add Language </span>
                   </a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/rtl.html">
+                <li class="nav-item {% if request.path == '/viewlanguage' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewlanguage" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Language  </span>
                   </a>

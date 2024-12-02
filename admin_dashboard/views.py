@@ -83,6 +83,68 @@ def addcategory_view(request):
     except Exception as e:
         return JsonResponse({'success':False,'error':str(e)},status=500)
     
+    
+def View_category(request):
+    data=Category.objects.all()
+    return render(request,'view_category.html',{'data':data})
+
+
+def edit_category_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        category = Category.objects.get(pk=pk)
+    except Category.DoesNotExist:
+        messages.error(request, 'Category does not exist.')
+        return redirect('view_category')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Category_form(request.POST, instance=category)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            category = form.save(commit=False)
+            category.save()
+
+            # Associate the formset with the supplier
+            
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Category.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/category_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('view_category')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating category failed.')
+            print(form.errors)
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form = Category_form(instance=category)
+        form_html = render_to_string('partials/editcategory.html', {'form': form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+    
+    
+    
+def delete_category_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Category.objects.get(pk=pk)
+            data.delete()
+            
+            all_data=Category.objects.all()
+            updated_table_html=render_to_string('partials/category_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Category.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+
+           
 
 
 
@@ -107,7 +169,66 @@ def addlanguage_view(request):
 
     
     
+def View_language(request):
+    data=Language.objects.all()
+    return render(request,'view_language.html',{'data':data})
+
+
+
+def edit_language_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        language = Language.objects.get(pk=pk)
+    except Language.DoesNotExist:
+        messages.error(request, 'Language does not exist.')
+        return redirect('viewlanguage')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Languages_form(request.POST, instance=language)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            language = form.save(commit=False)
+            language.save()
+
+            # Associate the formset with the supplier
+            
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Language.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/language_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('viewlanguage')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating language failed.')
+            print(form.errors)
     
+    else:
+        # For GET request, populate the forms with existing data
+        form = Languages_form(instance=language)
+        form_html = render_to_string('partials/editlanguage.html', {'form': form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+
+
+
+def delete_language_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Language.objects.get(pk=pk)
+            data.delete()
+            
+            all_data=Language.objects.all()
+            updated_table_html=render_to_string('partials/language_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Category.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
 
 
 def addsupplier_view(request):

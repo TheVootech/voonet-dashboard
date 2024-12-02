@@ -16,7 +16,19 @@ urlpatterns = [
     path('addpackage',addpackages_view,name="add_package"),
     
     path('addcategory',addcategory_view,name="add_category"),
+    path('viewcategory',View_category,name="view_category"),
+    path('editcategory/<str:pk>/',edit_category_view,name='editcategory'),
+    path('deletecategory/<str:pk>/',delete_category_view,name='deletecategory'),
+
+
+
+    
     path('addlanguage',addlanguage_view,name="add_language"),
+    path('viewlanguage',View_language,name="viewlanguage"),
+    path('editlanguage/<str:pk>/',edit_language_view,name='editlanguage'),
+    path('deletelanguage/<str:pk>/',delete_language_view,name='deletelanguage'),
+
+
     
     path('addsupplier',addsupplier_view,name="add_supplier"),
     path('viewsupplier',Supplier_view,name="supplier"),

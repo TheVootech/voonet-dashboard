@@ -91,7 +91,6 @@
                                                 <th class="text-center text-rose" style="font-weight: 900;">SL.NO</th>
                                                 <th class="text-center text-rose" style="font-weight: 900;">ID</th>
                                                 <th class="text-center text-rose" style="font-weight: 900;">CATEGORY</th>
-                                                <th class="text-center text-rose" style="font-weight: 900;">ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -100,14 +99,7 @@
                                                     <td class="text-center" style="font-weight: 500;">{{ forloop.counter }}</td>
                                                     <td class="text-center text-capitalize" style="font-weight: 500;">{{ i.language_id }}</td>
                                                     <td class="text-center text-capitalize" style="font-weight: 500;">{{ i.language_name }}</td>
-                                                    <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" class="btn btn-success">
-                                                            <a href="#" style="color: white;"><i class="material-icons">edit</i></a>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" class="btn btn-danger">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
+                                                    
                                                 </tr>
                                             {% endfor %}
                                         </tbody>
@@ -160,14 +152,7 @@ function updateTable(languages) {
             <td class="text-center" style="font-weight: 500;">${index + 1}</td>
             <td class="text-center text-capitalize" style="font-weight: 500;">${language.language_id}</td>
             <td class="text-center text-capitalize" style="font-weight: 500;">${language.language_name}</td>
-            <td class="td-actions text-center">
-                <button type="button" rel="tooltip" class="btn btn-success">
-                    <a href="#" style="color: white;"><i class="material-icons">edit</i></a>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-danger">
-                    <i class="material-icons">close</i>
-                </button>
-            </td>
+            
         </tr>`;
         tableBody.insertAdjacentHTML('beforeend', row);
     });
