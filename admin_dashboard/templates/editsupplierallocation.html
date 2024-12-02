@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row text-center"><h2 class="font-weight-bold"style="font-family:poppins,serif;color:#000;">Edit Supplier Allocation</h2></div>
+        <div class="row mt-4">
+        {% if messages %}
+            {% for message in messages.warning %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show packagealert text-center" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+            <div class="col-3"></div>
+            
+            <div class="col-lg-6 col-md-12 col-md-12  pt-3 text-black">
+              <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">add</i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'new_supplier_allocation' %}" method="post" id="supp-form">
+                        {% csrf_token %}
+                        <div class="text-black align-items-center">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Package</label>
+                                    {{form.package}}
+                                    {% if form.package.errors %}
+                                      <ul class="errorlist text-primary text-bold">
+                                        {% for error in form.package.errors %}
+                                          <li>{{ error }}</li>
+                                        {% endfor %}
+                                      </ul>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Supplier</label>
+                                  {{form.supplier}} 
+                                  {% if form.supplier.errors %}
+                                    <ul class="errorlist text-primary text-bold">
+                                      {% for error in form.supplier.errors %}
+                                        <li>{{ error }}</li>
+                                      {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <button class="btn btn-square btn-rose w-100 mt-4" type="submit">Edit Allocation</button>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+          </div>
+            
+            <div class="col-3"></div>
+           
+    </div>
+</div>
+
+
+
+{% endblock content %}

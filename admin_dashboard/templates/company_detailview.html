@@ -1,0 +1,353 @@
+
+{% extends "base.html" %}
+{% block content %}
+            <div class="row mt-5">
+                <div class="col-1"></div>
+                <div class="col-md-10 ml-auto mr-auto">
+                  <div class="page-categories">
+                    <h3 class="title text-center font-weight-bold">{{data.name}}</h3>
+                    <br />
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center mt-3" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#details" role="tablist">
+                          <i class="material-icons">business</i> Company Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#address" role="tablist">
+                          <i class="material-icons">location_on</i> Address
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contactperson" role="tablist">
+                          <i class="material-icons">person</i> Contact Person
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#bank" role="tablist">
+                          <i class="material-icons">payment</i>Bank Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#document" role="tablist">
+                          <i class="material-icons">assignment</i>Documents
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="tab-content tab-space tab-subcategories">
+                      <div class="tab-pane active" id="details">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Company Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TYPE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company_id}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company_type}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.mobile}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.email}}</td>
+                                        {% if data.status == "Active" %}
+                                          <td class="text-center text-capitalize text-success" style="font-weight: 500;">{{data.status}}</td>
+                                        {% elif data.status == "Inactive" %}
+                                          <td class="text-center text-capitalize text-priamry" style="font-weight: 500;">{{data.status}}</td>
+                                        {% else %}
+                                          <td class="text-center text-capitalize text-warning" style="font-weight: 500;">{{data.status}}</td>
+                                        {% endif %}
+
+                                        
+                                        
+      
+                                      </tr>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                        
+                       
+                      </div>
+                      <div class="tab-pane" id="address">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Address of the Company</h4>
+                            
+                          </div>
+                          <div class="card-body">
+                           
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >ADDRESS</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >CITY</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >STATE</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >COUNTRY</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >PIN/ZIP CODE</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >PHONE</th>
+                                   
+          
+                                    
+                                    
+                                  </tr>
+                                  
+                                </thead>
+                                <tbody>
+
+                                  <tr>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.address1}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.city1}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.state1}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.country1}}</td>
+                                    
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.pincode1}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.phone1}}</td>
+                                    
+                                    
+  
+                                  </tr>
+                                 
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                            {% if data.address2 %}
+                            <h4 class="text-center font-weight-bold mt-4 mb-3">Address 2</h4>
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >ADDRESS</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >CITY</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >STATE</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >COUNTRY</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >PIN/ZIP CODE</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >PHONE</th>
+                                   
+          
+                                    
+                                    
+                                  </tr>
+                                  
+                                </thead>
+                                <tbody>
+
+                                  <tr>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.address2}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.city2}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.state2}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.country2}}</td>
+                                    
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.pincode2}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.phone2}}</td>
+                                    
+                                    
+  
+                                  </tr>
+                                 
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="contactperson">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Contact Person</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >DESIGNATION</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >WHATSAPP</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+                                      {% for i in contact %}
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{forloop.counter}}</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.designation}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.mobile}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.whatsapp}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
+
+                                        
+                                      </tr>
+                                      {% endfor %}
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="bank">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Bank Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ACC NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >BANK NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ACC NO :</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >IBAN</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >SWIFT</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ROUTING NO : </th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >BANCH</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >CITY</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >COUNTRY</th>
+
+
+                                       
+              
+                                        
+                                        
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.account_name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.bank_name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.account_number}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.iban}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.swift}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.routing_number}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.branch}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.city}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.country}}</td>
+
+
+                                        
+                                        
+      
+                                      </tr>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="document">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Documents</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TRADE LICENSE NO :</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TRADE LICENSE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >VAT NO :</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >VAT CERTIFICATE</th>
+                                        
+
+
+                                       
+              
+                                        
+                                        
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.tl_number}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.trade_license }}" target="_blank" rel="noopener noreferrer">
+                                            File
+                                        </a></td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vat_number}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.vat_certificate }}" target="_blank" rel="noopener noreferrer">
+File
+                                        </a></td>
+                                        
+      
+                                      </tr>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1"></div>
+              </div>
+        </div>
+
+<script>
+
+    
+</script>
+
+{% endblock content %}
+
+

@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .alertmessage{
+        position: fixed; 
+        top: 1px; 
+        left:55%;
+        transform: translateX(-50%); 
+        padding: 30px 30px; 
+        background-color: #4CAF50; 
+        color: white; 
+        font-size: 16px; 
+        border-radius: 3px; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        z-index: 1000; 
+        width: 50%; /* This makes the alert have the same width as col-6 */
+    }
+</style>
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <h3 class="font-weight-bold" style="font-family:poppins,serif;color:#000;">Add New Category</h3>
+        </div>
+        <div class="row">
+            
+        <div id="success-message" class="alert alert-success text-center font-weight-bold alertmessage " role="alert" style="display: none;" >
+    
+        Category added successfully!
+        </div>
+           
+        <div id="error-message" class="alert alert-danger text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+              
+        </div>
+          
+        </div>
+        <div class="row mt-4">
+            
+            <div class="col-3"></div>
+            <div class="col-lg-6 col-md-12 col-md-12 pt-3 text-black">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">add</i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'add_category' %}" method="post" id="cat-form">
+                            {% csrf_token %}
+                            <div class="text-black align-items-center">
+                                <div class="col-md-12">
+                                    <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Category</label>
+
+                                    <div class="form-group">
+                                        {{ form.category_name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <button class="btn btn-square btn-rose w-100 mt-4" type="submit">ADD</button>
+                                </div>
+                                <div class="col-4"></div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-3"></div>
+
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-lg-8 col-md-12 col-md-12">
+                        <h3 class="card-title text-center mb-5" style="font-weight: 500;">Existing Categories</h3>
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">assignment</i>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="cat-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center text-rose" style="font-weight: 900;">SL.NO</th>
+                                                <th class="text-center text-rose" style="font-weight: 900;">ID</th>
+                                                <th class="text-center text-rose" style="font-weight: 900;">CATEGORY</th>
+                                                <th class="text-center text-rose" style="font-weight: 900;">ACTIONS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in data %}
+                                                <tr>
+                                                    <td class="text-center" style="font-weight: 500;">{{ forloop.counter }}</td>
+                                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{ i.category_id }}</td>
+                                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{ i.category_name }}</td>
+                                                    <td class="td-actions text-center">
+                                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                                            <a href="#" style="color: white;"><i class="material-icons">edit</i></a>
+                                                        </button>
+                                                        <button type="button" rel="tooltip" class="btn btn-danger">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let form = document.getElementById('cat-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "{% url 'add_category' %}",
+        data: $(form).serialize(),
+        dataType: "json",
+        success: function(response) {
+            console.log("AJAX request successful:", response);
+            if (response.success) {
+                
+                updateTable(response.category);
+                showSuccessMessage();
+                form.reset();
+            } else {
+                showErrorMessage(response.errors);
+                console.log("Form submission errors:", response.errors);
+            }
+        },
+        error: function(xhr, status, error) {
+            showErrorMessage("An Unexpected Error Occurs Please Try Again Later");
+            console.error("AJAX request failed:", status, error);
+            console.log("Response Text:", xhr.responseText);
+        }
+    });
+});
+
+function updateTable(category) {
+    console.log("Updating table with new data:", category);
+    let tableBody = document.querySelector('#cat-table tbody');
+    tableBody.innerHTML = '';
+    category.forEach(function(cat, index) {
+        let row = `<tr>
+            <td class="text-center" style="font-weight: 500;">${index + 1}</td>
+            <td class="text-center text-capitalize" style="font-weight: 500;">${cat.category_id}</td>
+            <td class="text-center text-capitalize" style="font-weight: 500;">${cat.category_name}</td>
+            <td class="td-actions text-center">
+                <button type="button" rel="tooltip" class="btn btn-success">
+                    <a href="#" style="color: white;"><i class="material-icons">edit</i></a>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-danger">
+                    <i class="material-icons">close</i>
+                </button>
+            </td>
+        </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', row);
+    });
+}
+
+function showSuccessMessage() {
+    let successMessage = document.getElementById('success-message');
+    successMessage.style.display = 'block';
+
+    // Hide the message after 3 seconds
+    setTimeout(function() {
+        successMessage.style.display = 'none';
+    }, 3000);
+}
+
+function showErrorMessage(errors) { 
+  let errorMessage = document.getElementById('error-message'); 
+  errorMessage.innerHTML = ''; 
+  if (typeof errors === 'string') { 
+    errorMessage.innerHTML = errors; 
+  } 
+  else { 
+    for (let key in errors) { 
+      if (errors.hasOwnProperty(key)) { 
+        let errorText = `${errors[key]}`; 
+        let errorItem = document.createElement('div'); 
+        errorItem.innerText = errorText; errorMessage.appendChild(errorItem);
+       } 
+      } 
+    }
+    errorMessage.style.display = 'block';
+     // Hide the message after 5 seconds 
+     setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
+    }
+
+
+
+  
+
+</script>
+
+{% endblock content %}

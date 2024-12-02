@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row text-center"><h2 class="font-weight-bold"style="font-family:poppins,serif;color:#4b0000;">Add New Booking</h2></div>
+        <div class="row mt-4">
+            <div class="col-lg-6 col-md-12 col-md-12 border pt-3 text-black">
+                <form class="form-horizontal text-black">
+                    <div class="row text-black align-items-center">
+                      <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Company/Hotel</label>
+                      <div class="col-md-9">
+                        <div class="form-group ">
+                          <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                            <option selected disabled>Select</option>
+                            <option value="1">One</option>
+                          </select>
+                               </div>
+                      </div>
+                    </div>
+
+                    <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Contact Person</label>
+                        <div class="col-md-9">
+                          <div class="form-group ">
+                            <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                              <option selected disabled>Select</option>
+                              <option value="1">One</option>
+                            </select>
+                                 </div>
+                        </div>
+                      </div>
+
+                      <div class="row text-black align-items-center mb-4">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Tour Package</label>
+                        <div class="col-md-9">
+                          <div class="form-group ">
+                            <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                              <option selected disabled>Select</option>
+                              <option value="1">One</option>
+                            </select>
+                                 </div>
+                        </div>
+                      </div>
+                      <hr class="border border-primary">
+
+                      <div class="mb-4">
+                        <h5 class="text-center font-weight-bold">Quantity of Persons</h5>
+                        <div class="row text-black align-items-center">
+                          <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Adults </label>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                            </div>
+                          </div>
+                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Childrens </label>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row text-black align-items-center">
+                          <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Infant </label>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                            </div>
+                          </div>
+                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Foc </label>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr class="border border-primary">
+
+                      
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Tour Date</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="date" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Tour Time</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="time" class="form-control border border-primary pl-4 pr-4">
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Pickup Location</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="text" class="form-control border border-primary pl-4 pr-4">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Guest Name</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="text" class="form-control border border-primary pl-4 pr-4">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Email</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="email" class="form-control border border-primary pl-4 pr-4">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Contact Number</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="text" class="form-control border border-primary pl-4 pr-4">
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Payment Ref no </label>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                            </div>
+                          </div>
+                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Room no </label>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Payment Mode </label>
+                          <div class="col-md-3">
+                            <div class="form-group ">
+                              <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                <option selected disabled>Select</option>
+                                <option value="1">One</option>
+                              </select>
+                                   </div>
+                          </div>
+                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Payment Status </label>
+                          <div class="col-md-3">
+                            <div class="form-group ">
+                              <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                <option selected disabled>Select</option>
+                                <option value="1">One</option>
+                              </select>
+                                   </div>
+                          </div>
+                      </div>
+
+                      <div class="row text-black align-items-center">
+                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Special Requirements</label>
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <input type="text" class="form-control border border-primary pl-4 pr-4">
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <button class="btn btn-primary btn-square w-100 mt-4">Submit</button>
+
+
+                  </form>
+            </div>
+            <div class="col-lg-6 col-md-12 col-md-12"></div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

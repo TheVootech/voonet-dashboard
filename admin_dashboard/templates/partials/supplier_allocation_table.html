@@ -1,0 +1,173 @@
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-lg-8 col-md-12 col-md-12">
+    <div class="card">
+      <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">assignment</i>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center text-rose" style="font-weight: 900">
+                  SL.NO
+                </th>
+                <th class="text-center text-rose" style="font-weight: 900">
+                  PACKAGE ID
+                </th>
+                <th class="text-center text-rose" style="font-weight: 900">
+                  PACKAGE TITLE
+                </th>
+                <th class="text-center text-rose" style="font-weight: 900">
+                  SUPPLIER
+                </th>
+                <th class="text-center text-rose" style="font-weight: 900">
+                  ACTIONS
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+              <tr>
+                <td class="text-center" style="font-weight: 500">
+                  {{ forloop.counter }}
+                </td>
+                <td
+                  class="text-center text-capitalize"
+                  style="font-weight: 500"
+                >
+                  {{ i.package.package_id }}
+                </td>
+                <td
+                  class="text-center text-capitalize"
+                  style="font-weight: 500"
+                >
+                  {{ i.package.package_title }}
+                </td>
+                <td
+                  class="text-center text-capitalize"
+                  style="font-weight: 500"
+                >
+                  <ol class="mt-2 text-center">
+                    {% for j in i.supplier.all %}
+                    <li class="mt-1 pl-0 ml-0">{{ j.name }}</li>
+                    {% endfor %}
+                  </ol>
+                </td>
+                <td class="td-actions text-center">
+                  <button
+                    type="button"
+                    rel="tooltip"
+                    class="btn btn-success"
+                    data-toggle="modal"
+                    data-target="#editModal{{ i.id }}"
+                    onclick="openEditModal({{ i.id }})"
+                  >
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button
+                    type="button"
+                    rel="tooltip"
+                    class="btn btn-danger"
+                    data-toggle="modal"
+                    data-target="#deleteModal{{i.id}}"
+                    onclick="openDeleteModal({{i.id}})"
+                  >
+                    <i class="material-icons">close</i>
+                  </button>
+                </td>
+              </tr>
+              <div
+                class="modal "
+                id="editModal{{i.id}}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="editModalLabel{{i.id}}"
+                aria-hidden="true"
+                data-backdrop=""
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title" id="editModalLabel{{i.id}}">
+                        Edit Supplier Allocation
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="modal-content-{{i.id}}">
+                      <!-- Form will be loaded here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="modal "
+                id="deleteModal{{i.id}}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="deleteModalLabel{{i.id}}"
+                aria-hidden="true"
+                data-backdrop=""
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="deleteModalLabel{{i.id}}"
+                      >
+                        Delete Supplier Allocation
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="modal-content-{{i.id}}">
+                      <h3 class="text-center font-weight-bold">Are you sure?</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary font-weight-bold"
+                        id="deleteBtn{{i.id}}"
+                        onclick="deleteItem({{i.id}})"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-2"></div>
+</div>

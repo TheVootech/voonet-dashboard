@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <h5 class="modal-title">New Supplier Allocation</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    
+    <div class="card">
+        <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'new_supplier_allocation' %}" method="post" id="supp-form">
+                {% csrf_token %}
+                <div class="text-black align-items-center">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Package</label>
+                            {{form.package}}
+                            {% if form.package.errors %}
+                            <ul class="errorlist text-primary text-bold">
+                                {% for error in form.package.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                        <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Supplier</label>
+                        {{form.supplier}} 
+                        {% if form.supplier.errors %}
+                            <ul class="errorlist text-primary text-bold">
+                            {% for error in form.supplier.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <button class="btn btn-square btn-rose w-100 mt-4" type="submit">Allocate Supplier</button>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary"></button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  </div>

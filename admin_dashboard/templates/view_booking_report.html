@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <h2 class="font-weight-bold" style="font-family:poppins,serif;color:#4b0000;">Package Booking Report</h2>
+        </div>
+
+        <div class="border border-primary searchsection mt-3">
+            <div class="row text-center mt-2">
+                <h6>Search</h6>
+            </div>
+            <form>
+                <div class="row mt-2 pl-3 pr-3">
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Date from</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                  <input type="date" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                              </div>
+                            </div>
+                          </div>
+                        
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Date To</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                  <input type="date" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Pickup Location</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                  <option selected disabled>Select</option>
+                                  <option value="1">One</option>
+                                </select>
+                                     </div>
+                            </div>
+                          </div>
+                    </div>
+    
+                    
+                </div>
+                <div class="row mt-2 pl-3 pr-3">
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Payment Mode</label>
+                            <div class="col-md-9">
+                                <div class="form-group ">
+                                    <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                      <option selected disabled>Select</option>
+                                      <option value="1">One</option>
+                                    </select>
+                                         </div>
+                            </div>
+                          </div>
+                        
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Package</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                  <option selected disabled>Select</option>
+                                  <option value="1">One</option>
+                                </select>
+                                     </div>
+                            </div>
+                          </div>
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Booked by</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                  <option selected disabled>Select</option>
+                                  <option value="1">One</option>
+                                </select>
+                                     </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 pl-3 pr-3">
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Company /Hotel</label>
+                            <div class="col-md-9">
+                                <div class="form-group ">
+                                    <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                      <option selected disabled>Select</option>
+                                      <option value="1">One</option>
+                                    </select>
+                                         </div>
+                            </div>
+                          </div>
+                        
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Status</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                  <option selected disabled>Select</option>
+                                  <option value="1">One</option>
+                                </select>
+                                     </div>
+                            </div>
+                          </div>
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="row text-black align-items-center">
+                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Payment Status</label>
+                            <div class="col-md-9">
+                              <div class="form-group ">
+                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
+                                  <option selected disabled>Select</option>
+                                  <option value="1">One</option>
+                                </select>
+                                     </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100">Search</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="reset" class="btn btn-primary w-100">Reset</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </form>
+            
+        </div>
+
+        <div class="tablesection mt-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table-bordered table-stripened">
+                    <thead>
+                      <tr style="background-color: #381111;color:#ffffff;">
+                        <th class="text-center p-2 border-secondary"></th>
+                        <th class="text-center p-2 border-secondary">Ref No</th>
+                        <th class="text-center p-2 border-secondary">Date</th>
+                        <th class="text-center p-2 border-secondary">Tour Package</th>
+                        <th class="text-center p-2 border-secondary">Customer</th>
+                        <th class="text-center p-2 border-secondary">PickUp location</th>
+                        <th class="text-center p-2 border-secondary">PickUp Time</th>
+                        <th class="text-center p-2 border-secondary">Contact</th>
+                        <th class="text-center p-2 border-secondary">Contact no</th>
+                        <th class="text-center p-2 border-secondary">Room no</th>
+                        <th class="text-center p-2 border-secondary">Name/Ticket</th>
+                        <th class="text-center p-2 border-secondary">Guest Ref no</th>
+                        <th class="text-center p-2 border-secondary">Adult</th>
+                        <th class="text-center p-2 border-secondary">Price</th
+                        <th class="text-center p-2 border-secondary">Child</th>
+                        <th class="text-center p-2 border-secondary">Price</th>
+                        <th class="text-center p-2 border-secondary">Infant</th>
+                        <th class="text-center p-2 border-secondary">Foc</th>
+                        <th class="text-center p-2 border-secondary">Sub Total</th>
+                        <th class="text-center p-2 border-secondary">VAT</th>
+                        <th class="text-center p-2 border-secondary">Grand Total</th>
+                        <th class="text-center p-2 border-secondary">Billing Mode</th>
+                        <th class="text-center p-2 border-secondary">Special</th>
+                        <th class="text-center p-2 border-secondary">Package Status</th>
+                        <th class="text-center p-2 border-secondary">Booked by</th>
+                        <th class="text-center p-2 border-secondary">Edit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" checked>
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div></td>
+                        <td class="text-center">1</td>
+                        
+                        </td>
+                        <td>Moleskine Agenda</td>
+                        <td>Office</td>
+                        <td>25</td>
+                        <td class="text-right">&euro; 49</td>
+                        <td class="text-right">&euro; 1,225</td>
+                        <td>Moleskine Agenda</td>
+                        <td>Office</td>
+                        <td>25</td>
+                        <td class="text-right">&euro; 49</td>
+                        <td class="text-right">&euro; 1,225</td>
+                        <td>Moleskine Agenda</td>
+                        <td>Office</td>
+                        <td>25</td>
+                        <td class="text-right">&euro; 49</td>
+                        <td class="text-right">&euro; 1,225</td>
+                        <td>Moleskine Agenda</td>
+                        <td>Office</td>
+                        <td>25</td>
+                        <td class="text-right">&euro; 49</td>
+                        <td class="text-right">&euro; 1,225</td>
+                        <td>Moleskine Agenda</td>
+                        <td>Office</td>
+                        <td>25</td>
+                        <td class="text-right">&euro; 49</td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

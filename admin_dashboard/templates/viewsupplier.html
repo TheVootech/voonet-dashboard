@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row text-center"><h2 class="font-weight-bold"style="font-family:poppins,serif;color:#000;">Supplier Allocation</h2></div>
+        <div class="row mt-2">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show packagealert text-center" role="alert">
+                    <strong>{{message}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <div class="container mt-2"> 
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-4"></div>
+                            <div class="col-4 text-right">
+                            </div>
+                        </div>
+                        <table class="table table-bordered mt-4"  style="border-radius: 5px !important;">
+                            <thead style="background-color: #002f75 !important;">
+                              <tr>
+                                <th class="font-weight-bold text-center" style="background-color: #000 !important;color:white;">Supplier ID</th>
+                                <th class="font-weight-bold text-center" style="background-color: #000 !important;color:white;">name</th>
+                                <th class="font-weight-bold text-center" style="background-color: #000 !important;color:white;">Designation</th>
+                                <th class="font-weight-bold text-center" style="background-color: #000 !important;color:white;">Action</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for i in data %}
+                              <tr>
+                                <td class="text-center" style="font-weight: 400;">{{i.supplier}}</td>
+                                <td class="text-center" style="font-weight: 400;">{{i.name}}</td>
+                                <td class="text-center" style="font-weight: 400;">{{i.designation}}</td>
+
+                                <td class="text-center " style="font-weight: 400;">
+                                    {% comment %} <ol class="mt-2">
+                                        {% for j in i.supplier.all %}
+                                            <li class="mt-1">{{j.name}}</li>
+                                        {% endfor %}
+                                    </ol></td> {% endcomment %}
+                                <td class="text-center">
+                                    <a href="editsupplierallocation/{{i.id}}/"><i class="material-icons" style="color: #002f75;">edit</i></a>
+                                    <i class="material-icons"> f</i> <a href="deletesupplierallocation/{{i.id}}/"> <i class="material-icons text-primary">delete</i></td></a>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col-1"></div>
+                </div>         
+                
+              </div>
+              
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,703 @@
+{% extends "base.html" %} {% block content %}
+
+<style>
+  .alertmessage{
+      position: fixed; 
+      top: 1px; 
+      left:55%;
+      transform: translateX(-50%); 
+      padding: 30px 30px; 
+      background-color: #4CAF50; 
+      color: white; 
+      font-size: 16px; 
+      border-radius: 3px; 
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+      z-index: 1000; 
+      width: 50%; /* This makes the alert have the same width as col-6 */
+  }
+</style>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row text-center">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{message.tags}} alert-dismissible fade show packagealert text-center" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <h2
+        class="font-weight-bold"
+        style="font-family: poppins, serif; color: #4b0000"
+      >
+        Add Supplier
+      </h2>
+    </div>
+    <div class="row">
+      
+        <!-- Success message container -->
+        <div id="success-message" class="alert alert-success text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+          Supplier added successfully!
+        </div>
+
+        <div id="error-message" class="alert alert-danger text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+          
+        </div>
+      
+    </div>
+    <div class="row mt-4">
+      <div class="col-1"></div>
+
+      <div class="col-lg-10 col-md-12 col-md-12  pt-3 text-black">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+                <i class="material-icons">add</i>
+            </div>
+          </div>
+          <div class="card-body">
+
+          
+        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supform">
+          {% csrf_token %}
+          <div class="row mt-3">
+            <div class="col-4">
+              <label for="" class="text-black">Supplier Name</label>
+
+              <div class="form-group">
+
+                {{form.name}} {% if form.name.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.name.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="" class="text-black">Category</label>
+
+              <div class="form-group">
+                {{form.category}} {% if form.category.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.category.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="" class="text-black">Supplier Type</label>
+              <div class="form-group">
+                {{form.supplier_type}} {% if form.supplier_type.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.supplier_type.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            
+          </div>
+          <div class="row mt-3">
+            <div class="col-4">
+              <label for="" class="text-black">TL Number</label>
+              <div class="form-group">
+                {{form.tl_number}} {% if form.tl_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.tl_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="" class="text-black">VAT Number</label>
+              <div class="form-group">
+                {{form.vat_number}} {% if form.vat_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.vat_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="" class="text-black">Mobile</label>
+              <div class="form-group">
+                {{form.mobile}} {% if form.mobile.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.mobile.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+           
+          </div>
+          <div class="row mt-3">
+           
+
+            <div class="col-4">
+              <label for="" class="text-black">Email</label>
+              <div class="form-group">
+                {{form.email}} {% if form.email.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.email.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+
+            
+
+          </div>
+          <hr>
+          <div class="row mt-3">
+            <h4 class="text-center font-weight-bold">Address</h4>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Address</label>
+              <div class="form-group">
+                {{form.address1}} {% if form.address1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.address1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">City</label>
+              <div class="form-group">
+                {{form.city1}} {% if form.city1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.city1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">State</label>
+              <div class="form-group">
+                {{form.state1}} {% if form.state1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.state1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Country</label>
+              <div class="form-group">
+                {{form.country1}} {% if form.country1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.country1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Pincode</label>
+              <div class="form-group">
+                {{form.pincode1}} {% if form.pincode1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.pincode1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Phone</label>
+              <div class="form-group">
+                {{form.phone1}} {% if form.phone1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.phone1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+          
+          </div>
+          <hr>
+          <div class="row mt-3">
+            <h4 class="text-center font-weight-bold">Address 2 <span style="font-size:17px">(optional)<span></h4>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Address</label>
+              <div class="form-group">
+                {{form.address2}} {% if form.address2.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.address2.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">City</label>
+              <div class="form-group">
+                {{form.city2}} {% if form.city2.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.city2.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">State</label>
+              <div class="form-group">
+                {{form.state2}} {% if form.state2.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.state2.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Country</label>
+              <div class="form-group">
+                {{form.country2}} {% if form.country2.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.country2.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Pincode</label>
+              <div class="form-group">
+                {{form.pincode2}} {% if form.pincode2.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.pincode2.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Phone</label>
+              <div class="form-group">
+                {{form.phone2}} {% if form.phone2.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.phone2.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+       
+          <div class="row mt-3">
+            {{ formset.management_form }}
+            <h4 class="text-center font-weight-bold mb-4">Contact Person Details</h4>
+            <div class="formset-container">
+              {% for form in formset %}
+              <div class="formset mb-2" id="formset">
+                  <div class="row">
+                      {% for field in form %}
+                          <div class="col-md-4 mb-3">  <!-- col-md-4 will make 3 items per row -->
+                              <div class="form-group">
+                                  <!-- Conditionally display the label for all fields except 'id' and 'supplier' -->
+                                  {% if field.name != 'id' and field.name != 'supplier' %}
+                                      <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                  {% endif %}
+                                  {{ field }}  <!-- Render each field -->
+                              </div>
+                          </div>
+                          {% if forloop.counter|divisibleby:3 %}
+                              </div><div class="row">  <!-- Start a new row after every 3 fields -->
+                          {% endif %}
+                      {% endfor %}
+                  </div>
+              </div>
+            {% endfor %}
+            </div>
+           
+            <!-- Add Button to dynamically add new contact forms -->
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Contact</button>
+                </div>
+            </div>
+
+                    
+                    <hr>
+                  
+
+
+          <div class="row mt-3">
+            <h4 class="text-center font-weight-bold mb-4">Documents</h4>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Trade License</label>
+              <div class="form-group">
+                {{form.trade_license}} {% if form.trade_license.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.trade_license.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">VAT Certificate</label>
+              <div class="form-group">
+                {{form.vat_certificate}} {% if form.vat_certificate.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.vat_certificate.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              
+            </div>
+            
+          </div>
+
+          <hr>
+
+          <div class="row mt-3">
+            <h4 class="text-center font-weight-bold mb-4">Bank Details</h4>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Name</label>
+              <div class="form-group">
+                {{form.account_name}} {% if form.account_name.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.account_name.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Bank Name</label>
+              <div class="form-group">
+                {{form.bank_name}} {% if form.bank_name.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.bank_name.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Account Number</label>
+              <div class="form-group">
+                {{form.account_number}} {% if form.account_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.account_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">IBAN</label>
+              <div class="form-group">
+                {{form.iban}} {% if form.iban.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.iban.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Swift</label>
+              <div class="form-group">
+                {{form.swift}} {% if form.swift.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.swift.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Routing Number</label>
+              <div class="form-group">
+                {{form.routing_number}} {% if form.routing_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.routing_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="" class="text-black">Branch</label>
+              <div class="form-group">
+                {{form.branch}} {% if form.branch.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.branch.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">City</label>
+              <div class="form-group">
+                {{form.city}} {% if form.city.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.city.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Country</label>
+              <div class="form-group">
+                {{form.country}} {% if form.country.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.country.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row mt-3">
+            <div class="col-4">
+              <label for="" class="text-black">Status</label>
+              <div class="form-group ">
+                {{form.status}} 
+                {% if form.status.errors%}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.status.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+              
+            
+          </div>
+
+
+          <div class="row mt-5">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <button type="submit" class="btn btn-rose w-100">
+                Add Supplier
+              </button>
+            </div>
+            <div class="col-3"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+
+
+<script>  
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('add-form').addEventListener('click', function() {
+        // Get the next form index (based on the current number of forms)
+        var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
+        console.log(formIdx);
+
+        // Clone the first form in the formset
+        var newForm = document.querySelector('.formset').cloneNode(true);
+
+        // Replace __prefix__ in name and id with the new form index
+        const regex = /__prefix__/g;
+        newForm.innerHTML = newForm.innerHTML.replace(regex, formIdx);
+
+        // Set the new ID for the form
+        newForm.setAttribute('id', `formset${formIdx}`);
+
+        // Reset all input values in the new form (clear values)
+        var name = newForm.querySelector('#id_contact_details_set-0-name');
+        
+        // Update the ID and name attributes
+        name.setAttribute('id', `id_contact_details_set-${formIdx}-name`);
+        name.setAttribute('name', `contact_details_set-${formIdx}-name`);
+
+        var designation = newForm.querySelector('#id_contact_details_set-0-designation');
+        
+        // Update the ID and name attributes
+        designation.setAttribute('id', `id_contact_details_set-${formIdx}-designation`);
+        designation.setAttribute('name', `contact_details_set-${formIdx}-designation`);
+
+
+        var mobile = newForm.querySelector('#id_contact_details_set-0-mobile');
+        
+        // Update the ID and name attributes
+        mobile.setAttribute('id', `id_contact_details_set-${formIdx}-mobile`);
+        mobile.setAttribute('name', `contact_details_set-${formIdx}-mobile`);
+
+
+        var whatsapp = newForm.querySelector('#id_contact_details_set-0-whatsapp');
+        
+        // Update the ID and name attributes
+        whatsapp.setAttribute('id', `id_contact_details_set-${formIdx}-whatsapp`);
+        whatsapp.setAttribute('name', `contact_details_set-${formIdx}-whatsapp`);
+
+
+        var email = newForm.querySelector('#id_contact_details_set-0-email');
+        
+        // Update the ID and name attributes
+        email.setAttribute('id', `id_contact_details_set-${formIdx}-email`);
+        email.setAttribute('name', `contact_details_set-${formIdx}-email`);
+
+        // Append the new form to the container (formset-container is assumed to be the container for forms)
+        document.querySelector('.formset-container').appendChild(newForm);
+
+        // Update the TOTAL_FORMS field (management form)
+        updateManagementForm();
+    });
+
+    // Handle form deletion
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.matches('.delete-form')) {
+            event.preventDefault();
+            var formToDelete = event.target.closest('.formset');
+            formToDelete.remove();
+            updateManagementForm();
+        }
+    });
+
+    // Function to update the TOTAL_FORMS field in the management form
+    function updateManagementForm() {
+        var forms = document.querySelectorAll('.formset');
+        var managementForm = document.getElementById('id_contact_details_set-TOTAL_FORMS');
+        managementForm.value = forms.length;
+    }
+});
+
+
+let supform=document.getElementById('supform');
+supform.addEventListener('submit',function(event){
+    event.preventDefault();
+    $.ajax({
+        type:"POST",
+        url:"{% url "add_supplier" %}",
+        data:$(supform).serialize(),
+        dataType:'json',
+        success:function(response){
+          console.log('AJAX request Successfull');
+          if(response.success){
+            showSuccessMessage();
+            supform.reset();
+          }
+          else{
+            showErrorMessage(response.errors);
+            console.log("form Submission errors :", response.errors);
+          }
+        },
+        error:function(xhr,Status,error){
+          showErrorMessage("An Unexpected Error Occurs Please Try again Later");
+          console.error("AJAX request failed:",status,error);
+          console.log("Response Text :",xhr.responseText)
+        }
+    });
+});
+
+
+function showSuccessMessage() {
+  let successMessage = document.getElementById('success-message');
+  successMessage.style.display = 'block';
+
+  // Hide the message after 3 seconds
+  setTimeout(function() {
+      successMessage.style.display = 'none';
+  }, 3000);
+}
+
+function showErrorMessage(errors) { 
+let errorMessage = document.getElementById('error-message'); 
+errorMessage.innerHTML = ''; 
+if (typeof errors === 'string') { 
+  errorMessage.innerHTML = errors; 
+} 
+else { 
+  for (let key in errors) { 
+    if (errors.hasOwnProperty(key)) { 
+      let errorText = `${errors[key]}`; 
+      let errorItem = document.createElement('div'); 
+      errorItem.innerText = errorText; errorMessage.appendChild(errorItem);
+     } 
+    } 
+  }
+  errorMessage.style.display = 'block';
+   // Hide the message after 5 seconds 
+   setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
+}
+
+</script> 
+
+
+
+
+
+{% endblock content %}

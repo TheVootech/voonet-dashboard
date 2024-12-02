@@ -1,0 +1,644 @@
+
+<div class="card">
+    <div class="card-header card-header-rose card-header-icon">
+      <div class="card-icon">
+          <i class="material-icons">edit</i>
+      </div>
+    </div>
+    <div class="card-body">
+
+    
+        <form action="{% url 'editcompany' form.instance.company_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
+            {% csrf_token %}
+            <div class="row mt-3">
+              <div class="col-4">
+                <label for="" class="text-black">Company Name</label>
+  
+                <div class="form-group">
+  
+                  {{form.name}} {% if form.name.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+              
+              <div class="col-4">
+                <label for="" class="text-black">Company Type</label>
+                <div class="form-group">
+                  {{form.company_type}} {% if form.company_type.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.company_type.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-4">
+                  <label for="" class="text-black">TL Number</label>
+                  <div class="form-group">
+                    {{form.tl_number}} {% if form.tl_number.errors %}
+                    <ul class="errorlist text-primary text-bold">
+                      {% for error in form.tl_number.errors %}
+                      <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+                  </div>
+                </div>
+              
+            </div>
+            <div class="row mt-3">
+              
+              <div class="col-4">
+                <label for="" class="text-black">VAT Number</label>
+                <div class="form-group">
+                  {{form.vat_number}} {% if form.vat_number.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.vat_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black">Mobile</label>
+                <div class="form-group">
+                  {{form.mobile}} {% if form.mobile.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.mobile.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+             
+            </div>
+            <div class="row mt-3">
+             
+  
+              <div class="col-4">
+                <label for="" class="text-black">Email</label>
+                <div class="form-group">
+                  {{form.email}} {% if form.email.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+  
+              
+  
+            </div>
+            <hr>
+            <div class="row mt-3">
+              <h4 class="text-center font-weight-bold">Address</h4>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">Address</label>
+                <div class="form-group">
+                  {{form.address1}} {% if form.address1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.address1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">City</label>
+                <div class="form-group">
+                  {{form.city1}} {% if form.city1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.city1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">State</label>
+                <div class="form-group">
+                  {{form.state1}} {% if form.state1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.state1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">Country</label>
+                <div class="form-group">
+                  {{form.country1}} {% if form.country1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.country1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Pincode</label>
+                <div class="form-group">
+                  {{form.pincode1}} {% if form.pincode1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.pincode1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Phone</label>
+                <div class="form-group">
+                  {{form.phone1}} {% if form.phone1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.phone1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+            
+            </div>
+            <hr>
+            <div class="row mt-3">
+              <h4 class="text-center font-weight-bold">Address 2 <span style="font-size:17px">(optional)<span></h4>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">Address</label>
+                <div class="form-group">
+                  {{form.address2}} {% if form.address2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.address2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">City</label>
+                <div class="form-group">
+                  {{form.city2}} {% if form.city2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.city2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">State</label>
+                <div class="form-group">
+                  {{form.state2}} {% if form.state2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.state2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">Country</label>
+                <div class="form-group">
+                  {{form.country2}} {% if form.country2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.country2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Pincode</label>
+                <div class="form-group">
+                  {{form.pincode2}} {% if form.pincode2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.pincode2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Phone</label>
+                <div class="form-group">
+                  {{form.phone2}} {% if form.phone2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.phone2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+  
+         
+            <div class="row mt-3">
+              {{ formset.management_form }}
+              <h4 class="text-center font-weight-bold mb-4">Contact Person Details</h4>
+              <div class="formset-container">
+                {% for form in formset %}
+                <div class="formset mb-2" id="formset">
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="col-md-4 mb-3">  <!-- col-md-4 will make 3 items per row -->
+                                <div class="form-group">
+                                    <!-- Conditionally display the label for all fields except 'id' and 'supplier' -->
+                                    {% if field.name != 'id' and field.name != 'company' %}
+                                        <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                    {% endif %}
+                                    {{ field }}  <!-- Render each field -->
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 %}
+                                </div><div class="row">  <!-- Start a new row after every 3 fields -->
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+              {% endfor %}
+              </div>
+             
+              <!-- Add Button to dynamically add new contact forms -->
+              <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-6">
+                      <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Contact</button>
+                  </div>
+              </div>
+  
+                      
+                      <hr>
+                    
+  
+  
+            <div class="row mt-3">
+              <h4 class="text-center font-weight-bold mb-4">Documents</h4>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black mb-3">Trade License</label>
+                  {{form.trade_license}} 
+                  <div class="form-group">
+                  {% if form.trade_license.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.trade_license.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black mb-3">VAT Certificate</label>
+                  {{form.vat_certificate}} 
+                  <div class="form-group">
+                  {% if form.vat_certificate.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.vat_certificate.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                
+              </div>
+              
+            </div>
+  
+            <hr>
+  
+            <div class="row mt-3">
+              <h4 class="text-center font-weight-bold mb-4">Bank Details</h4>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">Name</label>
+                <div class="form-group">
+                  {{form.account_name}} {% if form.account_name.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.account_name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Bank Name</label>
+                <div class="form-group">
+                  {{form.bank_name}} {% if form.bank_name.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.bank_name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Account Number</label>
+                <div class="form-group">
+                  {{form.account_number}} {% if form.account_number.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.account_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">IBAN</label>
+                <div class="form-group">
+                  {{form.iban}} {% if form.iban.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.iban.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Swift</label>
+                <div class="form-group">
+                  {{form.swift}} {% if form.swift.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.swift.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Routing Number</label>
+                <div class="form-group">
+                  {{form.routing_number}} {% if form.routing_number.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.routing_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label for="" class="text-black">Branch</label>
+                <div class="form-group">
+                  {{form.branch}} {% if form.branch.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.branch.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">City</label>
+                <div class="form-group">
+                  {{form.city}} {% if form.city.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.city.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col-4">
+                  <label for="" class="text-black">Country</label>
+                <div class="form-group">
+                  {{form.country}} {% if form.country.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.country.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+            </div>
+  
+            <hr>
+  
+            <div class="row mt-3">
+              <div class="col-4">
+                <label for="" class="text-black">Status</label>
+                <div class="form-group ">
+                  {{form.status}} 
+                  {% if form.status.errors%}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.status.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+                
+              
+            </div>
+  
+  
+            <div class="row mt-5">
+              <div class="col-3"></div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-rose w-100">
+                  Edit Company
+                </button>
+              </div>
+              <div class="col-3"></div>
+            </div>
+          </form>
+</div>
+</div>
+</div>
+
+
+
+<script>  
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('add-form').addEventListener('click', function() {
+            // Get the next form index (based on the current number of forms)
+            var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
+            console.log(formIdx);
+    
+            // Clone the first form in the formset
+            var newForm = document.querySelector('.formset').cloneNode(true);
+    
+            // Replace __prefix__ in name and id with the new form index
+            const regex = /__prefix__/g;
+            newForm.innerHTML = newForm.innerHTML.replace(regex, formIdx);
+    
+            // Set the new ID for the form
+            newForm.setAttribute('id', `formset${formIdx}`);
+    
+            // Reset all input values in the new form (clear values)
+            var name = newForm.querySelector('#id_company_contact_details_set-0-name');
+            
+            // Update the ID and name attributes
+            name.setAttribute('id', `id_company_contact_details_set-${formIdx}-name`);
+            name.setAttribute('name', `company_contact_details_set-${formIdx}-name`);
+    
+            var designation = newForm.querySelector('#id_company_contact_details_set-0-designation');
+            
+            // Update the ID and name attributes
+            designation.setAttribute('id', `id_company_contact_details_set-${formIdx}-designation`);
+            designation.setAttribute('name', `company_contact_details_set-${formIdx}-designation`);
+    
+    
+            var mobile = newForm.querySelector('#id_company_contact_details_set-0-mobile');
+            
+            // Update the ID and name attributes
+            mobile.setAttribute('id', `id_company_contact_details_set-${formIdx}-mobile`);
+            mobile.setAttribute('name', `company_contact_details_set-${formIdx}-mobile`);
+    
+    
+            var whatsapp = newForm.querySelector('#id_company_contact_details_set-0-whatsapp');
+            
+            // Update the ID and name attributes
+            whatsapp.setAttribute('id', `id_company_contact_details_set-${formIdx}-whatsapp`);
+            whatsapp.setAttribute('name', `company_contact_details_set-${formIdx}-whatsapp`);
+    
+    
+            var email = newForm.querySelector('#id_company_contact_details_set-0-email');
+            
+            // Update the ID and name attributes
+            email.setAttribute('id', `id_company_contact_details_set-${formIdx}-email`);
+            email.setAttribute('name', `company_contact_details_set-${formIdx}-email`);
+    
+            // Append the new form to the container (formset-container is assumed to be the container for forms)
+            document.querySelector('.formset-container').appendChild(newForm);
+    
+            // Update the TOTAL_FORMS field (management form)
+            updateManagementForm();
+        });
+    
+        // Handle form deletion
+        document.addEventListener('click', function(event) {
+            if (event.target && event.target.matches('.delete-form')) {
+                event.preventDefault();
+                var formToDelete = event.target.closest('.formset');
+                formToDelete.remove();
+                updateManagementForm();
+            }
+        });
+    
+        // Function to update the TOTAL_FORMS field in the management form
+        function updateManagementForm() {
+            var forms = document.querySelectorAll('.formset');
+            var managementForm = document.getElementById('id_company_contact_details_set-TOTAL_FORMS');
+            managementForm.value = forms.length;
+        }
+    });
+    
+
+    $(document).ready(function() {
+        // Handle form submission via AJAX
+        $('#supp-form').submit(function(event) {
+            event.preventDefault();  // Prevent the form from submitting the traditional way
+            
+            var form = $(this);
+            var formData = new FormData(this);  // Get form data including files
+            
+            $.ajax({
+                url: form.attr('action'),  // Use the action URL from the form
+                type: 'POST',
+                data: formData,
+                processData: false,  // Important for uploading files
+                contentType: false,  // Important for uploading files
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Hide the modal
+                        $('#editModal').modal('hide');
+                        
+                        // Remove the backdrop
+                        $('.modal-backdrop').remove(); 
+                        
+                        // Update the supplier allocation table dynamically
+                        $('#supplier-allocation-content').html(response.updated_table_html);
+                        
+                        // Optionally show a success message
+                        $('#success-message').fadeIn().delay(3000).fadeOut();
+                    } else {
+                        // Handle error message (you can show a message inside the modal or elsewhere)
+                        alert('There was an error editing the allocation.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + error);
+                    alert('An error occurred. Please try again later.');
+                }
+            });
+        });
+      
+        // Ensure the Edit button triggers the modal opening and form loading
+        // Use event delegation to ensure new elements get the event handler
+        $(document).on('click', '.edit-btn', function() {
+            var allocationId = $(this).data('id');  // Get the ID from the button's data-id attribute
+            
+            // Show loading indicator inside modal
+            $("#modal-content-" + allocationId).html("<p>Loading...</p>");
+      
+            // Perform AJAX request to fetch the form
+            $.ajax({
+                url: "/editcompany/" + allocationId + "/",
+                type: "GET",
+                success: function(response) {
+                    // On success, load the form HTML into the modal body
+                    $("#modal-content-" + allocationId).html(response.form_html);
+                    
+                    // Open the modal after content is loaded
+                    $('#editModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error and show an error message in the modal
+                    $("#modal-content-" + allocationId).html(
+                        "<p>There was an error fetching the form. Please try again later.</p>"
+                    );
+                    console.error("There was an error fetching the form: ", error);
+                }
+            });
+        });
+    });
+
+</script> 
+
+

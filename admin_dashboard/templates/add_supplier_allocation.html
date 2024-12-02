@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="content">
+  <div class="container-fluid" id="supplierallocation">
+        <div class="row text-center"><h2 class="font-weight-bold"style="font-family:poppins,serif;color:#000;">Allocate New Supplier</h2></div>
+
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <!-- Success message container -->
+            <div id="success-message" class="alert alert-success text-center font-weight-bold" role="alert" style="display: none; margin-top: 20px;">
+              Supplier Allocated successfully!
+            </div>
+
+            <div id="error-message" class="alert alert-danger text-center font-weight-bold" role="alert" style="display: none; margin-top: 20px;">
+              
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+        <div class="row mt-4">
+        {% if messages %}
+            {% for message in messages.warning %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show packagealert text-center" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if not packagelength %}
+            <h3 class="text-primary text-center font-weight-bold mt-5">No Packages left to Allocate New Supplier</h3>
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4 text-center">
+                <button onclick="goBackAndReload()" type="submit" class="btn btn-rose mt-2">Go Back</button>               <div class="col-4"></div>
+            </div>
+            
+        {% else %}
+            <div class="col-3"></div>
+            
+            <div class="col-lg-6 col-md-12 col-md-12  pt-3 text-black">
+              <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">add</i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'new_supplier_allocation' %}" method="post" id="supp-form">
+                        {% csrf_token %}
+                        <div class="text-black align-items-center">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Package</label>
+                                    {{form.package}}
+                                    {% if form.package.errors %}
+                                      <ul class="errorlist text-primary text-bold">
+                                        {% for error in form.package.errors %}
+                                          <li>{{ error }}</li>
+                                        {% endfor %}
+                                      </ul>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Supplier</label>
+                                  {{form.supplier}} 
+                                  {% if form.supplier.errors %}
+                                    <ul class="errorlist text-primary text-bold">
+                                      {% for error in form.supplier.errors %}
+                                        <li>{{ error }}</li>
+                                      {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <button class="btn btn-square btn-rose w-100 mt-4" type="submit">Allocate Supplier</button>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+          </div>
+            {% endif %}
+
+            <div class="col-3"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function goBackAndReload() {
+    // Navigate back to the previous page
+    window.history.go(-1);
+
+  
+}
+
+ 
+  let form = document.getElementById('supp-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "{% url 'new_supplier_allocation' %}",
+        data: $(form).serialize(),
+        dataType: "json",
+        success: function(response) {
+            console.log("AJAX request successful:", response);
+            if (response.success) {
+                // Inject the new form HTML into the #supplierallocation container
+                $('#supplierallocation').html(response.new_form_html);
+
+                // After injecting the new HTML, rebind the CSRF token and form submit action
+                rebindForm();
+
+                showSuccessMessage();
+                form.reset();
+            } else {
+                showErrorMessage(response.errors);
+                console.log("Form submission errors:", response.errors);
+            }
+        },
+        error: function(xhr, status, error) {
+            showErrorMessage("An Unexpected Error Occurs Please Try Again Later");
+            console.error("AJAX request failed:", status, error);
+            console.log("Response Text:", xhr.responseText);
+        }
+    });
+});
+
+// Rebind form and its CSRF token after form replacement
+function rebindForm() {
+    // Reattach the event listener for the form submission
+    let newForm = document.getElementById('supp-form');
+    newForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "{% url 'new_supplier_allocation' %}",
+            data: $(newForm).serialize(),
+            dataType: "json",
+            success: function(response) {
+                console.log("AJAX request successful:", response);
+                if (response.success) {
+                    $('#supplierallocation').html(response.new_form_html);
+                    rebindForm();  // Rebind again after injecting
+                    showSuccessMessage();
+                    newForm.reset();
+                } else {
+                    showErrorMessage(response.errors);
+                    console.log("Form submission errors:", response.errors);
+                }
+            },
+            error: function(xhr, status, error) {
+                showErrorMessage("An Unexpected Error Occurs Please Try Again Later");
+                console.error("AJAX request failed:", status, error);
+                console.log("Response Text:", xhr.responseText);
+            }
+        });
+    });
+}
+
+function showSuccessMessage() {
+    let successMessage = document.getElementById('success-message');
+    successMessage.style.display = 'block';
+
+    // Hide the message after 3 seconds
+    setTimeout(function() {
+        successMessage.style.display = 'none';
+    }, 3000);
+}
+
+function showErrorMessage(errors) {
+    let errorMessage = document.getElementById('error-message');
+    errorMessage.innerHTML = '';
+    if (typeof errors === 'string') {
+        errorMessage.innerHTML = errors;
+    } else {
+        for (let key in errors) {
+            if (errors.hasOwnProperty(key)) {
+                let errorText = `${errors[key]}`;
+                let errorItem = document.createElement('div');
+                errorItem.innerText = errorText;
+                errorMessage.appendChild(errorItem);
+            }
+        }
+    }
+    errorMessage.style.display = 'block';
+    // Hide the message after 5 seconds
+    setTimeout(function() {
+        errorMessage.style.display = 'none';
+    }, 5000);
+}
+
+
+  </script>
+
+
+{% endblock content %}

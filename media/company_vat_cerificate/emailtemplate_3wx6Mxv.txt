@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VooTours Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            font-weight: 500;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            max-width: 300px;
+            max-height: 200px;
+            filter: brightness(100%);
+        }
+        h3 {
+            color: #ffffff;
+            font-size: 20px;
+            background-color: #8B0000;
+            width: 50%;
+            padding: 5px;
+            padding-left: 20px;
+        }
+        table {
+            width: 100%;
+            border-spacing: 0;
+        }
+        td {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #000;
+            border: none;
+        }
+        td strong {
+            width: 150px;
+        }
+        td span {
+            margin-right: 30px;
+        }
+        .footer {
+            padding: 15px;
+            background-color: #8B0000;
+            color: white;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 2px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header with Logo -->
+        <div class="header" style="text-align: center; padding: 20px;">
+            <img src="https://helicoptertourabudhabi.com/wp-content/uploads/2024/11/LOGO-1-2.png" alt="VooTours Logo">
+        </div>
+
+        <!-- Email Content -->
+        <p>Dear <strong>[field id="name"] [field id="lastName"]</strong>,<br>Thank you for reaching out to VooTours Tourism! We are delighted to hear that you are interested in planning your next adventure with us.<br><br>Based on your enquiry regarding the following:</p>
+        
+        <!-- Trip Details Section -->
+        <h3>Trip Details</h3>
+        <table>
+            <tr>
+                <td><strong>Tour Package</strong></td>
+                <td><span>:</span> [field id="package"]</td>
+            </tr>
+            <tr>
+                <td><strong>Tour Date</strong></td>
+                <td><span>:</span> [field id="date"]</td>
+            </tr>
+            <tr>
+                <td><strong>Number of People</strong></td>
+                <td><span>:</span> [field id="count"]</td>
+            </tr>
+            <tr>
+                <td><strong>Trip Time</strong></td>
+                <td><span>:</span> [field id="time"]</td>
+            </tr>
+            <tr>
+                <td><strong>Trip Type</strong></td>
+                <td><span>:</span> [field id="type"]</td>
+            </tr>
+        </table>
+
+        <!-- Contact Details Section -->
+        <h3>Contact Details</h3>
+        <table>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td><span>:</span> [field id="name"]</td>
+            </tr>
+            <tr>
+                <td><strong>Email</strong></td>
+                <td><span>:</span> [field id="email"]</td>
+            </tr>
+            <tr>
+                <td><strong>Phone</strong></td>
+                <td><span>:</span> [field id="mobile"]</td>
+            </tr>
+        </table>
+
+        <!-- Follow-up Message -->
+        <p><strong>One of our travel experts will connect with you shortly to discuss your requirements and provide all the necessary details.</strong><br><br>For faster communication, please feel free to call or WhatsApp us directly at <strong>+971 5050 98987</strong>.<br>We are here to assist you and ensure a smooth and enjoyable booking process. Thank you for choosing VooTours Tourism.<br>We look forward to assisting you in planning an unforgettable travel experience!</p>
+        <p>Warm regards,<br><strong>VooTours Tourism</strong></p>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <table>
+                <tr>
+                    <td align="center" style="padding: 5px;">
+                        Phone :<a href="tel:+97125505080"> +97125505080</a>
+                        <span style="margin-left: 20px; margin-right: 20px;"> | </span>
+                        Hotline (24/7) : <a href="tel:+971505098987">+971505098987</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="padding: 5px;">
+                        WhatsApp : <a href="tel:+971505098987">+971505098987</a>
+                        <span style="margin-left: 20px; margin-right: 20px;"> | </span>
+                        Email: <a href="mailto:booking@vootours.com">booking@vootours.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="padding: 5px;">
+                        Website : <a href="http://www.vootours.com">www.vootours.com</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

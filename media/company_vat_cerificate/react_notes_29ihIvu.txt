@@ -1,0 +1,8 @@
+
+npx create-react-app ./
+install react-router-dom
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/material @mui/styled-engine-sc styled-components
+npm install @mui/icons-material
+npm install react-icons --save
+npm i bootstrap

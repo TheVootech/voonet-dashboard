@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row mt-4">
+    
+            <div class="row">
+              <div class="col-3"></div>
+              <div class="col-6 text-center ">
+                <div class="row text-center"><h3 class="font-weight-bold mb-5"style="font-family:poppins,serif;color:#000;">Delete Supplier Allocation</h3></div>
+
+                <div class='text-center pt-3 pr-3 pl-3'  style="border:black solid 2px;border-radius:5px; color:black;">
+                    <h3 class="font-weight-bold">Are You Sure ?</h3>
+                    <p class="font-weight-bold">Are you Sure That you need to Delete This Record ? . You Cant retrieve it Later</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6"><a href="{% url "supplier_allocation" %}" class="btn btn-success w-100">Cancel</a></div>
+                            <div class="col-6"><button type="submit" class="btn btn-primary text-white w-100">Delete</button></div>
+
+                        </div>
+                    </form>
+                    
+                </div>
+                
+                
+              </div>
+              <div class="col-3"></div>
+            </div>
+            
+     
+           
+    </div>
+</div>
+
+
+
+{% endblock content %}
