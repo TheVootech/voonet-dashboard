@@ -734,3 +734,145 @@ class Company_contact_details_form(forms.ModelForm):
 Company_contact_details_formset=inlineformset_factory(
     Company,Company_contact_details,form=Company_contact_details_form,extra=1,can_delete=True
 )
+
+
+
+class Payment_form(forms.ModelForm):
+    class Meta:
+        model=Payment_mode
+        exclude=['payment_id']
+        
+        widgets={
+                'payment_mode': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+         }
+        
+        
+class Driver_form(forms.ModelForm):
+    class Meta:
+        model=Driver
+        exclude=['driver_id']
+        
+        widgets={
+                'name': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'driver_type': forms.Select(attrs={
+                    'class': 'form-select bg-none border border-secondary',
+                    'style': 'background-color: transparent; border-radius: 5px;'
+                }),
+                'vehicle_make': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'vehicle_brand': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'vehicle_year': forms.NumberInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                }),
+                'mobile1': forms.NumberInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                }),
+                'mobile2': forms.NumberInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                }),
+                'whatsapp1': forms.NumberInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                }),
+                'whatsapp2': forms.NumberInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                }),
+                'email': forms.EmailInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                }),
+                'vehicle_registration': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'rc_expiry': forms.DateInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                    'type':'date'
+                }),
+                'dl_number': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'dl_expiry': forms.DateInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                    'type':'date'
+                }),
+                'passport_number': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'passport_expiry': forms.DateInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                    'type':'date'
+                }),
+                'emirates_id_number': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'emirates_id_expiry': forms.DateInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                    'type':'date'
+                }),
+                'visa_number': forms.TextInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'visa_expiry': forms.DateInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;',
+                    'type':'date'
+                }),
+                'vehicle_rc': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'insurance': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'driving_license': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'passport': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'emirates_id': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'visa': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'photos': forms.FileInput(attrs={
+                    'class': 'form-control border border-secondary pl-2 pr-2',
+                    'style': 'font-size: 17px;border-radius:5px;'
+                }),
+                'status':  forms.Select(attrs={
+                    'class': 'form-select bg-none border border-secondary',
+                    'style': 'background-color: transparent; border-radius: 5px;'
+                }),
+                 
+                
+         }

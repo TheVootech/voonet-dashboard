@@ -1,0 +1,378 @@
+
+{% extends "base.html" %}
+{% block content %}
+            <div class="row mt-5">
+                <div class="col-1"></div>
+                <div class="col-md-10 ml-auto mr-auto">
+                  <div class="page-categories">
+                    <h3 class="title text-center font-weight-bold">{{data.name}}</h3>
+                    <br />
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center mt-3" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#details" role="tablist">
+                          <i class="material-icons">person</i> Driver Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#vehicle" role="tablist">
+                          <i class="material-icons">directions_car</i> Vehicle Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contact" role="tablist">
+                          <i class="material-icons">phone</i> Contact Details
+                        </a>
+                      </li>
+                      
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#document" role="tablist">
+                          <i class="material-icons">assignment</i>Documents
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="tab-content tab-space tab-subcategories">
+                      <div class="tab-pane active" id="details">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Driver Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TYPE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE 1</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE 2</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.driver_id}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.driver_type}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.mobile1}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.mobile2}}</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.email}}</td>
+                                        {% if data.status == "Active" %}
+                                          <td class="text-center text-capitalize text-success" style="font-weight: 500;">{{data.status}}</td>
+                                        {% elif data.status == "Inactive" %}
+                                          <td class="text-center text-capitalize text-priamry" style="font-weight: 500;">{{data.status}}</td>
+                                        {% else %}
+                                          <td class="text-center text-capitalize text-warning" style="font-weight: 500;">{{data.status}}</td>
+                                        {% endif %}
+
+                                        
+                                        
+      
+                                      </tr>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                        
+                       
+                      </div>
+                      <div class="tab-pane" id="vehicle">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Vehicle Details</h4>
+                            
+                          </div>
+                          <div class="card-body">
+                           
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >VEHICLE MAKE</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >VEHICLE BRAND</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >VEHICLE YEAR</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >VEHICLE REGISTRATION</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >VEHICLE REGISTRATION EXPIRY</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >INSURANCE</th>
+
+
+
+                                    
+                                   
+          
+                                    
+                                    
+                                  </tr>
+                                  
+                                </thead>
+                                <tbody>
+
+                                  <tr>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_make}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_brand}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_year}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_registration}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.rc_expiry}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.insurance }}" target="_blank" rel="noopener noreferrer">
+                                        Insurance File
+                                                                                </a></td>
+
+
+                                   
+                                    
+                                    
+  
+                                  </tr>
+                                 
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="contact">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Contact Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE 1</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE 2</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >WHATSAPP 1</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >WHATSAPP 2</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+                                      
+
+                                      <tr>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.mobile1}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.mobile2}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.whatsapp1}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.whatsapp1}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.email}}</td>
+
+                                        
+                                      </tr>
+                                      
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="bank">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Bank Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ACC NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >BANK NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ACC NO :</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >IBAN</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >SWIFT</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ROUTING NO : </th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >BANCH</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >CITY</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >COUNTRY</th>
+
+
+                                       
+              
+                                        
+                                        
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.account_name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.bank_name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.account_number}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.iban}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.swift}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.routing_number}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.branch}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.city}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.country}}</td>
+
+
+                                        
+                                        
+      
+                                      </tr>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="document">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Documents</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >DOCUMENT TYPE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >DOCUMENT ID</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >DATE OF EXPIRY</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >FILE</th>
+
+                                        
+
+
+                                       
+              
+                                        
+                                        
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">Passport</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.passport_number}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.passport_expiry}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.passport }}" target="_blank" rel="noopener noreferrer">
+Passport File
+                                        </a></td>
+                                        
+      
+                                      </tr>
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">Emirates ID</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.emirates_id_number}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.emirates_id_expiry}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.emirates_id }}" target="_blank" rel="noopener noreferrer">
+Emirates ID File
+                                        </a></td>
+                                        
+      
+                                      </tr>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">Vehicle Registration</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_registration}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.rc_expiry}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.vehicle_rc }}" target="_blank" rel="noopener noreferrer">
+Vehicle RC File
+                                        </a></td>
+                                        
+      
+                                      </tr>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">Driving License</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.dl_number}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.dl_expiry}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.driving_license }}" target="_blank" rel="noopener noreferrer">
+Driving License File
+                                        </a></td>
+                                        
+      
+                                      </tr>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">Visa</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.visa_number}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.visa_expiry}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{ data.visa }}" target="_blank" rel="noopener noreferrer">
+Visa File
+                                        </a></td>
+                                        
+      
+                                      </tr>
+
+
+                                      
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+
+                              
+                            
+                          </div>
+
+                          
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1"></div>
+              </div>
+        </div>
+
+<script>
+
+    
+</script>
+
+{% endblock content %}
+
+

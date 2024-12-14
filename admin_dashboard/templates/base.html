@@ -245,16 +245,16 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse" id="driver">
+            <div class="collapse {% if request.path == '/add_driver' or  request.path == '/viewdriver' %}show{% endif %}" id="driver">
               <ul class="nav">
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/pricing.html">
+                <li class="nav-item {% if request.path == '/add_driver' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_driver" %}">
                     <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
                     <span class="sidebar-normal"> Add New Driver </span>
                   </a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/rtl.html">
+                <li class="nav-item {% if request.path == '/viewdriver' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewdriver" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Driver </span>
                   </a>
@@ -343,16 +343,16 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse" id="payment">
+            <div class="collapse {% if request.path == '/addpaymentmode' or  request.path == '/viewpayment'%}show{% endif %}" id="payment">
               <ul class="nav">
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/pricing.html">
+                <li class="nav-item {% if request.path == '/addpaymentmode' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "addpaymentmode" %}">
                     <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
                     <span class="sidebar-normal"> Add New Payment Mode </span>
                   </a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/rtl.html">
+                <li class="nav-item {% if request.path == '/viewpayment' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewpayment" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Payment Mode  </span>
                   </a>

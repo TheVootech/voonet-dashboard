@@ -347,3 +347,102 @@ class Company_contact_details(models.Model):
     
     def __str__(self):
         return self.company.company_id
+    
+    
+    
+    
+class Payment_mode(models.Model):
+    payment_id=models.CharField(max_length=10,primary_key=True,editable=False)
+    payment_mode=models.CharField(max_length=50,unique=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.payment_id:  # Only generate ID if it's not already set
+            # Get the last language added to calculate the next ID
+            last_payment = Payment_mode.objects.order_by('payment_id').last()
+            if last_payment:
+                # Extract the number part and increment it
+                last_id_number = int(last_payment.payment_id[3:])  # Skip 'LAN' prefix
+                next_id_number = last_id_number + 1
+                # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
+                self.payment_id = f"PAY{next_id_number:02d}"  # 2 digits for padding
+            else:
+                # If no languages exist, start with 'LAN01'
+                self.payment_id = 'PAY01'
+
+        super(Payment_mode, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.payment_id 
+    
+    
+    
+class Driver(models.Model):
+    type_Choices=[
+        ('Limousine','Limousine'),
+        ('Transportation','Transportation'),
+        ('Tourism','Tourism'),
+        ('Stretch limo','Stretch limo')
+    ]
+    
+    driver_id=models.CharField(max_length=10,primary_key=True,editable=False)
+    name=models.CharField(max_length=100)
+    driver_type=models.CharField(choices=type_Choices,max_length=100)
+    vehicle_make=models.CharField(max_length=100)
+    vehicle_brand=models.CharField(max_length=100)
+    vehicle_year=models.CharField(max_length=10)
+    mobile1=models.PositiveIntegerField()
+    mobile2=models.PositiveIntegerField()
+    whatsapp1=models.PositiveIntegerField()
+    whatsapp2=models.PositiveIntegerField()
+    email=models.EmailField()
+    vehicle_registration=models.CharField(max_length=100)
+    rc_expiry=models.DateField()
+    dl_number=models.CharField(max_length=100)
+    dl_expiry=models.DateField()
+    passport_number=models.CharField(max_length=100)
+    passport_expiry=models.DateField()
+    emirates_id_number=models.CharField(max_length=100)
+    emirates_id_expiry=models.DateField()
+    visa_number=models.CharField(max_length=100)
+    visa_expiry=models.DateField()
+    vehicle_rc=models.FileField(upload_to='driver_vehicle_rc/')
+    insurance=models.FileField(upload_to='driver_vehicle_insurance/')
+    driving_license=models.FileField(upload_to='driving_license/')
+    passport=models.FileField(upload_to='driver_passport/')
+    emirates_id=models.FileField(upload_to='driver_emirates_id/')
+    visa=models.FileField(upload_to='driver_visa/')
+    photos=models.FileField(upload_to='driver_photos/')
+    status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+
+
+    def save(self, *args, **kwargs):
+        if not self.driver_id:  # Only generate ID if it's not already set
+            # Get the last language added to calculate the next ID
+            last_driver = Driver.objects.order_by('driver_id').last()
+            if last_driver:
+                # Extract the number part and increment it
+                last_id_number = int(last_driver.driver_id[3:])  # Skip 'LAN' prefix
+                next_id_number = last_id_number + 1
+                # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
+                self.driver_id = f"DVR{next_id_number:02d}"  # 2 digits for padding
+            else:
+                # If no languages exist, start with 'LAN01'
+                self.driver_id = 'DVR01'
+
+        super(Driver, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.driver_id 
+
+
+
+
+
+
+
+
+
+
+
+    
+    

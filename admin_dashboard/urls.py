@@ -48,6 +48,20 @@ urlpatterns = [
     path('companydetailsview/<str:pk>/',company_detail_view,name='company_details'),
     path('editcompany/<str:pk>/',edit_company_view,name='editcompany'),
     path('deletecompany/<str:pk>/',delete_company_view,name='delete_company'),
+    
+    
+    
+    path('addpaymentmode',addpaymentmode_view,name="addpaymentmode"),
+    path('viewpayment',view_payment,name='viewpayment'),
+    path('editpaymentmode/<str:pk>/',edit_payment_view,name='editpaymentmode'),
+    path('deletepaymentmode/<str:pk>/',delete_payment_view,name='deletepaymentmode'),
+    
+    
+    path('add_driver',adddriver_view,name='add_driver'),
+    path('viewdriver',view_driver,name='viewdriver'),
+    path('driver_details/<str:pk>/',driver_details_view,name='driver_details')
+
+  
 
 
 

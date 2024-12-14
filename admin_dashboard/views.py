@@ -578,3 +578,123 @@ def delete_company_view(request,pk):
         
         except Company.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+        
+def addpaymentmode_view(request):
+    try:
+        if request.method == 'POST':
+            form = Payment_form(request.POST)
+            if form.is_valid():
+                form.save()
+                payments = Payment_mode.objects.all().values('payment_id', 'payment_mode')
+                payment_list = list(payments)
+                return JsonResponse({'success': True, 'payments': payment_list})
+            else:
+                return JsonResponse({'success': False, 'errors': form.errors})
+        else:
+            form = Payment_form()
+            payments = Payment_mode.objects.all()
+        return render(request, 'addpayment.html', {'form': form, 'data': payments})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    
+    
+    
+def view_payment(request):
+    data=Payment_mode.objects.all()
+    return render(request,'viewpayment.html',{'data':data})
+
+
+
+def edit_payment_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        payment = Payment_mode.objects.get(pk=pk)
+    except payment.DoesNotExist:
+        messages.error(request, 'payment does not exist.')
+        return redirect('viewpayment')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Payment_form(request.POST, instance=payment)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            payment = form.save(commit=False)
+            payment.save()
+
+            # Associate the formset with the supplier
+            
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Payment_mode.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/payment_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('viewpayment')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating payment failed.')
+            print(form.errors)
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form = Payment_form(instance=payment)
+        form_html = render_to_string('partials/editpayment.html', {'form': form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+    
+    
+    
+def delete_payment_view(request,pk):
+   
+    if request.method == 'POST':
+        try:
+            data=Payment_mode.objects.get(pk=pk)
+            data.delete()
+            all_data=Payment_mode.objects.all()
+            updated_table_html=render_to_string('partials/payment_table.html',{'data':all_data})
+            
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Payment_mode.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+        
+        
+def adddriver_view(request):
+    if request.method == 'POST':
+        form = Driver_form(request.POST,request.FILES)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            company = form.save(commit=False)
+            company.save()
+
+
+            # Provide success feedback
+            print(request.POST)
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'success':False,'errors':form.errors})
+   
+    else:
+        # For GET request, create empty forms
+        form = Driver_form()
+
+    return render(request, 'adddriver.html', {'form': form})
+
+
+def view_driver(request):
+    data=Driver.objects.all()
+    return render(request,'viewdriver.html',{'data':data})
+
+
+def driver_details_view(request,pk):
+    data=Driver.objects.get(driver_id=pk)
+    return render(request,'driverdetailsview.html',{'data':data})
