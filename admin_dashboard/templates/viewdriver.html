@@ -138,7 +138,7 @@
                                   class="modal-title font-weight-bold"
                                   id="editModalLabel{{i.driver_id}}"
                                 >
-                                  Edit company 
+                                  Edit Driver 
                                 </h3>
                                 <button
                                   type="button"
@@ -175,7 +175,7 @@
                               class="modal-title text-primary font-weight-bold"
                               id="deleteModalLabel{{i.driver_id}}"
                             >
-                              Delete company 
+                              Delete Driver 
                             </h3>
                             <button
                               type="button"
@@ -234,7 +234,7 @@
   
     // Perform AJAX request to fetch the form
     $.ajax({
-      url: "/editcompany/" + id + "/",
+      url: "/edit_driver/" + id + "/",
       type: "GET",
       success: function (response) {
         // On success, load the form HTML into the modal body
@@ -303,7 +303,7 @@
   function deleteItem(id) {
     // Perform the AJAX request to delete the item
     $.ajax({
-      url: "/deletecompany/" + id + "/",
+      url: "/delete_driver/" + id + "/",
       type: "POST", // Assuming you're using POST for deletion
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}", // Include CSRF token for POST request

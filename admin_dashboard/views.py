@@ -698,3 +698,62 @@ def view_driver(request):
 def driver_details_view(request,pk):
     data=Driver.objects.get(driver_id=pk)
     return render(request,'driverdetailsview.html',{'data':data})
+
+
+
+def edit_driver_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        driver = Driver.objects.get(pk=pk)
+    except driver.DoesNotExist:
+        messages.error(request, 'driver does not exist.')
+        return redirect('viewdriver')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Driver_form(request.POST, instance=driver)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            driver = form.save(commit=False)
+            driver.save()
+
+            # Associate the formset with the supplier
+            
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Driver.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/driver_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('viewdriver')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating driver failed.')
+            print(form.errors)
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form = Driver_form(instance=driver)
+        form_html = render_to_string('partials/editdriver.html', {'form': form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+    
+    
+    
+    
+def delete_driver_view(request,pk):
+   
+    if request.method == 'POST':
+        try:
+            data=Driver.objects.get(pk=pk)
+            data.delete()
+            all_data=Driver.objects.all()
+            updated_table_html=render_to_string('partials/driver_table.html',{'data':all_data})
+            
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Driver.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
