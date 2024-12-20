@@ -437,12 +437,88 @@ class Driver(models.Model):
 
 
 
+class Guide(models.Model):
+    guide_id=models.CharField(max_length=10,primary_key=True,editable=False)
+    name=models.CharField(max_length=100)
+    abudhabi_license=models.BooleanField(default=True)
+    dubai_license=models.BooleanField(default=True)
+    rak_license=models.BooleanField(default=True)
+    sharjah_license=models.BooleanField(default=True)
+    fujairah_license=models.BooleanField(default=True)
+    mobile1=models.PositiveIntegerField()
+    mobile2=models.PositiveIntegerField()
+    whatsapp1=models.PositiveIntegerField()
+    whatsapp2=models.PositiveIntegerField()
+    email=models.EmailField()
+    license_number=models.CharField(max_length=100)
+    license_expiry=models.DateField()
+    language=models.ManyToManyField(Language)
+    passport_number=models.CharField(max_length=100)
+    passport_expiry=models.DateField()
+    emirates_id_number=models.CharField(max_length=100)
+    emirates_id_expiry=models.DateField()
+    visa_number=models.CharField(max_length=100)
+    visa_expiry=models.DateField()
+    license_copy=models.FileField(upload_to='guide_license/')
+    passport=models.FileField(upload_to='guide_passport/')
+    emirates_id=models.FileField(upload_to='guide_emirates_id/')
+    visa=models.FileField(upload_to='guide_visa/')
+    photos=models.FileField(upload_to='driver_photos/')
+    status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+
+
+    def save(self, *args, **kwargs):
+        if not self.guide_id:  # Only generate ID if it's not already set
+            # Get the last language added to calculate the next ID
+            last_guide = Guide.objects.order_by('guide_id').last()
+            if last_guide:
+                # Extract the number part and increment it
+                last_id_number = int(last_guide.guide_id[3:])  # Skip 'LAN' prefix
+                next_id_number = last_id_number + 1
+                # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
+                self.guide_id = f"GUI{next_id_number:02d}"  # 2 digits for padding
+            else:
+                # If no languages exist, start with 'LAN01'
+                self.guide_id = 'GUI01'
+
+        super(Guide, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.guide_id 
 
 
 
 
 
 
+
+
+
+class Reminder(models.Model):
+    reminder_id=models.CharField(max_length=10,primary_key=True,editable=False)
+    name=models.CharField(max_length=50,unique=True)
+    description=models.CharField(max_length=200,unique=True)
+    date=models.DateField()
+    time=models.TimeField()
+    
+    def save(self, *args, **kwargs):
+        if not self.reminder_id:  # Only generate ID if it's not already set
+            # Get the last language added to calculate the next ID
+            last_reminder = Reminder.objects.order_by('reminder_id').last()
+            if last_reminder:
+                # Extract the number part and increment it
+                last_id_number = int(last_reminder.reminder_id[3:])  # Skip 'LAN' prefix
+                next_id_number = last_id_number + 1
+                # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
+                self.reminder_id = f"REM{next_id_number:02d}"  # 2 digits for padding
+            else:
+                # If no languages exist, start with 'LAN01'
+                self.reminder_id = 'REM01'
+
+        super(Reminder, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.reminder_id 
 
     
     

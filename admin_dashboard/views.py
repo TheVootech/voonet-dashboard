@@ -710,7 +710,7 @@ def edit_driver_view(request,pk):
         return redirect('viewdriver')  # Ensure 'supplier_list' is the correct URL name
 
     if request.method == 'POST':
-        form = Driver_form(request.POST, instance=driver)
+        form = Driver_form(request.POST,request.FILES, instance=driver)
 
         # Check if both the form and the formset are valid
         if form.is_valid():
@@ -757,3 +757,185 @@ def delete_driver_view(request,pk):
         
         except Driver.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+        
+def addguide_view(request):
+    if request.method == 'POST':
+        form = Guide_form(request.POST,request.FILES)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            form.save()
+
+
+            # Provide success feedback
+            print(request.POST)
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'success':False,'errors':form.errors})
+   
+    else:
+        # For GET request, create empty forms
+        form = Guide_form()
+
+    return render(request, 'addguide.html', {'form': form})
+
+
+
+def view_guide(request):
+    data=Guide.objects.all()
+    return render(request,'viewguide.html',{'data':data})
+
+
+
+
+def guide_details_view(request,pk):
+    data=Guide.objects.get(guide_id=pk)
+    return render(request,'guidedetailsview.html',{'data':data})
+
+
+
+
+
+def edit_guide_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        guide = Guide.objects.get(pk=pk)
+    except guide.DoesNotExist:
+        messages.error(request, 'guide does not exist.')
+        return redirect('viewguide')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Guide_form(request.POST,request.FILES,instance=guide)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            form.save()
+
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Guide.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/guide_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('viewguide')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating guide failed.')
+            print(form.errors)
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form = Guide_form(instance=guide)
+        form_html = render_to_string('partials/editguide.html', {'form': form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+    
+    
+    
+    
+def delete_guide_view(request,pk):
+   
+    if request.method == 'POST':
+        try:
+            data=Guide.objects.get(pk=pk)
+            data.delete()
+            all_data=Guide.objects.all()
+            updated_table_html=render_to_string('partials/guide_table.html',{'data':all_data})
+            
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Guide.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+        
+        
+def addreminder_view(request):
+    try:
+        if request.method == 'POST':
+            form = Reminder_form(request.POST)
+            if form.is_valid():
+                form.save()
+                reminder = Reminder.objects.all().values('reminder_id', 'name','description','date','time')
+                reminder_list = list(reminder)
+                return JsonResponse({'success': True, 'reminder': reminder_list})
+            else:
+                return JsonResponse({'success': False, 'errors': form.errors})
+        else:
+            form = Reminder_form()
+            reminder = Reminder.objects.all()
+        return render(request, 'addreminder.html', {'form': form, 'data': reminder})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    
+    
+    
+    
+    
+def view_reminder(request):
+    data=Reminder.objects.all()
+    return render(request,'viewreminder.html',{'data':data})
+
+
+
+
+def edit_reminder_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        reminder = Reminder.objects.get(pk=pk)
+    except reminder.DoesNotExist:
+        messages.error(request, 'reminder does not exist.')
+        return redirect('viewreminder')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Reminder_form(request.POST,instance=reminder)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            # Save the supplier form
+            form.save()
+
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Reminder.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/reminder_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('viewreminder')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating guide failed.')
+            print(form.errors)
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form = Reminder_form(instance=reminder)
+        form_html = render_to_string('partials/editreminder.html', {'form': form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+    
+    
+    
+def delete_reminder_view(request,pk):
+   
+    if request.method == 'POST':
+        try:
+            data=Reminder.objects.get(pk=pk)
+            data.delete()
+            all_data=Reminder.objects.all()
+            updated_table_html=render_to_string('partials/reminder_table.html',{'data':all_data})
+            
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Reminder.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+    
+    

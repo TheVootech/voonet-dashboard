@@ -1,0 +1,343 @@
+
+
+
+
+
+{% extends "base.html" %} 
+{% block content %}
+
+<style>
+  .extra-large-modal {
+    max-width: 60%;  
+  }
+
+
+
+    .alertmessage{
+        position: fixed; 
+        top: 1px; 
+        left:55%;
+        transform: translateX(-50%); 
+        padding: 30px 30px; 
+        background-color: #4CAF50; 
+        color: white; 
+        font-size: 16px; 
+        border-radius: 3px; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        z-index: 1000; 
+        width: 50%; /* This makes the alert have the same width as col-6 */
+    }
+
+</style>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <h2
+        class="font-weight-bold"
+        style="font-family: poppins, serif; color: #000"
+      >
+        View Guide
+      </h2>
+    </div>
+    <div class="row mt-2">
+      <div class="mt-5">
+        <div
+          id="success-message"
+          class="alert alert-success text-center font-weight-bold alertmessage"
+          role="alert"
+          style="display: none; margin-top: 20px"
+        >
+        Guide Edited successfully!
+        </div>
+
+        <div
+          id="dltsuccess-message"
+          class="alert alert-success text-center font-weight-bold alertmessage"
+          role="alert"
+          style="display: none; margin-top: 20px"
+        >
+        Guide Deleted successfully!
+        </div>
+
+        <div class="row" id="supplier-allocation-content">
+          <div class="col-2"></div>
+          <div class="col-lg-8 col-md-12 col-md-12">
+            <div class="card">
+              <div class="card-header card-header-rose card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">assignment</i>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                       
+                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                        
+                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" ></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in data %}
+                      <tr>
+                        <tr>
+                          <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.guide_id}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
+                          
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.mobile1}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
+                          
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.status}}</td>
+
+                          <td class="td-actions text-center">
+                            
+                            <button type="button" rel="tooltip" class="btn btn-info" >
+                                <i class="material-icons"><a href="{% url "guide_details" i.guide_id %}" style="color: white;">visibility</a></i>
+                            </button>
+                            
+                            {% comment %} <button type="button" rel="tooltip" class="btn btn-success">
+                              <a href="editsupplier/{{i.supplier_id}}/" style="color: white;"><i class="material-icons">edit</i></a>
+                            </button> {% endcomment %}
+
+                            <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.guide_id}}" onclick="openEditModal('{{i.guide_id}}')"> <i class="material-icons">edit</i> </button>
+
+
+                            <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.guide_id}}" onclick="openDeleteModal('{{i.guide_id}}')"> <i class="material-icons">close</i> </button>
+                            
+                          </td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;"></td>
+
+                      </tr>
+
+                      <div
+                          class="modal"
+                          id="editModal{{i.guide_id}}"
+                          tabindex="-1"
+                          role="dialog"
+                          aria-labelledby="editModalLabel{{i.guide_id}}"
+                          aria-hidden="true"
+                          
+                          
+                        >
+                          <div class="modal-dialog extra-large-modal" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h3
+                                  class="modal-title font-weight-bold"
+                                  id="editModalLabel{{i.guide_id}}"
+                                >
+                                  Edit Guide 
+                                </h3>
+                                <button
+                                  type="button"
+                                  class="close"
+                                  data-dismiss="modal"
+                                  aria-label="Close"
+                                >
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div
+                                class="modal-body"
+                                id="modal-content-{{i.guide_id}}"
+                              >
+                                <!-- Form will be loaded here -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                      <div
+                      class="modal "
+                      id="deleteModal{{i.guide_id}}"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="deleteModalLabel{{i.guide_id}}"
+                      aria-hidden="true"
+                      
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3
+                              class="modal-title text-primary font-weight-bold"
+                              id="deleteModalLabel{{i.guide_id}}"
+                            >
+                              Delete Guide 
+                            </h3>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div
+                            class="modal-body"
+                            id="modal-content-{{i.guide_id}}"
+                          >
+                            <h3 class="text-center font-weight-bold">Are you sure?</h3>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary font-weight-bold"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-primary font-weight-bold"
+                              id="deleteBtn{{i.guide_id}}"
+                              onclick="deleteItem('{{i.guide_id}}')"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openEditModal(id) {
+    // Show loading indicator
+    $("#modal-content-" + id).html("<p>Loading...</p>");
+  
+    // Perform AJAX request to fetch the form
+    $.ajax({
+      url: "/edit_guide/" + id + "/",
+      type: "GET",
+      success: function (response) {
+        // On success, load the form HTML into the modal body
+        $("#modal-content-" + id).html(response.form_html);
+  
+        // Reinitialize modal scripts after the new content is injected
+        initializeModalScripts();
+      },
+      error: function (xhr, status, error) {
+        // Handle error and show an error message in the modal
+        $("#modal-content-" + id).html("<p>There was an error fetching the form. Please try again later.</p>");
+        console.error("There was an error fetching the form: ", error);
+      },
+    });
+  }
+  
+  
+
+
+
+  $(document).on("submit", "#supp-form", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    var form = $(this);
+    var url = form.attr("action");
+
+    // Show a loading spinner or indicator
+    $("#modal-content-" + form.data("id")).html("<p>Submitting...</p>");
+
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: form.serialize(), // Serialize the form data
+      success: function (response) {
+        if (response.status === "success") {
+          
+          // Replace the whole table with updated table
+          $("#supplier-allocation-content").html(response.updated_table_html);
+
+          // Close the modal
+          $("#editModal" + form.data("id")).modal("hide");
+
+          // Optionally, show success message in the table or somewhere else
+          $("#success-message").fadeIn().delay(3000).fadeOut();
+
+        } else {
+          alert(
+            "An error occurred while submitting the form. Please try again."
+          );
+        }
+      },
+      error: function (xhr, status, error) {
+        alert("Error: " + error);
+        console.error("There was an error submitting the form:", error);
+      },
+    });
+  });
+
+
+  
+  function openDeleteModal(id) {
+    // Set the delete button in the modal to call deleteItem with the correct ID
+    $("#deleteBtn" + id).attr("onclick", "deleteItem('" + id + "')");
+  }
+
+  function deleteItem(id) {
+    // Perform the AJAX request to delete the item
+    $.ajax({
+      url: "/delete_guide/" + id + "/",
+      type: "POST", // Assuming you're using POST for deletion
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}", // Include CSRF token for POST request
+      },
+      success: function (response) {
+        if (response.status === "success") {
+          // Update the table with the new data
+          $("#supplier-allocation-content").html(response.updated_table_html);
+
+          // Hide the modal
+          $("#deleteModal" + id).modal("hide");
+
+          $(".modal-backdrop").remove();
+
+          // Show success message
+          $("#dltsuccess-message").fadeIn().delay(3000).fadeOut();
+        } else {
+          alert("An error occurred while deleting the item.");
+        }
+      },
+      error: function (xhr, status, error) {
+        alert("Error: " + error);
+        console.error("There was an error deleting the item:", error);
+      },
+    });
+  }
+
+  $('#deleteModal{{i.id}}').on('hidden.bs.modal', function () {
+    // Remove the backdrop manually after the modal is closed
+    $(".modal-backdrop").remove();
+  });
+  
+  if(performance.navigation.type == 2){
+    location.reload(true);
+ }
+
+</script>
+
+{% endblock content %}

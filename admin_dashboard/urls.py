@@ -62,6 +62,28 @@ urlpatterns = [
     path('driver_details/<str:pk>/',driver_details_view,name='driver_details'),
     path('edit_driver/<str:pk>/',edit_driver_view,name='edit_driver'),
     path('delete_driver/<str:pk>/',delete_driver_view,name='delete_driver'),
+    
+    
+    path('add_guide',addguide_view,name='add_guide'),
+    path('viewguide',view_guide,name='viewguide'),
+    path('guide_details/<str:pk>/',guide_details_view,name='guide_details'),
+    path('edit_guide/<str:pk>/',edit_guide_view,name='edit_guide'),
+    path('delete_guide/<str:pk>/',delete_guide_view,name='delete_guide'),
+    
+    
+    
+    path('add_reminder',addreminder_view,name='add_reminder'),
+    path('viewreminder',view_reminder,name='viewreminder'),
+    path('edit_reminder/<str:pk>/',edit_reminder_view,name='edit_reminder'),
+    path('delete_reminder/<str:pk>/',delete_reminder_view,name='delete_reminder'),
+
+
+
+
+
+
+
+
 
 
 

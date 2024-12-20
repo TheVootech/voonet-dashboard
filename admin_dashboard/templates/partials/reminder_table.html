@@ -1,0 +1,156 @@
+<div class="row" id="supplier-allocation-content">
+    <div class="col-2"></div>
+    <div class="col-lg-8 col-md-12 col-md-12">
+      <div class="card">
+        <div class="card-header card-header-rose card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">assignment</i>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                   
+                    <th class="text-center  text-rose" style="font-weight: 900;" >DESCRIPTION</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >DATE</th>
+                    
+                    <th class="text-center  text-rose" style="font-weight: 900;" >TIME</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" ></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+                  <tr>
+                    <tr>
+                      <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.reminder_id}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
+                      
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.description}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.date}}</td>
+                      
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.time}}</td>
+
+                      <td class="td-actions text-center">
+                        
+                        
+                        
+                        
+
+                        <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.reminder_id}}" onclick="openEditModal('{{i.reminder_id}}')"> <i class="material-icons">edit</i> </button>
+
+
+                        <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.reminder_id}}" onclick="openDeleteModal('{{i.reminder_id}}')"> <i class="material-icons">close</i> </button>
+                        
+                      </td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;"></td>
+
+                  </tr>
+
+                  <div
+                      class="modal"
+                      id="editModal{{i.reminder_id}}"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="editModalLabel{{i.reminder_id}}"
+                      aria-hidden="true"
+                      
+                      
+                    >
+                      <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3
+                              class="modal-title font-weight-bold"
+                              id="editModalLabel{{i.reminder_id}}"
+                            >
+                              Edit Reminder 
+                            </h3>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div
+                            class="modal-body"
+                            id="modal-content-{{i.reminder_id}}"
+                          >
+                            <!-- Form will be loaded here -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  <div
+                  class="modal "
+                  id="deleteModal{{i.reminder_id}}"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="deleteModalLabel{{i.reminder_id}}"
+                  aria-hidden="true"
+                  
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h3
+                          class="modal-title text-primary font-weight-bold"
+                          id="deleteModalLabel{{i.reminder_id}}"
+                        >
+                          Delete Reminder 
+                        </h3>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div
+                        class="modal-body"
+                        id="modal-content-{{i.reminder_id}}"
+                      >
+                        <h3 class="text-center font-weight-bold">Are you sure?</h3>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary font-weight-bold"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-primary font-weight-bold"
+                          id="deleteBtn{{i.reminder_id}}"
+                          onclick="deleteItem('{{i.reminder_id}}')"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>

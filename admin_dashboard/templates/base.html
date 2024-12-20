@@ -264,6 +264,33 @@
             </div>
           </li>
 
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#guide">
+              <i class="material-icons">directions</i>
+              <p> Manage Guide
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/add_guide' or request.path == '/viewguide' %}show{% endif %}" id="guide">
+              <ul class="nav">
+                <li class="nav-item {% if request.path == '/add_guide' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_guide" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Guide </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/viewguide' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewguide" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Guide </span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
           {% comment %} supplier management {% endcomment %}
 
           <li class="nav-item ">
@@ -355,6 +382,32 @@
                   <a class="nav-link" href="{% url "viewpayment" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Payment Mode  </span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#reminder">
+              <i class="material-icons">schedule</i>
+              <p> Manage Reminder
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/add_reminder' or request.path == '/viewreminder' %}show{% endif %}" id="reminder">
+              <ul class="nav">
+                <li class="nav-item {% if request.path == '/add_reminder' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_reminder" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Reminder </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/viewreminder' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewreminder" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Reminder </span>
                   </a>
                 </li>
 
