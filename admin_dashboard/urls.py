@@ -13,7 +13,16 @@ urlpatterns = [
     path('viewjobcard',view_jobcard_view,name="view_jobcard"),
     path('viewbookingreport',view_booking_report_view,name="view_booking_report"),
     path('viewjobreport',view_jobreport_view,name="view_job_report"),
+    
     path('addpackage',addpackages_view,name="add_package"),
+    path('viewpackage',view_package,name="viewpackage"),
+    path('packagedetails/<str:pk>/',package_detail_view,name='packagedetails'),
+    path('edit_package/<str:pk>/',edit_package_view,name='edit_package'),
+    path('deletepackage/<str:pk>/',delete_package_view,name='deletepackage'),
+
+
+
+
     
     path('addcategory',addcategory_view,name="add_category"),
     path('viewcategory',View_category,name="view_category"),

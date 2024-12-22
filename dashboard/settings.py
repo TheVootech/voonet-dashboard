@@ -27,17 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# 'ec95-2406-7400-10b-2489-95d7-ef25-6893-6574.ngrok-free.app'
+# '29c2-103-166-245-123.ngrok-free.app'
 
 # CSRF_TRUSTED_ORIGINS = [
-#     'https://ec95-2406-7400-10b-2489-95d7-ef25-6893-6574.ngrok-free.app',
+#     'https://29c2-103-166-245-123.ngrok-free.app',
 # ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

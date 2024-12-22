@@ -42,6 +42,7 @@ def addpackages_view(request):
         if form.is_valid():
             package=form.save(commit=False)
             package.save()
+            form.save_m2m()
             
             for i in image:
                 Package_images.objects.create(package=package,image=i)
@@ -52,17 +53,97 @@ def addpackages_view(request):
             for i in videos:
                 Video.objects.create(package=package,video=i)
                 
-            messages.success(request,"New Package Added Successfully...")
-            return redirect('add_package')
+            return JsonResponse({'success':True})
         else:
-            messages.warning(request,"Package Adding Failed")
-            return redirect('add_package')
+            return JsonResponse({'success':False,'errors':form.errors})
     else:
         form=Package_form()
         imageform=Package_image_form()
         hero_image_form=Hero_image_form()
         video_form=Video_form()
     return render(request,'addpackages.html',{'form':form,'imageform':imageform,'heroimageform':hero_image_form,'videoform':video_form})
+
+
+def view_package(request):
+    data=Package.objects.all()
+    return render(request,'viewpackage.html',{'data':data})
+
+
+def package_detail_view(request,pk):
+    data=Package.objects.get(pk=pk)
+    return render(request,'package_detail_view.html',{'data':data})
+
+
+
+
+
+def edit_package_view(request,pk):
+    try:
+        # Fetch the supplier instance to update
+        package = Package.objects.get(pk=pk)
+    except Package.DoesNotExist:
+        messages.error(request, 'Package does not exist.')
+        return redirect('viewpackage')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        image=request.FILES.getlist("image")
+        Hero_images=request.FILES.getlist("image")
+        videos=request.FILES.getlist("video")
+        form=Package_form(request.POST,instance=package)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid():
+            package=form.save(commit=False)
+            package.save()
+            
+            for i in image:
+                Package_images.objects.create(package=package,image=i)
+                
+            for i in Hero_images:
+                Hero_image.objects.create(package=package,image=i)
+                
+            for i in videos:
+                Video.objects.create(package=package,video=i)
+           
+            
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Package.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/package_table.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('viewpackage')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating package failed.')
+            print(form.errors)
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form=Package_form(instance=package)
+        imageform=Package_image_form(instance=package)
+        hero_image_form=Hero_image_form(instance=package)
+        video_form=Video_form(instance=package)
+        form_html = render_to_string('partials/editpackage.html', {'form':form,'imageform':imageform,'heroimageform':hero_image_form,'videoform':video_form,'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+    
+    
+    
+def delete_package_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Package.objects.get(pk=pk)
+            data.delete()
+            
+            all_data=Package.objects.all()
+            updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Package.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
 
 
 def addcategory_view(request):
@@ -233,7 +314,7 @@ def delete_language_view(request,pk):
 
 def addsupplier_view(request):
     if request.method == 'POST':
-        form = Supplier_form(request.POST)
+        form = Supplier_form(request.POST,request.FILES)
         formset = Contact_details_formset(request.POST)
 
         # Check if both the form and the formset are valid
@@ -373,7 +454,7 @@ def edit_supplier_view(request, pk):
     supplier = Supplier.objects.get(supplier_id=pk)
 
     if request.method == 'POST':
-        form = Supplier_form(request.POST,instance=supplier)
+        form = Supplier_form(request.POST,request.FILES,instance=supplier)
         formset = Contact_details_formset(request.POST,instance=supplier)
 
         # Check if both the form and the formset are valid
@@ -422,7 +503,7 @@ def update_supplier_view(request, pk):
         return redirect('supplier')  # Ensure 'supplier_list' is the correct URL name
 
     if request.method == 'POST':
-        form = Supplier_form(request.POST, instance=supplier)
+        form = Supplier_form(request.POST,request.FILES,instance=supplier)
         formset = Contact_details_formset(request.POST, instance=supplier)
 
         # Check if both the form and the formset are valid

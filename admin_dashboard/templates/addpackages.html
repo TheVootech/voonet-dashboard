@@ -1,18 +1,39 @@
 {% extends "base.html" %} {% block content %}
 
+
+<style>
+  .alertmessage{
+      position: fixed; 
+      top: 1px; 
+      left:55%;
+      transform: translateX(-50%); 
+      padding: 30px 30px; 
+      background-color: #4CAF50; 
+      color: white; 
+      font-size: 16px; 
+      border-radius: 3px; 
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+      z-index: 1000; 
+      width: 50%; /* This makes the alert have the same width as col-6 */
+  }
+</style>
+
 <div class="content">
   <div class="container-fluid">
     <div class="row text-center">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{message.tags}} alert-dismissible fade show packagealert text-center" role="alert">
-            <strong>{{message}}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        {% endfor %}
-      {% endif %}
+
+      <div class="row">
+      
+        <!-- Success message container -->
+        <div id="success-message" class="alert alert-success text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+          Package added successfully!
+        </div>
+
+        <div id="error-message" class="alert alert-danger text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+          
+        </div>
+      
+    </div>
       <h2
         class="font-weight-bold"
         style="font-family: poppins, serif; color: #4b0000"
@@ -31,7 +52,7 @@
             </div>
           </div>
         <div class="card-body">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" id="supform">
           {% csrf_token %}
           <div class="row mt-3">
             <div class="col-4">
@@ -469,5 +490,68 @@
     </div>
   </div>
 </div>
+
+<script>
+  let supform=document.getElementById('supform');
+  supform.addEventListener('submit',function(event){
+      event.preventDefault();
+      let formData = new FormData(supform);
+      $.ajax({
+          type:"POST",
+          url:"{% url "add_package" %}",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType:'json',
+          success:function(response){
+            console.log('AJAX request Successfull');
+            if(response.success){
+              showSuccessMessage();
+              supform.reset();
+            }
+            else{
+              showErrorMessage(response.errors);
+              console.log("form Submission errors :", response.errors);
+            }
+          },
+          error:function(xhr,Status,error){
+            showErrorMessage("An Unexpected Error Occurs Please Try again Later");
+            console.error("AJAX request failed:",status,error);
+            console.log("Response Text :",xhr.responseText)
+          }
+      });
+  });
+
+
+  function showSuccessMessage() {
+    let successMessage = document.getElementById('success-message');
+    successMessage.style.display = 'block';
+
+    // Hide the message after 3 seconds
+    setTimeout(function() {
+        successMessage.style.display = 'none';
+    }, 3000);
+  }
+
+  function showErrorMessage(errors) { 
+  let errorMessage = document.getElementById('error-message'); 
+  errorMessage.innerHTML = ''; 
+  if (typeof errors === 'string') { 
+    errorMessage.innerHTML = errors; 
+  } 
+  else { 
+    for (let key in errors) { 
+      if (errors.hasOwnProperty(key)) { 
+        let errorText = `${errors[key]}`; 
+        let errorItem = document.createElement('div'); 
+        errorItem.innerText = errorText; errorMessage.appendChild(errorItem);
+      } 
+      } 
+    }
+    errorMessage.style.display = 'block';
+    // Hide the message after 5 seconds 
+    setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
+  }
+</script>
 
 {% endblock content %}

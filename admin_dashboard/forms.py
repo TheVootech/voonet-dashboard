@@ -247,11 +247,11 @@ class Supplier_form(forms.ModelForm):
                     'class': 'form-select bg-none border border-secondary',
                     'style': 'background-color: transparent; border-radius: 5px;'
                 }),
-                'tl_number': forms.NumberInput(attrs={
+                'tl_number': forms.TextInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'vat_number': forms.NumberInput(attrs={
+                'vat_number': forms.TextInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
@@ -271,7 +271,7 @@ class Supplier_form(forms.ModelForm):
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'pincode1': forms.NumberInput(attrs={
+                'pincode1': forms.TextInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
@@ -303,7 +303,7 @@ class Supplier_form(forms.ModelForm):
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'mobile': forms.NumberInput(attrs={
+                'mobile': forms.TextInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
@@ -311,11 +311,11 @@ class Supplier_form(forms.ModelForm):
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'trade_license': forms.TextInput(attrs={
+                'trade_license': forms.FileInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'vat_certificate': forms.TextInput(attrs={
+                'vat_certificate': forms.FileInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
@@ -327,7 +327,7 @@ class Supplier_form(forms.ModelForm):
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'account_number': forms.NumberInput(attrs={
+                'account_number': forms.TextInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
@@ -339,7 +339,7 @@ class Supplier_form(forms.ModelForm):
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),
-                'routing_number': forms.NumberInput(attrs={
+                'routing_number': forms.TextInput(attrs={
                     'class': 'form-control border border-secondary pl-2 pr-2',
                     'style': 'font-size: 17px;border-radius:5px;'
                 }),

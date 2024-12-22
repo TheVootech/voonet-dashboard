@@ -1,0 +1,246 @@
+
+{% extends "base.html" %}
+{% block content %}
+            <div class="row mt-5">
+                <div class="col-1"></div>
+                <div class="col-md-10 ml-auto mr-auto">
+                  <div class="page-categories">
+                    <h3 class="title text-center font-weight-bold">{{data.package_title}}</h3>
+                    <br />
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center mt-3" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#details" role="tablist">
+                          <i class="material-icons">work</i> Package Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#vehicle" role="tablist">
+                          <i class="material-icons">public</i> Web Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contact" role="tablist">
+                          <i class="material-icons">highlight</i> Highlights
+                        </a>
+                      </li>
+                      
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#document" role="tablist">
+                          <i class="material-icons">movie</i>Image & Videos
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="tab-content tab-space tab-subcategories">
+                      <div class="tab-pane active" id="details">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Package Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TITLE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >CATEGORY</th>
+                                      
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >CITY</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >LOCATION</th>
+                                        
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TRANSPORTATION</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >DAYS OF OPERATION</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >OPEN HOURS</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      
+                     
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.package_id}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.package_title}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.package_category}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.package_city}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.location}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.transportation}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">
+                                          {% if data.sunday == True %}Sunday,{% endif %}
+                                          {% if data.monday == True %}Monday,{% endif %}
+                                          {% if data.tuesday == True %}Tuesday,{% endif %}
+                                          {% if data.wednesday == True %}Wednesday,{% endif %}
+                                          {% if data.thursday == True %}Thursday,{% endif %}
+                                          {% if data.friday == True %}Friday,{% endif %}
+                                          {% if data.saturday == True %}Saturday{% endif %}
+              
+                                        
+                                      </td>
+                                      <td class="text-center text-capitalize" style="font-weight: 500;">{{data.open_hours}}</td>    
+                                      <td class="text-center text-capitalize" style="font-weight: 500;">{{data.status}}</td>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                        
+                       
+                      </div>
+                      <div class="tab-pane" id="vehicle">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Web Details</h4>
+                            
+                          </div>
+                          <div class="card-body">
+                           
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >WEB ID</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >WEB SKU</th>
+                                    <th class="text-center  text-rose" style="font-weight: 900;" >WEBSITE LINK</th>
+                                    
+                                    
+                                  </tr>
+                                  
+                                </thead>
+                                <tbody>
+
+                                  <tr>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.web_id}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.web_sku}}</td>
+                                    <td class="text-center text-capitalize" style="font-weight: 500;">{{data.website_link}}</td>
+                                         
+  
+                                  </tr>
+                                 
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="contact">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Highlights</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >SHORT DESCRIPTION</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >DESCRIPTION</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >HIGHLIGHTS</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >INCLUSIONS</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >EXCLUSIONS</th>
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+                                      
+
+                                      <tr>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.short_description}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.description}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.highlights}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.inclusions}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.exclusions}}</td>
+
+                                        
+                                      </tr>
+                                      
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            
+                          </div>
+                      </div>
+                      <div class="tab-pane" id="document">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Image & Videos</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >IMAGE LINK</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >VIDEO LINK</th>
+                                        
+
+
+                                       
+              
+                                        
+                                        
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.image_link}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.video_link}}</td>
+                                   
+
+
+                                        
+                                        
+      
+                                      </tr>
+                                     
+                                      
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                               
+                            
+                          </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1"></div>
+              </div>
+        </div>
+
+<script>
+
+    
+</script>
+
+{% endblock content %}
+
+

@@ -304,7 +304,7 @@
                                         <th class="text-center  text-rose" style="font-weight: 900;" >TRADE LICENSE</th>
                                         <th class="text-center  text-rose" style="font-weight: 900;" >VAT NO :</th>
                                         <th class="text-center  text-rose" style="font-weight: 900;" >VAT CERTIFICATE</th>
-                                        <
+                                        
 
 
                                        
@@ -318,9 +318,10 @@
 
                                       <tr>
                                         <td class="text-center text-capitalize" style="font-weight: 500;">{{data.tl_number}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.trade_license}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{data.trade_license}}" target="_blank" rel="noopener noreferrer">{{data.trade_license}}</td>
                                         <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vat_number}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vat_certificate}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;"><a href="/media/{{data.vat_certificate}}" target="_blank" rel="noopener noreferrer">
+                                          {{data.vat_certificate}}</td>
                                         
       
                                       </tr>

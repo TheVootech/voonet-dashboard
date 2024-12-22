@@ -107,30 +107,8 @@
             
           </div>
           <div class="row mt-3">
-            <div class="col-4">
-              <label for="" class="text-black">TL Number</label>
-              <div class="form-group">
-                {{form.tl_number}} {% if form.tl_number.errors %}
-                <ul class="errorlist text-primary text-bold">
-                  {% for error in form.tl_number.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
-            </div>
-            <div class="col-4">
-              <label for="" class="text-black">VAT Number</label>
-              <div class="form-group">
-                {{form.vat_number}} {% if form.vat_number.errors %}
-                <ul class="errorlist text-primary text-bold">
-                  {% for error in form.vat_number.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
-            </div>
+            
+           
             <div class="col-4">
               <label for="" class="text-black">Mobile</label>
               <div class="form-group">
@@ -143,10 +121,7 @@
                 {% endif %}
               </div>
             </div>
-           
-          </div>
-          <div class="row mt-3">
-           
+
 
             <div class="col-4">
               <label for="" class="text-black">Email</label>
@@ -160,10 +135,9 @@
                 {% endif %}
               </div>
             </div>
-
-            
-
+           
           </div>
+          
           <hr>
           <div class="row mt-3">
             <h4 class="text-center font-weight-bold">Address</h4>
@@ -367,13 +341,26 @@
                   
 
 
-          <div class="row mt-3">
+          <div class="row mt-3 ">
             <h4 class="text-center font-weight-bold mb-4">Documents</h4>
-            <div class="row">
-              <div class="col-4">
-                <label for="" class="text-black">Trade License</label>
-              <div class="form-group">
-                {{form.trade_license}} {% if form.trade_license.errors %}
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="" class="text-black">Trade License No:</label>
+                <div class="form-group">
+                  {{form.tl_number}} {% if form.tl_number.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.tl_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="" class="text-black mb-3">Trade License</label>
+                {{form.trade_license}} 
+                <div class="form-group">
+                {% if form.trade_license.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.trade_license.errors %}
                   <li>{{ error }}</li>
@@ -382,20 +369,39 @@
                 {% endif %}
               </div>
               </div>
-              <div class="col-4">
-                <label for="" class="text-black">VAT Certificate</label>
-              <div class="form-group">
-                {{form.vat_certificate}} {% if form.vat_certificate.errors %}
+
+
+              <div class="col-3">
+                <label for="" class="text-black">VAT Number</label>
+                <div class="form-group">
+                  {{form.vat_number}} {% if form.vat_number.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.vat_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="col-3">
+                <label for="" class="text-black mb-3">VAT Certificate</label>
+                {{form.vat_certificate}}
+                <div class="form-group">
+                 {% if form.vat_certificate.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.vat_certificate.errors %}
                   <li>{{ error }}</li>
                   {% endfor %}
                 </ul>
                 {% endif %}
-              </div>
+                </div>
               </div>
               
+              
             </div>
+
+            
             
           </div>
 
@@ -639,10 +645,13 @@
 let supform=document.getElementById('supform');
 supform.addEventListener('submit',function(event){
     event.preventDefault();
+    let formData = new FormData(supform);
     $.ajax({
         type:"POST",
         url:"{% url "add_supplier" %}",
-        data:$(supform).serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         dataType:'json',
         success:function(response){
           console.log('AJAX request Successfull');

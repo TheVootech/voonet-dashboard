@@ -154,7 +154,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addpackage' %}show{% endif %}" id="package">
+            <div class="collapse {% if request.path == '/addpackage' or request.path == '/viewpackage' %}show{% endif %}" id="package">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addpackage' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_package" %}">
@@ -162,8 +162,8 @@
                     <span class="sidebar-normal"> Add New Package </span>
                   </a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/rtl.html">
+                <li class="nav-item {% if request.path == '/viewpackage' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewpackage" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Packages </span>
                   </a>
@@ -988,4 +988,10 @@
             $(packagealert).alert('close');  // Use jQuery to close the alert
         }
     }, 3000);
+
+
+
+    if(performance.navigation.type == 2){
+      location.reload(true);
+    }
   </script>
