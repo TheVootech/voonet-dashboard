@@ -65,7 +65,7 @@ def addpackages_view(request):
 
 
 def view_package(request):
-    data=Package.objects.all()
+    data=Package.objects.filter(is_deleted=False)
     return render(request,'viewpackage.html',{'data':data})
 
 
@@ -136,14 +136,35 @@ def delete_package_view(request,pk):
     if request.method == 'POST' :
         try:
             data=Package.objects.get(pk=pk)
-            data.delete()
+            data.is_deleted = True
+            data.save()
             
-            all_data=Package.objects.all()
+            all_data=Package.objects.filter(is_deleted=False)
             updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
         except Package.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def recover_package_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Package.objects.get(pk=pk)
+            data.is_deleted = False
+            data.save()
+            
+            all_data=Package.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Package.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def view_package_trash(request):
+    data=Package.objects.filter(is_deleted=True)
+    return render(request,'packagetrash.html',{'data':data})
 
 
 def addcategory_view(request):
@@ -224,6 +245,9 @@ def delete_category_view(request,pk):
         
         except Category.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+
+
+
 
            
 

@@ -154,7 +154,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addpackage' or request.path == '/viewpackage' %}show{% endif %}" id="package">
+            <div class="collapse {% if request.path == '/addpackage' or request.path == '/viewpackage' or request.path == '/packagetrash' %}show{% endif %}" id="package">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addpackage' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_package" %}">
@@ -169,8 +169,8 @@
                   </a>
                 </li>
 
-                <li class="nav-item ">
-                  <a class="nav-link" href="../examples/pages/rtl.html">
+                <li class="nav-item {% if request.path == '/packagetrash' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "packagetrash" %}">
                     <span class="sidebar-mini"> <i class="material-icons">delete</i> </span>
                     <span class="sidebar-normal"> Package Trash </span>
                   </a>

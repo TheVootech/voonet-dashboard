@@ -216,6 +216,7 @@ class Package(models.Model):
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
     image_link=models.CharField(max_length=600)
     video_link=models.CharField(max_length=600)
+    is_deleted=models.BooleanField(default=False)
 
     
     def __str__(self):

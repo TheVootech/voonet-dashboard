@@ -19,6 +19,10 @@ urlpatterns = [
     path('packagedetails/<str:pk>/',package_detail_view,name='packagedetails'),
     path('edit_package/<str:pk>/',edit_package_view,name='edit_package'),
     path('deletepackage/<str:pk>/',delete_package_view,name='deletepackage'),
+    path('packagetrash',view_package_trash,name="packagetrash"),
+    path('recoverpackage/<str:pk>/',recover_package_view,name='recoverpackage'),
+
+
 
 
 
