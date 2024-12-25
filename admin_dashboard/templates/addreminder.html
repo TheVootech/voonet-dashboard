@@ -51,32 +51,36 @@
                             {% csrf_token %}
                             <div class="text-black align-items-center">
                                 <div class="col-md-12">
-                                    <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Name</label>
 
                                     <div class="form-group">
+                                        <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Name</label>
+
                                         {{ form.name }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Description</label>
 
-                                    <div class="form-group">
+                                    <div class="form-group mt-3">
+                                        <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Description</label>
+
                                         {{ form.description }}
                                     </div>
                                 </div>
-                                <div class="row pl-3 pr-3">
+                                <div class="row pl-3 pr-3 mt-2">
                                     <div class="col-md-6">
-                                        <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Date</label>
     
                                         <div class="form-group">
+                                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Date</label>
+
                                             {{ form.date }}
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Time</label>
     
                                         <div class="form-group">
+                                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Time</label>
+
                                             {{ form.time }}
                                         </div>
                                     </div>

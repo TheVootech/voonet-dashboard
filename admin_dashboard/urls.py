@@ -20,7 +20,9 @@ urlpatterns = [
     path('edit_package/<str:pk>/',edit_package_view,name='edit_package'),
     path('deletepackage/<str:pk>/',delete_package_view,name='deletepackage'),
     path('packagetrash',view_package_trash,name="packagetrash"),
+    path('deletepackageforever/<str:pk>/',delete_package_forever_view,name='deletepackageforever'),
     path('recoverpackage/<str:pk>/',recover_package_view,name='recoverpackage'),
+    path('get-contact-persons/', get_contact_persons, name='get_contact_persons'),
 
 
 

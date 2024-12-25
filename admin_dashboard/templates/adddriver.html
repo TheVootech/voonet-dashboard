@@ -57,9 +57,10 @@
           {% csrf_token %}
           <div class="row mt-4">
             <div class="col-4">
-              <label for="" class="text-black">Driver Name</label>
 
               <div class="form-group">
+                <label for="" class="text-black">Driver Name</label>
+
 
                 {{form.name}} {% if form.name.errors %}
                 <ul class="errorlist text-primary text-bold">
@@ -72,8 +73,9 @@
             </div>
             
             <div class="col-4">
-              <label for="" class="text-black">Driver Type</label>
               <div class="form-group">
+                <label for="" class="text-black">Driver Type</label>
+
                 {{form.driver_type}} {% if form.driver_type.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.driver_type.errors %}
@@ -84,8 +86,9 @@
               </div>
             </div>
             <div class="col-4">
-                <label for="" class="text-black">Email</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Email</label>
+
                   {{form.email}} {% if form.email.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.email.errors %}
@@ -103,8 +106,9 @@
            
 
             <div class="col-4">
-              <label for="" class="text-black">Mobile 1</label>
               <div class="form-group">
+                <label for="" class="text-black">Mobile 1</label>
+
                 {{form.mobile1}} {% if form.mobile1.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.mobile1.errors %}
@@ -116,8 +120,9 @@
             </div>
 
             <div class="col-4">
-                <label for="" class="text-black">Mobile 2</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Mobile 2</label>
+
                   {{form.mobile2}} {% if form.mobile2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.mobile2.errors %}
@@ -128,8 +133,9 @@
                 </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Whatsapp 1</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Whatsapp 1</label>
+
                   {{form.whatsapp1}} {% if form.whatsapp1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.whatsapp1.errors %}
@@ -152,8 +158,9 @@
             
 
             <div class="col-4">
-                <label for="" class="text-black">Whatsapp 2</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Whatsapp 2</label>
+
                   {{form.whatsapp2}} {% if form.whatsapp2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.whatsapp2.errors %}
@@ -176,8 +183,9 @@
 
 
             <div class="col-4">
-                <label for="" class="text-black">Vehicle Make</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Vehicle Make</label>
+
                   {{form.vehicle_make}} {% if form.vehicle_make.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.vehicle_make.errors %}
@@ -189,8 +197,9 @@
               </div>
             
             <div class="col-4">
-              <label for="" class="text-black">Vehicle Brand</label>
               <div class="form-group">
+                <label for="" class="text-black">Vehicle Brand</label>
+
                 {{form.vehicle_brand}} {% if form.vehicle_brand.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.vehicle_brand.errors %}
@@ -201,8 +210,9 @@
               </div>
             </div>
             <div class="col-4">
-              <label for="" class="text-black">Vehicle Year</label>
               <div class="form-group">
+                <label for="" class="text-black">Vehicle Year</label>
+
                 {{form.vehicle_year}} {% if form.vehicle_year.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.vehicle_year.errors %}
@@ -219,8 +229,9 @@
             <h4 class="text-center font-weight-bold">Vehicle Registration</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Registration Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Registration Number</label>
+
                 {{form.vehicle_registration}} {% if form.vehicle_registration.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.vehicle_registration.errors %}
@@ -231,8 +242,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Registration Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Registration Expiry</label>
+
                 {{form.rc_expiry}} {% if form.rc_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.rc_expiry.errors %}
@@ -243,9 +255,8 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Registration Certificate</label>
+                <label for="" class="text-black mb-3">Upload Registration Certificate</label>
                 {{form.vehicle_rc}} 
-              <div class="form-group">
                 {% if form.vehicle_rc.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.vehicle_rc.errors %}
@@ -254,7 +265,6 @@
                 </ul>
                 {% endif %}
               </div>
-              </div>
             </div> 
           </div>
           <hr>
@@ -262,8 +272,9 @@
             <h4 class="text-center font-weight-bold">Driving License</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Driving License Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Driving License Number</label>
+
                 {{form.dl_number}} {% if form.dl_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.dl_number.errors %}
@@ -274,8 +285,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">License Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">License Expiry</label>
+
                 {{form.dl_expiry}} {% if form.dl_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.dl_expiry.errors %}
@@ -286,7 +298,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">License Document</label>
+                <label for="" class="text-black mb-3">Upload License Document</label>
                 {{form.driving_license}} 
               <div class="form-group">
                {% if form.driving_license.errors %}
@@ -305,8 +317,9 @@
             <h4 class="text-center font-weight-bold">Passport</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Passport Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Passport Number</label>
+
                 {{form.passport_number}} {% if form.passport_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.passport_number.errors %}
@@ -317,8 +330,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Passport Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Passport Expiry</label>
+
                 {{form.passport_expiry}} {% if form.passport_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.passport_expiry.errors %}
@@ -329,7 +343,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Passport Document</label>
+                <label for="" class="text-black mb-3">Upload Passport Document</label>
                 {{form.passport}}
               <div class="form-group">
                  {% if form.passport.errors %}
@@ -348,8 +362,9 @@
             <h4 class="text-center font-weight-bold">Emirates ID</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Emirates ID Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Emirates ID Number</label>
+
                 {{form.emirates_id_number}} {% if form.emirates_id_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.emirates_id_number.errors %}
@@ -360,8 +375,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Emirates ID Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Emirates ID Expiry</label>
+
                 {{form.emirates_id_expiry}} {% if form.emirates_id_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.emirates_id_expiry.errors %}
@@ -372,7 +388,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Emirates ID Document</label>
+                <label for="" class="text-black mb-3">Upload Emirates ID Document</label>
                 {{form.emirates_id}} 
               <div class="form-group">
                 {% if form.emirates_id.errors %}
@@ -391,8 +407,9 @@
             <h4 class="text-center font-weight-bold">Visa</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Visa Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Visa Number</label>
+
                 {{form.visa_number}} {% if form.visa_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.visa_number.errors %}
@@ -403,8 +420,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Visa Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Visa Expiry</label>
+
                 {{form.visa_expiry}} {% if form.visa_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.visa_expiry.errors %}
@@ -415,9 +433,8 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Visa Document</label>
+                <label for="" class="text-black mb-3">Upload Visa Document</label>
                 {{form.visa}} 
-              <div class="form-group">
                 {% if form.visa.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.visa.errors %}
@@ -426,15 +443,14 @@
                 </ul>
                 {% endif %}
               </div>
-              </div>
             </div>
            
           </div>
           <hr>
-          <div class="row mt-4">
+          <div class="row mt-5">
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black mb-3">Insurance</label>
+                <label for="" class="text-black mb-3">Upload Insurance</label>
                 {{form.insurance}}
               <div class="form-group">
                  {% if form.insurance.errors %}
@@ -447,7 +463,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Photos</label>
+                <label for="" class="text-black mb-3">Upload Photo</label>
                 {{form.photos}}
               <div class="form-group">
                  {% if form.photos.errors %}
@@ -460,8 +476,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Status</label>
               <div class="form-group">
+                <label for="" class="text-black">Status</label>
+
                 {{form.status}} {% if form.status.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.status.errors %}
@@ -500,7 +517,14 @@
  
 let supform=document.getElementById('supform');
 supform.addEventListener('submit',function(event){
+
     event.preventDefault();
+
+    if (!supform.checkValidity()) {
+      supform.reportValidity();  // Display default validation messages
+      return;
+    }
+
     let formData = new FormData(supform);
     $.ajax({
         type:"POST",

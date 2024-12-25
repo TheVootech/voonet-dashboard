@@ -15,6 +15,24 @@
       z-index: 1000; 
       width: 50%; /* This makes the alert have the same width as col-6 */
   }
+
+  /* Container style */
+  .select2-container .select2-selection--multiple {
+      height: 45px !important; /* Set height */
+      border: none !important; /* Remove border */
+      border-bottom: 2px solid #ccc !important;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+  }
+  
+ 
+  
+  
+  
+  
+
+
 </style>
 
 <div class="content">
@@ -57,9 +75,9 @@
           {% csrf_token %}
           <div class="row mt-4">
             <div class="col-4">
-              <label for="" class="text-black">Guide Name</label>
 
               <div class="form-group">
+                <label for="" class="text-black">Guide Name</label>
 
                 {{form.name}} {% if form.name.errors %}
                 <ul class="errorlist text-primary text-bold">
@@ -89,8 +107,9 @@
 
 
               <div class="col-4">
-                <label for="" class="text-black">Email</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Email</label>
+
                   {{form.email}} {% if form.email.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.email.errors %}
@@ -108,8 +127,9 @@
            
 
             <div class="col-4">
-              <label for="" class="text-black">Mobile 1</label>
               <div class="form-group">
+                <label for="" class="text-black">Mobile 1</label>
+
                 {{form.mobile1}} {% if form.mobile1.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.mobile1.errors %}
@@ -121,8 +141,9 @@
             </div>
 
             <div class="col-4">
-                <label for="" class="text-black">Mobile 2</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Mobile 2</label>
+
                   {{form.mobile2}} {% if form.mobile2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.mobile2.errors %}
@@ -133,8 +154,9 @@
                 </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Whatsapp 1</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Whatsapp 1</label>
+
                   {{form.whatsapp1}} {% if form.whatsapp1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.whatsapp1.errors %}
@@ -157,8 +179,9 @@
             
 
             <div class="col-4">
-                <label for="" class="text-black">Whatsapp 2</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Whatsapp 2</label>
+
                   {{form.whatsapp2}} {% if form.whatsapp2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.whatsapp2.errors %}
@@ -181,8 +204,9 @@
             <h4 class="text-center font-weight-bold">License</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">License Number</label>
               <div class="form-group">
+                <label for="" class="text-black">License Number</label>
+
                 {{form.license_number}} {% if form.license_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.license_number.errors %}
@@ -193,8 +217,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">License Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">License Expiry</label>
+
                 {{form.license_expiry}} {% if form.license_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.license_expiry.errors %}
@@ -205,7 +230,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">License Copy</label>
+                <label for="" class="text-black mb-3">Upload License Copy</label>
                 {{form.license_copy}} 
               <div class="form-group">
                 {% if form.license_copy.errors %}
@@ -225,8 +250,9 @@
             <h4 class="text-center font-weight-bold">Passport</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Passport Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Passport Number</label>
+
                 {{form.passport_number}} {% if form.passport_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.passport_number.errors %}
@@ -237,8 +263,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Passport Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Passport Expiry</label>
+
                 {{form.passport_expiry}} {% if form.passport_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.passport_expiry.errors %}
@@ -249,7 +276,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Passport Document</label>
+                <label for="" class="text-black mb-3">Upload Passport Document</label>
                 {{form.passport}}
               <div class="form-group">
                  {% if form.passport.errors %}
@@ -268,8 +295,9 @@
             <h4 class="text-center font-weight-bold">Emirates ID</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Emirates ID Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Emirates ID Number</label>
+
                 {{form.emirates_id_number}} {% if form.emirates_id_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.emirates_id_number.errors %}
@@ -280,8 +308,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Emirates ID Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Emirates ID Expiry</label>
+
                 {{form.emirates_id_expiry}} {% if form.emirates_id_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.emirates_id_expiry.errors %}
@@ -292,7 +321,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Emirates ID Document</label>
+                <label for="" class="text-black mb-3">Upload Emirates ID Document</label>
                 {{form.emirates_id}} 
               <div class="form-group">
                 {% if form.emirates_id.errors %}
@@ -311,8 +340,9 @@
             <h4 class="text-center font-weight-bold">Visa</h4>
             <div class="row">
               <div class="col-4">
-                <label for="" class="text-black">Visa Number</label>
               <div class="form-group">
+                <label for="" class="text-black">Visa Number</label>
+
                 {{form.visa_number}} {% if form.visa_number.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.visa_number.errors %}
@@ -323,8 +353,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Visa Expiry</label>
               <div class="form-group">
+                <label for="" class="text-black">Visa Expiry</label>
+
                 {{form.visa_expiry}} {% if form.visa_expiry.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.visa_expiry.errors %}
@@ -335,7 +366,7 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black mb-3">Visa Document</label>
+                <label for="" class="text-black mb-3">Upload Visa Document</label>
                 {{form.visa}} 
               <div class="form-group">
                 {% if form.visa.errors %}
@@ -354,8 +385,8 @@
           <div class="row mt-4">
             <div class="row">
               
-              <div class="col-4">
-                <label for="" class="text-black mb-3">Photos</label>
+              <div class="col-4 mt-2">
+                <label for="" class="text-black mb-3">Upload Photos</label>
                 {{form.photos}}
               <div class="form-group">
                  {% if form.photos.errors %}
@@ -368,8 +399,9 @@
               </div>
               </div>
               <div class="col-4">
-                <label for="" class="text-black">Language</label>
               <div class="form-group">
+                <label for="" class="text-black">Language</label>
+
                 {{form.language}} {% if form.language.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.language.errors %}
@@ -380,8 +412,9 @@
               </div>
               </div>
               <div class="col-4">
+              <div class="form-group mt-3">
                 <label for="" class="text-black">Status</label>
-              <div class="form-group">
+
                 {{form.status}} {% if form.status.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.status.errors %}
@@ -479,7 +512,13 @@ else {
    setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
 }
 
+
+  $('#id_language').select2();
+
+
+
 </script> 
+
 
 
 

@@ -11,9 +11,16 @@ from django.middleware.csrf import get_token
 def dashboard_view(request):
     return render(request,'dashboard.html')
 
+def get_contact_persons(request):
+    company_id = request.GET.get('company_id')
+    contact_persons = Company_contact_details.objects.filter(company_id=company_id).values('id', 'name','designation')
+    return JsonResponse(list(contact_persons), safe=False)
+
 
 def addbooking_view(request):
-    return render(request,'addbooking.html')
+    form=Booking_form()
+    formset=booking_trip_formset()
+    return render(request,'addbooking.html',{'form':form,'formset':formset})
 
 
 def viewbooking_view(request):
@@ -140,6 +147,19 @@ def delete_package_view(request,pk):
             data.save()
             
             all_data=Package.objects.filter(is_deleted=False)
+            updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Package.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def delete_package_forever_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Package.objects.get(pk=pk)
+            data.delete()
+            all_data=Package.objects.filter(is_deleted=True)
             updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         

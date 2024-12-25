@@ -12,9 +12,9 @@
             {% csrf_token %}
             <div class="row mt-3">
               <div class="col-4">
-                <label for="" class="text-black">Company Name</label>
   
                 <div class="form-group">
+                  <label for="" class="text-black">Customer Name</label>
   
                   {{form.name}} {% if form.name.errors %}
                   <ul class="errorlist text-primary text-bold">
@@ -27,8 +27,9 @@
               </div>
               
               <div class="col-4">
-                <label for="" class="text-black">Company Type</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Customer Type</label>
+  
                   {{form.company_type}} {% if form.company_type.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.company_type.errors %}
@@ -39,36 +40,9 @@
                 </div>
               </div>
               <div class="col-4">
-                  <label for="" class="text-black">TL Number</label>
-                  <div class="form-group">
-                    {{form.tl_number}} {% if form.tl_number.errors %}
-                    <ul class="errorlist text-primary text-bold">
-                      {% for error in form.tl_number.errors %}
-                      <li>{{ error }}</li>
-                      {% endfor %}
-                    </ul>
-                    {% endif %}
-                  </div>
-                </div>
-              
-            </div>
-            <div class="row mt-3">
-              
-              <div class="col-4">
-                <label for="" class="text-black">VAT Number</label>
                 <div class="form-group">
-                  {{form.vat_number}} {% if form.vat_number.errors %}
-                  <ul class="errorlist text-primary text-bold">
-                    {% for error in form.vat_number.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                  </ul>
-                  {% endif %}
-                </div>
-              </div>
-              <div class="col-4">
-                <label for="" class="text-black">Mobile</label>
-                <div class="form-group">
+                  <label for="" class="text-black">Mobile</label>
+  
                   {{form.mobile}} {% if form.mobile.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.mobile.errors %}
@@ -78,14 +52,17 @@
                   {% endif %}
                 </div>
               </div>
-             
+              
+              
             </div>
+            
             <div class="row mt-3">
              
   
               <div class="col-4">
-                <label for="" class="text-black">Email</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Email</label>
+  
                   {{form.email}} {% if form.email.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.email.errors %}
@@ -104,8 +81,9 @@
               <h4 class="text-center font-weight-bold">Address</h4>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">Address</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Address</label>
+  
                   {{form.address1}} {% if form.address1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.address1.errors %}
@@ -116,8 +94,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">City</label>
                 <div class="form-group">
+                  <label for="" class="text-black">City</label>
+  
                   {{form.city1}} {% if form.city1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.city1.errors %}
@@ -128,8 +107,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">State</label>
                 <div class="form-group">
+                  <label for="" class="text-black">State</label>
+  
                   {{form.state1}} {% if form.state1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.state1.errors %}
@@ -142,8 +122,9 @@
               </div>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">Country</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Country</label>
+  
                   {{form.country1}} {% if form.country1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.country1.errors %}
@@ -154,8 +135,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Pincode</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Pincode</label>
+  
                   {{form.pincode1}} {% if form.pincode1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.pincode1.errors %}
@@ -166,8 +148,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Phone</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Phone</label>
+  
                   {{form.phone1}} {% if form.phone1.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.phone1.errors %}
@@ -185,8 +168,9 @@
               <h4 class="text-center font-weight-bold">Address 2 <span style="font-size:17px">(optional)<span></h4>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">Address</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Address</label>
+  
                   {{form.address2}} {% if form.address2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.address2.errors %}
@@ -197,8 +181,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">City</label>
                 <div class="form-group">
+                  <label for="" class="text-black">City</label>
+  
                   {{form.city2}} {% if form.city2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.city2.errors %}
@@ -209,8 +194,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">State</label>
                 <div class="form-group">
+                  <label for="" class="text-black">State</label>
+  
                   {{form.state2}} {% if form.state2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.state2.errors %}
@@ -223,8 +209,9 @@
               </div>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">Country</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Country</label>
+  
                   {{form.country2}} {% if form.country2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.country2.errors %}
@@ -235,8 +222,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Pincode</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Pincode</label>
+  
                   {{form.pincode2}} {% if form.pincode2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.pincode2.errors %}
@@ -247,8 +235,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Phone</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Phone</label>
+  
                   {{form.phone2}} {% if form.phone2.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.phone2.errors %}
@@ -304,9 +293,22 @@
   
             <div class="row mt-3">
               <h4 class="text-center font-weight-bold mb-4">Documents</h4>
-              <div class="row">
-                <div class="col-4">
-                  <label for="" class="text-black mb-3">Trade License</label>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <div class="form-group">
+                    <label for="" class="text-black">Trade License No:</label>
+  
+                    {{form.tl_number}} {% if form.tl_number.errors %}
+                    <ul class="errorlist text-primary text-bold">
+                      {% for error in form.tl_number.errors %}
+                      <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-3">
+                  <label for="" class="text-black mb-3">Upload Trade License</label>
                   {{form.trade_license}} 
                   <div class="form-group">
                   {% if form.trade_license.errors %}
@@ -318,8 +320,21 @@
                   {% endif %}
                 </div>
                 </div>
-                <div class="col-4">
-                  <label for="" class="text-black mb-3">VAT Certificate</label>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label for="" class="text-black">VAT Number</label>
+  
+                    {{form.vat_number}} {% if form.vat_number.errors %}
+                    <ul class="errorlist text-primary text-bold">
+                      {% for error in form.vat_number.errors %}
+                      <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-3">
+                  <label for="" class="text-black mb-3">Upload VAT Certificate</label>
                   {{form.vat_certificate}} 
                   <div class="form-group">
                   {% if form.vat_certificate.errors %}
@@ -342,8 +357,9 @@
               <h4 class="text-center font-weight-bold mb-4">Bank Details</h4>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">Name</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Name</label>
+  
                   {{form.account_name}} {% if form.account_name.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.account_name.errors %}
@@ -354,8 +370,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Bank Name</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Bank Name</label>
+  
                   {{form.bank_name}} {% if form.bank_name.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.bank_name.errors %}
@@ -366,8 +383,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Account Number</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Account Number</label>
+  
                   {{form.account_number}} {% if form.account_number.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.account_number.errors %}
@@ -380,8 +398,9 @@
               </div>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">IBAN</label>
                 <div class="form-group">
+                  <label for="" class="text-black">IBAN</label>
+  
                   {{form.iban}} {% if form.iban.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.iban.errors %}
@@ -392,8 +411,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Swift</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Swift</label>
+  
                   {{form.swift}} {% if form.swift.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.swift.errors %}
@@ -404,8 +424,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Routing Number</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Routing Number</label>
+  
                   {{form.routing_number}} {% if form.routing_number.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.routing_number.errors %}
@@ -418,8 +439,9 @@
               </div>
               <div class="row">
                 <div class="col-4">
-                  <label for="" class="text-black">Branch</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Branch</label>
+  
                   {{form.branch}} {% if form.branch.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.branch.errors %}
@@ -430,8 +452,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">City</label>
                 <div class="form-group">
+                  <label for="" class="text-black">City</label>
+  
                   {{form.city}} {% if form.city.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.city.errors %}
@@ -442,8 +465,9 @@
                 </div>
                 </div>
                 <div class="col-4">
-                  <label for="" class="text-black">Country</label>
                 <div class="form-group">
+                  <label for="" class="text-black">Country</label>
+  
                   {{form.country}} {% if form.country.errors %}
                   <ul class="errorlist text-primary text-bold">
                     {% for error in form.country.errors %}
@@ -460,8 +484,9 @@
   
             <div class="row mt-3">
               <div class="col-4">
-                <label for="" class="text-black">Status</label>
                 <div class="form-group ">
+                  <label for="" class="text-black">Status</label>
+  
                   {{form.status}} 
                   {% if form.status.errors%}
                   <ul class="errorlist text-primary text-bold">
@@ -481,7 +506,7 @@
               <div class="col-3"></div>
               <div class="col-6">
                 <button type="submit" class="btn btn-rose w-100">
-                  Edit Company
+                  Edit Customer
                 </button>
               </div>
               <div class="col-3"></div>

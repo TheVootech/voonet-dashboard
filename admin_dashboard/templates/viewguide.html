@@ -238,8 +238,11 @@
         // On success, load the form HTML into the modal body
         $("#modal-content-" + id).html(response.form_html);
   
-        // Reinitialize modal scripts after the new content is injected
-        initializeModalScripts();
+        setTimeout(function () {
+          $('#id_language').select2();
+        }, 100);
+
+
       },
       error: function (xhr, status, error) {
         // Handle error and show an error message in the modal
@@ -248,6 +251,10 @@
       },
     });
   }
+
+
+
+ 
   
   
 
@@ -337,6 +344,15 @@
   if(performance.navigation.type == 2){
     location.reload(true);
  }
+
+ // Reinitialize Select2 when form content is loaded
+  $(document).on('ajaxComplete', function () {
+    $('#id_language').select2({
+        width: '100%',
+        placeholder: 'Select Languages'
+    });
+  });
+
 
 </script>
 

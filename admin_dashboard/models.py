@@ -44,6 +44,18 @@ class Language(models.Model):
 class Category(models.Model):
     category_id=models.CharField(max_length=10, primary_key=True, editable=False)
     category_name=models.CharField(max_length=30,unique=True)
+    adult=models.BooleanField(default=True)
+    child=models.BooleanField(default=True)
+    infant=models.BooleanField(default=True)
+    foc=models.BooleanField(default=True)
+    pickup_location=models.BooleanField(default=True)
+    drop_location=models.BooleanField(default=True)
+    room_no=models.BooleanField(default=True)
+    remark=models.BooleanField(default=True)
+    date=models.BooleanField(default=True)
+    time=models.BooleanField(default=True)
+    pickup_time=models.BooleanField(default=True)
+
     
     def __str__(self):
         return self.category_name
@@ -65,27 +77,7 @@ class Category(models.Model):
         super(Category, self).save(*args, **kwargs)
 
 
-class Bookings(models.Model):
-    company=models.CharField(max_length=120)
-    contact_person=models.CharField(max_length=120)
-    package=models.CharField(max_length=120)
-    adult=models.PositiveIntegerField()
-    child=models.PositiveIntegerField()
-    infant=models.PositiveIntegerField()
-    foc=models.PositiveIntegerField()
-    tour_date=models.DateField()
-    tour_time=models.TimeField()
-    pickup_location=models.CharField(max_length=200)
-    guest_name=models.CharField(max_length=200)
-    email=models.EmailField()
-    contact_number=models.CharField(max_length=20)
-    payment_ref_no=models.CharField(max_length=50)
-    room_no=models.CharField(max_length=20)
-    payment_status=models.CharField(max_length=20)
-    special_requirements=models.CharField(max_length=200)
-    
-    def __str__(self):
-        return self.guest_name
+
     
     
 class Supplier_type(models.Model):
@@ -335,7 +327,7 @@ class Company(models.Model):
         super(Company, self).save(*args, **kwargs)
         
     def __str__(self):
-        return self.company_id  
+        return self.name  
     
     
 class Company_contact_details(models.Model):
@@ -521,5 +513,62 @@ class Reminder(models.Model):
     def __str__(self):
         return self.reminder_id 
 
+
+
+class Booking(models.Model):
+    payment_status_choices=[
+        ('Paid','Paid'),
+        ('Unpaid','Unpaid'),
+    ]    
+    booked_date = models.DateField(auto_now_add=True)
+    booked_by=models.CharField(max_length=100,default="test by mujeeb")
+    booking_id=models.CharField(max_length=10,primary_key=True,editable=False)
+    company=models.ForeignKey(Company,on_delete=models.CASCADE)
+    contact_person=models.ForeignKey(Company_contact_details,on_delete=models.CASCADE)
+    guest_name=models.CharField(max_length=200)
+    email=models.EmailField()
+    contact_number=models.CharField(max_length=20)
+    payment_ref_no=models.CharField(max_length=50)
+    payment_status=models.CharField(choices=payment_status_choices,max_length=20)
     
     
+    def save(self, *args, **kwargs):
+        if not self.booking_id:  # Only generate ID if it's not already set
+            # Get the last language added to calculate the next ID
+            last_booking = Booking.objects.order_by('booking_id').last()
+            if last_booking:
+                # Extract the number part and increment it
+                last_id_number = int(last_booking.booking_id[3:])  # Skip 'LAN' prefix
+                next_id_number = last_id_number + 1
+                # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
+                self.booking_id = f"BOK{next_id_number:02d}"  # 2 digits for padding
+            else:
+                # If no languages exist, start with 'LAN01'
+                self.booking_id = 'BOK01'
+
+        super(Booking, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.booking_id 
+    
+    
+
+class Booking_Trip_details(models.Model):
+    booking=models.ForeignKey(Booking,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    package=models.ForeignKey(Package,on_delete=models.CASCADE)
+    trip_date=models.DateField()
+    trip_time=models.TimeField()
+    no_of_adult=models.PositiveIntegerField()
+    no_of_child=models.PositiveIntegerField()
+    no_of_infant=models.PositiveIntegerField()
+    no_of_foc=models.PositiveIntegerField()
+    room_no=models.CharField(max_length=10)
+    pickup_location=models.CharField(max_length=100)
+    pickup_time=models.TimeField()
+    drop_location=models.CharField(max_length=100)
+    
+    
+    def __str__(self):
+        return self.booking.booking_id 
+

@@ -27,60 +27,65 @@ class Package_form(forms.ModelForm):
         
         widgets = {
             'package_code': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;'
+                'class': 'form-control',
+                'placeholder':'Enter Package Code ',
             }),
             'package_title': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;'
+                'class': 'form-control',
+                'placeholder':'Enter Package Title ',
             }),
             'package_category': forms.Select(attrs={
-                'class': 'form-select bg-none border border-secondary',
-                'style': 'background-color: transparent; border-radius: 5px;'
+                'class': 'form-select',
+                'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
             }),
             'package_city': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;'
+                'class': 'form-control',
+                'placeholder':'Enter Package  City ',
             }),
             'web_id': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;'
+                'class': 'form-control',
+                'placeholder':'Enter WEB ID ',
             }),
             'web_sku': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;'
+                'class': 'form-control',
+                'placeholder':'Enter WEB SKU ',
             }),
             'website_link': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
+                'placeholder':'Enter Website Link ', 
             }),
             'short_description': forms.Textarea(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;height:100px !important;' 
+                'class': 'form-control',
+                'placeholder':'Enter Short Description ',
+                'style': 'height:100px !important;' 
             }),
             'highlights': forms.Textarea(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;height:100px !important;' 
+                'class': 'form-control',
+                'placeholder':'Enter Highlights ',
+                'style': 'height:100px !important;' 
             }),
             'description': forms.Textarea(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;height:100px !important;' 
+                'class': 'form-control',
+                'placeholder':'Enter Description ',
+                'style': 'height:80px !important;' 
             }),
             'inclusions': forms.Textarea(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;height:100px !important;' 
+                'class': 'form-control',
+                'placeholder':'Enter Inclusions ',
+                'style': 'height:80px !important;' 
             }),
             'exclusions': forms.Textarea(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;height:100px !important;' 
+                'class': 'form-control',
+                'placeholder':'Enter Exclusions ',
+                'style': 'height:80px !important;' 
             }),
             'transportation': forms.Select(attrs={
-                'class': 'form-select bg-none border border-secondary',
-                'style': 'background-color: transparent; border-radius: 5px;'
+                'class': 'form-select',
+                'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
             }),
              'language': forms.SelectMultiple(attrs={
-                'class': 'form-select bg-none border border-secondary',
-                'style': 'background-color: transparent; border-radius: 5px;height:50px !important;'
+                'class': 'form-select'
             }),
             'sunday': forms.CheckboxInput(attrs={
             }),
@@ -97,48 +102,45 @@ class Package_form(forms.ModelForm):
             'saturday': forms.CheckboxInput(attrs={
             }),
             'open_hours': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
+                'placeholder':'Enter Open Hours ',
+                 
             }),
             'location': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
+                'placeholder':'Enter Location ',
             }),
             'adult_rate': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;',
+                'class': 'form-control',
+
             }),
             'child_rate': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
+
             }),
             'infant_rate': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
             }),
             'adult_age': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
             }),
             'child_age': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
             }),
             'infant_age': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
             }),
             'status': forms.Select(attrs={
-                'class': 'form-select bg-none border border-secondary',
-                'style': 'background-color: transparent; border-radius: 5px;'
+                'class': 'form-select',
+                'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
             }),
             'image_link': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
+                'placeholder':'Enter Image Link ',
             }),
             'video_link': forms.TextInput(attrs={
-                'class': 'form-control border border-secondary pl-2 pr-2',
-                'style': 'font-size: 17px;border-radius:5px;' 
+                'class': 'form-control',
+                'placeholder':'Enter Video Link ',
             }),
             
         }
@@ -150,12 +152,24 @@ class Package_image_form(forms.ModelForm):
         model=Package_images
         fields=['image']
         
+        widgets = {
+                'image': forms.FileInput(attrs={
+                    'class': 'form-control',
+                }),
+                }
+        
 
 class Hero_image_form(forms.ModelForm):
     image=MultipleFileField(label='',required=False)
     class Meta:
         model=Hero_image
         fields=['image']
+        
+        widgets = {
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+            }),
+            }
         
         
         
@@ -165,6 +179,12 @@ class Video_form(forms.ModelForm):
         model=Video
         fields=['video']
         
+        widgets = {
+            'video': forms.FileInput(attrs={
+                'class': 'form-control',
+            }),
+        }
+        
         
 class Category_form(forms.ModelForm):
     class Meta:
@@ -173,8 +193,30 @@ class Category_form(forms.ModelForm):
         
         widgets = {
                 'category_name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Category Name'
+                }),
+                'adult': forms.CheckboxInput(attrs={
+                }),
+                'child': forms.CheckboxInput(attrs={
+                }),
+                'infant': forms.CheckboxInput(attrs={
+                }),
+                'foc': forms.CheckboxInput(attrs={
+                }),
+                'pickup_location': forms.CheckboxInput(attrs={
+                }),
+                'drop_location': forms.CheckboxInput(attrs={
+                }),
+                'room_no': forms.CheckboxInput(attrs={
+                }),
+                'remark': forms.CheckboxInput(attrs={
+                }),
+                'date': forms.CheckboxInput(attrs={
+                }),
+                'time': forms.CheckboxInput(attrs={
+                }),
+                'pickup_time': forms.CheckboxInput(attrs={
                 }),
         }
     
@@ -188,8 +230,8 @@ class Languages_form(forms.ModelForm):
         
         widgets = {
                 'language_name': forms.TextInput(attrs={
-                    'class': 'form-control  border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Language Name'
                 }),
         }
  
@@ -202,24 +244,24 @@ class Contact_details_form(forms.ModelForm):
         
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Name'
                 }),
                 'designation': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Designation'
                 }),
                 'mobile': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Mobile'
                 }),
                 'whatsapp': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Whatsapp'
                 }),
                 'email': forms.EmailInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Email'
                 }),
         }
         
@@ -236,131 +278,142 @@ class Supplier_form(forms.ModelForm):
         
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Supplier Full Name',
+                    'required':'required',
+                    
                 }),
-                'category':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                'category': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                    
                 }),
+
                 'supplier_type':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;'
                 }),
                 'tl_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trade License No :'
                 }),
                 'vat_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter VAT No :'
                 }),
                 'address1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Address'
                 }),
                 'city1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter City'
                 }),
                 'state1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter State'
                 }),
                 'country1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Country'
                 }),
                 'pincode1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Pincode/Zipcode'
                 }),
                 'phone1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Phone'
                 }),
                 'address2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Address'
                 }),
                 'city2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter City'
                 }),
                 'state2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter State'
                 }),
                 'country2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Country'
                 }),
-                'pincode2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                'pincode2': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter Pincode/Zipcode'
                 }),
                 'phone2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Phone'
                 }),
                 'mobile': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Mobile'
                 }),
                 'email': forms.EmailInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Email ID'
                 }),
                 'trade_license': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+
                 }),
                 'vat_certificate': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'account_name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Account Name'
                 }),
                 'bank_name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Bank Name'
                 }),
                 'account_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Account No :'
                 }),
                 'iban': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter IBAN ID'
                 }),
                 'swift': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Swift ID'
                 }),
                 'routing_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Routing No :'
                 }),
                 'branch': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Branch'
                 }),
                 'city': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                   'class': 'form-control',
+                    'placeholder': 'Enter City'
                 }),
                 'country': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'EnterCountry'
                 }),
                 'status':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;'
+
                 }),
                 
         }
+        
+    
+        
+   
+    
+
+       
 
 
 
@@ -369,8 +422,11 @@ class Allocate_supplier_form(forms.ModelForm):
         model = Supplier_allocation
         fields = ['package', 'supplier']
         widgets = {
-            'package': forms.Select(attrs={'class': 'form-select bg-none', 'style': 'background-color: transparent; border-radius: 5px;'}),
-            'supplier': forms.SelectMultiple(attrs={'class': 'form-select bg-none', 'style': 'background-color: transparent; border-radius: 5px;'}),
+            'package': forms.Select(attrs={                    
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                }),
+            'supplier': forms.SelectMultiple(attrs={'class': 'form-select'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -578,124 +634,122 @@ class Company_form(forms.ModelForm):
         
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Customer Name'
                 }),
                 'company_type':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
                 }),
                 'tl_number': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trade License No :'
                 }),
                 'vat_number': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter VAT No :'
                 }),
                 'address1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Address'
                 }),
                 'city1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter City Name'
                 }),
                 'state1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter State Name'
                 }),
                 'country1': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Coutry'
                 }),
                 'pincode1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Pincode/Zipcode'
                 }),
                 'phone1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Phone No :'
                 }),
                 'address2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                   'class': 'form-control',
+                    'placeholder': 'Enter Address'
                 }),
                 'city2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter City Name'
                 }),
                 'state2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter State Name'
                 }),
                 'country2': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Coutry'
                 }),
                 'pincode2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Pincode/Zipcode'
                 }),
                 'phone2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Phone No :'
                 }),
                 'mobile': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Mobile No :'
                 }),
                 'email': forms.EmailInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Email ID'
                 }),
                 'trade_license': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
                 }),
                 'vat_certificate': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
                 }),
                 'account_name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Account Name'
                 }),
                 'bank_name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Bank Name '
                 }),
                 'account_number': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Account No :'
                 }),
                 'iban': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter IBAN ID'
                 }),
                 'swift': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Swift ID'
                 }),
                 'routing_number': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Routing No :'
                 }),
                 'branch': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Branch'
                 }),
                 'city': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter City Name'
                 }),
                 'country': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Country'
                 }),
                 'status':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
                 }),
                 
         }
@@ -710,24 +764,24 @@ class Company_contact_details_form(forms.ModelForm):
         
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Full Name'
                 }),
                 'designation': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Designation'
                 }),
                 'mobile': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Mobile No :'
                 }),
                 'whatsapp': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Whatsapp No :'
                 }),
                 'email': forms.EmailInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder': 'Enter Email ID'
                 }),
         }
         
@@ -744,8 +798,8 @@ class Payment_form(forms.ModelForm):
         
         widgets={
                 'payment_mode': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder': 'Enter Payment Mode',
                 }),
          }
         
@@ -755,123 +809,115 @@ class Driver_form(forms.ModelForm):
         model=Driver
         exclude=['driver_id']
         
+        
+        
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Driver Full Name'
                 }),
                 'driver_type': forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
                 }),
                 'vehicle_make': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Vehicle Make'
                 }),
                 'vehicle_brand': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Vehicle Brand'
                 }),
                 'vehicle_year': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':' Enter Vehicle Year',
+                    
                 }),
                 'mobile1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Mobile No :',
                 }),
                 'mobile2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Mobile No :',
                 }),
                 'whatsapp1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Whatsapp No :',
                 }),
                 'whatsapp2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Whatsapp No :',
                 }),
                 'email': forms.EmailInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Email ID',
                 }),
                 'vehicle_registration': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Vehicle Registration No :',
                 }),
                 'rc_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'dl_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder':'Enter Driving License No :',
                 }),
                 'dl_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                     'class': 'form-control',
                     'type':'date'
                 }),
                 'passport_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder':'Enter Passport No :',
                 }),
                 'passport_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                     'class': 'form-control',
                     'type':'date'
                 }),
                 'emirates_id_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                     'class': 'form-control',
+                    'placeholder':'Enter Emirates ID No :',
                 }),
                 'emirates_id_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'visa_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Visa No :',
                 }),
                 'visa_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'vehicle_rc': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'insurance': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'driving_license': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'passport': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'emirates_id': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'visa': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'photos': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
                 }),
                 'status':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
                 }),
                  
                 
@@ -888,8 +934,8 @@ class Guide_form(forms.ModelForm):
         
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                   'class': 'form-control',
+                    'placeholder':'Enter Guide Full Name',
                 }),
                 
                 'abudhabi_license': forms.CheckboxInput(attrs={
@@ -904,88 +950,78 @@ class Guide_form(forms.ModelForm):
                 }),
                 
                 'mobile1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Mobile No :',
                 }),
                 'mobile2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Mobile No :',
                 }),
                 'whatsapp1': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Whatsapp No :',
                 }),
                 'whatsapp2': forms.NumberInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Whatsapp No :',
                 }),
                 'email': forms.EmailInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
+                    'placeholder':'Enter Email ID ',
                 }),
                 'license_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter License No :',
                 }),
                 'license_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'language': forms.SelectMultiple(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;height:50px !important;'
+                    'class': 'form-control select2',
                 }),
                 'passport_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Passport No :',
                 }),
                 'passport_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'emirates_id_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Emirates ID No :',
                 }),
                 'emirates_id_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'visa_number': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Visa No :',
                 }),
                 'visa_expiry': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date'
                 }),
                 'license_copy': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control'
                 }),            
                 'passport': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control'
                 }),
                 'emirates_id': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control'
                 }),
                 'visa': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control'
                 }),
                 'photos': forms.FileInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control'
                 }),
                 'status':  forms.Select(attrs={
-                    'class': 'form-select bg-none border border-secondary',
-                    'style': 'background-color: transparent; border-radius: 5px;'
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
                 }),
 
          }
@@ -1000,21 +1036,149 @@ class Reminder_form(forms.ModelForm):
         
         widgets={
                 'name': forms.TextInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Reminder Name'
                 }),
                 'description': forms.Textarea(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;height:80px !important;'
+                    'class': 'form-control',
+                    'placeholder':'Enter Reminder Description',
+                    'style':'height:100px !important;'
+
                 }),
                 'date': forms.DateInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'date',
                 }),
                 'time': forms.TimeInput(attrs={
-                    'class': 'form-control border border-secondary pl-2 pr-2',
-                    'style': 'font-size: 17px;border-radius:5px;',
+                    'class': 'form-control',
                     'type':'time',
                 }),
          }
+        
+        
+class Booking_form(forms.ModelForm):
+    class Meta:
+        model=Booking
+        exclude=['booking_id','booked_date','booked_date']
+        
+        
+    
+        
+        widgets={    
+                'company':  forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),
+                'contact_person': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),
+                
+                'guest_name': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Guest Full Name',
+                }),
+                'email': forms.EmailInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Guest Email ID',
+                }),
+                'contact_number': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Contact No :',
+                }),
+                'payment_ref_no': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Payment Reference No :',
+                }),
+               
+                'payment_status': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),
+                
+        
+        }
+        
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Initialize contact_person queryset as empty by default
+        self.fields['contact_person'].queryset = Company_contact_details.objects.none()
+
+        if 'company' in self.data:
+            try:
+                company_id = int(self.data.get('company'))
+                self.fields['contact_person'].queryset = Company_contact_details.objects.filter(company_id=company_id)
+            except (ValueError, TypeError):
+                self.fields['contact_person'].queryset = Company_contact_details.objects.none()
+        elif self.instance.pk:  # When editing an existing booking
+            self.fields['contact_person'].queryset = Company_contact_details.objects.filter(company=self.instance.company)
+
+
+class booking_trip_form(forms.ModelForm):
+    class Meta:
+        model=Booking_Trip_details
+        exclude=['booking']
+        
+        widgets={
+                'category': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),
+                'package': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                }),
+                'trip_date': forms.DateInput(attrs={
+                    'class': 'form-control',
+                    'type':'date',
+                }),
+                'trip_time': forms.TimeInput(attrs={
+                    'class': 'form-control',
+                    'type':'time',
+                }),
+                'no_of_adult': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter No : of Adult',
+
+                }),
+                'no_of_child': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter No : of Child',
+                }),
+                'no_of_infant': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter No : of Infant',
+                }),
+                'no_of_foc': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter No : of FOC',
+                }),
+                'room_no': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Room No :'
+                }),
+                'pickup_location': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Pickup Location'
+                }),
+                'pickup_time': forms.TimeInput(attrs={
+                    'class': 'form-control',
+                    'type':'time',
+                }),
+                'drop_location': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Drop off Location'
+                }),
+         }
+
+
+
+booking_trip_formset=inlineformset_factory(
+    Booking,Booking_Trip_details,form=booking_trip_form,extra=1,can_delete=True
+)

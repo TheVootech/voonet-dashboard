@@ -1,3 +1,15 @@
+<style>
+  .select2-container .select2-selection--multiple {
+    height: 45px !important; /* Set height */
+    border: none !important; /* Remove border */
+    border-bottom: 2px solid #ccc !important;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+</style>
+
+
 
 <div class="card">
     <div class="card-header card-header-rose card-header-icon">
@@ -371,7 +383,13 @@
 
 <script>  
 
+
+// Reinitialize Select2 when form content is loaded
+
+
+
 $(document).ready(function() {
+
 // Handle form submission via AJAX
 $('#supp-form').submit(function(event) {
 event.preventDefault();  // Prevent the form from submitting the traditional way
@@ -428,6 +446,10 @@ $.ajax({
         
         // Open the modal after content is loaded
         $('#editModal').modal('show');
+
+        setTimeout(function () {
+          $('#id_language').select2();
+        }, 100);
     },
     error: function(xhr, status, error) {
         // Handle error and show an error message in the modal
@@ -440,6 +462,11 @@ $.ajax({
 });
 });
 
+
+  
+
 </script> 
+
+
 
 

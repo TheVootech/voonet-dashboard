@@ -1,199 +1,453 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
+<style>
+  .alertmessage{
+      position: fixed; 
+      top: 1px; 
+      left:55%;
+      transform: translateX(-50%); 
+      padding: 30px 30px; 
+      background-color: #4CAF50; 
+      color: white; 
+      font-size: 16px; 
+      border-radius: 3px; 
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+      z-index: 1000; 
+      width: 50%; /* This makes the alert have the same width as col-6 */
+  }
+</style>
 
 <div class="content">
-    <div class="container-fluid">
-        <div class="row text-center"><h2 class="font-weight-bold"style="font-family:poppins,serif;color:#4b0000;">Add New Booking</h2></div>
-        <div class="row mt-4">
-            <div class="col-lg-6 col-md-12 col-md-12 border pt-3 text-black">
-                <form class="form-horizontal text-black">
-                    <div class="row text-black align-items-center">
-                      <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Company/Hotel</label>
-                      <div class="col-md-9">
-                        <div class="form-group ">
-                          <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                            <option selected disabled>Select</option>
-                            <option value="1">One</option>
-                          </select>
-                               </div>
-                      </div>
-                    </div>
-
-                    <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Contact Person</label>
-                        <div class="col-md-9">
-                          <div class="form-group ">
-                            <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                              <option selected disabled>Select</option>
-                              <option value="1">One</option>
-                            </select>
-                                 </div>
-                        </div>
-                      </div>
-
-                      <div class="row text-black align-items-center mb-4">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Tour Package</label>
-                        <div class="col-md-9">
-                          <div class="form-group ">
-                            <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                              <option selected disabled>Select</option>
-                              <option value="1">One</option>
-                            </select>
-                                 </div>
-                        </div>
-                      </div>
-                      <hr class="border border-primary">
-
-                      <div class="mb-4">
-                        <h5 class="text-center font-weight-bold">Quantity of Persons</h5>
-                        <div class="row text-black align-items-center">
-                          <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Adults </label>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                            </div>
-                          </div>
-                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Childrens </label>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row text-black align-items-center">
-                          <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Infant </label>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                            </div>
-                          </div>
-                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Foc </label>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <hr class="border border-primary">
-
-                      
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Tour Date</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="date" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Tour Time</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="time" class="form-control border border-primary pl-4 pr-4">
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Pickup Location</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="text" class="form-control border border-primary pl-4 pr-4">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Guest Name</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="text" class="form-control border border-primary pl-4 pr-4">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Email</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="email" class="form-control border border-primary pl-4 pr-4">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Contact Number</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="text" class="form-control border border-primary pl-4 pr-4">
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Payment Ref no </label>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                            </div>
-                          </div>
-                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Room no </label>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                            </div>
-                          </div>
-                      </div>
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Payment Mode </label>
-                          <div class="col-md-3">
-                            <div class="form-group ">
-                              <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                                <option selected disabled>Select</option>
-                                <option value="1">One</option>
-                              </select>
-                                   </div>
-                          </div>
-                          <label class="col-md-3 col-form-label text-black text-right" style="font-size: 17px;">Payment Status </label>
-                          <div class="col-md-3">
-                            <div class="form-group ">
-                              <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                                <option selected disabled>Select</option>
-                                <option value="1">One</option>
-                              </select>
-                                   </div>
-                          </div>
-                      </div>
-
-                      <div class="row text-black align-items-center">
-                        <label class="col-md-3 col-form-label text-black" style="font-size: 17px;">Special Requirements</label>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              <input type="text" class="form-control border border-primary pl-4 pr-4">
-                          </div>
-                        </div>
-                      </div>
-
-
-
-                      <button class="btn btn-primary btn-square w-100 mt-4">Submit</button>
-
-
-                  </form>
-            </div>
-            <div class="col-lg-6 col-md-12 col-md-12"></div>
-        </div>
+  <div class="container-fluid">
+    <div class="row text-center">
+      
+      <h2
+        class="font-weight-bold"
+        style="font-family: poppins, serif; color: #4b0000"
+      >
+        Add Booking
+      </h2>
     </div>
+    <div class="row">
+      
+        <!-- Success message container -->
+        <div id="success-message" class="alert alert-success text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+          Booking added successfully!
+        </div>
+
+        <div id="error-message" class="alert alert-danger text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
+          
+        </div>
+      
+    </div>
+    <div class="row mt-4">
+      
+
+      <div class="col-lg-6 col-md-12 col-md-12  pt-3 text-black">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+                <i class="material-icons">add</i>
+            </div>
+          </div>
+          <div class="card-body">
+
+          
+        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supform">
+          {% csrf_token %}
+
+          <div class="col-12 mt-2">
+            <div class="form-group">
+              <label for="" class="text-black">Guest name</label>
+
+              {{form.guest_name}} {% if form.guest_name.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.guest_name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-12 mt-2">
+            <div class="form-group">
+              <label for="" class="text-black">Email</label>
+
+              {{form.email}} {% if form.email.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.email.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+
+          <div class="col-12 mt-2">
+            <div class="form-group">
+              <label for="" class="text-black">Contact Number</label>
+
+              {{form.contact_number}} {% if form.contact_number.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.contact_number.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+            <div class="col-12">
+
+              <div class="form-group">
+                <label for="id_company" class="bmd-label-floating text-black">Company</label>
+
+
+                {{form.company}} {% if form.company.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.company.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-12">
+
+              <div class="form-group">
+                <label for="id_contact_person" class="text-black">Contact person</label>
+
+                {{form.contact_person}} {% if form.contact_person.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.contact_person.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+
+
+            <div class="row mt-5 mb-3">
+              {{ formset.management_form }}
+              <h4 class="text-center font-weight-bold mb-4">Trip Details</h4>
+              <div class="formset-container">
+                {% for form in formset %}
+                <div class="formset mb-2" id="formset">
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="col-md-4 mb-3">  <!-- col-md-4 will make 3 items per row -->
+                                <div class="form-group">
+                                    <!-- Conditionally display the label for all fields except 'id' and 'supplier' -->
+                                    {% if field.name != 'id' and field.name != 'booking' %}
+                                        <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                    {% endif %}
+                                    {{ field }}
+                                      <!-- Render each field -->
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 %}
+                                </div><div class="row">  <!-- Start a new row after every 3 fields -->
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+              {% endfor %}
+              </div>
+             
+              <!-- Add Button to dynamically add new contact forms -->
+              <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-6">
+                      <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Trip</button>
+                  </div>
+              </div>
+  
+                      
+                      <hr>
+                    
+  
+            </div>
+            
+          
+
+          
+
+
+          
+
+
+          <div class="col-12 mt-2">
+            <label for="" class="text-black">Payment ref No :</label>
+            <div class="form-group">
+              {{form.payment_ref_no}} {% if form.payment_ref_no.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.payment_ref_no.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+
+          <div class="col-12 mt-2">
+            <label for="" class="text-black">Payment Status</label>
+            <div class="form-group">
+              {{form.payment_status}} {% if form.payment_status.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.payment_status.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+          
+
+
+          <div class="row mt-5">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <button type="submit" class="btn btn-rose w-100">
+                Add Booking
+              </button>
+            </div>
+            <div class="col-3"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="col-6"></div>
+  </div>
 </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#id_company').change(function () {
+            var companyId = $(this).val();
+            var contactPersonDropdown = $('#id_contact_person');
+            
+            contactPersonDropdown.empty(); // Clear existing options
+            
+            if (companyId) {
+                $.ajax({
+                    url: "{% url 'get_contact_persons' %}",
+                    data: { company_id: companyId },
+                    success: function (data) {
+                        contactPersonDropdown.append('<option value="">Select Contact Person</option>');
+                        data.forEach(function (person) {
+                            contactPersonDropdown.append('<option value="' + person.id + '">' + person.name +" "+ "(" + person.designation +")"+ '</option>');
+                        });
+                    },
+                    error: function () {
+                        alert('Unable to fetch contact persons. Please try again later.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('add-form').addEventListener('click', function() {
+        // Get the next form index (based on the current number of forms)
+        var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
+        console.log(formIdx);
+
+        // Clone the first form in the formset
+        var newForm = document.querySelector('.formset').cloneNode(true);
+
+        // Replace __prefix__ in name and id with the new form index
+        const regex = /__prefix__/g;
+        newForm.innerHTML = newForm.innerHTML.replace(regex, formIdx);
+
+        // Set the new ID for the form
+        newForm.setAttribute('id', `formset${formIdx}`);
+
+        // Reset all input values in the new form (clear values)
+        var category = newForm.querySelector('#id_booking_trip_details_set-0-category');
+        
+        // Update the ID and name attributes
+        category.setAttribute('id', `id_booking_trip_details_set-${formIdx}-category`);
+        category.setAttribute('name', `booking_trip_details_set-${formIdx}-category`);
+
+        var package = newForm.querySelector('#id_booking_trip_details_set-0-package');
+        
+        // Update the ID and name attributes
+        package.setAttribute('id', `id_booking_trip_details_set-${formIdx}-package`);
+        package.setAttribute('name', `booking_trip_details_set-${formIdx}-package`);
+
+
+        var trip_date = newForm.querySelector('#id_booking_trip_details_set-0-trip_date');
+        
+        // Update the ID and name attributes
+        trip_date.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_date`);
+        trip_date.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_date`);
+
+
+        var trip_time = newForm.querySelector('#id_booking_trip_details_set-0-trip_time');
+        
+        // Update the ID and name attributes
+        trip_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_time`);
+        trip_time.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_time`);
+
+
+        var no_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-no_of_adult');
+        
+        // Update the ID and name attributes
+        no_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_adult`);
+        no_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_adult`);
+
+
+        var no_of_child = newForm.querySelector('#id_booking_trip_details_set-0-no_of_child');
+        
+        // Update the ID and name attributes
+        no_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_child`);
+        no_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_child`);
+
+        var no_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-no_of_infant');
+        
+        // Update the ID and name attributes
+        no_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_infant`);
+        no_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_infant`);
+
+
+        var no_of_foc = newForm.querySelector('#id_booking_trip_details_set-0-no_of_foc');
+        
+        // Update the ID and name attributes
+        no_of_foc.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_foc`);
+        no_of_foc.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_foc`);
+
+
+        var room_no = newForm.querySelector('#id_booking_trip_details_set-0-room_no');
+        
+        // Update the ID and name attributes
+        room_no.setAttribute('id', `id_booking_trip_details_set-${formIdx}-room_no`);
+        room_no.setAttribute('name', `booking_trip_details_set-${formIdx}-room_no`);
+
+        
+
+        var pickup_location = newForm.querySelector('#id_booking_trip_details_set-0-pickup_location');
+        
+        // Update the ID and name attributes
+        pickup_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_location`);
+        pickup_location.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_location`);
+
+
+        var drop_location = newForm.querySelector('#id_booking_trip_details_set-0-drop_location');
+        
+        // Update the ID and name attributes
+        drop_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-drop_location`);
+        drop_location.setAttribute('name', `booking_trip_details_set-${formIdx}-drop_location`);
+
+
+        var pickup_time = newForm.querySelector('#id_booking_trip_details_set-0-pickup_time');
+        
+        // Update the ID and name attributes
+        pickup_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_time`);
+        pickup_time.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_time`);
+
+        // Append the new form to the container (formset-container is assumed to be the container for forms)
+        document.querySelector('.formset-container').appendChild(newForm);
+
+        // Update the TOTAL_FORMS field (management form)
+        updateManagementForm();
+    });
+
+    // Handle form deletion
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.matches('.delete-form')) {
+            event.preventDefault();
+            var formToDelete = event.target.closest('.formset');
+            formToDelete.remove();
+            updateManagementForm();
+        }
+    });
+
+    // Function to update the TOTAL_FORMS field in the management form
+    function updateManagementForm() {
+        var forms = document.querySelectorAll('.formset');
+        var managementForm = document.getElementById('id_booking_trip_details_set-TOTAL_FORMS');
+        managementForm.value = forms.length;
+    }
+});  
+
+let supform=document.getElementById('supform');
+supform.addEventListener('submit',function(event){
+    event.preventDefault();
+    let formData = new FormData(supform);
+    $.ajax({
+        type:"POST",
+        url:"{% url "add_supplier" %}",
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType:'json',
+        success:function(response){
+          console.log('AJAX request Successfull');
+          if(response.success){
+            showSuccessMessage();
+            supform.reset();
+          }
+          else{
+            showErrorMessage(response.errors);
+            console.log("form Submission errors :", response.errors);
+          }
+        },
+        error:function(xhr,Status,error){
+          showErrorMessage("An Unexpected Error Occurs Please Try again Later");
+          console.error("AJAX request failed:",status,error);
+          console.log("Response Text :",xhr.responseText)
+        }
+    });
+});
+
+
+function showSuccessMessage() {
+  let successMessage = document.getElementById('success-message');
+  successMessage.style.display = 'block';
+
+  // Hide the message after 3 seconds
+  setTimeout(function() {
+      successMessage.style.display = 'none';
+  }, 3000);
+}
+
+function showErrorMessage(errors) { 
+let errorMessage = document.getElementById('error-message'); 
+errorMessage.innerHTML = ''; 
+if (typeof errors === 'string') { 
+  errorMessage.innerHTML = errors; 
+} 
+else { 
+  for (let key in errors) { 
+    if (errors.hasOwnProperty(key)) { 
+      let errorText = `${errors[key]}`; 
+      let errorItem = document.createElement('div'); 
+      errorItem.innerText = errorText; errorMessage.appendChild(errorItem);
+     } 
+    } 
+  }
+  errorMessage.style.display = 'block';
+   // Hide the message after 5 seconds 
+   setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
+}
+
+</script> 
+
+
 
 
 

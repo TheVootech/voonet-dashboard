@@ -47,17 +47,17 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'addpaymentmode' %}" method="post" id="lang-form">
+                        <form  enctype="multipart/form-data" action="{% url 'addpaymentmode' %}" method="post" id="lang-form">
                             {% csrf_token %}
-                            <div class="text-black align-items-center">
+                            
                                 <div class="col-md-12">
-                                    <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Payment Mode</label>
+                                    <div class=" form-group">
+                                        <label for="id_payment_mode" class="text-black">Payment Mode</label>
 
-                                    <div class="form-group">
                                         {{ form.payment_mode }}
                                     </div>
                                 </div>
-                            </div>
+                                
                             <div class="row">
                                 <div class="col-4"></div>
                                 <div class="col-lg-4 col-md-4 col-12">

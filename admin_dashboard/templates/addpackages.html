@@ -16,6 +16,16 @@
       z-index: 1000; 
       width: 50%; /* This makes the alert have the same width as col-6 */
   }
+
+  /* Container style */
+  .select2-container .select2-selection--multiple {
+      height: 50px !important; /* Set height */
+      border: none !important; /* Remove border */
+      border-bottom: 2px solid #ccc !important;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+  }
 </style>
 
 <div class="content">
@@ -56,8 +66,9 @@
           {% csrf_token %}
           <div class="row mt-3">
             <div class="col-4">
-              <label for="" class="text-black">Package Code</label>
               <div class="form-group">
+                <label for="" class="text-black">Package Code</label>
+
                 {{form.package_code}} {% if form.package_code.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.package_code.errors %}
@@ -68,8 +79,9 @@
               </div>
             </div>
             <div class="col-4">
-              <label for="" class="text-black">Package Title</label>
               <div class="form-group">
+                <label for="" class="text-black">Package Title</label>
+
                 {{form.package_title}} {% if form.package_title.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.package_title.errors %}
@@ -80,8 +92,9 @@
               </div>
             </div>
             <div class="col-4">
-              <label for="" class="text-black">Package Category</label>
               <div class="form-group">
+                <label for="" class="text-black">Package Category</label>
+
                 {{form.package_category}} {% if form.package_category.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.package_category.errors %}
@@ -95,8 +108,9 @@
           </div>
           <div class="row mt-3">
             <div class="col-4">
-              <label for="" class="text-black">Package City</label>
               <div class="form-group">
+                <label for="" class="text-black">Package City</label>
+
                 {{form.package_city}} {% if form.package_city.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.package_city.errors %}
@@ -107,8 +121,9 @@
               </div>
             </div>
             <div class="col-4">
-              <label for="" class="text-black">Web Id</label>
               <div class="form-group">
+                <label for="" class="text-black">Web Id</label>
+
                 {{form.web_id}} {% if form.web_id.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.web_id.errors %}
@@ -119,8 +134,9 @@
               </div>
             </div>
             <div class="col-4">
-              <label for="" class="text-black">Web SKU</label>
               <div class="form-group">
+                <label for="" class="text-black">Web SKU</label>
+
                 {{form.web_sku}} {% if form.web_sku.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.web_sku.errors %}
@@ -135,8 +151,9 @@
 
           <div class="row mt-3">
             <div class="col-4">
-              <label for="" class="text-black">Website Link</label>
               <div class="form-group">
+                <label for="" class="text-black">Website Link</label>
+
                 {{form.website_link}} {% if form.website_link.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.website_link.errors %}
@@ -148,8 +165,9 @@
             </div>
 
             <div class="col-4">
-              <label for="" class="text-black">Location</label>
               <div class="form-group">
+                <label for="" class="text-black">Location</label>
+
                 {{form.location}} {% if form.location.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.location.errors %}
@@ -161,8 +179,9 @@
             </div>
 
             <div class="col-4">
-              <label for="" class="text-black">Transportation</label>
               <div class="form-group">
+                <label for="" class="text-black">Transportation</label>
+
                 {{form.transportation}} {% if form.transportation.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.transportation.errors %}
@@ -177,8 +196,9 @@
 
           <div class="row mt-3">
             
-              <label for="" class="text-black">Short Description</label>
               <div class="form-group">
+                <label for="" class="text-black">Short Description</label>
+
                 {{form.short_description}} 
                 {% if form.short_description.errors%}
                 <ul class="errorlist text-primary text-bold">
@@ -192,8 +212,9 @@
           </div>
 
           <div class="row mt-3"> 
-              <label for="" class="text-black">Highlights</label>
               <div class="form-group">
+                <label for="" class="text-black">Highlights</label>
+
                 {{form.highlights}} {% if form.highlights.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.highlights.errors %}
@@ -207,8 +228,9 @@
 
           <div class="row mt-3">
             
-              <label for="" class="text-black">Description</label>
               <div class="form-group">
+                <label for="" class="text-black">Description</label>
+
                 {{form.description}} {% if form.description.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.description.errors %}
@@ -222,8 +244,9 @@
 
           <div class="row mt-3">
             
-              <label for="" class="text-black">Inclusions</label>
               <div class="form-group">
+                <label for="" class="text-black">Inclusions</label>
+
                 {{form.inclusions}} {% if form.inclusions.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.inclusions.errors %}
@@ -237,8 +260,9 @@
 
           <div class="row mt-3">
             
-              <label for="" class="text-black">Exclusions</label>
               <div class="form-group">
+                <label for="" class="text-black">Exclusions</label>
+
                 {{form.exclusions}} {% if form.exclusions.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.exclusions.errors %}
@@ -254,7 +278,9 @@
             
             <div class="col-6">
               <label for="" class="text-black">Days of Operation</label>
+
               <div class="form-group pr-5">
+
                 {{form.sunday}}
                 <span class="font-weight-bold mr-2">Sunday</span>
                 {{form.monday}}
@@ -273,8 +299,9 @@
             </div>
 
             <div class="col-6">
-              <label for="" class="text-black">Open Hours</label>
               <div class="form-group">
+                <label for="" class="text-black">Open Hours</label>
+
                 {{form.open_hours}} {% if form.open_hours.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.open_hours.errors %}
@@ -289,8 +316,9 @@
           <div class="row mt-3">
 
             <div class="col-6">
-              <label for="" class="text-black">Language</label>
               <div class="form-group">
+                <label for="" class="text-black">Language</label>
+
                 {{form.language}} {% if form.language.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.language.errors %}
@@ -303,7 +331,7 @@
 
             <div class="col-6 mt-2">
               <label for="" class="text-black">Rate Policy</label>
-              <div class="row">
+              <div class="row mt-3">
                 <div class="col-4">
                   <div class="row align-items-center">
                     <div class="col-4">
@@ -357,9 +385,10 @@
           </div>
 
           <div class="row mt-3">
-            <div class="col-6">
-              <label for="" class="text-black">Status</label>
+            <div class="col-6 mt-3">
               <div class="form-group">
+                <label for="" class="text-black">Status</label>
+
                 {{form.status}} {% if form.status.errors %}
                 <ul class="errorlist text-primary text-bold">
                   {% for error in form.status.errors %}
@@ -371,7 +400,7 @@
             </div>
             <div class="col-6 mt-2">
               <label for="" class="text-black">Age Policy</label>
-              <div class="row">
+              <div class="row mt-3">
                 <div class="col-4">
                   <div class="row align-items-center">
                     <div class="col-4">
@@ -425,13 +454,12 @@
             </div>
             
           </div>
-          <hr class="mt-4 mb-1 border-secondary">
           
-          <div class="row mt-3">
-            <div class="row ml-1 mr-3">
+          <div class="row mt-4">
+            <div class="row ml-1 mr-3 ">
               <h4 class="text-center font-weight-bold mb-3">Images & Videos</h4>
 
-              <div class="col-6">
+              <div class="col-6 mt-3">
                 <label for="{{ form.image_link.id_for_label }}" class="text-black">Image Link</label>
                 {{form.image_link}}
                 {% if form.image_link.errors %}
@@ -442,7 +470,7 @@
                       </ul>
                 {% endif %}
               </div>
-              <div class="col-6">
+              <div class="col-6 mt-3">
                 <label for="{{ form.video_link.id_for_label }}" class="text-black">Video Link</label>
                 {{form.video_link}}
                 {% if form.video_link.errors %}
@@ -552,6 +580,11 @@
     // Hide the message after 5 seconds 
     setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
   }
+
+  $('#id_language').select2();
+
 </script>
+
+
 
 {% endblock content %}

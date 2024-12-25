@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
+<style>
+  /* Container style */
+  .select2-container .select2-selection--multiple {
+      height: 40px !important; /* Set height */
+      border: none !important; /* Remove border */
+      border-bottom: 2px solid #ccc !important;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+  }
+</style>
+
 
 <div class="content">
   <div class="container-fluid" id="supplierallocation">
@@ -204,6 +216,8 @@ function showErrorMessage(errors) {
     }, 5000);
 }
 
+
+$('#id_supplier').select2();
 
   </script>
 
