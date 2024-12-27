@@ -356,7 +356,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addcompany' or request.path == '/viewcompany' %}show{% endif %}" id="company">
+            <div class="collapse {% if request.path == '/addcompany' or request.path == '/viewcompany' or request.path == '/addcompanytype' %}show{% endif %}" id="company">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addcompany' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_company" %}">
@@ -368,6 +368,12 @@
                   <a class="nav-link" href="{% url "company" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Customer  </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/addcompanytype' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "addcompanytype" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> add Customer Type </span>
                   </a>
                 </li>
 
@@ -478,6 +484,32 @@
                     <span class="sidebar-normal"> Guest Reports  </span>
                   </a>
                 </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#status">
+              <i class="material-icons">hourglass_empty</i>
+              <p> Manage Status
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/addstatus'%}show{% endif %}" id="status">
+              <ul class="nav">
+                <li class="nav-item {% if request.path == '/addstatus' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "addstatus" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Status </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url "company" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Status  </span>
+                  </a>
+                </li>
+
               </ul>
             </div>
           </li>

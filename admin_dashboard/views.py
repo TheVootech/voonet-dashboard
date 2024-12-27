@@ -13,14 +13,17 @@ def dashboard_view(request):
 
 def get_contact_persons(request):
     company_id = request.GET.get('company_id')
-    contact_persons = Company_contact_details.objects.filter(company_id=company_id).values('id', 'name','designation')
+    contact_persons = Company_contact_details.objects.filter(company=company_id).values('id', 'name','designation')
     return JsonResponse(list(contact_persons), safe=False)
 
 
-def addbooking_view(request):
-    form=Booking_form()
-    formset=booking_trip_formset()
-    return render(request,'addbooking.html',{'form':form,'formset':formset})
+def get_package(request):
+    category_id = request.GET.get('category_id')
+    package = Package.objects.filter(package_category=category_id).values('package_id', 'package_title')
+    return JsonResponse(list(package), safe=False)
+
+
+
 
 
 def viewbooking_view(request):
@@ -1062,5 +1065,124 @@ def delete_reminder_view(request,pk):
         
         except Reminder.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+        
+def addstatus_view(request):
+    try:
+        if request.method=='POST':
+            form=Status_form(request.POST)
+            if form.is_valid():
+                form.save()
+                data=Status_type.objects.all().values('id', 'status')
+                status_list=list(data)
+                return JsonResponse({'success':True,'status':status_list})
+            else:
+                return JsonResponse({'successs':False,'errors':form.errors})
+        else:
+            form=Status_form()
+            data=Status_type.objects.all()
+            return render(request,'addstatus.html',{'form':form,'data':data})
+    except Exception as e:
+        return JsonResponse({'success':False,'error':str(e)},status=500)
     
     
+def add_company_type_view(request):
+    try:
+        if request.method=='POST':
+            form=Company_type_form(request.POST)
+            if form.is_valid():
+                form.save()
+                data=Company_type.objects.all().values('id', 'type_name')
+                type_list=list(data)
+                return JsonResponse({'success':True,'type':type_list})
+            else:
+                return JsonResponse({'successs':False,'errors':form.errors})
+        else:
+            form=Company_type_form()
+            data=Company_type.objects.all()
+            return render(request,'addcompanytype.html',{'form':form,'data':data})
+    except Exception as e:
+        return JsonResponse({'success':False,'error':str(e)},status=500)
+    
+def get_category_fields(request):
+    """
+    View to return field visibility for a selected category.
+    """
+    category_id = request.GET.get('category_id')  # Get the category_id from the request
+
+    if not category_id:
+        return JsonResponse({"success": False, "error": "Category ID is required."})
+
+    try:
+        # Fetch the category object
+        category = Category.objects.get(category_id=category_id)
+
+        # Create a dictionary of field names and their boolean values
+        fields = {
+            "no_of_adult": category.no_of_adult,
+            "no_of_child": category.no_of_child,
+            "no_of_infant": category.no_of_infant,
+            "rate_of_adult": category.rate_of_adult,
+            "rate_of_child": category.rate_of_child,
+            "rate_of_infant": category.rate_of_infant,
+            "pickup_location": category.pickup_location,
+            "drop_location": category.drop_location,
+            "room_no": category.room_no,
+            "remark": category.remark,
+            "date": category.date,
+            "time": category.time,
+            "pickup_time": category.pickup_time,
+            "transfer_type": category.transfer_type,
+            "vehicle_type": category.vehicle_type,
+            "vehicle_name": category.vehicle_name,
+            "no_of_luggage": category.no_of_luggage,
+            "flight_time": category.flight_time,
+        }
+
+        # Respond with the field data
+        return JsonResponse({"success": True, "fields": fields})
+
+    except Category.DoesNotExist:
+        return JsonResponse({"success": False, "error": "Category not found."})
+    
+    
+    
+
+def addbooking_view(request):
+    if request.method == 'POST':
+        form = Booking_form(request.POST)
+        formset = booking_trip_formset(request.POST)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid() and formset.is_valid():
+            # Save the supplier form
+            booking = form.save(commit=False)
+            booking.save()
+
+            # Associate the formset with the supplier
+            formset.instance = booking
+
+            # Save the contact details in the formset
+            formset.save()
+
+            # Provide success feedback
+            print(request.POST)
+            return JsonResponse({'success':True})
+        else:
+            print(request.POST)
+            print(formset.errors)
+            return JsonResponse({'success':False,'errors':form.errors})
+   
+    else:
+        # For GET request, create empty forms
+        form = Booking_form()
+        formset = booking_trip_formset()  # Use empty queryset to avoid initial extra forms
+
+    return render(request, 'addbooking.html', {'form': form, 'formset': formset})
+    
+    
+
+def view_bookings(request):
+    data=Booking.objects.all()
+    return render(request,'viewbookings.html',{'data':data})

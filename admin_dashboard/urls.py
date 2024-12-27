@@ -7,7 +7,7 @@ from .views import *
 urlpatterns = [
     path('',dashboard_view,name='dashboard'),
     path('addbooking',addbooking_view,name="add_booking"),
-    path('viewbooking',viewbooking_view,name="view_booking"),
+    path('viewbooking',view_bookings,name="view_booking"),
     
     path('viewdriverallocation',viewdriverallocation_view,name="view_driverallocation"),
     path('viewjobcard',view_jobcard_view,name="view_jobcard"),
@@ -23,10 +23,12 @@ urlpatterns = [
     path('deletepackageforever/<str:pk>/',delete_package_forever_view,name='deletepackageforever'),
     path('recoverpackage/<str:pk>/',recover_package_view,name='recoverpackage'),
     path('get-contact-persons/', get_contact_persons, name='get_contact_persons'),
-
-
-
-
+    path('get-package/', get_package, name='get_package'),
+    
+    path('addstatus',addstatus_view,name="addstatus"),
+    path('addcompanytype',add_company_type_view,name="addcompanytype"),
+    
+    path('get_category_fields/', get_category_fields, name='get_category_fields'),
 
 
     

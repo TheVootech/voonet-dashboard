@@ -196,13 +196,17 @@ class Category_form(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder':'Enter Category Name'
                 }),
-                'adult': forms.CheckboxInput(attrs={
+                'no_of_adult': forms.CheckboxInput(attrs={
                 }),
-                'child': forms.CheckboxInput(attrs={
+                'no_of_child': forms.CheckboxInput(attrs={
                 }),
-                'infant': forms.CheckboxInput(attrs={
+                'no_of_infant': forms.CheckboxInput(attrs={
                 }),
-                'foc': forms.CheckboxInput(attrs={
+                'rate_of_adult': forms.CheckboxInput(attrs={
+                }),
+                'rate_of_child': forms.CheckboxInput(attrs={
+                }),
+                'rate_of_infant': forms.CheckboxInput(attrs={
                 }),
                 'pickup_location': forms.CheckboxInput(attrs={
                 }),
@@ -217,6 +221,16 @@ class Category_form(forms.ModelForm):
                 'time': forms.CheckboxInput(attrs={
                 }),
                 'pickup_time': forms.CheckboxInput(attrs={
+                }),
+                'transfer_type': forms.CheckboxInput(attrs={
+                }),
+                'vehicle_type': forms.CheckboxInput(attrs={
+                }),
+                'vehicle_name': forms.CheckboxInput(attrs={
+                }),
+                'no_of_luggage': forms.CheckboxInput(attrs={
+                }),
+                'flight_time': forms.CheckboxInput(attrs={
                 }),
         }
     
@@ -804,6 +818,31 @@ class Payment_form(forms.ModelForm):
          }
         
         
+class Status_form(forms.ModelForm):
+    class Meta:
+        model=Status_type
+        exclude=['id']
+        
+        widgets={
+                'status': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter Status',
+                }),
+         }
+        
+class Company_type_form(forms.ModelForm):
+    class Meta:
+        model=Company_type
+        exclude=['id']
+        
+        widgets={
+                'type_name': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter Customer Type',
+                }),
+         }
+        
+        
 class Driver_form(forms.ModelForm):
     class Meta:
         model=Driver
@@ -1059,23 +1098,14 @@ class Reminder_form(forms.ModelForm):
 class Booking_form(forms.ModelForm):
     class Meta:
         model=Booking
-        exclude=['booking_id','booked_date','booked_date']
-        
-        
-    
-        
+        exclude=['booking_id','booked_date','booked_by']
+       
         widgets={    
                 'company':  forms.Select(attrs={
                     'class': 'form-select',
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
 
-                }),
-                'contact_person': forms.Select(attrs={
-                    'class': 'form-select',
-                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
-
-                }),
-                
+                }),              
                 'guest_name': forms.TextInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Guest Full Name',
@@ -1085,6 +1115,10 @@ class Booking_form(forms.ModelForm):
                     'placeholder':'Enter Guest Email ID',
                 }),
                 'contact_number': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Contact No :',
+                }),
+                'whatsapp_number': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Contact No :',
                 }),
@@ -1098,25 +1132,24 @@ class Booking_form(forms.ModelForm):
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
 
                 }),
+                'payment_mode': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),
+                
+                'status': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),
                 
         
         }
         
         
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # Initialize contact_person queryset as empty by default
-        self.fields['contact_person'].queryset = Company_contact_details.objects.none()
-
-        if 'company' in self.data:
-            try:
-                company_id = int(self.data.get('company'))
-                self.fields['contact_person'].queryset = Company_contact_details.objects.filter(company_id=company_id)
-            except (ValueError, TypeError):
-                self.fields['contact_person'].queryset = Company_contact_details.objects.none()
-        elif self.instance.pk:  # When editing an existing booking
-            self.fields['contact_person'].queryset = Company_contact_details.objects.filter(company=self.instance.company)
+        
+        
 
 
 class booking_trip_form(forms.ModelForm):
@@ -1155,15 +1188,31 @@ class booking_trip_form(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder':'Enter No : of Infant',
                 }),
-                'no_of_foc': forms.NumberInput(attrs={
+                'rate_of_adult': forms.NumberInput(attrs={
                     'class': 'form-control',
-                    'placeholder':'Enter No : of FOC',
+                    'placeholder':'Enter Rate of Adult',
                 }),
-                'room_no': forms.NumberInput(attrs={
+                
+                 'rate_of_child': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Rate of Child',
+                }),
+                'rate_of_infant': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Rate of Infant',
+                }),
+                'remark': forms.Textarea(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Remark',
+                    'style': 'height:75px !important;' 
+
+                }),
+
+                'room_no': forms.TextInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Room No :'
                 }),
-                'pickup_location': forms.NumberInput(attrs={
+                'pickup_location': forms.TextInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Pickup Location'
                 }),
@@ -1171,11 +1220,57 @@ class booking_trip_form(forms.ModelForm):
                     'class': 'form-control',
                     'type':'time',
                 }),
-                'drop_location': forms.NumberInput(attrs={
+                'drop_location': forms.TextInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Drop off Location'
                 }),
+                'transfer_type': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                }),
+                'vehicle_type': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                }),
+                'vehicle_name': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Vehicle Name'
+                }),
+                'no_of_luggage': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter No : Luggage'
+                }),
+                'flight_time': forms.TimeInput(attrs={
+                    'class': 'form-control',
+                    'type':'time'
+                }),
          }
+        
+        
+def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+
+    # Initialize the package queryset as empty by default
+    self.fields['package'].queryset = Package.objects.none()
+
+    if 'category' in self.data:
+        try:
+            # Ensure category_id is valid and not empty
+            category_id = str(self.data.get('category'))
+            self.fields['package'].queryset = Package.objects.filter(package_category_id=category_id)
+        except (ValueError, TypeError):
+            self.fields['package'].queryset = Package.objects.none()
+    elif self.instance.pk:  # When editing an existing booking
+        # Ensure that the instance has a valid category
+        if self.instance.category:
+            self.fields['package'].queryset = Package.objects.filter(package_category=self.instance.category)
+        else:
+            self.fields['package'].queryset = Package.objects.none()
+
+    # Optional: You can log or print to verify the queryset
+    # print(self.fields['package'].queryset)
+            
+    
 
 
 

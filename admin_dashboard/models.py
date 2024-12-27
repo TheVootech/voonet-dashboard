@@ -44,10 +44,12 @@ class Language(models.Model):
 class Category(models.Model):
     category_id=models.CharField(max_length=10, primary_key=True, editable=False)
     category_name=models.CharField(max_length=30,unique=True)
-    adult=models.BooleanField(default=True)
-    child=models.BooleanField(default=True)
-    infant=models.BooleanField(default=True)
-    foc=models.BooleanField(default=True)
+    no_of_adult=models.BooleanField(default=True)
+    no_of_child=models.BooleanField(default=True)
+    no_of_infant=models.BooleanField(default=True)
+    rate_of_adult=models.BooleanField(default=True)
+    rate_of_child=models.BooleanField(default=True)
+    rate_of_infant=models.BooleanField(default=True)
     pickup_location=models.BooleanField(default=True)
     drop_location=models.BooleanField(default=True)
     room_no=models.BooleanField(default=True)
@@ -55,6 +57,11 @@ class Category(models.Model):
     date=models.BooleanField(default=True)
     time=models.BooleanField(default=True)
     pickup_time=models.BooleanField(default=True)
+    transfer_type=models.BooleanField(default=True)
+    vehicle_type=models.BooleanField(default=True)
+    vehicle_name=models.BooleanField(default=True)
+    no_of_luggage=models.BooleanField(default=True)
+    flight_time=models.BooleanField(default=True)
 
     
     def __str__(self):
@@ -365,7 +372,7 @@ class Payment_mode(models.Model):
         super(Payment_mode, self).save(*args, **kwargs)
         
     def __str__(self):
-        return self.payment_id 
+        return self.payment_mode
     
     
     
@@ -512,6 +519,15 @@ class Reminder(models.Model):
         
     def __str__(self):
         return self.reminder_id 
+    
+    
+    
+class Vehicle_type(models.Model):
+    type_name=models.CharField(max_length=100)
+    description=models.CharField(max_length=200,blank=True,null=True)
+    
+    def __str__(self):
+        return self.type_name
 
 
 
@@ -521,15 +537,19 @@ class Booking(models.Model):
         ('Unpaid','Unpaid'),
     ]    
     booked_date = models.DateField(auto_now_add=True)
-    booked_by=models.CharField(max_length=100,default="test by mujeeb")
+    booked_by=models.CharField(max_length=100,default="mujeeb")
     booking_id=models.CharField(max_length=10,primary_key=True,editable=False)
     company=models.ForeignKey(Company,on_delete=models.CASCADE)
-    contact_person=models.ForeignKey(Company_contact_details,on_delete=models.CASCADE)
     guest_name=models.CharField(max_length=200)
     email=models.EmailField()
     contact_number=models.CharField(max_length=20)
+    whatsapp_number=models.CharField(max_length=20)
     payment_ref_no=models.CharField(max_length=50)
     payment_status=models.CharField(choices=payment_status_choices,max_length=20)
+    payment_mode=models.ForeignKey(Payment_mode,on_delete=models.CASCADE)
+    status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+
+
     
     
     def save(self, *args, **kwargs):
@@ -562,11 +582,21 @@ class Booking_Trip_details(models.Model):
     no_of_adult=models.PositiveIntegerField()
     no_of_child=models.PositiveIntegerField()
     no_of_infant=models.PositiveIntegerField()
-    no_of_foc=models.PositiveIntegerField()
-    room_no=models.CharField(max_length=10)
-    pickup_location=models.CharField(max_length=100)
-    pickup_time=models.TimeField()
-    drop_location=models.CharField(max_length=100)
+    rate_of_adult=models.PositiveIntegerField()
+    rate_of_child=models.PositiveIntegerField()
+    rate_of_infant=models.PositiveIntegerField()
+    pickup_location=models.CharField(max_length=100,null=True,blank=True)
+    drop_location=models.CharField(max_length=100,null=True,blank=True)
+    room_no=models.CharField(max_length=100,null=True,blank=True)
+    pickup_time=models.TimeField(null=True,blank=True)
+    transfer_type=models.CharField(max_length=100,null=True,blank=True)
+    vehicle_type=models.ForeignKey(Vehicle_type,on_delete=models.CASCADE,null=True,blank=True)
+    vehicle_name=models.CharField(max_length=100,null=True,blank=True)
+    no_of_luggage=models.PositiveIntegerField(null=True,blank=True)
+    flight_time=models.TimeField(null=True,blank=True)
+    remark=models.CharField(max_length=500,null=True,blank=True)
+
+    
     
     
     def __str__(self):

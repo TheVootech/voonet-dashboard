@@ -10,66 +10,155 @@
           
         <form action="{% url "editcategory" form.instance.category_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
           {% csrf_token %}
-          <div class="row mt-3">
+          <div class="text-black align-items-center">
+            <div class="col-md-12">
+
+                <div class=" form-group">
+                    <label for="id_category_name" class="text-black">Category</label>
+
+                    {{ form.category_name }}
+                </div>
+            </div>
             
-              <label for="" class="text-black">Category</label>
+            <h5 class="text-center font-weight-bold  mt-3">Mark the Required Fields Only</h5>
+            <div class="row pl-3">
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.date }} <span class="font-weight-bold">Trip Date</span>
 
-              <div class="form-group">
+                    </div>
 
-                {{form.category_name}} {% if form.category_name.errors %}
-                <ul class="errorlist text-primary text-bold">
-                  {% for error in form.category_name.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.time }} <span class="font-weight-bold">Trip Time</span>
 
-              <h5 class="text-center font-weight-bold  mt-3">Mark the Required Fields Only</h5>
-                                <div class="row pl-5">
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.date }} <span class="font-weight-bold">Trip Date</span>
+                    </div>
 
-                                        </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.remark }} <span class="font-weight-bold">Remark</span>
 
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.time }} <span class="font-weight-bold">Trip Time</span>
+                    </div>
 
-                                        </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.no_of_adult }} <span class="font-weight-bold"> No : Adult</span>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.no_of_child }} <span class="font-weight-bold">No : Child</span>
 
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.adult }} <span class="font-weight-bold"> No : Adult</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.child }} <span class="font-weight-bold">No : Child</span>
+                    </div>
 
-                                        </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.no_of_infant }} <span class="font-weight-bold"> No : Infant</span>
 
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.infant }} <span class="font-weight-bold"> No : Infant</span>
+                    </div>
 
-                                        </div>
+                </div>
+              
+                
 
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.foc }} <span class="font-weight-bold">No : FOC</span>
+            </div>
+            <div class="row pl-3">
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.rate_of_adult }} <span class="font-weight-bold">Rate of Adult</span>
 
-                                        </div>
+                    </div>
 
-                                    </div>
-                                    
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.rate_of_child }} <span class="font-weight-bold">Rate of Child</span>
 
-                                </div>
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.rate_of_infant }} <span class="font-weight-bold">Rate of Infant</span>
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.pickup_location }} <span class="font-weight-bold">Pickup Location</span>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.pickup_time }} <span class="font-weight-bold">Pickup Time</span>
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.drop_location }} <span class="font-weight-bold"> Drop off Location</span>
+
+                    </div>
+
+                </div>
+      
+                
+
+            </div>
+
+            <div class="row pl-3">
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.room_no }} <span class="font-weight-bold">Room No :</span>
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.transfer_type }} <span class="font-weight-bold">Transfer Type</span>
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.vehicle_type }} <span class="font-weight-bold">Vehicle Type</span>
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.vehicle_name }} <span class="font-weight-bold">Vehicle Name</span>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.no_of_luggage }} <span class="font-weight-bold">No : Luggage</span>
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <div class=" form-group">
+                        {{ form.flight_time }} <span class="font-weight-bold">Flight Time</span>
+
+                    </div>
+
+                </div>
+      
+                
+
+            </div>
+                
+            </div>
             
             
           <div class="row mt-5">
