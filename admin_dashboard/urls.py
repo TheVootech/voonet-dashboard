@@ -8,6 +8,12 @@ urlpatterns = [
     path('',dashboard_view,name='dashboard'),
     path('addbooking',addbooking_view,name="add_booking"),
     path('viewbooking',view_bookings,name="view_booking"),
+    path('edit_booking/<str:pk>/',edit_booking_view,name='edit_booking'),
+    path('bookingdetailsview/<str:pk>/',booking_details_view,name='booking_details'),
+    path('deletebooking/<str:pk>/',delete_bookings_view,name='deletebooking'),
+    path('recoverbooking/<str:pk>/',recover_booking_view,name='recoverbooking'),
+    path('bookingtrash',view_booking_trash,name="bookingtrash"),
+    path('deletebookingforver/<str:pk>/',delete_booking_forever_view,name='deletebookingforver'),
     
     path('viewdriverallocation',viewdriverallocation_view,name="view_driverallocation"),
     path('viewjobcard',view_jobcard_view,name="view_jobcard"),
@@ -26,9 +32,7 @@ urlpatterns = [
     path('get-package/', get_package, name='get_package'),
     
     path('addstatus',addstatus_view,name="addstatus"),
-    path('addcompanytype',add_company_type_view,name="addcompanytype"),
-    
-    path('get_category_fields/', get_category_fields, name='get_category_fields'),
+        
 
 
     
@@ -36,7 +40,7 @@ urlpatterns = [
     path('viewcategory',View_category,name="view_category"),
     path('editcategory/<str:pk>/',edit_category_view,name='editcategory'),
     path('deletecategory/<str:pk>/',delete_category_view,name='deletecategory'),
-
+    path('get_category_fields/', get_category_fields, name='get_category_fields'),
 
 
     
@@ -52,7 +56,11 @@ urlpatterns = [
     path('editsupplier/<str:pk>/',update_supplier_view,name='editsupplier'),
     path('supplierdetailsview/<str:pk>/',supplier_details_view,name='supplier_details'),
     path('deletesupplier/<str:pk>/',delete_supplier_view,name='delete_supplier'),
-
+    path('addsuppliertype',add_supplier_type_view,name="addsuppliertype"),
+    path('suppliertrash',view_supplier_trash,name="suppliertrash"),
+    path('recoversupplier/<str:pk>/',recover_supplier_view,name='recoversupplier'),
+    path('deletesupplierforver/<str:pk>/',delete_Supplier_forever_view,name='deletesupplierforver'),
+   
     
     path('suppierallocation',Supplier_allocation_view,name='supplier_allocation'),
     path('allocatenewsupplier',Allocate_new_supplier_view,name='new_supplier_allocation'),
@@ -65,7 +73,11 @@ urlpatterns = [
     path('companydetailsview/<str:pk>/',company_detail_view,name='company_details'),
     path('editcompany/<str:pk>/',edit_company_view,name='editcompany'),
     path('deletecompany/<str:pk>/',delete_company_view,name='delete_company'),
-    
+    path('addcompanytype',add_company_type_view,name="addcompanytype"),
+    path('companytrash',view_company_trash,name="companytrash"),
+    path('recovercompany/<str:pk>/',recover_company_view,name='recovercompany'),
+    path('deletecompanyforver/<str:pk>/',delete_company_forever_view,name='deletecompanyforver'),
+
     
     
     path('addpaymentmode',addpaymentmode_view,name="addpaymentmode"),
@@ -79,6 +91,10 @@ urlpatterns = [
     path('driver_details/<str:pk>/',driver_details_view,name='driver_details'),
     path('edit_driver/<str:pk>/',edit_driver_view,name='edit_driver'),
     path('delete_driver/<str:pk>/',delete_driver_view,name='delete_driver'),
+    path('drivertrash',view_driver_trash,name="drivertrash"),
+    path('recoverdriver/<str:pk>/',recover_driver_view,name='recoverdriver'),
+    path('deletedriverforver/<str:pk>/',delete_driver_forever_view,name='deletedriverforver'),
+    
     
     
     path('add_guide',addguide_view,name='add_guide'),
@@ -86,7 +102,9 @@ urlpatterns = [
     path('guide_details/<str:pk>/',guide_details_view,name='guide_details'),
     path('edit_guide/<str:pk>/',edit_guide_view,name='edit_guide'),
     path('delete_guide/<str:pk>/',delete_guide_view,name='delete_guide'),
-    
+    path('guidetrash',view_guide_trash,name="guidetrash"),
+    path('recoverguide/<str:pk>/',recover_guide_view,name='recoverguide'),
+    path('deleteguideforver/<str:pk>/',delete_guide_forever_view,name='deleteguideforver'),
     
     
     path('add_reminder',addreminder_view,name='add_reminder'),

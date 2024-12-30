@@ -48,7 +48,7 @@
           role="alert"
           style="display: none; margin-top: 20px"
         >
-          Customer Edited successfully!
+        Booking Edited successfully!
         </div>
 
         <div
@@ -57,7 +57,7 @@
           role="alert"
           style="display: none; margin-top: 20px"
         >
-        Customer Deleted successfully!
+        Booking Deleted successfully!
         </div>
 
         <div class="row" id="supplier-allocation-content">
@@ -79,7 +79,7 @@
                         <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
                        
                         <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >COMPANY</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
                         
                         <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
 
@@ -122,7 +122,7 @@
                           <td class="td-actions text-center">
                             
                             <button type="button" rel="tooltip" class="btn btn-info" >
-                                <i class="material-icons"><a href="{% url "company_details" i.booking_id %}" style="color: white;">visibility</a></i>
+                                <i class="material-icons"><a href="{% url "booking_details" i.booking_id %}" style="color: white;">visibility</a></i>
                             </button>
                             
                             {% comment %} <button type="button" rel="tooltip" class="btn btn-success">
@@ -156,7 +156,7 @@
                                   class="modal-title font-weight-bold"
                                   id="editModalLabel{{i.booking_id}}"
                                 >
-                                  Edit Customer 
+                                  Edit Booking 
                                 </h3>
                                 <button
                                   type="button"
@@ -193,7 +193,7 @@
                               class="modal-title text-primary font-weight-bold"
                               id="deleteModalLabel{{i.booking_id}}"
                             >
-                              Delete Customer 
+                              Delete Booking 
                             </h3>
                             <button
                               type="button"
@@ -254,7 +254,7 @@
   
     // Perform AJAX request to fetch the form
     $.ajax({
-      url: "/editcompany/" + id + "/",
+      url: "/edit_booking/" + id + "/",
       type: "GET",
       success: function (response) {
         // On success, load the form HTML into the modal body
@@ -262,6 +262,8 @@
   
         // Reinitialize modal scripts after the new content is injected
         initializeModalScripts();
+        catfields();
+        packageselect();
       },
       error: function (xhr, status, error) {
         // Handle error and show an error message in the modal
@@ -270,88 +272,289 @@
       },
     });
   }
-  
-  function initializeModalScripts() {
-    // Reinitialize the add-form functionality with event delegation
-    $(document).off('click', '#add-form').on('click', '#add-form', function(event) {
-      var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
-      console.log(formIdx);
-  
-      // Clone the first form in the formset
-      var newForm = document.querySelector('.formset').cloneNode(true);
-  
-      // Replace __prefix__ in name and id with the new form index
-      const regex = /__prefix__/g;
-      newForm.innerHTML = newForm.innerHTML.replace(regex, formIdx);
-  
-      // Set the new ID for the form
-      newForm.setAttribute('id', `formset${formIdx}`);
-  
-      // Reset all input values in the new form (clear values)
-      var name = newForm.querySelector('#id_company_contact_details_set-0-name');
-            
-            // Update the ID and name attributes
-            name.setAttribute('id', `id_company_contact_details_set-${formIdx}-name`);
-            name.setAttribute('name', `company_contact_details_set-${formIdx}-name`);
-    
-            var designation = newForm.querySelector('#id_company_contact_details_set-0-designation');
-            
-            // Update the ID and name attributes
-            designation.setAttribute('id', `id_company_contact_details_set-${formIdx}-designation`);
-            designation.setAttribute('name', `company_contact_details_set-${formIdx}-designation`);
-    
-    
-            var mobile = newForm.querySelector('#id_company_contact_details_set-0-mobile');
-            
-            // Update the ID and name attributes
-            mobile.setAttribute('id', `id_company_contact_details_set-${formIdx}-mobile`);
-            mobile.setAttribute('name', `company_contact_details_set-${formIdx}-mobile`);
-    
-    
-            var whatsapp = newForm.querySelector('#id_company_contact_details_set-0-whatsapp');
-            
-            // Update the ID and name attributes
-            whatsapp.setAttribute('id', `id_company_contact_details_set-${formIdx}-whatsapp`);
-            whatsapp.setAttribute('name', `company_contact_details_set-${formIdx}-whatsapp`);
-    
-    
-            var email = newForm.querySelector('#id_company_contact_details_set-0-email');
-            
-            // Update the ID and name attributes
-            email.setAttribute('id', `id_company_contact_details_set-${formIdx}-email`);
-            email.setAttribute('name', `company_contact_details_set-${formIdx}-email`);
-    
-            // Append the new form to the container (formset-container is assumed to be the container for forms)
-            document.querySelector('.formset-container').appendChild(newForm);
-    
-            // Update the TOTAL_FORMS field (management form)
-            updateManagementForm();
-        });
-    
-        // Handle form deletion
-        document.addEventListener('click', function(event) {
-            if (event.target && event.target.matches('.delete-form')) {
-                event.preventDefault();
-                var formToDelete = event.target.closest('.formset');
-                formToDelete.remove();
-                updateManagementForm();
+
+  function catfields() {
+    // Use event delegation to handle dynamically added elements
+    $(document).off('change', '[id^="id_booking_trip_details_set-"][id$="-category"]').on('change', '[id^="id_booking_trip_details_set-"][id$="-category"]', function () {
+        var $categoryField = $(this);  // The category dropdown that was changed
+        var categoryId = $categoryField.val();  // Get the selected category ID
+
+        // Get the form this category field belongs to
+        var $form = $categoryField.closest('.formset');
+
+        if (categoryId) {
+            // AJAX call to get field visibility based on the selected category
+            $.ajax({
+                url: "{% url 'get_category_fields' %}",
+                data: { category_id: categoryId },
+                success: function (response) {
+                    if (response.success) {
+                        var fields = response.fields;
+
+                        // Show all fields in the form by default
+                        $form.find(".dynamic-field").show();
+
+                        // Hide fields marked as false
+                        for (var fieldName in fields) {
+                            if (!fields[fieldName]) {
+                                $form.find("[data-field-name='" + fieldName + "']").hide();
+                            }
+                        }
+                    } else {
+                        alert(response.error || 'Unable to fetch category field data.');
+                    }
+                },
+                error: function () {
+                    alert('Unable to fetch category field data. Please try again.');
+                }
+            });
+        } else {
+            // If no category is selected, show all fields by default
+            $form.find(".dynamic-field").show();
+        }
+    });
+}
+
+
+function packageselect(){
+
+  $(document).on('change', '[id^="id_booking_trip_details_set-"][id$="-category"]', function () {
+    var $categoryField = $(this);
+    var categoryId = $categoryField.val();
+
+    // Dynamically determine the package dropdown related to the changed category field
+    var packageFieldId = $categoryField.attr('id').replace('-category', '-package');
+    var $packageDropdown = $('#' + packageFieldId);
+
+    $packageDropdown.empty(); // Clear existing options
+
+    if (categoryId) {
+        $.ajax({
+            url: "{% url 'get_package' %}",
+            data: { category_id: categoryId },
+            success: function (data) {
+                $packageDropdown.append('<option value="">Select Package</option>');
+                data.forEach(function (package) {
+                    $packageDropdown.append('<option value="' + package.package_id + '">' + package.package_title + '</option>');
+                });
+            },
+            error: function () {
+                alert('Unable to fetch packages. Please try again later.');
             }
         });
-    
-        // Function to update the TOTAL_FORMS field in the management form
-        function updateManagementForm() {
-            var forms = document.querySelectorAll('.formset');
-            var managementForm = document.getElementById('id_company_contact_details_set-TOTAL_FORMS');
-            managementForm.value = forms.length;
-        }
-  }
-  
+    }
+});
+}
 
+// Ensure that catfields() is called after content is loaded dynamically}
 
 
   
+  function initializeModalScripts() {
+    $(document).off('click', '#add-form').on('click', '#add-form', function(event){
+          // Get the next form index (based on the current number of forms)
+          var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
+          console.log(formIdx);
+  
+          // Clone the first form in the formset
+          var newForm = document.querySelector('.formset').cloneNode(true);
+  
+          // Replace __prefix__ in name and id with the new form index
+          const regex = /__prefix__/g;
+          newForm.innerHTML = newForm.innerHTML.replace(regex, formIdx);
+  
+          // Set the new ID for the form
+          newForm.setAttribute('id', `formset${formIdx}`);
 
+          // Select all input, select, and textarea elements in the cloned form
+          var inputs = newForm.querySelectorAll('input, select, textarea');
 
+          // Loop through each input field and reset its value
+          inputs.forEach(function(input) {
+              // Skip the 'id' field (exclude resetting the id field)
+              if (input.id.includes('id_')) {
+                  // Only reset the value for fields other than the 'id' field
+                  if (input.id !== 'id_booking_trip_details_set-0-id') { // Example for id field
+                      input.value = '';
+
+                      // For checkboxes or radio buttons, uncheck them
+                      if (input.type === 'checkbox' || input.type === 'radio') {
+                          input.checked = false;
+                      }
+                  }
+              }
+          });
+
+  
+          // Reset all input values in the new form (clear values)
+          var category = newForm.querySelector('#id_booking_trip_details_set-0-category');
+          
+          // Update the ID and name attributes
+          category.setAttribute('id', `id_booking_trip_details_set-${formIdx}-category`);
+          category.setAttribute('name', `booking_trip_details_set-${formIdx}-category`);
+  
+          var package = newForm.querySelector('#id_booking_trip_details_set-0-package');
+          
+          // Update the ID and name attributes
+          package.setAttribute('id', `id_booking_trip_details_set-${formIdx}-package`);
+          package.setAttribute('name', `booking_trip_details_set-${formIdx}-package`);
+  
+  
+          var trip_date = newForm.querySelector('#id_booking_trip_details_set-0-trip_date');
+          
+          // Update the ID and name attributes
+          trip_date.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_date`);
+          trip_date.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_date`);
+  
+  
+          var trip_time = newForm.querySelector('#id_booking_trip_details_set-0-trip_time');
+          
+          // Update the ID and name attributes
+          trip_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_time`);
+          trip_time.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_time`);
+  
+  
+          var no_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-no_of_adult');
+          
+          // Update the ID and name attributes
+          no_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_adult`);
+          no_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_adult`);
+  
+  
+          var no_of_child = newForm.querySelector('#id_booking_trip_details_set-0-no_of_child');
+          
+          // Update the ID and name attributes
+          no_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_child`);
+          no_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_child`);
+  
+          var no_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-no_of_infant');
+          
+          // Update the ID and name attributes
+          no_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_infant`);
+          no_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_infant`);
+  
+  
+          var rate_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_adult');
+          
+          // Update the ID and name attributes
+          rate_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_adult`);
+          rate_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_adult`);
+  
+  
+          var rate_of_child = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_child');
+          
+          // Update the ID and name attributes
+          rate_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_child`);
+          rate_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_child`);
+  
+  
+          var rate_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_infant');
+          
+          // Update the ID and name attributes
+          rate_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_infant`);
+          rate_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_infant`);
+  
+  
+          var transfer_type = newForm.querySelector('#id_booking_trip_details_set-0-transfer_type');
+          
+          // Update the ID and name attributes
+          transfer_type.setAttribute('id', `id_booking_trip_details_set-${formIdx}-transfer_type`);
+          transfer_type.setAttribute('name', `booking_trip_details_set-${formIdx}-transfer_type`);
+  
+  
+          
+          var vehicle_type = newForm.querySelector('#id_booking_trip_details_set-0-vehicle_type');
+          
+          // Update the ID and name attributes
+          vehicle_type.setAttribute('id', `id_booking_trip_details_set-${formIdx}-vehicle_type`);
+          vehicle_type.setAttribute('name', `booking_trip_details_set-${formIdx}-vehicle_type`);
+  
+  
+          var vehicle_name = newForm.querySelector('#id_booking_trip_details_set-0-vehicle_name');
+          
+          // Update the ID and name attributes
+          vehicle_name.setAttribute('id', `id_booking_trip_details_set-${formIdx}-vehicle_name`);
+          vehicle_name.setAttribute('name', `booking_trip_details_set-${formIdx}-vehicle_name`);
+  
+  
+          var no_of_luggage = newForm.querySelector('#id_booking_trip_details_set-0-no_of_luggage');
+          
+          // Update the ID and name attributes
+          no_of_luggage.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_luggage`);
+          no_of_luggage.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_luggage`);
+  
+  
+          var flight_time = newForm.querySelector('#id_booking_trip_details_set-0-flight_time');
+          
+          // Update the ID and name attributes
+          flight_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-flight_time`);
+          flight_time.setAttribute('name', `booking_trip_details_set-${formIdx}-flight_time`);
+  
+  
+          var remark = newForm.querySelector('#id_booking_trip_details_set-0-remark');
+          
+          // Update the ID and name attributes
+          remark.setAttribute('id', `id_booking_trip_details_set-${formIdx}-remark`);
+          remark.setAttribute('name', `booking_trip_details_set-${formIdx}-remark`);
+  
+  
+  
+          var room_no = newForm.querySelector('#id_booking_trip_details_set-0-room_no');
+          
+          // Update the ID and name attributes
+          room_no.setAttribute('id', `id_booking_trip_details_set-${formIdx}-room_no`);
+          room_no.setAttribute('name', `booking_trip_details_set-${formIdx}-room_no`);
+  
+          
+  
+          var pickup_location = newForm.querySelector('#id_booking_trip_details_set-0-pickup_location');
+          
+          // Update the ID and name attributes
+          pickup_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_location`);
+          pickup_location.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_location`);
+  
+  
+          var drop_location = newForm.querySelector('#id_booking_trip_details_set-0-drop_location');
+          
+          // Update the ID and name attributes
+          drop_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-drop_location`);
+          drop_location.setAttribute('name', `booking_trip_details_set-${formIdx}-drop_location`);
+  
+  
+          var pickup_time = newForm.querySelector('#id_booking_trip_details_set-0-pickup_time');
+          
+          // Update the ID and name attributes
+          pickup_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_time`);
+          pickup_time.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_time`);
+  
+          // Append the new form to the container (formset-container is assumed to be the container for forms)
+          document.querySelector('.formset-container').appendChild(newForm);
+  
+          // Update the TOTAL_FORMS field (management form)
+          updateManagementForm();
+      });
+  
+      // Handle form deletion
+      document.addEventListener('click', function(event) {
+          if (event.target && event.target.matches('.delete-form')) {
+              event.preventDefault();
+              var formToDelete = event.target.closest('.formset');
+              formToDelete.remove();
+              updateManagementForm();
+          }
+      });
+  
+      // Function to update the TOTAL_FORMS field in the management form
+      function updateManagementForm() {
+          var forms = document.querySelectorAll('.formset');
+          var managementForm = document.getElementById('id_booking_trip_details_set-TOTAL_FORMS');
+          managementForm.value = forms.length;
+      }
+  }  
+
+  
+    // Reinitialize the add-form functionality with event delegation
+  
   
   function openDeleteModal(id) {
     // Set the delete button in the modal to call deleteItem with the correct ID
@@ -361,7 +564,7 @@
   function deleteItem(id) {
     // Perform the AJAX request to delete the item
     $.ajax({
-      url: "/deletecompany/" + id + "/",
+      url: "/deletebooking/" + id + "/",
       type: "POST", // Assuming you're using POST for deletion
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}", // Include CSRF token for POST request

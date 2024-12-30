@@ -779,28 +779,38 @@ class Company_contact_details_form(forms.ModelForm):
         widgets={
                 'name': forms.TextInput(attrs={
                      'class': 'form-control',
-                    'placeholder': 'Enter Full Name'
+                    'placeholder': 'Enter Full Name',
+                    'required':'required'
                 }),
                 'designation': forms.TextInput(attrs={
                      'class': 'form-control',
-                    'placeholder': 'Enter Designation'
+                    'placeholder': 'Enter Designation',
+                     'required':'required'
+
                 }),
                 'mobile': forms.NumberInput(attrs={
                      'class': 'form-control',
-                    'placeholder': 'Enter Mobile No :'
+                    'placeholder': 'Enter Mobile No :',
+                    'required':'required'
                 }),
                 'whatsapp': forms.NumberInput(attrs={
                      'class': 'form-control',
-                    'placeholder': 'Enter Whatsapp No :'
+                    'placeholder': 'Enter Whatsapp No :',
+                    'required':'required'
                 }),
                 'email': forms.EmailInput(attrs={
                      'class': 'form-control',
-                    'placeholder': 'Enter Email ID'
+                    'placeholder': 'Enter Email ID',
+                    'required':'required'
                 }),
         }
         
 Company_contact_details_formset=inlineformset_factory(
     Company,Company_contact_details,form=Company_contact_details_form,extra=1,can_delete=True
+)
+
+Edit_company_contact_details_formset=inlineformset_factory(
+    Company,Company_contact_details,form=Company_contact_details_form,extra=0,can_delete=True
 )
 
 
@@ -833,6 +843,20 @@ class Status_form(forms.ModelForm):
 class Company_type_form(forms.ModelForm):
     class Meta:
         model=Company_type
+        exclude=['id']
+        
+        widgets={
+                'type_name': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter Customer Type',
+                }),
+         }
+        
+        
+
+class Supplier_type_form(forms.ModelForm):
+    class Meta:
+        model=Supplier_type
         exclude=['id']
         
         widgets={
@@ -1161,45 +1185,55 @@ class booking_trip_form(forms.ModelForm):
                 'category': forms.Select(attrs={
                     'class': 'form-select',
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                    'required':'required'
 
                 }),
                 'package': forms.Select(attrs={
                     'class': 'form-select',
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                    'required':'required'
                 }),
                 'trip_date': forms.DateInput(attrs={
                     'class': 'form-control',
                     'type':'date',
+                    'required':'required'
                 }),
                 'trip_time': forms.TimeInput(attrs={
                     'class': 'form-control',
                     'type':'time',
+                    'required':'required'
                 }),
                 'no_of_adult': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter No : of Adult',
+                    'required':'required'
 
                 }),
                 'no_of_child': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter No : of Child',
+                    'required':'required'
                 }),
                 'no_of_infant': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter No : of Infant',
+                    'required':'required'
                 }),
                 'rate_of_adult': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Rate of Adult',
+                    'required':'required'
                 }),
                 
                  'rate_of_child': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Rate of Child',
+                    'required':'required'
                 }),
                 'rate_of_infant': forms.NumberInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Rate of Infant',
+                    'required':'required'
                 }),
                 'remark': forms.Textarea(attrs={
                     'class': 'form-control',
@@ -1269,6 +1303,9 @@ def __init__(self, *args, **kwargs):
 
     # Optional: You can log or print to verify the queryset
     # print(self.fields['package'].queryset)
+    
+    
+
             
     
 
@@ -1276,4 +1313,9 @@ def __init__(self, *args, **kwargs):
 
 booking_trip_formset=inlineformset_factory(
     Booking,Booking_Trip_details,form=booking_trip_form,extra=1,can_delete=True
+)
+
+
+edit_booking_trip_formset=inlineformset_factory(
+    Booking,Booking_Trip_details,form=booking_trip_form,extra=0,can_delete=True
 )

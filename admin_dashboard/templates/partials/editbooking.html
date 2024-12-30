@@ -1,0 +1,296 @@
+
+<div class="card">
+    <div class="card-header card-header-rose card-header-icon">
+      <div class="card-icon">
+          <i class="material-icons">edit</i>
+      </div>
+    </div>
+    <div class="card-body">
+
+    <div class="row">
+        {% comment %} <div class="col-6"> {% endcomment %}
+  <form action="{% url "edit_booking" form.instance.booking_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
+    {% csrf_token %}
+    <div class="col-12 mt-2">
+        <div class="form-group">
+          <label for="" class="text-black">Guest name</label>
+
+          {{form.guest_name}} {% if form.guest_name.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.guest_name.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-12 mt-2">
+        <div class="form-group">
+          <label for="" class="text-black">Email</label>
+
+          {{form.email}} {% if form.email.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.email.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+
+      <div class="col-12 mt-2">
+        <div class="form-group">
+          <label for="" class="text-black">Contact Number</label>
+
+          {{form.contact_number}} {% if form.contact_number.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.contact_number.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-12 mt-2">
+        <div class="form-group">
+          <label for="" class="text-black">Whatsapp Number</label>
+
+          {{form.whatsapp_number}} {% if form.whatsapp_number.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.whatsapp_number.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+        <div class="col-12">
+
+          <div class="form-group">
+            <label for="id_company" class="bmd-label-floating text-black">Company/Customer</label>
+
+
+            {{form.company}} {% if form.company.errors %}
+            <ul class="errorlist text-primary text-bold">
+              {% for error in form.company.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-12">
+
+         
+
+        <div class="row mt-5 mb-3">
+          {% comment %} {{ formset.management_form }} {% endcomment %}
+          <div class="formset-container">
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <div class="formset mt-2 pl-3 pr-3">
+              <h4 class="text-center font-weight-bold mb-5">Trip Details</h4>
+
+                <div class="row">
+                    {% for field in form %}
+                        {% if field.name == "remark" %}
+                            <div class="col-12 dynamic-field" data-field-name="remark">
+                                <div class="form-group">
+                                    <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                    {{ field }}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-md-4 mb-3 dynamic-field" data-field-name="{{ field.name }}">
+                                <div class="form-group">
+                                    {% if field.name != 'id' and field.name != 'booking' %}
+                                        <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                    {% endif %}
+                                    {{ field }}
+                                    
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 %}
+                                </div><div class="row">
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+         
+          <!-- Add Button to dynamically add new contact forms -->
+          <div class="row mb-4">
+              <div class="col-3"></div>
+              <div class="col-6">
+                  <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Trip</button>
+              </div>
+          </div>
+
+                  
+                  <hr>
+                
+
+        </div>
+        
+      
+
+      
+
+
+      
+
+
+      <div class="col-12 mt-2">
+        <label for="" class="text-black">Payment ref No :</label>
+        <div class="form-group">
+          {{form.payment_ref_no}} {% if form.payment_ref_no.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.payment_ref_no.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+
+      <div class="col-12 mt-2">
+        <label for="" class="text-black">Payment Status</label>
+        <div class="form-group">
+          {{form.payment_status}} {% if form.payment_status.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.payment_status.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-12 mt-2">
+        <label for="" class="text-black">Payment Mode</label>
+        <div class="form-group">
+          {{form.payment_mode}} {% if form.payment_mode.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.payment_mode.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+
+      <div class="col-12 mt-2">
+        <label for="" class="text-black">Status</label>
+        <div class="form-group">
+          {{form.status}} {% if form.status.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.status.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+
+      
+
+
+      <div class="row mt-5">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <button type="submit" class="btn btn-rose w-100">
+            Edit Booking
+          </button>
+        </div>
+        <div class="col-3"></div>
+      </div>
+  </form>
+{% comment %} </div> {% endcomment %}
+</div>
+</div>
+</div>
+
+
+
+<script>  
+
+$(document).ready(function() {
+// Handle form submission via AJAX
+$('#supp-form').submit(function(event) {
+event.preventDefault();  // Prevent the form from submitting the traditional way
+
+var form = $(this);
+var formData = new FormData(this);  // Get form data including files
+
+$.ajax({
+    url: form.attr('action'),  // Use the action URL from the form
+    type: 'POST',
+    data: formData,
+    processData: false,  // Important for uploading files
+    contentType: false,  // Important for uploading files
+    success: function(response) {
+        if (response.status === 'success') {
+            // Hide the modal
+            $('#editModal').modal('hide');
+            
+            // Remove the backdrop
+            $('.modal-backdrop').remove(); 
+            
+            // Update the supplier allocation table dynamically
+            $('#supplier-allocation-content').html(response.updated_table_html);
+            
+            // Optionally show a success message
+            $('#success-message').fadeIn().delay(3000).fadeOut();
+        } else {
+            // Handle error message (you can show a message inside the modal or elsewhere)
+            alert('There was an error editing the allocation.');
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error("Error: " + error);
+        alert('An error occurred. Please try again later.');
+    }
+});
+});
+
+// Ensure the Edit button triggers the modal opening and form loading
+// Use event delegation to ensure new elements get the event handler
+$(document).on('click', '.edit-btn', function() {
+var allocationId = $(this).data('id');  // Get the ID from the button's data-id attribute
+
+// Show loading indicator inside modal
+$("#modal-content-" + allocationId).html("<p>Loading...</p>");
+
+// Perform AJAX request to fetch the form
+$.ajax({
+    url: "/edit_booking/" + allocationId + "/",
+    type: "GET",
+    success: function(response) {
+        // On success, load the form HTML into the modal body
+        $("#modal-content-" + allocationId).html(response.form_html);
+        
+        // Open the modal after content is loaded
+        $('#editModal').modal('show');
+    },
+    error: function(xhr, status, error) {
+        // Handle error and show an error message in the modal
+        $("#modal-content-" + allocationId).html(
+            "<p>There was an error fetching the form. Please try again later.</p>"
+        );
+        console.error("There was an error fetching the form: ", error);
+    }
+});
+});
+});
+
+</script> 
+
+

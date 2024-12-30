@@ -163,7 +163,7 @@ def delete_package_forever_view(request,pk):
             data=Package.objects.get(pk=pk)
             data.delete()
             all_data=Package.objects.filter(is_deleted=True)
-            updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
+            updated_table_html=render_to_string('partials/package_trash_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
         except Package.DoesNotExist:
@@ -178,7 +178,7 @@ def recover_package_view(request,pk):
             data.save()
             
             all_data=Package.objects.filter(is_deleted=True)
-            updated_table_html=render_to_string('partials/package_table.html',{'data':all_data})
+            updated_table_html=render_to_string('partials/package_trash_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
         except Package.DoesNotExist:
@@ -399,7 +399,7 @@ def Supplier_allocation_view(request):
 
 
 def Supplier_view(request):
-    data=Supplier.objects.all()
+    data=Supplier.objects.filter(is_deleted=False) 
     return render(request,'view_supplier.html',{'data':data})
 
 
@@ -595,12 +595,49 @@ def delete_supplier_view(request,pk):
     if request.method=='POST':
         try:
             data=Supplier.objects.get(pk=pk)
-            data.delete()
-            all_data = Supplier.objects.all()  # or you can filter as needed
+            data.is_deleted=True
+            data.save()
+            
+            all_data = Supplier.objects.filter(is_deleted=False)  # or you can filter as needed
             updated_table_html = render_to_string('partials/suppliertable.html', {'data': all_data})
             
             return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
         except Supplier.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def view_supplier_trash(request):
+    data=Supplier.objects.filter(is_deleted=True)
+    return render(request,'suppliertrash.html',{'data':data})
+
+        
+        
+def recover_supplier_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Supplier.objects.get(pk=pk)
+            data.is_deleted = False
+            data.save()
+            
+            all_data=Supplier.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/supplier_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Package.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+
+        
+def delete_Supplier_forever_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Supplier.objects.get(pk=pk)
+            data.delete()
+            all_data=Supplier.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/supplier_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Company.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
         
         
@@ -641,7 +678,7 @@ def addcompany_view(request):
 
 
 def view_company(request):
-    data=Company.objects.all()
+    data=Company.objects.filter(is_deleted=False)
     return render(request,'viewcompany.html',{'data':data})
 
 
@@ -662,7 +699,7 @@ def edit_company_view(request,pk):
     
     if request.method == 'POST':
         form=Company_form(request.POST,request.FILES,instance=company)
-        formset=Company_contact_details_formset(request.POST,instance=company)
+        formset=Edit_company_contact_details_formset(request.POST,instance=company)
         
         if form.is_valid() and formset.is_valid():
             
@@ -687,7 +724,7 @@ def edit_company_view(request,pk):
     
     else:
         form = Company_form(instance=company)
-        formset = Company_contact_details_formset(instance=company)
+        formset = Edit_company_contact_details_formset(instance=company)
         form_html = render_to_string('partials/editcompany.html', {'form': form,'formset':formset, 'csrf_token': get_token(request)})
         return JsonResponse({'form_html': form_html})
             
@@ -698,14 +735,50 @@ def delete_company_view(request,pk):
     if request.method == 'POST':
         try:
             data=Company.objects.get(pk=pk)
-            data.delete()
-            all_data=Company.objects.all()
+            data.is_deleted = True
+            data.save()
+            all_data=Company.objects.filter(is_deleted=False)
             updated_table_html=render_to_string('partials/companytable.html',{'data':all_data})
             
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
         except Company.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+def view_company_trash(request):
+    data=Company.objects.filter(is_deleted=True)
+    return render(request,'companytrash.html',{'data':data})
+
+
+
+def recover_company_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Company.objects.get(pk=pk)
+            data.is_deleted = False
+            data.save()
+            
+            all_data=Company.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/company_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Package.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+
+        
+def delete_company_forever_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Company.objects.get(pk=pk)
+            data.delete()
+            all_data=Company.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/company_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Company.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+
         
         
         
@@ -819,7 +892,7 @@ def adddriver_view(request):
 
 
 def view_driver(request):
-    data=Driver.objects.all()
+    data=Driver.objects.filter(is_deleted=False)
     return render(request,'viewdriver.html',{'data':data})
 
 
@@ -877,8 +950,10 @@ def delete_driver_view(request,pk):
     if request.method == 'POST':
         try:
             data=Driver.objects.get(pk=pk)
-            data.delete()
-            all_data=Driver.objects.all()
+            data.is_deleted=True
+            data.save()
+            
+            all_data=Driver.objects.filter(is_deleted=False)
             updated_table_html=render_to_string('partials/driver_table.html',{'data':all_data})
             
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
@@ -886,6 +961,40 @@ def delete_driver_view(request,pk):
         except Driver.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
         
+        
+def view_driver_trash(request):
+    data=Driver.objects.filter(is_deleted=True)
+    return render(request,'drivertrash.html',{'data':data})
+
+        
+        
+def recover_driver_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Driver.objects.get(pk=pk)
+            data.is_deleted = False
+            data.save()
+            
+            all_data=Driver.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/driver_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Driver.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+
+        
+def delete_driver_forever_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Driver.objects.get(pk=pk)
+            data.delete()
+            all_data=Driver.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/driver_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Driver.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
         
         
 def addguide_view(request):
@@ -913,7 +1022,7 @@ def addguide_view(request):
 
 
 def view_guide(request):
-    data=Guide.objects.all()
+    data=Guide.objects.filter(is_deleted=False)
     return render(request,'viewguide.html',{'data':data})
 
 
@@ -972,14 +1081,54 @@ def delete_guide_view(request,pk):
     if request.method == 'POST':
         try:
             data=Guide.objects.get(pk=pk)
-            data.delete()
-            all_data=Guide.objects.all()
+            data.is_deleted=True
+            data.save()
+            
+            all_data=Guide.objects.filter(is_deleted=False)
             updated_table_html=render_to_string('partials/guide_table.html',{'data':all_data})
             
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
         except Guide.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+
+
+def view_guide_trash(request):
+    data=Guide.objects.filter(is_deleted=True)
+    return render(request,'guidetrash.html',{'data':data})
+
+        
+        
+def recover_guide_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Guide.objects.get(pk=pk)
+            data.is_deleted = False
+            data.save()
+            
+            all_data=Guide.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/guide_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Guide.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+
+        
+def delete_guide_forever_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Guide.objects.get(pk=pk)
+            data.delete()
+            all_data=Guide.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/guide_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Driver.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
         
         
         
@@ -1186,3 +1335,130 @@ def addbooking_view(request):
 def view_bookings(request):
     data=Booking.objects.all()
     return render(request,'viewbookings.html',{'data':data})
+
+
+
+
+def edit_booking_view(request, pk):
+    try:
+        # Fetch the supplier instance to update
+        booking = Booking.objects.get(pk=pk)
+    except Booking.DoesNotExist:
+        messages.error(request, 'Booking does not exist.')
+        return redirect('view_booking')  # Ensure 'supplier_list' is the correct URL name
+
+    if request.method == 'POST':
+        form = Booking_form(request.POST,instance=booking)
+        formset = edit_booking_trip_formset(request.POST,instance=booking)
+
+        # Check if both the form and the formset are valid
+        if form.is_valid() and formset.is_valid():
+            # Save the supplier form
+            booking = form.save(commit=False)
+            booking.save()
+
+            # Associate the formset with the supplier
+            formset.instance = booking
+
+            # Save the contact details in the formset
+            formset.save()
+
+            # Provide success feedback
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Fetch all supplier allocation data and render the updated table
+                all_data = Booking.objects.all()  # or you can filter as needed
+                updated_table_html = render_to_string('partials/bookingtable.html', {'data': all_data})
+                
+                return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
+            
+            return redirect('view_booking')  # Ensure 'supplier_list' is the correct URL name
+
+        else:
+            # Provide warning feedback if any form or formset is invalid
+            messages.warning(request, 'Updating Booking failed.')
+            print(form.errors)
+            print(formset.errors)
+            
+    
+    else:
+        # For GET request, populate the forms with existing data
+        form = Booking_form(instance=booking)
+        formset = edit_booking_trip_formset(instance=booking)
+        form_html = render_to_string('partials/editbooking.html', {'form': form,'formset':formset, 'csrf_token': get_token(request)})
+        return JsonResponse({'form_html': form_html})
+
+
+   
+def add_supplier_type_view(request):
+    try:
+        if request.method=='POST':
+            form=Supplier_type_form(request.POST)
+            if form.is_valid():
+                form.save()
+                data=Supplier_type.objects.all().values('id', 'type_name')
+                type_list=list(data)
+                return JsonResponse({'success':True,'type':type_list})
+            else:
+                return JsonResponse({'successs':False,'errors':form.errors})
+        else:
+            form=Supplier_type_form()
+            data=Supplier_type.objects.all()
+            return render(request,'addsuppliertype.html',{'form':form,'data':data})
+    except Exception as e:
+        return JsonResponse({'success':False,'error':str(e)},status=500) 
+    
+    
+def booking_details_view(request,pk):
+    data=Booking.objects.get(pk=pk)
+    trip=Booking_Trip_details.objects.filter(booking=data)
+    contact=Company_contact_details.objects.filter(company=data.company)
+    return render(request,'bookingdetailsview.html',{'data':data,'trip':trip,'contact':contact})
+
+
+def delete_bookings_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Booking.objects.get(pk=pk)
+            data.is_deleted = True
+            data.save()
+            
+            all_data=Booking.objects.filter(is_deleted=False)
+            updated_table_html=render_to_string('partials/bookingtable.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Booking.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def recover_booking_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Booking.objects.get(pk=pk)
+            data.is_deleted = False
+            data.save()
+            
+            all_data=Booking.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/booking_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Booking.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def delete_booking_forever_view(request,pk):
+    if request.method == 'POST' :
+        try:
+            data=Booking.objects.get(pk=pk)
+            data.delete()
+            all_data=Booking.objects.filter(is_deleted=True)
+            updated_table_html=render_to_string('partials/booking_trash_table.html',{'data':all_data})
+            return JsonResponse({'status':'success','updated_table_html':updated_table_html})
+        
+        except Booking.DoesNotExist:
+            return JsonResponse({'status':'error','message':'item not found'})
+        
+    
+     
+def view_booking_trash(request):
+    data=Booking.objects.filter(is_deleted=True)
+    return render(request,'bookingstrash.html',{'data':data})

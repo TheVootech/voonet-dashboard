@@ -269,6 +269,24 @@
   
       // Set the new ID for the form
       newForm.setAttribute('id', `formset${formIdx}`);
+
+      var inputs = newForm.querySelectorAll('input, select, textarea');
+
+          // Loop through each input field and reset its value
+          inputs.forEach(function(input) {
+              // Skip the 'id' field (exclude resetting the id field)
+              if (input.id.includes('id_')) {
+                  // Only reset the value for fields other than the 'id' field
+                  if (input.id !== 'id_company_contact_details_set-0-id') { // Example for id field
+                      input.value = '';
+
+                      // For checkboxes or radio buttons, uncheck them
+                      if (input.type === 'checkbox' || input.type === 'radio') {
+                          input.checked = false;
+                      }
+                  }
+              }
+          });
   
       // Reset all input values in the new form (clear values)
       var name = newForm.querySelector('#id_company_contact_details_set-0-name');

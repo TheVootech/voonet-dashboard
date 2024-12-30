@@ -116,11 +116,11 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addbooking' or request.path == '/viewbooking'  or request.path == '/viewdriverallocation'  or request.path == '/viewjobcard' or request.path == '/viewbookingreport' or request.path == '/viewjobreport' %} show {% endif %}" id="booking">
+            <div class="collapse {% if request.path == '/addbooking' or request.path == '/viewbooking'  or request.path == '/viewdriverallocation'  or request.path == '/viewjobcard' or request.path == '/viewbookingreport' or request.path == '/viewjobreport' or request.path == '/bookingtrash'%} show {% endif %}" id="booking">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addbooking' %} active {% endif %}" >
                   <a class="nav-link"  href="{% url "add_booking" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span> 
                     <span class="sidebar-normal"> Add New Booking </span>
                   </a>
                 </li>
@@ -128,6 +128,12 @@
                   <a class="nav-link" href="{% url "view_booking" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Bookings </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/bookingtrash' %} active {% endif %}" >
+                  <a class="nav-link" href="{% url "bookingtrash" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">delete</i> </span>
+                    <span class="sidebar-normal"> Bookings Trash </span>
                   </a>
                 </li>
                 <li class="nav-item {% if request.path == '/viewdriverallocation' %} active {% endif %}">
@@ -196,6 +202,166 @@
           </li>
 
           {% comment %} Manage Category {% endcomment %}
+          
+          {% comment %} driver management {% endcomment %}
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#driver">
+              <i class="material-icons">directions_car</i>
+              <p> Manage Driver
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/add_driver' or  request.path == '/viewdriver' or request.path == '/drivertrash' %}show{% endif %}" id="driver">
+              <ul class="nav">
+                <li class="nav-item {% if request.path == '/add_driver' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_driver" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Driver </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/viewdriver' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewdriver" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Driver </span>
+                  </a>
+                </li>
+
+                <li class="nav-item {% if request.path == '/drivertrash' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "drivertrash" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">delete</i> </span>
+                    <span class="sidebar-normal">Driver Trash </span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#guide">
+              <i class="material-icons">directions</i>
+              <p> Manage Guide
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/add_guide' or request.path == '/viewguide' or request.path == '/guidetrash'%}show{% endif %}" id="guide">
+              <ul class="nav">
+                <li class="nav-item {% if request.path == '/add_guide' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_guide" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Guide </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/viewguide' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "viewguide" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Guide </span> 
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/guidetrash' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "guidetrash" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">delete</i> </span>
+                    <span class="sidebar-normal">Guide Trash</span> 
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+          {% comment %} supplier management {% endcomment %}
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#supplier">
+              <i class="material-icons">group</i>
+              <p> Manage Supplier
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/addsupplier' or request.path == '/suppierallocation' or request.path == '/allocatenewsupplier' or request.path == '/viewsupplier' or request.path == '/addsuppliertype' or request.path == '/suppliertrash' %}show{% endif %}" id="supplier">
+              <ul class="nav">
+                <li class="nav-item  {% if request.path == '/addsupplier' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_supplier" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Supplier </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/viewsupplier' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "supplier" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Supplier </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/suppliertrash' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "suppliertrash" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">delete</i> </span>
+                    <span class="sidebar-normal"> Supplier Trash </span>
+                  </a>
+                </li>
+                <li class="nav-item  {% if request.path == '/allocatenewsupplier' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "new_supplier_allocation" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">settings</i> </span>
+                    <span class="sidebar-normal"> Allocate New Supplier</span>
+                  </a>
+                </li> 
+                <li class="nav-item {% if request.path == '/suppierallocation' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "supplier_allocation" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">list</i> </span>
+                    <span class="sidebar-normal"> View Supplier Allocations </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/addsuppliertype' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "addsuppliertype" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add Supplier Type </span>
+                  </a>
+                </li>
+
+
+              </ul>
+            </div>
+          </li>
+
+          {% comment %} Hotel/company management {% endcomment %}
+
+          <li class="nav-item ">
+            <a class="nav-link" data-toggle="collapse" href="#company">
+              <i class="material-icons">business</i>
+              <p> Manage Customer
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse {% if request.path == '/addcompany' or request.path == '/viewcompany' or request.path == '/addcompanytype' or request.path == '/companytrash' %}show{% endif %}" id="company">
+              <ul class="nav">
+                <li class="nav-item {% if request.path == '/addcompany' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "add_company" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> Add New Customer </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/viewcompany' %}active{% endif %}"> 
+                  <a class="nav-link" href="{% url "company" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
+                    <span class="sidebar-normal"> View/Edit Customer  </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/companytrash' %}active{% endif %}"> 
+                  <a class="nav-link" href="{% url "companytrash" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">delete</i> </span>
+                    <span class="sidebar-normal">Customer Trash </span>
+                  </a>
+                </li>
+                <li class="nav-item {% if request.path == '/addcompanytype' %}active{% endif %}">
+                  <a class="nav-link" href="{% url "addcompanytype" %}">
+                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
+                    <span class="sidebar-normal"> add Customer Type </span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" data-toggle="collapse" href="#category">
               <i class="material-icons">tag</i>
@@ -252,134 +418,6 @@
             </div>
           </li>
 
-          {% comment %} driver management {% endcomment %}
-          <li class="nav-item ">
-            <a class="nav-link" data-toggle="collapse" href="#driver">
-              <i class="material-icons">directions_car</i>
-              <p> Manage Driver
-                <b class="caret"></b>
-              </p>
-            </a>
-            <div class="collapse {% if request.path == '/add_driver' or  request.path == '/viewdriver' %}show{% endif %}" id="driver">
-              <ul class="nav">
-                <li class="nav-item {% if request.path == '/add_driver' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "add_driver" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
-                    <span class="sidebar-normal"> Add New Driver </span>
-                  </a>
-                </li>
-                <li class="nav-item {% if request.path == '/viewdriver' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "viewdriver" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
-                    <span class="sidebar-normal"> View/Edit Driver </span>
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-          </li>
-
-
-          <li class="nav-item ">
-            <a class="nav-link" data-toggle="collapse" href="#guide">
-              <i class="material-icons">directions</i>
-              <p> Manage Guide
-                <b class="caret"></b>
-              </p>
-            </a>
-            <div class="collapse {% if request.path == '/add_guide' or request.path == '/viewguide' %}show{% endif %}" id="guide">
-              <ul class="nav">
-                <li class="nav-item {% if request.path == '/add_guide' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "add_guide" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
-                    <span class="sidebar-normal"> Add New Guide </span>
-                  </a>
-                </li>
-                <li class="nav-item {% if request.path == '/viewguide' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "viewguide" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
-                    <span class="sidebar-normal"> View/Edit Guide </span>
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-          </li>
-
-          {% comment %} supplier management {% endcomment %}
-
-          <li class="nav-item ">
-            <a class="nav-link" data-toggle="collapse" href="#supplier">
-              <i class="material-icons">group</i>
-              <p> Manage Supplier
-                <b class="caret"></b>
-              </p>
-            </a>
-            <div class="collapse {% if request.path == '/addsupplier' or request.path == '/suppierallocation' or request.path == '/allocatenewsupplier' or request.path == '/viewsupplier' %}show{% endif %}" id="supplier">
-              <ul class="nav">
-                <li class="nav-item  {% if request.path == '/addsupplier' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "add_supplier" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
-                    <span class="sidebar-normal"> Add New Supplier </span>
-                  </a>
-                </li>
-                <li class="nav-item {% if request.path == '/viewsupplier' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "supplier" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
-                    <span class="sidebar-normal"> View/Edit Supplier </span>
-                  </a>
-                </li>
-                <li class="nav-item  {% if request.path == '/allocatenewsupplier' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "new_supplier_allocation" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">settings</i> </span>
-                    <span class="sidebar-normal"> Allocate New Supplier</span>
-                  </a>
-                </li>
-                <li class="nav-item {% if request.path == '/suppierallocation' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "supplier_allocation" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">list</i> </span>
-                    <span class="sidebar-normal"> View Supplier Allocations </span>
-                  </a>
-                </li>
-
-
-              </ul>
-            </div>
-          </li>
-
-          {% comment %} Hotel/company management {% endcomment %}
-
-          <li class="nav-item ">
-            <a class="nav-link" data-toggle="collapse" href="#company">
-              <i class="material-icons">business</i>
-              <p> Manage Customer
-                <b class="caret"></b>
-              </p>
-            </a>
-            <div class="collapse {% if request.path == '/addcompany' or request.path == '/viewcompany' or request.path == '/addcompanytype' %}show{% endif %}" id="company">
-              <ul class="nav">
-                <li class="nav-item {% if request.path == '/addcompany' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "add_company" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
-                    <span class="sidebar-normal"> Add New Customer </span>
-                  </a>
-                </li>
-                <li class="nav-item {% if request.path == '/viewcompany' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "company" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
-                    <span class="sidebar-normal"> View/Edit Customer  </span>
-                  </a>
-                </li>
-                <li class="nav-item {% if request.path == '/addcompanytype' %}active{% endif %}">
-                  <a class="nav-link" href="{% url "addcompanytype" %}">
-                    <span class="sidebar-mini"> <i class="material-icons">add_box</i> </span>
-                    <span class="sidebar-normal"> add Customer Type </span>
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-          </li>
 
           
           {% comment %} payment management {% endcomment %}

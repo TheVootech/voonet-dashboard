@@ -1,0 +1,187 @@
+<div class="row" id="supplier-allocation-content">
+    <div class="col-2"></div>
+    <div class="col-lg-8 col-md-12 col-md-12">
+      <div class="card">
+        <div class="card-header card-header-rose card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">assignment</i>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                  <tr>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >TYPE</th>
+                   
+                    <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                    
+                    <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+                    <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+                  <tr>
+                    <tr>
+                      <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.company_id}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.company_type}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.mobile}}</td>
+                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
+                      
+                          
+                          {% if i.status|lower  == "active" %}
+                          <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{i.status}}</td>
+                          {% endif %}
+                          {% if i.status|lower  == "inactive" %}
+                          <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{i.status}}</td>
+                          {% endif %}
+                          {% if i.status|lower  == "blocked" %}
+                          <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{i.status}}</td>
+                          {% endif %}
+                          {% if i.status|lower  == "pending" %}
+                          <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{i.status}}</td>
+                          {% endif %}
+
+                    <td class="td-actions text-center">
+                      
+                      <button type="button" rel="tooltip" class="btn btn-info" >
+                          <i class="material-icons"><a href="{% url "company_details" i.company_id %}" style="color: white;">visibility</a></i>
+                      </button>
+                      
+                     
+
+                      <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#recoverModal{{i.company_id}}" onclick="openRecoverModal('{{i.company_id}}')"> <i class="material-icons">replay</i> </button>
+
+
+                      <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.company_id}}" onclick="openDeleteModal('{{i.company_id}}')"> <i class="material-icons">close</i> </button>
+                      
+                    </td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;"></td>
+
+                </tr>
+
+                <div
+                class="modal "
+                id="recoverModal{{i.company_id}}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="recoverModalLabel{{i.company_id}}"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="recoverModalLabel{{i.company_id}}"
+                      >
+                        Recover Customer 
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content-{{i.company_id}}"
+                    >
+                      <h3 class="text-center font-weight-bold">Do You Want to Recover This Customer ?</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success font-weight-bold"
+                        id="recoverBtn{{i.company_id}}"
+                        onclick="recoverItem('{{i.company_id}}')"
+                      >
+                        Recover
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+                <div
+                class="modal "
+                id="deleteModal{{i.company_id}}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="deleteModalLabel{{i.company_id}}"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="deleteModalLabel{{i.company_id}}"
+                      >
+                      Delete From Trash
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content-{{i.company_id}}"
+                    >
+                      <h3 class="text-center font-weight-bold">Are you sure? You can't retrieve it later.</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary font-weight-bold"
+                        id="deleteBtn{{i.company_id}}"
+                        onclick="deleteItem('{{i.company_id}}')"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>

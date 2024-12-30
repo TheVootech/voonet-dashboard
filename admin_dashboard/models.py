@@ -135,6 +135,7 @@ class Supplier(models.Model):
     city=models.CharField(max_length=100)
     country=models.CharField(max_length=200)
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+    is_deleted=models.BooleanField(default=False)
     
     def save(self, *args, **kwargs):
         if not self.supplier_id:  # Only generate ID if it's not already set
@@ -316,6 +317,7 @@ class Company(models.Model):
     city=models.CharField(max_length=100)
     country=models.CharField(max_length=200)
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+    is_deleted=models.BooleanField(default=False)
     
     def save(self, *args, **kwargs):
         if not self.company_id:  # Only generate ID if it's not already set
@@ -326,10 +328,10 @@ class Company(models.Model):
                 last_id_number = int(last_company.company_id[3:])  # Skip 'LAN' prefix
                 next_id_number = last_id_number + 1
                 # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
-                self.company_id = f"COM{next_id_number:02d}"  # 2 digits for padding
+                self.company_id = f"CUS{next_id_number:02d}"  # 2 digits for padding
             else:
                 # If no languages exist, start with 'LAN01'
-                self.company_id = 'COM01'
+                self.company_id = 'CUS01'
 
         super(Company, self).save(*args, **kwargs)
         
@@ -413,6 +415,7 @@ class Driver(models.Model):
     visa=models.FileField(upload_to='driver_visa/')
     photos=models.FileField(upload_to='driver_photos/')
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+    is_deleted=models.BooleanField(default=False)
 
 
     def save(self, *args, **kwargs):
@@ -465,6 +468,7 @@ class Guide(models.Model):
     visa=models.FileField(upload_to='guide_visa/')
     photos=models.FileField(upload_to='driver_photos/')
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+    is_deleted=models.BooleanField(default=False)
 
 
     def save(self, *args, **kwargs):
@@ -548,6 +552,7 @@ class Booking(models.Model):
     payment_status=models.CharField(choices=payment_status_choices,max_length=20)
     payment_mode=models.ForeignKey(Payment_mode,on_delete=models.CASCADE)
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+    is_deleted=models.BooleanField(default=False)
 
 
     

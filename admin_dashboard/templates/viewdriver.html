@@ -107,9 +107,7 @@
                                 <i class="material-icons"><a href="{% url "driver_details" i.driver_id %}" style="color: white;">visibility</a></i>
                             </button>
                             
-                            {% comment %} <button type="button" rel="tooltip" class="btn btn-success">
-                              <a href="editsupplier/{{i.supplier_id}}/" style="color: white;"><i class="material-icons">edit</i></a>
-                            </button> {% endcomment %}
+                            
 
                             <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.driver_id}}" onclick="openEditModal('{{i.driver_id}}')"> <i class="material-icons">edit</i> </button>
 
