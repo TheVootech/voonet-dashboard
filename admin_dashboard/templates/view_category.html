@@ -231,45 +231,6 @@
   
 
 
-  $(document).on("submit", "#supp-form", function (e) {
-    e.preventDefault(); // Prevent default form submission
-
-    var form = $(this);
-    var url = form.attr("action");
-
-    // Show a loading spinner or indicator
-    $("#modal-content-" + form.data("id")).html("<p>Submitting...</p>");
-
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: form.serialize(), // Serialize the form data
-      success: function (response) {
-        if (response.status === "success") {
-          
-          // Replace the whole table with updated table
-          $("#supplier-allocation-content").html(response.updated_table_html);
-
-          // Close the modal
-          $("#editModal" + form.data("id")).modal("hide");
-
-          // Optionally, show success message in the table or somewhere else
-          $("#success-message").fadeIn().delay(3000).fadeOut();
-
-        } else {
-          alert(
-            "An error occurred while submitting the form. Please try again."
-          );
-        }
-      },
-      error: function (xhr, status, error) {
-        alert("Error: " + error);
-        console.error("There was an error submitting the form:", error);
-      },
-    });
-  });
-
-
   
   function openDeleteModal(id) {
     // Set the delete button in the modal to call deleteItem with the correct ID

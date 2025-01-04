@@ -10,7 +10,7 @@
             <div class="row mt-5 pl-5 pr-3">
                 <div class="col-md-12 ml-auto mr-auto">
                   <div class="page-categories">
-                    <h3 class="title text-center font-weight-bold">{{data.booking_id}}</h3>
+                    <h3 class="title text-center font-weight-bold">{{data.booking_trip_id}}</h3>
                     <br/>
                     <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center mt-3" role="tablist">
                       <li class="nav-item">
@@ -24,16 +24,22 @@
                         </a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#document" role="tablist">
+                          <i class="material-icons">commute  </i>Trip Details
+                        </a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#contact" role="tablist">
                           <i class="material-icons">business</i> Customer Details
                         </a>
                       </li>
                       
                       <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#document" role="tablist">
-                          <i class="material-icons">commute  </i>Trip Details
+                        <a class="nav-link" data-toggle="tab" href="#a" role="tablist">
+                          <i class="material-icons">local_shipping</i> Supplier Details
                         </a>
                       </li>
+                     
                       <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#contactperson" role="tablist">
                           <i class="material-icons">phone</i>Customer Contact Person
@@ -60,9 +66,9 @@
                                            
                                             <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
                                             <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
-                                            
+                                            <th class="text-center  text-rose" style="font-weight: 900;" >SUPPLIER</th>
+                                            <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT REF NO : </th>
                                             <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
-                    
                                             <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
                                             <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED DATE</th>
                                             <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>
@@ -75,26 +81,28 @@
                                           
                                           
                                             <tr>
-                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking_id}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking_trip_id}}</td>
                                               <td class="text-center text-capitalize" style="font-weight: 500;">{{data.guest_name}}</td>
                                               <td class="text-center text-capitalize" style="font-weight: 500;">{{data.email}}</td>
                                               
                                               <td class="text-center text-capitalize" style="font-weight: 500;">{{data.contact_number}}</td>
-                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company}}</td>
-                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.payment_mode}}</td>
-                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.payment_status}}</td>
-                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booked_date}}</td>
-                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booked_by}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.company}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.payment_ref_no}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.payment_mode}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.payment_status}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.booked_date}}</td>
+                                              <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.booked_by}}</td>
                                               
                                               
-                                                {% if data.status|lower  == "active" %}
-                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{data.status}}</td>
+                                                {% if data.booking.status|lower  == "active" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{data.booking.status}}</td>
                                                 {% endif %}
-                                                {% if data.status|lower  == "inactive" %}
-                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{data.status}}</td>
+                                                {% if data.booking.status|lower  == "inactive" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{data.booking.status}}</td>
                                                 {% endif %}
-                                                {% if data.status|lower  == "blocked" %}
-                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{data.status}}</td>
+                                                {% if data.booking.status|lower  == "blocked" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{data.booking.status}}</td>
                                                 {% endif %}
                                       </tr>
                                      
@@ -186,28 +194,29 @@
                                     </thead>
                                     <tbody>
                                       
-
+                                     
                                       <tr>
 
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company.company_id}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company.name}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company.company_type}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company.email}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.company.address1}},{{data.company.city1}},{{data.company.state1}},{{data.company.country1}}-{{data.company.pincode1}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{company.company_id}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{company.name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{company.company_type}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{company.email}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{company.address1}},{{data.company.city1}},{{data.company.state1}},{{data.company.country1}}-{{data.company.pincode1}}</td>
 
                                         
-                                        {% if data.company.status|lower  == "active" %}
-                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{data.company.status}}</td>
+                                        {% if company.status|lower  == "active" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{company.status}}</td>
                                                 {% endif %}
-                                                {% if data.company.status|lower  == "inactive" %}
-                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{data.company.status}}</td>
+                                                {% if company.status|lower  == "inactive" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{company.status}}</td>
                                                 {% endif %}
-                                                {% if data.company.status|lower  == "blocked" %}
-                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{data.company.status}}</td>
+                                                {% if company.status|lower  == "blocked" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{company.status}}</td>
                                                 {% endif %}
 
                                         
                                       </tr>
+                                    
                                       
                                      
                                       
@@ -218,7 +227,63 @@
                             
                           </div>
                       </div>
-                    
+                      <div class="tab-pane" id="a">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title text-center font-weight-bold mt-2">Supplier Details</h4>
+                          </div>
+                          
+                            
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >TYPE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >ADDRESS</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+
+
+                                      </tr>
+                                      
+                                    </thead>
+                                    <tbody>
+                                      
+                                     
+                                      <tr>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier.supplier_id}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier.name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier.supplier_type}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier.email}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier.address1}},{{data.supplier.city1}},{{data.supplier.state1}},{{data.supplier.country1}}-{{data.supplier.pincode1}}</td>
+
+              
+                                        {% if company.status|lower  == "active" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{company.status}}</td>
+                                                {% endif %}
+                                                {% if company.status|lower  == "inactive" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{company.status}}</td>
+                                                {% endif %}
+                                                {% if company.status|lower  == "blocked" %}
+                                                <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{company.status}}</td>
+                                                {% endif %}
+
+                                        
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            
+                          </div>
+                      </div>
+                     
                       <div class="tab-pane" id="document">
                         <div class="card">
                           <div class="card-header">
@@ -235,6 +300,7 @@
                                         
                                         <th class="text-center  text-rose" style="font-weight: 900;" >CATEGORY</th>
                                         <th class="text-center  text-rose" style="font-weight: 900;" >PACKAGE</th>
+                                        <th class="text-center  text-rose" style="font-weight: 900;" >SUPPLIER</th>
                                         <th class="text-center  text-rose" style="font-weight: 900;" >REMARK</th>
                                         <th class="text-center  text-rose" style="font-weight: 900;" >TRIP DATE</th>
                                         <th class="text-center  text-rose" style="font-weight: 900;" >TRIP TIME</th>
@@ -264,29 +330,30 @@
                                       
                                     </thead>
                                     <tbody>
-                                        {% for i in trip %}
-                                      <tr>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.category}}</td>
-
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.package}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.remark}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.trip_date}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.trip_time}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_adult}}</td>
-
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_child}}</td>
                                         
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_infant}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.rate_of_adult}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.rate_of_child}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.rate_of_infant}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.pickup_location}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.pickup_time}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.transfer_type}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.vehicle_type}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.vehicle_name}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_luggage}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.flight_time}}</td>
+                                      <tr>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.category}}</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.package}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.supplier}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.remark}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.trip_date}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.trip_time}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.no_of_adult}}</td>
+
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.no_of_child}}</td>
+                                        
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.no_of_infant}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.rate_of_adult}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.rate_of_child}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.rate_of_infant}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.pickup_location}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.pickup_time}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.transfer_type}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_type}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.vehicle_name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.no_of_luggage}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.flight_time}}</td>
 
 
 
@@ -295,7 +362,7 @@
                                         
       
                                       </tr>
-                                      {% endfor %}
+                                     
                                       
 
                                       
@@ -338,18 +405,18 @@
                                       
                                     </thead>
                                     <tbody>
-                                        {% for i in contact %}
+                                        
                                       <tr>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.contact_person.name}}</td>
 
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.designation}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.mobile}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.whatsapp}}</td>
-                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.contact_person.designation}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.contact_person.mobile}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.contact_person.whatsapp}}</td>
+                                        <td class="text-center text-capitalize" style="font-weight: 500;">{{data.booking.contact_person.email}}</td>
 
                                         
                                       </tr>
-                                      {% endfor %}
+                                   
                                       
 
                                       
@@ -366,6 +433,7 @@
 
                           
                       </div>
+                      
                     </div>
                   </div>
                 </div>

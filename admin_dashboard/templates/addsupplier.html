@@ -60,6 +60,8 @@
           
         <form action="{% url "add_supplier" %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supform">
           {% csrf_token %}
+          <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5">
+              <h6 class="text-center font-weight-bold mb-3 mt-2">Supplier Details</h6>
           <div class="row mt-3">
             <div class="col-4">
 
@@ -106,6 +108,7 @@
             </div>
             
           </div>
+        
           <div class="row mt-3">
             
            
@@ -143,11 +146,11 @@
             </div>
            
           </div>
+        </div>
           
-          <hr>
+        <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+          <h6 class="text-center font-weight-bold mb-3 mt-2">Address</h6>
           <div class="row mt-3">
-            <h4 class="text-center font-weight-bold">Address</h4>
-            <div class="row">
               <div class="col-4">
                 
               <div class="form-group">
@@ -241,10 +244,10 @@
             </div>
           
           </div>
-          <hr>
+          <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-3 mt-2">Address 2 (optional)</h6>
           <div class="row mt-3">
-            <h4 class="text-center font-weight-bold">Address 2 <span style="font-size:17px">(optional)<span></h4>
-            <div class="row">
+          
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Address</label>
@@ -335,12 +338,12 @@
               </div>
             </div>
           </div>
-          <hr>
+          
 
-       
+          <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-3 mt-2">Contact Person Details</h6>
           <div class="row mt-3">
             {{ formset.management_form }}
-            <h4 class="text-center font-weight-bold mb-4">Contact Person Details</h4>
             <div class="formset-container">
               {% for form in formset %}
               <div class="formset mb-2" id="formset">
@@ -374,12 +377,13 @@
             </div>
 
                     
-                    <hr>
+                    
                   
 
           </div>
-          <div class="row mt-3 ">
-            <h4 class="text-center font-weight-bold mb-4">Documents</h4>
+        </div>
+        <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-4 mt-5">
+          <h6 class="text-center font-weight-bold mb-3 mt-2">Documents</h6>
             <div class="row mb-3">
               <div class="col-3">
                 <div class="form-group mt-3">
@@ -448,11 +452,11 @@
             
           </div>
 
-          <hr>
-
+          
+          <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-3 mt-2">Bank Details</h6>
           <div class="row mt-3">
-            <h4 class="text-center font-weight-bold mb-4">Bank Details</h4>
-            <div class="row">
+            
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Name</label>
@@ -586,8 +590,9 @@
             </div>
           </div>
 
-          <hr>
-
+         
+          <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-3 mt-2">Supplier Status</h6>
           <div class="row mt-3">
             <div class="col-4">
               <div class="form-group ">
@@ -606,6 +611,7 @@
               
             
           </div>
+        </div>
 
 
           <div class="row mt-5">

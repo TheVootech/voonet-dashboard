@@ -10,67 +10,96 @@
           <div class="table-responsive">
             <table class="table">
               <thead>
+                <tr>
+                  <th class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value=""> 
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div></th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >GUEST NAME</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                 
+                  <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >CONTACT PERSON</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >SUPPLIER</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >TRIP DATE</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >TRIP CATEGORY</th>
+                  
+                  <th class="text-center  text-rose" style="font-weight: 900;" >TRIP PACKAGE</th>
+
+                  <th class="text-center  text-rose" style="font-weight: 900;" >NO : ADULT</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >NO : CHILD</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >NO : INFANT</th> 
+                  <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
+
+                  <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED DATE</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+                  <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in data %}
+                
                   <tr>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >GUEST NAME</th>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
-                     
-                      <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
-                      
-                      <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
-
-                      <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED DATE</th>
-                      <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>
-
-                      <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
-
-                      <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for i in data %}
+                    <td class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value=""> 
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div></td>
+                    <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking_trip_id}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.guest_name}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
                     
-                      <tr>
-                        <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking_id}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.guest_name}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
-                        
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.contact_number}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.company}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.payment_mode}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.payment_status}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booked_date}}</td>
-                        <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booked_by}}</td>
-                        
-                        
-                          {% if i.status|lower  == "active" %}
-                          <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{i.status}}</td>
-                          {% endif %}
-                          {% if i.status|lower  == "inactive" %}
-                          <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{i.status}}</td>
-                          {% endif %}
-                          {% if i.status|lower  == "blocked" %}
-                          <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{i.status}}</td>
-                          {% endif %}
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.contact_number}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.company}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.contact_person.name}} ( {{i.booking.contact_person.designation}} )</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.supplier}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.trip_date}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.category}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.package}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_adult}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_child}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_infant}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_mode}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_status}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_date}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_by}}</td>
+                    
+                    
+                      {% if i.booking.status|lower  == "active" %}
+                      <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{i.booking.status}}</td>
+                      {% endif %}
+                      {% if i.booking.status|lower  == "inactive" %}
+                      <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{i.booking.status}}</td>
+                      {% endif %}
+                      {% if i.booking.status|lower  == "blocked" %}
+                      <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{i.booking.status}}</td>
+                      {% endif %}
 
                     <td class="td-actions text-center">
                       
                       <button type="button" rel="tooltip" class="btn btn-info" >
-                          <i class="material-icons"><a href="{% url "booking_details" i.booking_id %}" style="color: white;">visibility</a></i>
+                          <i class="material-icons"><a href="{% url "booking_details" i.booking_trip_id %}" style="color: white;">visibility</a></i>
                       </button>
                       
-                      {% comment %} <button type="button" rel="tooltip" class="btn btn-success">
-                        <a href="editsupplier/{{i.supplier_id}}/" style="color: white;"><i class="material-icons">edit</i></a>
-                      </button> {% endcomment %}
+                      
 
-                      <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#recoverModal{{i.booking_id}}" onclick="openRecoverModal('{{i.booking_id}}')"> <i class="material-icons">replay</i> </button>
+                      <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#recoverModal{{i.booking_trip_id}}" onclick="openRecoverModal('{{i.booking_trip_id}}')"> <i class="material-icons">replay</i> </button>
 
 
-                      <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.booking_id}}" onclick="openDeleteModal('{{i.booking_id}}')"> <i class="material-icons">close</i> </button>
+                      <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.booking_trip_id}}" onclick="openDeleteModal('{{i.booking_trip_id}}')"> <i class="material-icons">close</i> </button>
                       
                     </td>
                     <td class="text-center text-capitalize" style="font-weight: 500;"></td>
@@ -79,10 +108,10 @@
 
                 <div
                 class="modal "
-                id="recoverModal{{i.booking_id}}"
+                id="recoverModal{{i.booking_trip_id}}"
                 tabindex="-1"
                 role="dialog"
-                aria-labelledby="recoverModalLabel{{i.booking_id}}"
+                aria-labelledby="recoverModalLabel{{i.booking_trip_id}}"
                 aria-hidden="true"
                 
               >
@@ -91,7 +120,7 @@
                     <div class="modal-header">
                       <h3
                         class="modal-title text-primary font-weight-bold"
-                        id="recoverModalLabel{{i.booking_id}}"
+                        id="recoverModalLabel{{i.booking_trip_id}}"
                       >
                         Recover Booking 
                       </h3>
@@ -106,7 +135,7 @@
                     </div>
                     <div
                       class="modal-body"
-                      id="modal-content-{{i.booking_id}}"
+                      id="modal-content-{{i.booking_trip_id}}"
                     >
                       <h3 class="text-center font-weight-bold">Do You Want to Recover This Booking ?</h3>
                     </div>
@@ -121,8 +150,8 @@
                       <button
                         type="button"
                         class="btn btn-success font-weight-bold"
-                        id="recoverBtn{{i.booking_id}}"
-                        onclick="recoverItem('{{i.booking_id}}')"
+                        id="recoverBtn{{i.booking_trip_id}}"
+                        onclick="recoverItem('{{i.booking_trip_id}}')"
                       >
                         Recover
                       </button>
@@ -133,10 +162,10 @@
                 
                 <div
                 class="modal "
-                id="deleteModal{{i.booking_id}}"
+                id="deleteModal{{i.booking_trip_id}}"
                 tabindex="-1"
                 role="dialog"
-                aria-labelledby="deleteModalLabel{{i.booking_id}}"
+                aria-labelledby="deleteModalLabel{{i.booking_trip_id}}"
                 aria-hidden="true"
                 
               >
@@ -145,7 +174,7 @@
                     <div class="modal-header">
                       <h3
                         class="modal-title text-primary font-weight-bold"
-                        id="deleteModalLabel{{i.booking_id}}"
+                        id="deleteModalLabel{{i.booking_trip_id}}"
                       >
                         Delete Booking 
                       </h3>
@@ -160,7 +189,7 @@
                     </div>
                     <div
                       class="modal-body"
-                      id="modal-content-{{i.booking_id}}"
+                      id="modal-content-{{i.booking_trip_id}}"
                     >
                       <h3 class="text-center font-weight-bold">Are you sure? You can't retrieve it later.</h3>
                     </div>
@@ -175,8 +204,8 @@
                       <button
                         type="button"
                         class="btn btn-primary font-weight-bold"
-                        id="deleteBtn{{i.booking_id}}"
-                        onclick="deleteItem('{{i.booking_id}}')"
+                        id="deleteBtn{{i.booking_trip_id}}"
+                        onclick="deleteItem('{{i.booking_trip_id}}')"
                       >
                         Delete
                       </button>

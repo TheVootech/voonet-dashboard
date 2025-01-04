@@ -400,7 +400,40 @@ def Supplier_allocation_view(request):
 
 def Supplier_view(request):
     data=Supplier.objects.filter(is_deleted=False) 
-    return render(request,'view_supplier.html',{'data':data})
+    return render(request,'view_supplier.html',{'data':data,'form':Supplier_filter_form})
+
+
+
+def filter_Supplier(request):
+    form = Supplier_filter_form(request.GET)  # Initialize the form with GET data
+    supplier = Supplier.objects.filter(is_deleted=False)
+
+
+    if form.is_valid():
+        type = form.cleaned_data.get('supplier_type')
+        category = form.cleaned_data.get('category')
+        status = form.cleaned_data.get('status')
+        
+
+        if type:
+            supplier = supplier.filter(supplier_type=type)
+        if category:
+            supplier = supplier.filter(category__category_name__icontains=category)
+        if status:
+            supplier = supplier.filter(status=status)
+        
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/suppliertable.html', {'data': supplier})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
+
+
+
+
+
+
 
 
 def Allocate_new_supplier_view(request):
@@ -1269,6 +1302,8 @@ def get_category_fields(request):
 
         # Create a dictionary of field names and their boolean values
         fields = {
+            "trip_date":category.date,
+            "trip_time":category.time,
             "no_of_adult": category.no_of_adult,
             "no_of_child": category.no_of_child,
             "no_of_infant": category.no_of_infant,
@@ -1296,7 +1331,21 @@ def get_category_fields(request):
         return JsonResponse({"success": False, "error": "Category not found."})
     
     
-    
+
+def get_package_rates(request):
+    package_id = request.GET.get('package_id')  # Get the package ID from the query parameters
+    package = Package.objects.filter(package_id=package_id).first()  # Fetch the package from the database
+
+    if package:
+        # Return the rates as JSON
+        response_data = {
+            'adult_rate': package.adult_rate,
+            'child_rate': package.child_rate,
+            'infant_rate': package.infant_rate,
+        }
+        return JsonResponse(response_data)
+    else:
+        return JsonResponse({'error': 'Package not found'}, status=404)  
 
 def addbooking_view(request):
     if request.method == 'POST':
@@ -1333,8 +1382,59 @@ def addbooking_view(request):
     
 
 def view_bookings(request):
-    data=Booking.objects.all()
-    return render(request,'viewbookings.html',{'data':data})
+    data=Booking_Trip_details.objects.filter(is_deleted=False)
+    booking = Booking.objects.filter(bookingtripdetails__isnull=True)
+    booking.delete()
+    a=Booking.objects.all()
+    b=len(a)
+    print(b,"booking with zero trip deleted")
+    return render(request,'viewbookings.html',{'data':data,'form':Booking_filter_form})
+
+
+def filter_bookings(request):
+    form = Booking_filter_form(request.GET)  # Initialize the form with GET data
+    bookings = Booking_Trip_details.objects.filter(is_deleted=False)
+
+
+    if form.is_valid():
+        date_from = form.cleaned_data.get('date_from')
+        date_to = form.cleaned_data.get('date_to')
+        category = form.cleaned_data.get('category')
+        package = form.cleaned_data.get('package')
+        customer = form.cleaned_data.get('customer')
+        payment_mode = form.cleaned_data.get('payment_mode')
+        payment_status = form.cleaned_data.get('payment_status')
+        status = form.cleaned_data.get('status')
+        booked_by = form.cleaned_data.get('booked_by')
+        supplier = form.cleaned_data.get('supplier')
+
+        if date_from:
+            bookings = bookings.filter(trip_date__gte=date_from)
+        if date_to:
+            bookings = bookings.filter(trip_date__lte=date_to)
+        if category:
+            bookings = bookings.filter(category__category_name__icontains=category)
+        if package:
+            bookings = bookings.filter(package__package_title__icontains=package)
+            print(bookings.exists())
+        if customer:
+            print("customer")
+            bookings = bookings.filter(booking__company_id=customer)
+            
+        if payment_mode:
+            bookings = bookings.filter(booking__payment_mode_id=payment_mode)
+        if payment_status:
+            bookings = bookings.filter(booking__payment_status=payment_status)
+        if status:
+            bookings = bookings.filter(booking__status=status)
+        if supplier:
+            bookings = bookings.filter(supplier=supplier)
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/bookingtable.html', {'data': bookings})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
 
 
 
@@ -1343,6 +1443,7 @@ def edit_booking_view(request, pk):
     try:
         # Fetch the supplier instance to update
         booking = Booking.objects.get(pk=pk)
+        trip_id=request.GET.get('trip_id')
     except Booking.DoesNotExist:
         messages.error(request, 'Booking does not exist.')
         return redirect('view_booking')  # Ensure 'supplier_list' is the correct URL name
@@ -1351,8 +1452,8 @@ def edit_booking_view(request, pk):
         form = Booking_form(request.POST,instance=booking)
         formset = edit_booking_trip_formset(request.POST,instance=booking)
 
-        # Check if both the form and the formset are valid
-        if form.is_valid() and formset.is_valid():
+        # Check if both the form and the formset are valid and formset.is_valid()
+        if form.is_valid() :
             # Save the supplier form
             booking = form.save(commit=False)
             booking.save()
@@ -1360,13 +1461,13 @@ def edit_booking_view(request, pk):
             # Associate the formset with the supplier
             formset.instance = booking
 
-            # Save the contact details in the formset
+            # # Save the contact details in the formset
             formset.save()
 
             # Provide success feedback
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 # Fetch all supplier allocation data and render the updated table
-                all_data = Booking.objects.all()  # or you can filter as needed
+                all_data = Booking_Trip_details.objects.filter(is_deleted=False)  # or you can filter as needed
                 updated_table_html = render_to_string('partials/bookingtable.html', {'data': all_data})
                 
                 return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
@@ -1383,7 +1484,7 @@ def edit_booking_view(request, pk):
     else:
         # For GET request, populate the forms with existing data
         form = Booking_form(instance=booking)
-        formset = edit_booking_trip_formset(instance=booking)
+        formset = edit_booking_trip_formset(instance=booking,queryset=Booking_Trip_details.objects.filter(booking_trip_id=trip_id))
         form_html = render_to_string('partials/editbooking.html', {'form': form,'formset':formset, 'csrf_token': get_token(request)})
         return JsonResponse({'form_html': form_html})
 
@@ -1409,20 +1510,19 @@ def add_supplier_type_view(request):
     
     
 def booking_details_view(request,pk):
-    data=Booking.objects.get(pk=pk)
-    trip=Booking_Trip_details.objects.filter(booking=data)
-    contact=Company_contact_details.objects.filter(company=data.company)
-    return render(request,'bookingdetailsview.html',{'data':data,'trip':trip,'contact':contact})
+    data=Booking_Trip_details.objects.get(pk=pk)
+    company=data.booking.company
+    return render(request,'bookingdetailsview.html',{'data':data,'company':company})
 
 
 def delete_bookings_view(request,pk):
     if request.method == 'POST' :
         try:
-            data=Booking.objects.get(pk=pk)
+            data=Booking_Trip_details.objects.get(pk=pk)
             data.is_deleted = True
             data.save()
             
-            all_data=Booking.objects.filter(is_deleted=False)
+            all_data=Booking_Trip_details.objects.filter(is_deleted=False)
             updated_table_html=render_to_string('partials/bookingtable.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
@@ -1433,32 +1533,62 @@ def delete_bookings_view(request,pk):
 def recover_booking_view(request,pk):
     if request.method == 'POST' :
         try:
-            data=Booking.objects.get(pk=pk)
+            data=Booking_Trip_details.objects.get(pk=pk)
             data.is_deleted = False
             data.save()
             
-            all_data=Booking.objects.filter(is_deleted=True)
+            all_data=Booking_Trip_details.objects.filter(is_deleted=True)
             updated_table_html=render_to_string('partials/booking_trash_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
-        except Booking.DoesNotExist:
+        except Booking_Trip_details.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
         
         
 def delete_booking_forever_view(request,pk):
     if request.method == 'POST' :
         try:
-            data=Booking.objects.get(pk=pk)
+            data=Booking_Trip_details.objects.get(pk=pk)
             data.delete()
-            all_data=Booking.objects.filter(is_deleted=True)
+            all_data=Booking_Trip_details.objects.filter(is_deleted=True)
             updated_table_html=render_to_string('partials/booking_trash_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
-        except Booking.DoesNotExist:
+        except Booking_Trip_details.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
         
     
      
 def view_booking_trash(request):
-    data=Booking.objects.filter(is_deleted=True)
+    data=Booking_Trip_details.objects.filter(is_deleted=True)
     return render(request,'bookingstrash.html',{'data':data})
+
+
+
+
+def get_locations(request):
+    search_query = request.GET.get('search', '')
+    locations = Place.objects.filter(place_name__icontains=search_query)
+    location_data = [{"name": location.place_name} for location in locations]
+    
+    print(location_data)  # Add this to inspect the response data
+    
+    return JsonResponse(location_data, safe=False)
+
+
+
+
+
+def save_location(request):
+    location_name = request.GET.get('location_name', '').strip()
+    
+    if location_name:
+        # Check if the location exists
+        location, created = Place.objects.get_or_create(place_name=location_name)
+        
+        if created:
+            return JsonResponse({"success": True, "message": "Location saved."})
+        else:
+            return JsonResponse({"success": True, "message": "Location already exists."})
+    
+    return JsonResponse({"success": False, "message": "No location name provided."})

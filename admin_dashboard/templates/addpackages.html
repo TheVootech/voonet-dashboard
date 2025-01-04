@@ -64,6 +64,8 @@
         <div class="card-body">
         <form action="" method="post" enctype="multipart/form-data" id="supform">
           {% csrf_token %}
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-3 mt-2">Package Details</h6>
           <div class="row mt-3">
             <div class="col-4">
               <div class="form-group">
@@ -193,7 +195,9 @@
             </div>
 
           </div>
-
+        </div>
+        <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+          <h6 class="text-center font-weight-bold mb-3 mt-2">Description & Highlights</h6>
           <div class="row mt-3">
             
               <div class="form-group">
@@ -273,49 +277,214 @@
               </div>
             
           </div>
+        </div>
+
+        
 
           <div class="row mt-3">
             
             <div class="col-6">
-              <label for="" class="text-black">Days of Operation</label>
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h6 class="text-center font-weight-bold mb-4 mt-2">Days of operation</h6>
+                <div class="row">
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.sunday }}  Sunday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.monday }}  Monday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.tuesday }}  Tuesday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.wednesday }}  Wednesday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.thursday }}  Thursday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.friday }}  Friday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.saturday }}  Saturday                                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-              <div class="form-group pr-5">
-
-                {{form.sunday}}
-                <span class="font-weight-bold mr-2">Sunday</span>
-                {{form.monday}}
-                <span class="font-weight-bold mr-2">Monday</span>
-                {{form.tuesday}}
-                <span class="font-weight-bold mr-2">Tuesday</span>
-                {{form.wednesday}}
-                <span class="font-weight-bold mr-2">Wednesday</span>
-                {{form.thursday}}
-                <span class="font-weight-bold mr-2">Thursday</span>
-                {{form.friday}}
-                <span class="font-weight-bold mr-2">Friday</span>
-                {{form.saturday}}
-                <span class="font-weight-bold mr-2">Saturday</span>
               </div>
             </div>
 
             <div class="col-6">
-              <div class="form-group">
-                <label for="" class="text-black">Open Hours</label>
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h6 class="text-center font-weight-bold mb-4 mt-2">Open Hours</h6>
+                <div class="form-group">
+                  <label for="" class="text-black">Open Hours</label>
 
-                {{form.open_hours}} {% if form.open_hours.errors %}
-                <ul class="errorlist text-primary text-bold">
-                  {% for error in form.open_hours.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
+                  {{form.open_hours}} {% if form.open_hours.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.open_hours.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
             </div>
           </div>
+        </div>
 
+
+          
+
+          <div class="row">
+            <div class="col-6 mt-2">
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h6 class="text-center font-weight-bold mb-4 mt-2">Price Details</h6>
+
+              
+              <div class="row mt-3">
+                <div class="col-4">
+                  <div class="form-group">
+                      <label for="" class="text-black">Adult</label>
+                      {{form.adult_rate}} {% if form.adult_rate.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.adult_rate.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+
+                    </div>
+                    
+                  </div>
+                
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="" class="text-black">Child</label>
+                    {{form.child_rate}} {% if form.child_rate.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.child_rate.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+
+                  </div>
+                  
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="" class="text-black">Infant</label>
+                    {{form.infant_rate}} {% if form.infant_rate.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.infant_rate.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            <div class="col-6 mt-2">
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h6 class="text-center font-weight-bold mb-4 mt-2">Age Details</h6>
+              <div class="row mt-3">
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="" class="text-black">Adult</label>
+                    {{form.adult_age}} {% if form.adult_age.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.adult_age.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                  </div>
+                </div>
+                
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="" class="text-black">Child</label>
+                    {{form.child_age}} {% if form.child_age.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.child_age.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="" class="text-black">Infant</label>
+                    {{form.infant_age}} 
+                      {% if form.infant_age.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.infant_age.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                  </div>
+                </div>
+              </div>
+                
+              </div>
+            </div>
+            
+          </div>
+
+          
           <div class="row mt-3">
 
             <div class="col-6">
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h6 class="text-center font-weight-bold mb-3 mt-2">Language</h6>
               <div class="form-group">
                 <label for="" class="text-black">Language</label>
 
@@ -328,66 +497,13 @@
                 {% endif %}
               </div>
             </div>
-
-            <div class="col-6 mt-2">
-              <label for="" class="text-black">Rate Policy</label>
-              <div class="row mt-3">
-                <div class="col-4">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <span style="font-size: 14px">Adult</span>
-                    </div>
-                    <div class="col-6">
-                      {{form.adult_rate}} {% if form.adult_rate.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.adult_rate.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <span style="font-size: 14px">Child</span>
-                    </div>
-                    <div class="col-6">
-                      {{form.child_rate}} {% if form.child_rate.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.child_rate.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <span style="font-size: 14px">Infant</span>
-                    </div>
-                    <div class="col-6">
-                      {{form.infant_rate}} {% if form.infant_rate.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.infant_rate.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
 
-          <div class="row mt-3">
-            <div class="col-6 mt-3">
+            <div class="col-6">
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h6 class="text-center font-weight-bold mb-3 mt-2">Package Status</h6>
               <div class="form-group">
-                <label for="" class="text-black">Status</label>
+                <label for="" class="text-black mt-3">Status</label>
 
                 {{form.status}} {% if form.status.errors %}
                 <ul class="errorlist text-primary text-bold">
@@ -398,66 +514,16 @@
                 {% endif %}
               </div>
             </div>
-            <div class="col-6 mt-2">
-              <label for="" class="text-black">Age Policy</label>
-              <div class="row mt-3">
-                <div class="col-4">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <span style="font-size: 14px">Adult</span>
-                    </div>
-                    <div class="col-6">
-                      {{form.adult_age}} {% if form.adult_age.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.adult_age.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <span style="font-size: 14px">Child</span>
-                    </div>
-                    <div class="col-6">
-                      {{form.child_age}} {% if form.child_age.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.child_age.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <span style="font-size: 14px">Infant</span>
-                    </div>
-                    <div class="col-6">
-                      {{form.infant_age}} 
-                      {% if form.infant_age.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.infant_age.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             
+            </div>
           </div>
           
-          <div class="row mt-4">
+
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-3 mt-2">Images & Videos</h6>
+          
             <div class="row ml-1 mr-3 ">
-              <h4 class="text-center font-weight-bold mb-3">Images & Videos</h4>
 
               <div class="col-6 mt-3">
                 <label for="{{ form.image_link.id_for_label }}" class="text-black">Image Link</label>
@@ -483,7 +549,7 @@
               </div>
               
             </div>
-          </div>
+          
 
           <div class="row mt-3">
             <div class="row mt-3 ml-3">
@@ -501,6 +567,7 @@
               </div>
             </div>
           </div>
+        </div>
 
           <div class="row mt-5">
             <div class="col-3"></div>

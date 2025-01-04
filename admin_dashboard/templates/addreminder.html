@@ -50,6 +50,8 @@
                         <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'add_reminder' %}" method="post" id="lang-form">
                             {% csrf_token %}
                             <div class="text-black align-items-center">
+                                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-3">
+                                    <h6 class="text-center font-weight-bold mb-3 mt-2">Name & Description</h6>
                                 <div class="col-md-12">
 
                                     <div class="form-group">
@@ -66,22 +68,24 @@
                                         {{ form.description }}
                                     </div>
                                 </div>
-                                <div class="row pl-3 pr-3 mt-2">
-                                    <div class="col-md-6">
-    
-                                        <div class="form-group">
-                                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Date</label>
+                                </div>
+                                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-4">
+                                    <h6 class="text-center font-weight-bold mb-3 mt-2">Date & Time</h6>
+                                    <div class="row pl-3 pr-3 mt-2">
+                                        <div class="col-md-6">
+        
+                                            <div class="form-group">
+                                                <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Date</label>
 
-                                            {{ form.date }}
+                                                {{ form.date }}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
-    
-                                        <div class="form-group">
-                                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Time</label>
-
-                                            {{ form.time }}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Time</label>
+                                                {{ form.time }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

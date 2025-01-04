@@ -32,16 +32,207 @@
 
 <div class="content">
   <div class="container-fluid">
+    <div class="col-1">
+      <button class="btn" onclick="window.history.back()" style="background-color:#01052b;color:white;">            <i class="material-icons">arrow_back</i>
+      </button>
+      </div>
     <div class="row text-center">
+      
       <h2
-        class="font-weight-bold"
+        class="font-weight-bold mb-2"
         style="font-family: poppins, serif; color: #000"
       >
         View Bookings
       </h2>
     </div>
-    <div class="row mt-2">
-      <div class="mt-5">
+    <div class="row text-center">
+      
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+    </div>
+
+    <div class="card mt-5">
+      <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">filter_alt</i>
+        </div>
+      </div>
+      <div class="card-body ">
+        <form action="" method="get" id="filter-form">
+        <div class="row d-flex justify-content-center gap-5">
+    
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black mb-3">Date from</label>
+
+
+              {{form.date_from}} {% if form.date_from.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.date_from.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black mb-3">Date to</label>
+
+
+              {{form.date_to}} {% if form.date_to.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.date_to.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black mb-2">Category</label>
+
+
+
+              {{form.category}} {% if form.category.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.category.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Package</label>
+
+
+              {{form.package}} {% if form.package.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.package.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Customer/Company</label>
+
+
+              {{form.customer}} {% if form.customer.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.customer.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center gap-5">
+          
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Payment Mode</label>
+
+
+              {{form.payment_mode}} {% if form.payment_mode.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.payment_mode.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black ">Payment Status</label>
+
+
+              {{form.payment_status}} {% if form.payment_status.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.payment_status.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Supplier</label>
+
+
+              {{form.supplier}} {% if form.supplier.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.supplier.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Booked by</label>
+
+
+              {{form.booked_by}} {% if form.booked_by.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.booked_by.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Status</label>
+
+
+              {{form.status}} {% if form.status.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.status.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          
+        </div>
+        <div class="row mt-4 mb-2  d-flex justify-content-center">
+          
+          <div class="col-1">
+            <button type="submit" class="btn w-100"  style="background-color:#023817;color:white;">Filter</button>
+
+          </div>
+          <div class="col-1">
+            <button type="reset" class="btn w-100"  style="background-color:#380202;color:white;">Reset</button>
+
+          </div>
+          
+        </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
         <div
           id="success-message"
           class="alert alert-success text-center font-weight-bold alertmessage"
@@ -73,6 +264,15 @@
                   <table class="table">
                     <thead>
                       <tr>
+                        <th class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value=""> 
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div></th>
+
                         <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >GUEST NAME</th>
@@ -80,14 +280,21 @@
                        
                         <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >CONTACT PERSON</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >SUPPLIER</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP DATE</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP CATEGORY</th>
                         
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP PACKAGE</th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NO : ADULT</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NO : CHILD</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NO : INFANT</th> 
                         <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
 
                         <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED DATE</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>
-
-                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
 
                         <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
                       </tr>
@@ -96,43 +303,57 @@
                       {% for i in data %}
                       
                         <tr>
+                          <td class="text-center" style="font-weight: 500;"><div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value=""> 
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div></td>
                           <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking_id}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking_trip_id}}</td>
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.guest_name}}</td>
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
                           
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.contact_number}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.company}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.payment_mode}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.payment_status}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booked_date}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booked_by}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.company}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.contact_person.name}} ( {{i.booking.contact_person.designation}} )</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.supplier.name}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.trip_date}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.category}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.package.package_title}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_adult}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_child}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_infant}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_mode}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_status}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_date}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_by}}</td>
                           
                           
-                            {% if i.status|lower  == "active" %}
-                            <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{i.status}}</td>
+                            {% if i.booking.status|lower  == "active" %}
+                            <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{i.booking.status}}</td>
                             {% endif %}
-                            {% if i.status|lower  == "inactive" %}
-                            <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{i.status}}</td>
+                            {% if i.booking.status|lower  == "inactive" %}
+                            <td class="text-center text-capitalize" style="font-weight: 800;color:#FFA500;">{{i.booking.status}}</td>
                             {% endif %}
-                            {% if i.status|lower  == "blocked" %}
-                            <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{i.status}}</td>
+                            {% if i.booking.status|lower  == "blocked" %}
+                            <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;">{{i.booking.status}}</td>
                             {% endif %}
 
                           <td class="td-actions text-center">
                             
                             <button type="button" rel="tooltip" class="btn btn-info" >
-                                <i class="material-icons"><a href="{% url "booking_details" i.booking_id %}" style="color: white;">visibility</a></i>
+                                <i class="material-icons"><a href="{% url "booking_details" i.booking_trip_id %}" style="color: white;">visibility</a></i>
                             </button>
                             
-                            {% comment %} <button type="button" rel="tooltip" class="btn btn-success">
-                              <a href="editsupplier/{{i.supplier_id}}/" style="color: white;"><i class="material-icons">edit</i></a>
-                            </button> {% endcomment %}
+                            
 
-                            <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.booking_id}}" onclick="openEditModal('{{i.booking_id}}')"> <i class="material-icons">edit</i> </button>
+                            <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.booking.booking_id}}" onclick="openEditModal('{{i.booking.booking_id}}','{{i.booking_trip_id}}')"> <i class="material-icons">edit</i> </button>
 
 
-                            <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.booking_id}}" onclick="openDeleteModal('{{i.booking_id}}')"> <i class="material-icons">close</i> </button>
+                            <button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{i.booking_trip_id}}" onclick="openDeleteModal('{{i.booking_trip_id}}')"> <i class="material-icons">close</i> </button>
                             
                           </td>
                           <td class="text-center text-capitalize" style="font-weight: 500;"></td>
@@ -141,10 +362,10 @@
 
                       <div
                           class="modal"
-                          id="editModal{{i.booking_id}}"
+                          id="editModal{{i.booking.booking_id}}"
                           tabindex="-1"
                           role="dialog"
-                          aria-labelledby="editModalLabel{{i.booking_id}}"
+                          aria-labelledby="editModalLabel{{i.booking.booking_id}}"
                           aria-hidden="true"
                           
                           
@@ -154,7 +375,7 @@
                               <div class="modal-header">
                                 <h3
                                   class="modal-title font-weight-bold"
-                                  id="editModalLabel{{i.booking_id}}"
+                                  id="editModalLabel{{i.booking.booking_id}}"
                                 >
                                   Edit Booking 
                                 </h3>
@@ -169,7 +390,7 @@
                               </div>
                               <div
                                 class="modal-body"
-                                id="modal-content-{{i.booking_id}}"
+                                id="modal-content-{{i.booking.booking_id}}"
                               >
                                 <!-- Form will be loaded here -->
                               </div>
@@ -179,10 +400,10 @@
                       
                       <div
                       class="modal "
-                      id="deleteModal{{i.booking_id}}"
+                      id="deleteModal{{i.booking_trip_id}}"
                       tabindex="-1"
                       role="dialog"
-                      aria-labelledby="deleteModalLabel{{i.booking_id}}"
+                      aria-labelledby="deleteModalLabel{{i.booking_trip_id}}"
                       aria-hidden="true"
                       
                     >
@@ -191,7 +412,7 @@
                           <div class="modal-header">
                             <h3
                               class="modal-title text-primary font-weight-bold"
-                              id="deleteModalLabel{{i.booking_id}}"
+                              id="deleteModalLabel{{i.booking_trip_id}}"
                             >
                               Delete Booking 
                             </h3>
@@ -206,7 +427,7 @@
                           </div>
                           <div
                             class="modal-body"
-                            id="modal-content-{{i.booking_id}}"
+                            id="modal-content-{{i.booking_trip_id}}"
                           >
                             <h3 class="text-center font-weight-bold">Are you sure?</h3>
                           </div>
@@ -221,8 +442,8 @@
                             <button
                               type="button"
                               class="btn btn-primary font-weight-bold"
-                              id="deleteBtn{{i.booking_id}}"
-                              onclick="deleteItem('{{i.booking_id}}')"
+                              id="deleteBtn{{i.booking_trip_id}}"
+                              onclick="deleteItem('{{i.booking_trip_id}}')"
                             >
                               Delete
                             </button>
@@ -248,14 +469,12 @@
 
   
 
-  function openEditModal(id) {
-    // Show loading indicator
-    $("#modal-content-" + id).html("<p>Loading...</p>");
-  
-    // Perform AJAX request to fetch the form
+  function openEditModal(id,trip_id) {
+    
     $.ajax({
       url: "/edit_booking/" + id + "/",
       type: "GET",
+      data: { trip_id: trip_id },
       success: function (response) {
         // On success, load the form HTML into the modal body
         $("#modal-content-" + id).html(response.form_html);
@@ -264,6 +483,7 @@
         initializeModalScripts();
         catfields();
         packageselect();
+        contact();
       },
       error: function (xhr, status, error) {
         // Handle error and show an error message in the modal
@@ -274,13 +494,14 @@
   }
 
   function catfields() {
-    // Use event delegation to handle dynamically added elements
-    $(document).off('change', '[id^="id_booking_trip_details_set-"][id$="-category"]').on('change', '[id^="id_booking_trip_details_set-"][id$="-category"]', function () {
+    
+    // When the category is changed, show the fields dynamically based on the selected category
+    $(document).off('change', '[id^="id_bookingtripdetails-"][id$="-category"]').on('change', '[id^="id_bookingtripdetails-"][id$="-category"]', function () {
         var $categoryField = $(this);  // The category dropdown that was changed
         var categoryId = $categoryField.val();  // Get the selected category ID
 
         // Get the form this category field belongs to
-        var $form = $categoryField.closest('.formset');
+        var $form = $categoryField.closest('#supp-form');
 
         if (categoryId) {
             // AJAX call to get field visibility based on the selected category
@@ -292,11 +513,14 @@
                         var fields = response.fields;
 
                         // Show all fields in the form by default
-                        $form.find(".dynamic-field").show();
+                        $form.find(".dynamic-field").hide();
+                        $form.find("[data-field-name='category'], [data-field-name='package'],[data-field-name='supplier'],[data-field-name='guest_name'],[data-field-name='email'],[data-field-name='whatsapp_number'],[data-field-name='contact_number']").show();
 
-                        // Hide fields marked as false
+                        // Show or hide fields based on the response data
                         for (var fieldName in fields) {
-                            if (!fields[fieldName]) {
+                            if (fields[fieldName]) {
+                                $form.find("[data-field-name='" + fieldName + "']").show();
+                            } else {
                                 $form.find("[data-field-name='" + fieldName + "']").hide();
                             }
                         }
@@ -309,8 +533,8 @@
                 }
             });
         } else {
-            // If no category is selected, show all fields by default
-            $form.find(".dynamic-field").show();
+            // If no category is selected, hide all fields
+            $form.find(".dynamic-field").hide();
         }
     });
 }
@@ -318,7 +542,7 @@
 
 function packageselect(){
 
-  $(document).on('change', '[id^="id_booking_trip_details_set-"][id$="-category"]', function () {
+  $(document).on('change', '[id^="id_bookingtripdetails-"][id$="-category"]', function () {
     var $categoryField = $(this);
     var categoryId = $categoryField.val();
 
@@ -340,6 +564,36 @@ function packageselect(){
             },
             error: function () {
                 alert('Unable to fetch packages. Please try again later.');
+            }
+        });
+    }
+});
+}
+
+function contact(){
+  
+  $(document).on('change', '[id^="id_company"]', function () {
+    var $companyField = $(this);
+    var companyId = $companyField.val();
+
+    // Dynamically determine the contact person dropdown related to the changed company field
+    var contactPersonFieldId = $companyField.attr('id').replace('_company', '_contact_person');
+    var $contactPersonDropdown = $('#' + contactPersonFieldId);
+
+    $contactPersonDropdown.empty(); // Clear existing options
+
+    if (companyId) {
+        $.ajax({
+            url: "{% url 'get_contact_persons' %}",
+            data: { company_id: companyId },
+            success: function (data) {
+                $contactPersonDropdown.append('<option value="">Select Contact Person</option>');
+                data.forEach(function (contact) {
+                    $contactPersonDropdown.append('<option value="' + contact.id + '">' + contact.name + ' (' + contact.designation + ')</option>');
+                });
+            },
+            error: function () {
+                alert('Unable to fetch contact persons. Please try again later.');
             }
         });
     }
@@ -374,7 +628,7 @@ function packageselect(){
               // Skip the 'id' field (exclude resetting the id field)
               if (input.id.includes('id_')) {
                   // Only reset the value for fields other than the 'id' field
-                  if (input.id !== 'id_booking_trip_details_set-0-id') { // Example for id field
+                  if (input.id !== 'id_booking_trip_details_set-0-booking_trip_id') { // Example for id field
                       input.value = '';
 
                       // For checkboxes or radio buttons, uncheck them
@@ -599,6 +853,38 @@ function packageselect(){
   
   
 
+</script>
+
+
+<script>
+  $(document).ready(function() {
+      // Handle form submission
+      $('#filter-form').on('submit', function(event) {
+          event.preventDefault();  // Prevent normal form submission
+
+          // Serialize the form data to send as GET parameters
+          var formData = $(this).serialize();
+
+          // Send the AJAX request
+          $.ajax({
+              url: "{% url 'filter_bookings' %}",
+              method: "GET",
+              data: formData,
+              success: function(response) {
+                  if (response.status === 'success') {
+                      // Update the bookings container with the new HTML
+                      $('#supplier-allocation-content').html(response.bookings_html);
+                  } else {
+                      alert('Error: ' + response.message);
+                  }
+              },
+              error: function(xhr, errmsg, err) {
+                  alert('An error occurred. Please try again.');
+                  console.error(xhr.status + ': ' + xhr.responseText);
+              }
+          });
+      });
+  });
 </script>
 
 {% endblock content %}

@@ -49,6 +49,7 @@
                     <div class="card-body">
                         <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'add_language' %}" method="post" id="lang-form">
                             {% csrf_token %}
+                            <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-2">
                             <div class="text-black align-items-center">
                                 <div class="col-md-12">
 
@@ -58,6 +59,7 @@
                                         {{ form.language_name }}
                                     </div>
                                 </div>
+                            </div>
                             </div>
                             <div class="row">
                                 <div class="col-4"></div>

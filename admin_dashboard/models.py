@@ -12,6 +12,16 @@ class Status_type(models.Model):
     
     
 
+    
+    
+class Place(models.Model):
+    place_name=models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.place_name
+    
+    
+
 class Language(models.Model):
     # Custom ID starts with 'LAN' followed by an auto-incrementing number
     language_id = models.CharField(max_length=10, primary_key=True, editable=False)
@@ -154,7 +164,8 @@ class Supplier(models.Model):
         super(Supplier, self).save(*args, **kwargs)
         
     def __str__(self):
-        return self.supplier_id  
+        return f"{self.name} ( {self.supplier_id} )"
+
    
     
 class Contact_details(models.Model):
@@ -166,7 +177,7 @@ class Contact_details(models.Model):
     email=models.EmailField(blank=True,null=True)
     
     def __str__(self):
-        return self.supplier.supplier_id
+        return f"{self.name} ( {self.supplier_id} )"
     
     
 
@@ -348,7 +359,7 @@ class Company_contact_details(models.Model):
     email=models.EmailField(blank=True,null=True)
     
     def __str__(self):
-        return self.company.company_id
+        return f"{self.name} ( {self.company_id} )"
     
     
     
@@ -544,10 +555,7 @@ class Booking(models.Model):
     booked_by=models.CharField(max_length=100,default="mujeeb")
     booking_id=models.CharField(max_length=10,primary_key=True,editable=False)
     company=models.ForeignKey(Company,on_delete=models.CASCADE)
-    guest_name=models.CharField(max_length=200)
-    email=models.EmailField()
-    contact_number=models.CharField(max_length=20)
-    whatsapp_number=models.CharField(max_length=20)
+    contact_person=models.ForeignKey(Company_contact_details,on_delete=models.CASCADE)
     payment_ref_no=models.CharField(max_length=50)
     payment_status=models.CharField(choices=payment_status_choices,max_length=20)
     payment_mode=models.ForeignKey(Payment_mode,on_delete=models.CASCADE)
@@ -579,9 +587,15 @@ class Booking(models.Model):
     
 
 class Booking_Trip_details(models.Model):
-    booking=models.ForeignKey(Booking,on_delete=models.CASCADE)
+    guest_name=models.CharField(max_length=200)
+    email=models.EmailField(null=True,blank=True)
+    contact_number=models.CharField(max_length=20)
+    whatsapp_number=models.CharField(max_length=20,null=True,blank=True)
+    booking_trip_id=models.CharField(max_length=10,primary_key=True,editable=False)
+    booking=models.ForeignKey(Booking,on_delete=models.CASCADE,related_name='bookingtripdetails')
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     package=models.ForeignKey(Package,on_delete=models.CASCADE)
+    supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
     trip_date=models.DateField()
     trip_time=models.TimeField()
     no_of_adult=models.PositiveIntegerField()
@@ -600,10 +614,29 @@ class Booking_Trip_details(models.Model):
     no_of_luggage=models.PositiveIntegerField(null=True,blank=True)
     flight_time=models.TimeField(null=True,blank=True)
     remark=models.CharField(max_length=500,null=True,blank=True)
+    is_deleted=models.BooleanField(default=False)
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.booking_trip_id:  # Only generate ID if it's not already set
+            # Get the last language added to calculate the next ID
+            last_booking = Booking_Trip_details.objects.order_by('booking_trip_id').last()
+            if last_booking:
+                # Extract the number part and increment it
+                last_id_number = int(last_booking.booking_trip_id[3:])  # Skip 'LAN' prefix
+                next_id_number = last_id_number + 1
+                # Ensure the ID has 2 digits for padding (e.g., LAN01, LAN02, ...)
+                self.booking_trip_id = f"BKG{next_id_number:02d}"  # 2 digits for padding
+            else:
+                # If no languages exist, start with 'LAN01'
+                self.booking_trip_id = 'BKG01'
 
-    
-    
-    
+        super(Booking_Trip_details, self).save(*args, **kwargs)
+        
+   
     def __str__(self):
-        return self.booking.booking_id 
+        return self.booking_trip_id 
+    
+    
+
 

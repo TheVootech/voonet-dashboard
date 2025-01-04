@@ -61,7 +61,7 @@
     <div class="sidebar" data-color="rose" data-background-color="black" data-image="../assets/img/sidebar-1.jpg">
       
       <div class="logo"><a href="{% url "dashboard" %}" class="simple-text logo-mini">
-          CT
+          
         </a>
         <a href="{% url "dashboard" %}" class="simple-text logo-normal">
           Vootours
@@ -116,7 +116,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addbooking' or request.path == '/viewbooking'  or request.path == '/viewdriverallocation'  or request.path == '/viewjobcard' or request.path == '/viewbookingreport' or request.path == '/viewjobreport' or request.path == '/bookingtrash'%} show {% endif %}" id="booking">
+            <div class="collapse {% if request.path == '/addbooking' or request.path == '/viewbooking'  or request.path == '/viewdriverallocation'  or request.path == '/viewjobcard' or request.path == '/viewbookingreport' or request.path == '/viewjobreport' or request.path == '/bookingtrash' or '/bookingdetailsview/' in request.path%} show {% endif %}" id="booking">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addbooking' %} active {% endif %}" >
                   <a class="nav-link"  href="{% url "add_booking" %}">
@@ -124,7 +124,7 @@
                     <span class="sidebar-normal"> Add New Booking </span>
                   </a>
                 </li>
-                <li class="nav-item {% if request.path == '/viewbooking' %} active {% endif %}" >
+                <li class="nav-item {% if request.path == '/viewbooking' or '/bookingdetailsview/' in request.path %} active {% endif %}" >
                   <a class="nav-link" href="{% url "view_booking" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Bookings </span>
@@ -175,7 +175,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addpackage' or request.path == '/viewpackage' or request.path == '/packagetrash' %}show{% endif %}" id="package">
+            <div class="collapse {% if request.path == '/addpackage' or request.path == '/viewpackage' or request.path == '/packagetrash' or '/packagedetails/' in request.path %}show{% endif %}" id="package">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addpackage' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_package" %}">
@@ -183,7 +183,7 @@
                     <span class="sidebar-normal"> Add New Package </span>
                   </a>
                 </li>
-                <li class="nav-item {% if request.path == '/viewpackage' %}active{% endif %}">
+                <li class="nav-item {% if request.path == '/viewpackage' or '/packagedetails/' in request.path %}active{% endif %}">
                   <a class="nav-link" href="{% url "viewpackage" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Packages </span>
@@ -211,7 +211,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/add_driver' or  request.path == '/viewdriver' or request.path == '/drivertrash' %}show{% endif %}" id="driver">
+            <div class="collapse {% if request.path == '/add_driver' or  request.path == '/viewdriver' or request.path == '/drivertrash'  or '/driverdetailsview/' in request.path %}show{% endif %}" id="driver">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/add_driver' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_driver" %}">
@@ -219,7 +219,7 @@
                     <span class="sidebar-normal"> Add New Driver </span>
                   </a>
                 </li>
-                <li class="nav-item {% if request.path == '/viewdriver' %}active{% endif %}">
+                <li class="nav-item {% if request.path == '/viewdriver' or '/driverdetailsview/' in request.path %}active{% endif %}">
                   <a class="nav-link" href="{% url "viewdriver" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Driver </span>
@@ -245,7 +245,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/add_guide' or request.path == '/viewguide' or request.path == '/guidetrash'%}show{% endif %}" id="guide">
+            <div class="collapse {% if request.path == '/add_guide' or request.path == '/viewguide' or request.path == '/guidetrash' or '/guidedetailsview/' in request.path%}show{% endif %}" id="guide">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/add_guide' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_guide" %}">
@@ -253,7 +253,7 @@
                     <span class="sidebar-normal"> Add New Guide </span>
                   </a>
                 </li>
-                <li class="nav-item {% if request.path == '/viewguide' %}active{% endif %}">
+                <li class="nav-item {% if request.path == '/viewguide' or '/guidedetailsview/' in request.path%}active{% endif %}">
                   <a class="nav-link" href="{% url "viewguide" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Guide </span> 
@@ -274,12 +274,12 @@
 
           <li class="nav-item ">
             <a class="nav-link" data-toggle="collapse" href="#supplier">
-              <i class="material-icons">group</i>
+              <i class="material-icons">local_shipping</i>
               <p> Manage Supplier
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addsupplier' or request.path == '/suppierallocation' or request.path == '/allocatenewsupplier' or request.path == '/viewsupplier' or request.path == '/addsuppliertype' or request.path == '/suppliertrash' %}show{% endif %}" id="supplier">
+            <div class="collapse {% if request.path == '/addsupplier' or request.path == '/suppierallocation' or request.path == '/allocatenewsupplier' or request.path == '/viewsupplier' or request.path == '/addsuppliertype' or request.path == '/suppliertrash' or '/supplierdetailsview/' in request.path %}show{% endif %}" id="supplier">
               <ul class="nav">
                 <li class="nav-item  {% if request.path == '/addsupplier' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_supplier" %}">
@@ -287,7 +287,7 @@
                     <span class="sidebar-normal"> Add New Supplier </span>
                   </a>
                 </li>
-                <li class="nav-item {% if request.path == '/viewsupplier' %}active{% endif %}">
+                <li class="nav-item {% if request.path == '/viewsupplier' or '/supplierdetailsview/' in request.path %}active{% endif %}">
                   <a class="nav-link" href="{% url "supplier" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Supplier </span>
@@ -332,7 +332,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse {% if request.path == '/addcompany' or request.path == '/viewcompany' or request.path == '/addcompanytype' or request.path == '/companytrash' %}show{% endif %}" id="company">
+            <div class="collapse {% if request.path == '/addcompany' or request.path == '/viewcompany' or request.path == '/addcompanytype' or request.path == '/companytrash'  or '/companydetailsview/' in request.path%}show{% endif %}" id="company">
               <ul class="nav">
                 <li class="nav-item {% if request.path == '/addcompany' %}active{% endif %}">
                   <a class="nav-link" href="{% url "add_company" %}">
@@ -340,7 +340,7 @@
                     <span class="sidebar-normal"> Add New Customer </span>
                   </a>
                 </li>
-                <li class="nav-item {% if request.path == '/viewcompany' %}active{% endif %}"> 
+                <li class="nav-item {% if request.path == '/viewcompany' or '/companydetailsview/' in request.path %}active{% endif %}"> 
                   <a class="nav-link" href="{% url "company" %}">
                     <span class="sidebar-mini"> <i class="material-icons">visibility</i> </span>
                     <span class="sidebar-normal"> View/Edit Customer  </span>

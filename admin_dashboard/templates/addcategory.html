@@ -51,6 +51,7 @@
                         <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'add_category' %}" method="post" id="cat-form">
                             {% csrf_token %}
                             <div class="text-black align-items-center">
+                                <div class="package rounded border pt-3 pl-3 pr-3 pb-4 mt-3">
                                 <div class="col-md-12">
 
                                     <div class=" form-group">
@@ -59,47 +60,70 @@
                                         {{ form.category_name }}
                                     </div>
                                 </div>
-                                
-                                <h5 class="text-center font-weight-bold  mt-3">Mark the Required Fields Only</h5>
+                                </div>
+
+
+                             <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                                <h5 class="text-center font-weight-bold  mt-4 mb-5 text-uppercase">Mark the Required Fields Only</h5>
                                 <div class="row pl-3">
+                                    
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.date }} <span class="font-weight-bold">Trip Date</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.date }}  Trip Date                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.time }} <span class="font-weight-bold">Trip Time</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.remark }} <span class="font-weight-bold">Remark</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.time }}  Trip time                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.no_of_adult }} <span class="font-weight-bold"> No : Adult</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.no_of_child }} <span class="font-weight-bold">No : Child</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.remark }} Remark                                       <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.no_of_infant }} <span class="font-weight-bold"> No : Infant</span>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.no_of_adult }}  No : Adult                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.no_of_child }}  No : Child                                      <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
-                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.no_of_infant }}  No : Infant                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                   
@@ -108,43 +132,62 @@
                                 </div>
                                 <div class="row pl-3">
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.rate_of_adult }} <span class="font-weight-bold">Rate of Adult</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.rate_of_child }} <span class="font-weight-bold">Rate of Child</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.rate_of_adult }}  Rate : Adult                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.rate_of_infant }} <span class="font-weight-bold">Rate of Infant</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.pickup_location }} <span class="font-weight-bold">Pickup Location</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.pickup_time }} <span class="font-weight-bold">Pickup Time</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.rate_of_child }}  Rate : Child                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.drop_location }} <span class="font-weight-bold"> Drop off Location</span>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.rate_of_infant }}  Rate : Infant                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
-                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.pickup_location }}  Pickup Location                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.pickup_time }}  Pickup Time                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
+
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.drop_location }}  Drop Location                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                           
@@ -154,43 +197,62 @@
 
                                 <div class="row pl-3">
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.room_no }} <span class="font-weight-bold">Room No :</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.transfer_type }} <span class="font-weight-bold">Transfer Type</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.room_no }}  Room No :                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.vehicle_type }} <span class="font-weight-bold">Vehicle Type</span>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.vehicle_name }} <span class="font-weight-bold">Vehicle Name</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.no_of_luggage }} <span class="font-weight-bold">No : Luggage</span>
-
-                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.transfer_type }}  Transfer Type                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                                     <div class="col-2">
-                                        <div class=" form-group">
-                                            {{ form.flight_time }} <span class="font-weight-bold">Flight Time</span>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.vehicle_type }}  Vehicle Type                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
-                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.vehicle_name }}  Vehicle Name                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.no_of_luggage }}  No : Luggage                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
+
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-black">
+                                                {{ form.flight_time }}  Flight Time                                        <span class="form-check-sign">
+                                                <span class="check"></span>
+                                              </span>
+                                            </label>
+                                          </div>
 
                                     </div>
                           
@@ -199,6 +261,7 @@
                                 </div>
                                     
                                 </div>
+                            </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-4"></div>
@@ -214,7 +277,7 @@
             </div>
             <div class="col-2"></div>
 
-            <div class="container mt-5">
+            <div class="container mt-4">
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-lg-8 col-md-12 col-md-12">

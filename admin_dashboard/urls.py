@@ -30,10 +30,13 @@ urlpatterns = [
     path('recoverpackage/<str:pk>/',recover_package_view,name='recoverpackage'),
     path('get-contact-persons/', get_contact_persons, name='get_contact_persons'),
     path('get-package/', get_package, name='get_package'),
-    
+    path('get_package_rates/', get_package_rates, name='get_package_rates'),    
     path('addstatus',addstatus_view,name="addstatus"),
-        
-
+    
+    path('locations/', get_locations, name='get_locations'),        
+    path('locations/save/', save_location, name='save_location'),
+    path('filter-bookings/', filter_bookings, name='filter_bookings'),
+    path('filter-supplier/', filter_Supplier, name='filter_supplier'),
 
     
     path('addcategory',addcategory_view,name="add_category"),

@@ -88,18 +88,25 @@ class Package_form(forms.ModelForm):
                 'class': 'form-select'
             }),
             'sunday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'monday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'tuesday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'wednesday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'thursday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'friday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'saturday': forms.CheckboxInput(attrs={
+                'class':'form-check-input',
             }),
             'open_hours': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -112,23 +119,29 @@ class Package_form(forms.ModelForm):
             }),
             'adult_rate': forms.TextInput(attrs={
                 'class': 'form-control',
+                'placeholder':'Enter Adult Price ',
+
 
             }),
             'child_rate': forms.TextInput(attrs={
                 'class': 'form-control',
-
+                'placeholder':'Enter Child Price ',
             }),
             'infant_rate': forms.TextInput(attrs={
                 'class': 'form-control',
+                'placeholder':'Enter Infant Price ',
             }),
             'adult_age': forms.TextInput(attrs={
                 'class': 'form-control',
+                'placeholder':'Enter Adult Age ',
             }),
             'child_age': forms.TextInput(attrs={
                 'class': 'form-control',
+                'placeholder':'Enter Child Price ',
             }),
             'infant_age': forms.TextInput(attrs={
                 'class': 'form-control',
+                'placeholder':'Enter Infant Price ',
             }),
             'status': forms.Select(attrs={
                 'class': 'form-select',
@@ -197,40 +210,58 @@ class Category_form(forms.ModelForm):
                     'placeholder':'Enter Category Name'
                 }),
                 'no_of_adult': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'no_of_child': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'no_of_infant': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'rate_of_adult': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'rate_of_child': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'rate_of_infant': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'pickup_location': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'drop_location': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'room_no': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'remark': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'date': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'time': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'pickup_time': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'transfer_type': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'vehicle_type': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'vehicle_name': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'no_of_luggage': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
                 'flight_time': forms.CheckboxInput(attrs={
+                    'class':'form-check-input',
                 }),
         }
     
@@ -1129,23 +1160,13 @@ class Booking_form(forms.ModelForm):
                     'class': 'form-select',
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
 
-                }),              
-                'guest_name': forms.TextInput(attrs={
-                    'class': 'form-control',
-                    'placeholder':'Enter Guest Full Name',
-                }),
-                'email': forms.EmailInput(attrs={
-                    'class': 'form-control',
-                    'placeholder':'Enter Guest Email ID',
-                }),
-                'contact_number': forms.NumberInput(attrs={
-                    'class': 'form-control',
-                    'placeholder':'Enter Contact No :',
-                }),
-                'whatsapp_number': forms.NumberInput(attrs={
-                    'class': 'form-control',
-                    'placeholder':'Enter Contact No :',
-                }),
+                }), 
+                'contact_person':  forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+                }),                
+                
                 'payment_ref_no': forms.TextInput(attrs={
                     'class': 'form-control',
                     'placeholder':'Enter Payment Reference No :',
@@ -1171,6 +1192,28 @@ class Booking_form(forms.ModelForm):
         
         }
         
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Initialize the package queryset as empty by default
+        self.fields['contact_person'].queryset = Company_contact_details.objects.none()
+
+        if 'company' in self.data:
+            try:
+                # Ensure category_id is valid and not empty
+                company_id = str(self.data.get('company'))
+                self.fields['contact_person'].queryset = Company_contact_details.objects.filter(company_id=company_id)
+            except (ValueError, TypeError):
+                self.fields['contact_person'].queryset = Company_contact_details.objects.none()
+        elif self.instance.pk:  # When editing an existing booking
+            # Ensure that the instance has a valid category
+            if self.instance.company:
+                self.fields['contact_person'].queryset = Company_contact_details.objects.filter(company=self.instance.company)
+            else:
+                self.fields['contact_person'].queryset = Company_contact_details.objects.none()
+            
+    
+        
         
         
         
@@ -1179,9 +1222,32 @@ class Booking_form(forms.ModelForm):
 class booking_trip_form(forms.ModelForm):
     class Meta:
         model=Booking_Trip_details
-        exclude=['booking']
+        exclude=['booking','booking_trip_id','is_deleted']
         
         widgets={
+                'guest_name': forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Guest Fullname',
+                    'required':'required'
+                }),
+                'email': forms.EmailInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Guest Email ID'
+                }),
+                'contact_number': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Conatct No :',
+                    'required':'required'
+                }),
+                'whatsapp_number': forms.NumberInput(attrs={
+                    'class': 'form-control',
+                    'placeholder':'Enter Whatsapp No :'
+                }),
+                'supplier': forms.Select(attrs={
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                    'required':'required'
+                }),
                 'category': forms.Select(attrs={
                     'class': 'form-select',
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
@@ -1301,8 +1367,7 @@ def __init__(self, *args, **kwargs):
         else:
             self.fields['package'].queryset = Package.objects.none()
 
-    # Optional: You can log or print to verify the queryset
-    # print(self.fields['package'].queryset)
+  
     
     
 
@@ -1312,10 +1377,130 @@ def __init__(self, *args, **kwargs):
 
 
 booking_trip_formset=inlineformset_factory(
-    Booking,Booking_Trip_details,form=booking_trip_form,extra=1,can_delete=True
+    Booking,Booking_Trip_details,form=booking_trip_form,extra=1,can_delete=False
 )
 
 
 edit_booking_trip_formset=inlineformset_factory(
-    Booking,Booking_Trip_details,form=booking_trip_form,extra=0,can_delete=True
+    Booking,Booking_Trip_details,form=booking_trip_form,extra=0,can_delete=False
 )
+
+
+class Booking_filter_form(forms.Form):
+    date_from=forms.DateField(
+         required=False,
+         widget=forms.DateInput(attrs={
+            'type': 'date',  # This makes it a date picker
+            'class': 'form-control',  # Add Bootstrap classes for styling
+            
+        })
+    )
+    date_to=forms.DateField(
+         required=False,
+         widget=forms.DateInput(attrs={
+            'type': 'date',  # This makes it a date picker
+            'class': 'form-control',  # Add Bootstrap classes for styling
+            
+        })
+    )
+    category=forms.ModelChoiceField(
+          queryset=Category.objects.all(),
+          required=False,
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+        })                    
+    )
+    package=forms.ModelChoiceField(
+          queryset=Package.objects.filter(is_deleted=False),
+          required=False,
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    customer=forms.ModelChoiceField(
+          queryset=Company.objects.filter(is_deleted=False),
+          required=False,                   
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    payment_mode=forms.ModelChoiceField(
+         queryset=Payment_mode.objects.all(),
+          required=False,                       
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    payment_status=forms.ChoiceField(
+          choices=[('Paid', 'Paid'), ('Unpaid', 'Unpaid')],
+          required=False, 
+          initial=None,                        
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    status=forms.ModelChoiceField(
+        queryset=Status_type.objects.all(),
+          required=False,                 
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+        })                    
+    )
+    booked_by=forms.CharField(max_length=100,
+          required=False,                    
+          widget=forms.Select(attrs={
+            'class': 'form-control',  # Add Bootstrap classes for styling
+            'required':False
+        })                    
+    )
+    supplier=forms.ModelChoiceField(
+          queryset=Supplier.objects.filter(is_deleted=False),                 
+          required=False,                          
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+    
+    
+class Supplier_filter_form(forms.Form):
+    
+    supplier_type=forms.ModelChoiceField(
+          queryset=Supplier_type.objects.all(),
+          required=False,
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+        })                    
+    )
+    category=forms.ModelChoiceField(
+          queryset=Category.objects.all(),
+          required=False,
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    status=forms.ModelChoiceField(
+          queryset=Status_type.objects.all(),
+          required=False,                   
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+   
+    
+    
+    

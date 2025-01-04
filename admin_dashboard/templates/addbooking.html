@@ -19,6 +19,11 @@
 
 <div class="content">
   <div class="container-fluid">
+    <div class="col-1">
+      <button class="btn" onclick="window.history.back()" style="background-color:#01052b;color:white;">            <i class="material-icons">arrow_back</i>
+      </button>
+      </div>
+    
     <div class="row text-center">
       
       <h2
@@ -53,66 +58,13 @@
           <div class="card-body">
 
           
-        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supform">
+        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal text-black pt-2 pl-3 pr-3" id="supform">
           {% csrf_token %}
 
-          <div class="col-12 mt-2">
-            <div class="form-group">
-              <label for="" class="text-black">Guest name</label>
-
-              {{form.guest_name}} {% if form.guest_name.errors %}
-              <ul class="errorlist text-primary text-bold">
-                {% for error in form.guest_name.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-            </div>
-          </div>
-
-          <div class="col-12 mt-2">
-            <div class="form-group">
-              <label for="" class="text-black">Email</label>
-
-              {{form.email}} {% if form.email.errors %}
-              <ul class="errorlist text-primary text-bold">
-                {% for error in form.email.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-            </div>
-          </div>
-
-
-          <div class="col-12 mt-2">
-            <div class="form-group">
-              <label for="" class="text-black">Contact Number</label>
-
-              {{form.contact_number}} {% if form.contact_number.errors %}
-              <ul class="errorlist text-primary text-bold">
-                {% for error in form.contact_number.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-            </div>
-          </div>
-          <div class="col-12 mt-2">
-            <div class="form-group">
-              <label for="" class="text-black">Whatsapp Number</label>
-
-              {{form.whatsapp_number}} {% if form.whatsapp_number.errors %}
-              <ul class="errorlist text-primary text-bold">
-                {% for error in form.whatsapp_number.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-            </div>
-          </div>
-
+          
+          <div class="company rounded border pt-3 pl-3 pr-3 pb-5">
             <div class="col-12">
+              <h5 class="text-center font-weight-bold mb-3">Company Details</h5>
 
               <div class="form-group">
                 <label for="id_company" class="bmd-label-floating text-black">Company/Customer</label>
@@ -127,60 +79,114 @@
                 {% endif %}
               </div>
             </div>
-            <div class="col-12">
 
-             
+          <div class="col-12 mt-3">
+            <div class="form-group">
+              <label for="id_company" class="bmd-label-floating text-black">Contact Person</label>
 
-            <div class="row mt-5 mb-3">
-              {% comment %} {{ formset.management_form }} {% endcomment %}
-              <div class="formset-container">
-                {{ formset.management_form }}
-                {% for form in formset %}
-                <div class="formset mt-2 pl-3 pr-3">
-                  <h4 class="text-center font-weight-bold mb-5">Trip Details</h4>
 
-                    <div class="row">
-                        {% for field in form %}
-                            {% if field.name == "remark" %}
-                                <div class="col-12 dynamic-field" data-field-name="remark">
-                                    <div class="form-group">
-                                        <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
-                                        {{ field }}
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="col-md-4 mb-3 dynamic-field" data-field-name="{{ field.name }}">
-                                    <div class="form-group">
-                                        {% if field.name != 'id' and field.name != 'booking' %}
-                                            <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
-                                        {% endif %}
-                                        {{ field }}
-                                    </div>
-                                </div>
-                                {% if forloop.counter|divisibleby:3 %}
-                                    </div><div class="row">
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
+              {{form.contact_person}} {% if form.contact_person.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.contact_person.errors %}
+                <li>{{ error }}</li>
                 {% endfor %}
+              </ul>
+              {% endif %}
             </div>
-            
+          </div>
+        </div>
+
              
-              <!-- Add Button to dynamically add new contact forms -->
-              <div class="row mb-4">
-                  <div class="col-3"></div>
-                  <div class="col-6">
-                      <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Trip</button>
+
+        <div class="row mt-5 mb-1">
+          <div class="formset-container">
+              <!-- Management form for the formset -->
+              {{ formset.management_form }}
+              
+              <!-- Iterate over each form in the formset -->
+              {% for form in formset %}
+              <div class="formset mt-2 pl-3 pr-2">
+                
+                  <h3 class="text-center font-weight-bold mb-3">Booking Details</h3>
+                  <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"><i class="material-icons delete-form" style="cursor: pointer; color: #4b0000; font-size: 36px; letter-spacing: 1px;">close</i>
+                    </div>
+                  </div>
+      
+                  <div class="row pl-3">
+                      <!-- Guest details section -->
+                      <div class="row guest-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+                          <h5 class="text-center font-weight-bold mb-5 mt-2">Guest Details</h5>
+      
+                          {% for field in form %}
+                              {% if field.name == 'guest_name' or field.name == 'email' or field.name == 'contact_number' or field.name == 'whatsapp_number' %}
+                              <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
+                                  <div class="form-group">
+                                      <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                      {{ field }}
+                                  </div>
+                              </div>
+                              {% endif %}
+                          {% endfor %}
+                      </div>
+      
+                      <!-- Trip details section -->
+                      <div class="row trip-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+                          <h5 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h5>
+      
+                          {% for field in form %}
+                              {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' %}
+                              <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
+                                  <div class="form-group">
+                                      {% if field.name != 'booking_trip_id' and field.name != 'booking' and field.name != 'is_deleted' %}
+                                      <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                                      {% endif %}
+                                      {{ field }}
+                                  </div>
+                              </div>
+                              {% endif %}
+                          {% endfor %}
+      
+                          <!-- Add remark field at the bottom of the trip details section with col-12 (full width) -->
+                          <div class="col-12 mb-3 dynamic-field" data-field-name="remark">
+                              <div class="form-group">
+                                  <label for="{{ form.remark.id_for_label }}" class="text-black">{{ form.remark.label }}</label>
+                                  {{ form.remark }}
+                              </div>
+                          </div>
+                      </div>
+      
+                      {% if forloop.counter|divisibleby:3 %}
+                      <div class="row">
+                      {% endif %}
+                      
                   </div>
               </div>
-  
-                      
-                      <hr>
-                    
-  
-            </div>
+              {% endfor %}
+          </div>
+      
+          <!-- Add Button to dynamically add new contact forms -->
+          <div class="row mb-4">
+              <div class="col-3"></div>
+              <div class="col-6">
+                  <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Trip</button>
+              </div>
+          </div>
+      </div>
+      
+      
+      
             
           
 
@@ -188,7 +194,9 @@
 
 
           
-
+      <div class="row pl-3 pr-3">
+        <div class="payment rounded border pt-3 pl-2 pr-2 pb-5 mb-5">
+          <h5 class="text-center font-weight-bold mb-3">Payment Details</h5>
 
           <div class="col-12 mt-2">
             <label for="" class="text-black">Payment ref No :</label>
@@ -229,9 +237,11 @@
               {% endif %}
             </div>
           </div>
+        </div>
+      </div>
 
-
-          <div class="col-12 mt-2">
+        <div class="pl-2 pr-2">
+          <div class="col-12 mt-2 ">
             <label for="" class="text-black">Status</label>
             <div class="form-group">
               {{form.status}} {% if form.status.errors %}
@@ -243,6 +253,7 @@
               {% endif %}
             </div>
           </div>
+        </div>
 
           
 
@@ -270,40 +281,112 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+  
     $(document).ready(function () {
-      // Use event delegation to handle dynamically added elements
-      $(document).on('change', '[id^="id_booking_trip_details_set-"][id$="-category"]', function () {
-          var $categoryField = $(this);
-          var categoryId = $categoryField.val();
+        // Event listener for category change (this will populate the package dropdown)
+        $(document).on('change', '[id^="id_bookingtripdetails-"][id$="-category"]', function () {
+            var $categoryField = $(this);
+            var categoryId = $categoryField.val();
   
-          // Dynamically determine the package dropdown related to the changed category field
-          var packageFieldId = $categoryField.attr('id').replace('-category', '-package');
-          var $packageDropdown = $('#' + packageFieldId);
+            // Dynamically determine the package dropdown related to the changed category field
+            var packageFieldId = $categoryField.attr('id').replace('-category', '-package');
+            var $packageDropdown = $('#' + packageFieldId);
+            
   
-          $packageDropdown.empty(); // Clear existing options
+            $packageDropdown.empty(); // Clear existing options
   
-          if (categoryId) {
-              $.ajax({
-                  url: "{% url 'get_package' %}",
-                  data: { category_id: categoryId },
-                  success: function (data) {
-                      $packageDropdown.append('<option value="">Select Package</option>');
-                      data.forEach(function (package) {
-                          $packageDropdown.append('<option value="' + package.package_id + '">' + package.package_title + '</option>');
-                      });
-                  },
-                  error: function () {
-                      alert('Unable to fetch packages. Please try again later.');
-                  }
-              });
-          }
-      });
-  });
+            if (categoryId) {
+                $.ajax({
+                    url: "{% url 'get_package' %}",  // Assuming you have a Django view for this
+                    data: { category_id: categoryId },
+                    success: function (data) {
+                        $packageDropdown.append('<option value="">Select Package</option>');
+                        data.forEach(function (pkg) {
+                            $packageDropdown.append('<option value="' + pkg.package_id + '">' + pkg.package_title + '</option>');
+                        });
+                    },
+                    error: function () {
+                        alert('Unable to fetch packages. Please try again later.');
+                    }
+                });
+            }
+        });
+
+        // Event listener for package change (this will populate the rates fields)
+        $(document).on('change', '[id^="id_bookingtripdetails-"][id$="-package"]', function () {
+            var $packageField = $(this);
+            var packageId = $packageField.val();
+
+            // Dynamically determine the related rate fields (adult, child, infant)
+            var formIndex = $packageField.attr('id').split('-')[1]; // Assuming form index is part of the ID
+            var $adultRateField = $('#id_bookingtripdetails-' + formIndex + '-rate_of_adult');
+            var $childRateField = $('#id_bookingtripdetails-' + formIndex + '-rate_of_child');
+            var $infantRateField = $('#id_bookingtripdetails-' + formIndex + '-rate_of_infant');
+
+            if (packageId) {
+                $.ajax({
+                    url: "{% url 'get_package_rates' %}",
+                    data: { package_id: packageId },
+                    success: function (data) {
+                        if (data.error) {
+                            alert('Package not found.');
+                        } else {
+                            // Set the rates in the corresponding fields
+                            $adultRateField.val(data.adult_rate);
+                            $childRateField.val(data.child_rate);
+                            $infantRateField.val(data.infant_rate);
+                        }
+                    },
+                    error: function () {
+                        alert('Unable to fetch package rates. Please try again later.');
+                    }
+                });
+            } else {
+                // Clear the rate fields if no package is selected
+                $adultRateField.val('');
+                $childRateField.val('');
+                $infantRateField.val('');
+            }
+        });
+    });
 
 
 
-  $(document).on('change', '[id^="id_booking_trip_details_set-"][id$="-category"]', function () {
+
+  $(document).on('change', '[id^="id_company"]', function () {
+    var $companyField = $(this);
+    var companyId = $companyField.val();
+
+    // Dynamically determine the contact person dropdown related to the changed company field
+    var contactPersonFieldId = $companyField.attr('id').replace('_company', '_contact_person');
+    var $contactPersonDropdown = $('#' + contactPersonFieldId);
+
+    $contactPersonDropdown.empty(); // Clear existing options
+
+    if (companyId) {
+        $.ajax({
+            url: "{% url 'get_contact_persons' %}",
+            data: { company_id: companyId },
+            success: function (data) {
+                $contactPersonDropdown.append('<option value="">Select Contact Person</option>');
+                data.forEach(function (contact) {
+                    $contactPersonDropdown.append('<option value="' + contact.id + '">' + contact.name + ' (' + contact.designation + ')</option>');
+                });
+            },
+            error: function () {
+                alert('Unable to fetch contact persons. Please try again later.');
+            }
+        });
+    }
+});
+
+
+
+
+
+  $(document).on('change', '[id^="id_bookingtripdetails-"][id$="-category"]', function () {
     var $categoryField = $(this); // The category dropdown that was changed
     var categoryId = $categoryField.val(); // Get the selected category ID
 
@@ -348,14 +431,18 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-form').addEventListener('click', function() {
-        // Get the next form index (based on the current number of forms)
-        var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
-        console.log(formIdx);
+  
 
-        // Clone the first form in the formset
-        var newForm = document.querySelector('.formset').cloneNode(true);
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to handle form cloning
+    document.querySelector('#add-form').addEventListener('click', function() {
+        // Calculate the index based on the current number of formsets
+        var formIdx = document.querySelectorAll('.formset').length;
+        console.log(formIdx); // Debugging the current form index
+
+        // Clone the last form in the formset (instead of the first)
+        var lastForm = document.querySelector('.formset:last-of-type');
+        var newForm = lastForm.cloneNode(true);
 
         // Replace __prefix__ in name and id with the new form index
         const regex = /__prefix__/g;
@@ -364,146 +451,11 @@
         // Set the new ID for the form
         newForm.setAttribute('id', `formset${formIdx}`);
 
-        // Reset all input values in the new form (clear values)
-        var category = newForm.querySelector('#id_booking_trip_details_set-0-category');
-        
-        // Update the ID and name attributes
-        category.setAttribute('id', `id_booking_trip_details_set-${formIdx}-category`);
-        category.setAttribute('name', `booking_trip_details_set-${formIdx}-category`);
+        // Update all input fields in the new form with the correct index
+        updateFieldIdsAndNames(newForm, formIdx);
 
-        var package = newForm.querySelector('#id_booking_trip_details_set-0-package');
-        
-        // Update the ID and name attributes
-        package.setAttribute('id', `id_booking_trip_details_set-${formIdx}-package`);
-        package.setAttribute('name', `booking_trip_details_set-${formIdx}-package`);
-
-
-        var trip_date = newForm.querySelector('#id_booking_trip_details_set-0-trip_date');
-        
-        // Update the ID and name attributes
-        trip_date.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_date`);
-        trip_date.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_date`);
-
-
-        var trip_time = newForm.querySelector('#id_booking_trip_details_set-0-trip_time');
-        
-        // Update the ID and name attributes
-        trip_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_time`);
-        trip_time.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_time`);
-
-
-        var no_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-no_of_adult');
-        
-        // Update the ID and name attributes
-        no_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_adult`);
-        no_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_adult`);
-
-
-        var no_of_child = newForm.querySelector('#id_booking_trip_details_set-0-no_of_child');
-        
-        // Update the ID and name attributes
-        no_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_child`);
-        no_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_child`);
-
-        var no_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-no_of_infant');
-        
-        // Update the ID and name attributes
-        no_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_infant`);
-        no_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_infant`);
-
-
-        var rate_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_adult');
-        
-        // Update the ID and name attributes
-        rate_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_adult`);
-        rate_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_adult`);
-
-
-        var rate_of_child = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_child');
-        
-        // Update the ID and name attributes
-        rate_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_child`);
-        rate_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_child`);
-
-
-        var rate_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_infant');
-        
-        // Update the ID and name attributes
-        rate_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_infant`);
-        rate_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_infant`);
-
-
-        var transfer_type = newForm.querySelector('#id_booking_trip_details_set-0-transfer_type');
-        
-        // Update the ID and name attributes
-        transfer_type.setAttribute('id', `id_booking_trip_details_set-${formIdx}-transfer_type`);
-        transfer_type.setAttribute('name', `booking_trip_details_set-${formIdx}-transfer_type`);
-
-
-        
-        var vehicle_type = newForm.querySelector('#id_booking_trip_details_set-0-vehicle_type');
-        
-        // Update the ID and name attributes
-        vehicle_type.setAttribute('id', `id_booking_trip_details_set-${formIdx}-vehicle_type`);
-        vehicle_type.setAttribute('name', `booking_trip_details_set-${formIdx}-vehicle_type`);
-
-
-        var vehicle_name = newForm.querySelector('#id_booking_trip_details_set-0-vehicle_name');
-        
-        // Update the ID and name attributes
-        vehicle_name.setAttribute('id', `id_booking_trip_details_set-${formIdx}-vehicle_name`);
-        vehicle_name.setAttribute('name', `booking_trip_details_set-${formIdx}-vehicle_name`);
-
-
-        var no_of_luggage = newForm.querySelector('#id_booking_trip_details_set-0-no_of_luggage');
-        
-        // Update the ID and name attributes
-        no_of_luggage.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_luggage`);
-        no_of_luggage.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_luggage`);
-
-
-        var flight_time = newForm.querySelector('#id_booking_trip_details_set-0-flight_time');
-        
-        // Update the ID and name attributes
-        flight_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-flight_time`);
-        flight_time.setAttribute('name', `booking_trip_details_set-${formIdx}-flight_time`);
-
-
-        var remark = newForm.querySelector('#id_booking_trip_details_set-0-remark');
-        
-        // Update the ID and name attributes
-        remark.setAttribute('id', `id_booking_trip_details_set-${formIdx}-remark`);
-        remark.setAttribute('name', `booking_trip_details_set-${formIdx}-remark`);
-
-
-
-        var room_no = newForm.querySelector('#id_booking_trip_details_set-0-room_no');
-        
-        // Update the ID and name attributes
-        room_no.setAttribute('id', `id_booking_trip_details_set-${formIdx}-room_no`);
-        room_no.setAttribute('name', `booking_trip_details_set-${formIdx}-room_no`);
-
-        
-
-        var pickup_location = newForm.querySelector('#id_booking_trip_details_set-0-pickup_location');
-        
-        // Update the ID and name attributes
-        pickup_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_location`);
-        pickup_location.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_location`);
-
-
-        var drop_location = newForm.querySelector('#id_booking_trip_details_set-0-drop_location');
-        
-        // Update the ID and name attributes
-        drop_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-drop_location`);
-        drop_location.setAttribute('name', `booking_trip_details_set-${formIdx}-drop_location`);
-
-
-        var pickup_time = newForm.querySelector('#id_booking_trip_details_set-0-pickup_time');
-        
-        // Update the ID and name attributes
-        pickup_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_time`);
-        pickup_time.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_time`);
+        // Reset input values for the new form
+        resetFormValues(newForm);
 
         // Append the new form to the container (formset-container is assumed to be the container for forms)
         document.querySelector('.formset-container').appendChild(newForm);
@@ -512,23 +464,54 @@
         updateManagementForm();
     });
 
-    // Handle form deletion
+    // Function to handle form deletion
     document.addEventListener('click', function(event) {
         if (event.target && event.target.matches('.delete-form')) {
             event.preventDefault();
-            var formToDelete = event.target.closest('.formset');
-            formToDelete.remove();
-            updateManagementForm();
+
+            // Find the formset that the delete button belongs to
+            var formToDelete = event.target.closest('.formset'); // Finds the closest parent with class .formset
+
+            if (formToDelete) {
+                formToDelete.remove(); // Remove the respective formset
+
+                // Update management form (if necessary)
+                updateManagementForm();
+            }
         }
     });
 
     // Function to update the TOTAL_FORMS field in the management form
     function updateManagementForm() {
         var forms = document.querySelectorAll('.formset');
-        var managementForm = document.getElementById('id_booking_trip_details_set-TOTAL_FORMS');
+        var managementForm = document.getElementById('id_bookingtripdetails-TOTAL_FORMS');
         managementForm.value = forms.length;
     }
-});  
+
+    // Function to update the ID and name attributes for fields in the cloned form
+    function updateFieldIdsAndNames(newForm, formIdx) {
+        var fields = ['guest_name', 'email', 'contact_number', 'whatsapp_number', 'supplier', 'category', 'package', 'trip_date', 'trip_time', 
+                      'no_of_adult', 'no_of_child', 'no_of_infant', 'rate_of_adult', 'rate_of_child', 'rate_of_infant', 'transfer_type', 
+                      'vehicle_type', 'vehicle_name', 'no_of_luggage', 'flight_time', 'remark', 'room_no', 'pickup_location', 'drop_location', 'pickup_time'];
+
+        fields.forEach(function(field) {
+            var fieldElement = newForm.querySelector(`#id_bookingtripdetails-0-${field}`);
+            if (fieldElement) {
+                fieldElement.setAttribute('id', `id_bookingtripdetails-${formIdx}-${field}`);
+                fieldElement.setAttribute('name', `bookingtripdetails-${formIdx}-${field}`);
+            }
+        });
+    }
+
+    // Function to reset input values for the new form
+    function resetFormValues(newForm) {
+        var inputs = newForm.querySelectorAll('input, select, textarea');
+        inputs.forEach(function(input) {
+            input.value = ''; // Clear the value of each field
+        });
+    }
+});
+
 
 let supform=document.getElementById('supform');
 supform.addEventListener('submit',function(event){
@@ -590,6 +573,7 @@ else {
    // Hide the message after 5 seconds 
    setTimeout(function() { errorMessage.style.display = 'none'; }, 5000); 
 }
+
 
 </script> 
 
