@@ -55,6 +55,8 @@
           
         <form action="{% url 'add_driver' %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supform">
           {% csrf_token %}
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Driver Details</h6>
           <div class="row mt-4">
             <div class="col-4">
 
@@ -145,11 +147,7 @@
                   {% endif %}
                 </div>
               </div>
-
-             
-
             
-
           </div>
 
           <div class="row mt-4">
@@ -174,12 +172,13 @@
               
 
           </div>
+        </div>
 
-          <hr>
-
+          
+        <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+          <h6 class="text-center font-weight-bold mb-4 mt-2">Vehicle Details</h6>
           <div class="row mt-4">
 
-            <h4 class="text-center font-weight-bold">Vehicle Details</h4>
 
 
             <div class="col-4">
@@ -224,10 +223,10 @@
             </div>
            
           </div>
-          <hr>
+        </div>
+        <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+          <h6 class="text-center font-weight-bold mb-4 mt-2">Vehicle Registration</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Vehicle Registration</h4>
-            <div class="row">
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Registration Number</label>
@@ -267,10 +266,9 @@
               </div>
             </div> 
           </div>
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Driving License</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Driving License</h4>
-            <div class="row">
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Driving License Number</label>
@@ -312,10 +310,9 @@
               </div>
             </div> 
           </div>
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Passport Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Passport</h4>
-            <div class="row">
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Passport Number</label>
@@ -357,10 +354,9 @@
               </div>
             </div> 
           </div>
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Emirates ID Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Emirates ID</h4>
-            <div class="row">
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Emirates ID Number</label>
@@ -402,10 +398,10 @@
               </div>
             </div> 
           </div>
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Visa Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Visa</h4>
-            <div class="row">
+            
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Visa Number</label>
@@ -446,10 +442,11 @@
             </div>
            
           </div>
-          <hr>
-          <div class="row mt-5">
-            <div class="row">
+         
+          <div class="row mt-1">
               <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Insurance</h6>
                 <label for="" class="text-black mb-3">Upload Insurance</label>
                 {{form.insurance}}
               <div class="form-group">
@@ -462,7 +459,10 @@
                 {% endif %}
               </div>
               </div>
+            </div>
               <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Photo</h6>
                 <label for="" class="text-black mb-3">Upload Photo</label>
                 {{form.photos}}
               <div class="form-group">
@@ -475,9 +475,12 @@
                 {% endif %}
               </div>
               </div>
+            </div>
               <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Driver Status</h6>
               <div class="form-group">
-                <label for="" class="text-black">Status</label>
+                <label for="" class="text-black mb-4">Status</label>
 
                 {{form.status}} {% if form.status.errors %}
                 <ul class="errorlist text-primary text-bold">
@@ -489,8 +492,9 @@
               </div>
               </div>
             </div>
+            </div>
            
-          </div>
+         
 
 
 

@@ -40,8 +40,163 @@
         View Package
       </h2>
     </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="card mt-5">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">filter_alt</i>
+            </div>
+          </div>
+          <div class="card-body ">
+            <form action="" method="get" id="filter-form">
+            <div class="row d-flex justify-content-center pl-5 pr-5">
+
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="" class="bmd-label-floating text-black mb-1">Category</label>
+    
+    
+                  {{form.category}} {% if form.category.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.category.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-3">
+    
+                <div class="form-group">
+                  <label for="" class="bmd-label-floating text-black mb-2">Transportation</label>
+    
+    
+    
+                  {{form.transportation}} {% if form.transportation.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.transportation.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+        
+              <div class="col-3">
+                <div class="row">
+                  <label class="form-check-label text-black mb-4">Days of Operation</label>
+  
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.sunday }}  Sunday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.monday }}Monday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.tuesday }}Tuesday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.wednesday }}Wednesday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.thursday }}Thursday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.friday }}Friday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-check">
+                      <label class="form-check-label text-black">
+                          {{ form.saturday }}Saturday<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                 
+                </div>
+              
+              <div class="col-3">
+    
+                <div class="form-group">
+                  <label for="" class="bmd-label-floating text-black mb-2">Status</label>
+    
+    
+    
+                  {{form.status}} {% if form.status.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.status.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+             
+              
+            </div>
+            
+            <div class="row mt-4 mb-2  d-flex justify-content-center">
+              
+              <div class="col-1">
+                <button type="submit" class="btn w-100"  style="background-color:#023817;color:white;">Filter</button>
+    
+              </div>
+              <div class="col-1">
+                <button type="reset" class="btn w-100"  style="background-color:#380202;color:white;">Reset</button>
+    
+              </div>
+              
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
     <div class="row mt-2">
-      <div class="mt-5">
+      <div class="">
         <div
           id="success-message"
           class="alert alert-success text-center font-weight-bold alertmessage"
@@ -322,6 +477,38 @@
   
   
 
+</script>
+
+
+<script>
+  $(document).ready(function() {
+      // Handle form submission
+      $('#filter-form').on('submit', function(event) {
+          event.preventDefault();  // Prevent normal form submission
+
+          // Serialize the form data to send as GET parameters
+          var formData = $(this).serialize();
+
+          // Send the AJAX request
+          $.ajax({
+              url: "{% url 'filter_package' %}",
+              method: "GET",
+              data: formData,
+              success: function(response) {
+                  if (response.status === 'success') {
+                      // Update the bookings container with the new HTML
+                      $('#supplier-allocation-content').html(response.bookings_html);
+                  } else {
+                      alert('Error: ' + response.message);
+                  }
+              },
+              error: function(xhr, errmsg, err) {
+                  alert('An error occurred. Please try again.');
+                  console.error(xhr.status + ': ' + xhr.responseText);
+              }
+          });
+      });
+  });
 </script>
 
 {% endblock content %}

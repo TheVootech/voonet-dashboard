@@ -1033,14 +1033,19 @@ class Guide_form(forms.ModelForm):
                 }),
                 
                 'abudhabi_license': forms.CheckboxInput(attrs={
+                     'class':'form-check-input',
                 }),
                 'dubai_license': forms.CheckboxInput(attrs={
+                     'class':'form-check-input',
                 }),
                 'rak_license': forms.CheckboxInput(attrs={
+                     'class':'form-check-input',
                 }),
                 'sharjah_license': forms.CheckboxInput(attrs={
+                     'class':'form-check-input',
                 }),
                 'fujairah_license': forms.CheckboxInput(attrs={
+                     'class':'form-check-input',
                 }),
                 
                 'mobile1': forms.NumberInput(attrs={
@@ -1126,7 +1131,7 @@ class Guide_form(forms.ModelForm):
 class Reminder_form(forms.ModelForm):
     class Meta:
         model=Reminder
-        exclude=['reminder_id']
+        exclude=['reminder_id','status']
         
         widgets={
                 'name': forms.TextInput(attrs={
@@ -1344,6 +1349,25 @@ class booking_trip_form(forms.ModelForm):
                     'class': 'form-control',
                     'type':'time'
                 }),
+                'total_amount':forms.NumberInput(
+                    attrs={
+                    'class': 'form-control pl-3',
+                    'readonly':'readonly'
+                }),
+                'vat':forms.NumberInput(
+                    attrs={
+                    'class': 'form-control pl-2',
+                }),
+                'include':forms.CheckboxInput(
+                    attrs={
+                    'class':'form-check-input',
+                }),
+                
+                'exclude':forms.CheckboxInput(
+                    attrs={
+                    'class':'form-check-input',
+                }),
+                
          }
         
         
@@ -1437,7 +1461,7 @@ class Booking_filter_form(forms.Form):
         })                    
     )
     payment_status=forms.ChoiceField(
-          choices=[('Paid', 'Paid'), ('Unpaid', 'Unpaid')],
+          choices=[('______', '______'),('Paid', 'Paid'), ('Unpaid', 'Unpaid')],
           required=False, 
           initial=None,                        
           widget=forms.Select(attrs={
@@ -1503,4 +1527,214 @@ class Supplier_filter_form(forms.Form):
    
     
     
+class Driver_filter_form(forms.Form):
     
+    driver_type=forms.ChoiceField(
+          choices=[('______', '______'),('Limousine', 'Limousine'), ('Transportation', 'Transportation'),('Tourism', 'Tourism'), ('Stretch limo', 'Stretch limo')],
+          required=False,
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+
+        })                    
+    )
+    
+    status=forms.ModelChoiceField(
+          queryset=Status_type.objects.all(),
+          required=False,                   
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+
+
+
+class Guide_filter_form(forms.Form):
+   
+    abudhabi_license=forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    dubai_license=forms.BooleanField(
+        required=False,
+        
+
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    rak_license=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    sharjah_license=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    fujairah_license=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+                
+    status=forms.ModelChoiceField(
+          queryset=Status_type.objects.all(),
+          required=False, 
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+class Reminder_filter_form(forms.Form):
+    
+    date_from=forms.DateField(
+         required=False,
+         widget=forms.DateInput(attrs={
+            'type': 'date',  # This makes it a date picker
+            'class': 'form-control', 
+        })                    
+    )
+    
+    
+    date_to=forms.DateField(
+         required=False,
+         widget=forms.DateInput(attrs={
+            'type': 'date',  # This makes it a date picker
+            'class': 'form-control', 
+        })                    
+    )
+    
+    status=forms.ChoiceField(
+         choices=[('______', '______'),('Active', 'Active'), ('Expired', 'Expired')],
+          required=False,                   
+          widget=forms.Select(attrs={
+            'class': 'form-select',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+    
+class Customer_filter_form(forms.Form):
+    
+    customer_type=forms.ModelChoiceField(
+          queryset=Company_type.objects.all(),
+          required=False, 
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    status=forms.ModelChoiceField(
+          queryset=Status_type.objects.all(),
+          required=False, 
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+class Package_filter_form(forms.Form):
+    
+    
+    category=forms.ModelChoiceField(
+          queryset=Category.objects.all(),
+          required=False, 
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    transportation=forms.ChoiceField(
+         choices=[('______', '______'),('Sharing', 'Sharing'), ('Private', 'Private'),('Without Transfer', 'Without Transfer'), ('Tickets Only', 'Tickets Only')],
+          required=False,                   
+          widget=forms.Select(attrs={
+            'class': 'form-select',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+   
+    sunday=forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    monday=forms.BooleanField(
+        required=False,
+        
+
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    tuesday=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    wednesday=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    thursday=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    friday=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+    
+    saturday=forms.BooleanField(
+        required=False,
+        
+        widget=forms.CheckboxInput(attrs={
+            'class':'form-check-input',
+        }) 
+    ) 
+                
+    status=forms.ModelChoiceField(
+          queryset=Status_type.objects.all(),
+          required=False, 
+          widget=forms.Select(attrs={
+            'class': 'form-select mt-1',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )

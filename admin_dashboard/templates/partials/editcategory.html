@@ -8,227 +8,230 @@
           <div class="card-body">
 
           
-        <form action="{% url "editcategory" form.instance.category_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
-          {% csrf_token %}
-          <div class="text-black align-items-center">
-            <div class="col-md-12">
+          <form action="{% url "editcategory" form.instance.category_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
+            {% csrf_token %}
+            <div class="text-black align-items-center">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-4 mt-3">
+                <div class="col-md-12">
 
-                <div class=" form-group">
-                    <label for="id_category_name" class="text-black">Category</label>
+                    <div class=" form-group">
+                        <label for="id_category_name" class="text-black">Category</label>
 
-                    {{ form.category_name }}
+                        {{ form.category_name }}
+                    </div>
+                </div>
+                </div>
+
+
+              <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                <h5 class="text-center font-weight-bold  mt-4 mb-5 text-uppercase">Mark the Required Fields Only</h5>
+                <div class="row pl-3">
+                    
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.date }}  Trip Date                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.time }}  Trip time                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.remark }} Remark                                       <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.no_of_adult }}  No : Adult                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.no_of_child }}  No : Child                                      <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.no_of_infant }}  No : Infant                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                  
+                    
+
+                </div>
+                <div class="row pl-3">
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.rate_of_adult }}  Rate : Adult                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.rate_of_child }}  Rate : Child                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.rate_of_infant }}  Rate : Infant                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.pickup_location }}  Pickup Location                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.pickup_time }}  Pickup Time                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.drop_location }}  Drop Location                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+          
+                    
+
+                </div>
+
+                <div class="row pl-3">
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.room_no }}  Room No :                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.transfer_type }}  Transfer Type                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.vehicle_type }}  Vehicle Type                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.vehicle_name }}  Vehicle Name                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.no_of_luggage }}  No : Luggage                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.flight_time }}  Flight Time                                        <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+
+                    </div>
+          
+                    
+
+                </div>
+                    
                 </div>
             </div>
             
-            <h5 class="text-center font-weight-bold  mt-4 mb-5">Mark the Required Fields Only</h5>
-            <div class="row pl-3">
-                
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.date }}  Trip Date                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
+            <div class="row mb-3">
+                <div class="col-4"></div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <button class="btn btn-square btn-rose w-100 mt-4" type="submit">EDIT CATEGORY</button>
                 </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.time }}  Trip time                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.remark }} Remark                                       <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.no_of_adult }}  No : Adult                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.no_of_child }}  No : Child                                      <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.no_of_infant }}  No : Infant                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-              
-                
-
+                <div class="col-4"></div>
             </div>
-            <div class="row pl-3">
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.rate_of_adult }}  Rate : Adult                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.rate_of_child }}  Rate : Child                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.rate_of_infant }}  Rate : Infant                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.pickup_location }}  Pickup Location                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.pickup_time }}  Pickup Time                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.drop_location }}  Drop Location                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-      
-                
-
-            </div>
-
-            <div class="row pl-3">
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.room_no }}  Room No :                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.transfer_type }}  Transfer Type                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.vehicle_type }}  Vehicle Type                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.vehicle_name }}  Vehicle Name                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.no_of_luggage }}  No : Luggage                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-                <div class="col-2">
-                    <div class="form-check">
-                        <label class="form-check-label text-black">
-                            {{ form.flight_time }}  Flight Time                                        <span class="form-check-sign">
-                            <span class="check"></span>
-                          </span>
-                        </label>
-                      </div>
-
-                </div>
-      
-                
-
-            </div>
-                
-            </div>
-            
-            
-          <div class="row mt-5">
-            <div class="col-3"></div>
-            <div class="col-6">
-              <button type="submit" class="btn btn-rose w-100">
-                Edit Category
-              </button>
-            </div>
-            <div class="col-3"></div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
     </div>

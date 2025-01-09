@@ -146,7 +146,7 @@
                           <h5 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h5>
       
                           {% for field in form %}
-                              {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' %}
+                              {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' and field.name != 'total_amount' and field.name != 'vat' and field.name != 'exclude' and field.name != 'include'%}
                               <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
                                   <div class="form-group">
                                       {% if field.name != 'booking_trip_id' and field.name != 'booking' and field.name != 'is_deleted' %}
@@ -165,6 +165,44 @@
                                   {{ form.remark }}
                               </div>
                           </div>
+
+                          <div class="col-5 mb-3 dynamic-field" data-field-name="total_amount">
+                            <div class="form-group">
+                                <label for="{{ form.total_amount.id_for_label }}" class="text-black">{{ form.total_amount.label }}</label>
+                                {{ form.total_amount }}
+                            </div>
+      
+                        </div>
+                        <div class="col-2 mb-3 dynamic-field">
+                          
+                      </div>
+                        <div class="col-5 mb-3 dynamic-field" data-field-name="vat">
+                          <div class="form-group">
+                              <label for="{{ form.vat.id_for_label }}" class="text-black">{{ form.vat.label }}</label>
+                              {{ form.vat }}
+                          </div>
+                          <div class="row mt-2">
+                            <div class="col-6 mb-3 dynamic-field" data-field-name="include">
+                              <div class="form-check">
+                                <label class="form-check-label text-black">
+                                    {{ form.include }}  Include VAT<span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                          </div>
+                          <div class="col-6 mb-3 dynamic-field" data-field-name="exclude">
+                            <div class="form-check">
+                              <label class="form-check-label text-black">
+                                  {{ form.exclude }}  Exclude VAT<span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                          </div>
+                      </div>
+                      
                       </div>
       
                       {% if forloop.counter|divisibleby:3 %}
@@ -432,7 +470,6 @@
 
 <script>
   
-
   document.addEventListener('DOMContentLoaded', function() {
     // Function to handle form cloning
     document.querySelector('#add-form').addEventListener('click', function() {
@@ -459,6 +496,9 @@
 
         // Append the new form to the container (formset-container is assumed to be the container for forms)
         document.querySelector('.formset-container').appendChild(newForm);
+
+        // Attach event listeners to new form fields to calculate total_amount dynamically
+        attachInputListeners(formIdx);
 
         // Update the TOTAL_FORMS field (management form)
         updateManagementForm();
@@ -492,7 +532,7 @@
     function updateFieldIdsAndNames(newForm, formIdx) {
         var fields = ['guest_name', 'email', 'contact_number', 'whatsapp_number', 'supplier', 'category', 'package', 'trip_date', 'trip_time', 
                       'no_of_adult', 'no_of_child', 'no_of_infant', 'rate_of_adult', 'rate_of_child', 'rate_of_infant', 'transfer_type', 
-                      'vehicle_type', 'vehicle_name', 'no_of_luggage', 'flight_time', 'remark', 'room_no', 'pickup_location', 'drop_location', 'pickup_time'];
+                      'vehicle_type', 'vehicle_name', 'no_of_luggage', 'flight_time', 'remark', 'room_no', 'pickup_location', 'drop_location', 'pickup_time','total_amount','vat','include','exclude'];
 
         fields.forEach(function(field) {
             var fieldElement = newForm.querySelector(`#id_bookingtripdetails-0-${field}`);
@@ -509,8 +549,107 @@
         inputs.forEach(function(input) {
             input.value = ''; // Clear the value of each field
         });
+
+        var vatField = newForm.querySelector('input[name$="vat"]');
+        if (vatField) {
+            vatField.value = 5; // Set VAT default to 5
+        }
+
+        // Reset include/exclude checkboxes
+        var includeField = newForm.querySelector('input[name$="include"]');
+        var excludeField = newForm.querySelector('input[name$="exclude"]');
+        if (includeField) includeField.checked = false;
+        if (excludeField) excludeField.checked = false;
     }
+
+    // Function to attach event listeners to the form fields for total_amount calculation
+    function attachInputListeners(formIdx) {
+        var fields = [
+            `id_bookingtripdetails-${formIdx}-rate_of_adult`,
+            `id_bookingtripdetails-${formIdx}-no_of_adult`,
+            `id_bookingtripdetails-${formIdx}-rate_of_child`,
+            `id_bookingtripdetails-${formIdx}-no_of_child`,
+            `id_bookingtripdetails-${formIdx}-rate_of_infant`,
+            `id_bookingtripdetails-${formIdx}-no_of_infant`,
+            `id_bookingtripdetails-${formIdx}-vat`,
+            `id_bookingtripdetails-${formIdx}-include`,
+            `id_bookingtripdetails-${formIdx}-exclude`,
+            `id_bookingtripdetails-${formIdx}-package`,
+
+        ];
+
+        fields.forEach(function(fieldId) {
+            var field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener("change", function() {  // Use change event for checkboxes
+                    resetIncludeExcludeAndRecalculate(formIdx); // Reset and recalculate total amount
+                });
+            }
+        });
+
+        // Initial calculation for this new form
+        calculateTotalAmount(formIdx);
+    }
+
+    // Function to reset include/exclude and recalculate total_amount
+    function resetIncludeExcludeAndRecalculate(formIdx) {
+        var includeField = document.getElementById(`id_bookingtripdetails-${formIdx}-include`);
+        var excludeField = document.getElementById(`id_bookingtripdetails-${formIdx}-exclude`);
+
+        // Ensure only one checkbox is checked
+        if (includeField.checked) {
+            excludeField.checked = false;  // Uncheck exclude if include is checked
+        } else if (excludeField.checked) {
+            includeField.checked = false;  // Uncheck include if exclude is checked
+        }
+
+        // Recalculate the total amount
+        calculateTotalAmount(formIdx);
+    }
+
+    // Function to calculate the total_amount for a specific form
+    function calculateTotalAmount(formIdx) {
+        // Get values from the form fields dynamically using formIdx
+        var rate_of_adult = parseFloat(document.getElementById(`id_bookingtripdetails-${formIdx}-rate_of_adult`).value) || 0;
+        var no_of_adult = parseInt(document.getElementById(`id_bookingtripdetails-${formIdx}-no_of_adult`).value) || 0;
+        var rate_of_child = parseFloat(document.getElementById(`id_bookingtripdetails-${formIdx}-rate_of_child`).value) || 0;
+        var no_of_child = parseInt(document.getElementById(`id_bookingtripdetails-${formIdx}-no_of_child`).value) || 0;
+        var rate_of_infant = parseFloat(document.getElementById(`id_bookingtripdetails-${formIdx}-rate_of_infant`).value) || 0;
+        var no_of_infant = parseInt(document.getElementById(`id_bookingtripdetails-${formIdx}-no_of_infant`).value) || 0;
+        var vat = parseFloat(document.getElementById(`id_bookingtripdetails-${formIdx}-vat`).value) || 5; // default to 5
+
+        // Calculate the total_amount before VAT
+        var total_amount = (rate_of_adult * no_of_adult) + (rate_of_child * no_of_child) + (rate_of_infant * no_of_infant);
+
+        // Check if include or exclude is checked
+        var includeField = document.getElementById(`id_bookingtripdetails-${formIdx}-include`);
+        var excludeField = document.getElementById(`id_bookingtripdetails-${formIdx}-exclude`);
+        
+        if (includeField.checked) {
+            // Calculate VAT with the include value
+            total_amount = total_amount * (1 + (vat / 100));
+          } else if (excludeField.checked) {
+            // Calculate VAT with the exclude value (VAT excluded)
+            var vatExcludedAmount = total_amount / (1 + (vat / 100));  // Reverse calculation to exclude VAT
+            var vatAmount = total_amount - vatExcludedAmount;  // Calculate the VAT amount
+            vatAmount = Math.round(vatAmount * 100) / 100;  // Round to 2 decimal places
+            
+
+            total_amount = vatExcludedAmount;  // Update total_amount to be the VAT excluded amount
+        }
+
+        // Update the total_amount field dynamically
+        document.getElementById(`id_bookingtripdetails-${formIdx}-total_amount`).value = total_amount.toFixed(2); // format to 2 decimal places
+    }
+
+    // Initial call to attach event listeners on page load for existing forms
+    document.querySelectorAll('.formset').forEach(function(form, idx) {
+        attachInputListeners(idx);
+    });
 });
+
+
+    
 
 
 let supform=document.getElementById('supform');

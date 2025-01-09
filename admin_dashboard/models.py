@@ -359,7 +359,7 @@ class Company_contact_details(models.Model):
     email=models.EmailField(blank=True,null=True)
     
     def __str__(self):
-        return f"{self.name} ( {self.company_id} )"
+        return f"{self.name} ( {self.designation} )"
     
     
     
@@ -515,6 +515,7 @@ class Reminder(models.Model):
     description=models.CharField(max_length=200,unique=True)
     date=models.DateField()
     time=models.TimeField()
+    status=models.CharField(max_length=100,default='Active')
     
     def save(self, *args, **kwargs):
         if not self.reminder_id:  # Only generate ID if it's not already set
@@ -614,6 +615,10 @@ class Booking_Trip_details(models.Model):
     no_of_luggage=models.PositiveIntegerField(null=True,blank=True)
     flight_time=models.TimeField(null=True,blank=True)
     remark=models.CharField(max_length=500,null=True,blank=True)
+    total_amount=models.FloatField(default=0)
+    vat=models.FloatField(default=5)
+    include=models.BooleanField(default=False)
+    exclude=models.BooleanField(default=False)
     is_deleted=models.BooleanField(default=False)
     
     

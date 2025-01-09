@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # CSRF_TRUSTED_ORIGINS = [
-#     'https://28c3-103-161-55-195.ngrok-free.app',
+#     'https://b1f9-103-166-244-201.ngrok-free.app',
 # ]
 
 

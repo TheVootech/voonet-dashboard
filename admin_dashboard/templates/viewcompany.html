@@ -41,7 +41,7 @@
       </h2>
     </div>
     <div class="row mt-2">
-      <div class="mt-5">
+      <div class="">
         <div
           id="success-message"
           class="alert alert-success text-center font-weight-bold alertmessage"
@@ -58,6 +58,75 @@
           style="display: none; margin-top: 20px"
         >
         Customer Deleted successfully!
+        </div>
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <div class="card mt-5">
+              <div class="card-header card-header-rose card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">filter_alt</i>
+                </div>
+              </div>
+              <div class="card-body ">
+                <form action="" method="get" id="filter-form">
+                <div class="row d-flex justify-content-center gap-5">
+            
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="" class="bmd-label-floating text-black mb-2">Customer Type</label>
+        
+        
+                      {{form.customer_type}} {% if form.customer_type.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.customer_type.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+        
+                  </div>
+
+                  
+                  
+                  <div class="col-4">
+        
+                    <div class="form-group">
+                      <label for="" class="bmd-label-floating text-black">Status</label>
+        
+        
+        
+                      {{form.status}} {% if form.status.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.status.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
+                 
+                  
+                </div>
+                
+                <div class="row mt-4 mb-2  d-flex justify-content-center">
+                  
+                  <div class="col-2">
+                    <button type="submit" class="btn w-100"  style="background-color:#023817;color:white;">Filter</button>
+        
+                  </div>
+                  <div class="col-2">
+                    <button type="reset" class="btn w-100"  style="background-color:#380202;color:white;">Reset</button>
+        
+                  </div>
+                  
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-2"></div>
         </div>
 
         <div class="row" id="supplier-allocation-content">
@@ -397,6 +466,37 @@
   
   
 
+</script>
+
+<script>
+  $(document).ready(function() {
+      // Handle form submission
+      $('#filter-form').on('submit', function(event) {
+          event.preventDefault();  // Prevent normal form submission
+
+          // Serialize the form data to send as GET parameters
+          var formData = $(this).serialize();
+
+          // Send the AJAX request
+          $.ajax({
+              url: "{% url 'filter_customer' %}",
+              method: "GET",
+              data: formData,
+              success: function(response) {
+                  if (response.status === 'success') {
+                      // Update the bookings container with the new HTML
+                      $('#supplier-allocation-content').html(response.bookings_html);
+                  } else {
+                      alert('Error: ' + response.message);
+                  }
+              },
+              error: function(xhr, errmsg, err) {
+                  alert('An error occurred. Please try again.');
+                  console.error(xhr.status + ': ' + xhr.responseText);
+              }
+          });
+      });
+  });
 </script>
 
 {% endblock content %}

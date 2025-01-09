@@ -22,358 +22,417 @@
         
 
         <form action="{% url "edit_guide" form.instance.guide_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
-                {% csrf_token %}
-                <div class="row mt-4">
-                  <div class="col-4">
-                    <label for="" class="text-black">Guide Name</label>
-      
-                    <div class="form-group">
-      
-                      {{form.name}} {% if form.name.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.name.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
+          {% csrf_token %}
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Guide Details</h6>
+          <div class="row mt-4">
+            <div class="col-4">
+
+              <div class="form-group">
+                <label for="" class="text-black">Guide Name</label>
+
+                {{form.name}} {% if form.name.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.name.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            
+            <div class="col-4">
+              <div class="row">
+                <label class="form-check-label text-black mb-3">Licensed Area</label>
+
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.abudhabi_license }}  Abu Dhabi<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
                   </div>
-                  
-                  <div class="col-4">
-                      <label for="" class="text-black">License</label>
-                      <div class="form-group pr-5">
-                        {{form.abudhabi_license}}
-                        <span class="font-weight-bold mr-2">Abu Dhabi</span>
-                        {{form.dubai_license}}
-                        <span class="font-weight-bold mr-2">Dubai</span>
-                        {{form.rak_license}}
-                        <span class="font-weight-bold mr-2">RAK</span>
-                        {{form.sharjah_license}}
-                        <span class="font-weight-bold mr-3">Sharjah</span>
-                        {{form.fujairah_license}}
-                        <span class="font-weight-bold mr-2">Fujairah</span>
-                      </div>
-                    </div>
-      
-      
-                    <div class="col-4">
-                      <label for="" class="text-black">Email</label>
-                      <div class="form-group">
-                        {{form.email}} {% if form.email.errors %}
-                        <ul class="errorlist text-primary text-bold">
-                          {% for error in form.email.errors %}
-                          <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                        {% endif %}
-                      </div>
-                    </div>
-                  
-                  
                 </div>
-                
-                <div class="row mt-4">
-                 
-      
-                  <div class="col-4">
-                    <label for="" class="text-black">Mobile 1</label>
-                    <div class="form-group">
-                      {{form.mobile1}} {% if form.mobile1.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.mobile1.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.dubai_license }}Dubai<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
                   </div>
-      
-                  <div class="col-4">
-                      <label for="" class="text-black">Mobile 2</label>
-                      <div class="form-group">
-                        {{form.mobile2}} {% if form.mobile2.errors %}
-                        <ul class="errorlist text-primary text-bold">
-                          {% for error in form.mobile2.errors %}
-                          <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                        {% endif %}
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">Whatsapp 1</label>
-                      <div class="form-group">
-                        {{form.whatsapp1}} {% if form.whatsapp1.errors %}
-                        <ul class="errorlist text-primary text-bold">
-                          {% for error in form.whatsapp1.errors %}
-                          <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                        {% endif %}
-                      </div>
-                    </div>
-      
-                   
-      
-                  
-      
                 </div>
-      
-                <div class="row mt-4">
-                 
-      
-                  
-      
-                  <div class="col-4">
-                      <label for="" class="text-black">Whatsapp 2</label>
-                      <div class="form-group">
-                        {{form.whatsapp2}} {% if form.whatsapp2.errors %}
-                        <ul class="errorlist text-primary text-bold">
-                          {% for error in form.whatsapp2.errors %}
-                          <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                        {% endif %}
-                      </div>
-                    </div>
-      
-                    
-      
-                </div>
-      
-                <hr>
-      
-                
-                <hr>
-                <div class="row mt-4">
-                  <h4 class="text-center font-weight-bold">License</h4>
-                  <div class="row">
-                    <div class="col-4">
-                      <label for="" class="text-black">License Number</label>
-                    <div class="form-group">
-                      {{form.license_number}} {% if form.license_number.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.license_number.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">License Expiry</label>
-                    <div class="form-group">
-                      {{form.license_expiry}} {% if form.license_expiry.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.license_expiry.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black mb-3">License Copy</label>
-                      {{form.license_copy}} 
-                    <div class="form-group">
-                      {% if form.license_copy.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.license_copy.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                  </div> 
-                </div>
-                
-                <hr>
-                <div class="row mt-4">
-                  <h4 class="text-center font-weight-bold">Passport</h4>
-                  <div class="row">
-                    <div class="col-4">
-                      <label for="" class="text-black">Passport Number</label>
-                    <div class="form-group">
-                      {{form.passport_number}} {% if form.passport_number.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.passport_number.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">Passport Expiry</label>
-                    <div class="form-group">
-                      {{form.passport_expiry}} {% if form.passport_expiry.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.passport_expiry.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black mb-3">Passport Document</label>
-                      {{form.passport}}
-                    <div class="form-group">
-                       {% if form.passport.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.passport.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                  </div> 
-                </div>
-                <hr>
-                <div class="row mt-4">
-                  <h4 class="text-center font-weight-bold">Emirates ID</h4>
-                  <div class="row">
-                    <div class="col-4">
-                      <label for="" class="text-black">Emirates ID Number</label>
-                    <div class="form-group">
-                      {{form.emirates_id_number}} {% if form.emirates_id_number.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.emirates_id_number.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">Emirates ID Expiry</label>
-                    <div class="form-group">
-                      {{form.emirates_id_expiry}} {% if form.emirates_id_expiry.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.emirates_id_expiry.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black mb-3">Emirates ID Document</label>
-                      {{form.emirates_id}} 
-                    <div class="form-group">
-                      {% if form.emirates_id.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.emirates_id.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                  </div> 
-                </div>
-                <hr>
-                <div class="row mt-4">
-                  <h4 class="text-center font-weight-bold">Visa</h4>
-                  <div class="row">
-                    <div class="col-4">
-                      <label for="" class="text-black">Visa Number</label>
-                    <div class="form-group">
-                      {{form.visa_number}} {% if form.visa_number.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.visa_number.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">Visa Expiry</label>
-                    <div class="form-group">
-                      {{form.visa_expiry}} {% if form.visa_expiry.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.visa_expiry.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black mb-3">Visa Document</label>
-                      {{form.visa}} 
-                    <div class="form-group">
-                      {% if form.visa.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.visa.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.rak_license }}RAK<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
                   </div>
-                 
                 </div>
-                <hr>
-                <div class="row mt-4">
-                  <div class="row">
-                    
-                    <div class="col-4">
-                      <label for="" class="text-black mb-3">Photos</label>
-                      {{form.photos}}
-                    <div class="form-group">
-                       {% if form.photos.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.photos.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">Language</label>
-                    <div class="form-group">
-                      {{form.language}} {% if form.language.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.language.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
-                    <div class="col-4">
-                      <label for="" class="text-black">Status</label>
-                    <div class="form-group">
-                      {{form.status}} {% if form.status.errors %}
-                      <ul class="errorlist text-primary text-bold">
-                        {% for error in form.status.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </div>
-                    </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.sharjah_license }}Sharjah<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
                   </div>
-                 
                 </div>
-      
-      
-      
-                <div class="row mt-5">
-                  <div class="col-3"></div>
-                  <div class="col-6">
-                    <button type="submit" class="btn btn-rose w-100">
-                      Edit Guide
-                    </button>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.fujairah_license }}Fujairah<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
                   </div>
-                  <div class="col-3"></div>
                 </div>
+              </div>
+               
+              </div>
+
+
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="text-black">Email</label>
+
+                  {{form.email}} {% if form.email.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+            
+            
+          </div>
+          
+          <div class="row mt-4">
+           
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Mobile 1</label>
+
+                {{form.mobile1}} {% if form.mobile1.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.mobile1.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="text-black">Mobile 2</label>
+
+                  {{form.mobile2}} {% if form.mobile2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.mobile2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="text-black">Whatsapp 1</label>
+
+                  {{form.whatsapp1}} {% if form.whatsapp1.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.whatsapp1.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+
+             
+
+            
+
+          </div>
+
+          <div class="row mt-4">
+           
+
+            
+
+            <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="text-black">Whatsapp 2</label>
+
+                  {{form.whatsapp2}} {% if form.whatsapp2.errors %}
+                  <ul class="errorlist text-primary text-bold">
+                    {% for error in form.whatsapp2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+
+              
+
+          </div>
+
+        </div>
+        <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+          <h6 class="text-center font-weight-bold mb-4 mt-2">License Details</h6>
+          <div class="row mt-4">
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">License Number</label>
+
+                {{form.license_number}} {% if form.license_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.license_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">License Expiry</label>
+
+                {{form.license_expiry}} {% if form.license_expiry.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.license_expiry.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black mb-3">Upload License Copy</label>
+                {{form.license_copy}} 
+              <div class="form-group">
+                {% if form.license_copy.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.license_copy.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div> 
+          </div>
+          
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Passport Details</h6>
+          <div class="row mt-4">
+           
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Passport Number</label>
+
+                {{form.passport_number}} {% if form.passport_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.passport_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Passport Expiry</label>
+
+                {{form.passport_expiry}} {% if form.passport_expiry.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.passport_expiry.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black mb-3">Upload Passport Document</label>
+                {{form.passport}}
+              <div class="form-group">
+                 {% if form.passport.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.passport.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div> 
+          </div>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Emirates ID Details</h6>
+          <div class="row mt-4">
+            
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Emirates ID Number</label>
+
+                {{form.emirates_id_number}} {% if form.emirates_id_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.emirates_id_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Emirates ID Expiry</label>
+
+                {{form.emirates_id_expiry}} {% if form.emirates_id_expiry.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.emirates_id_expiry.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black mb-3">Upload Emirates ID Document</label>
+                {{form.emirates_id}} 
+              <div class="form-group">
+                {% if form.emirates_id.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.emirates_id.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div> 
+          </div>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Visa Details</h6>
+          <div class="row mt-4">
+            
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Visa Number</label>
+
+                {{form.visa_number}} {% if form.visa_number.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.visa_number.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+              <div class="form-group">
+                <label for="" class="text-black">Visa Expiry</label>
+
+                {{form.visa_expiry}} {% if form.visa_expiry.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.visa_expiry.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-4">
+                <label for="" class="text-black mb-3">Upload Visa Document</label>
+                {{form.visa}} 
+              <div class="form-group">
+                {% if form.visa.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.visa.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+           
+          </div>
+          
+          <div class="row mt-1">
+            
+              
+              <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Photo</h6>
+                <label for="" class="text-black mb-3">Upload Photo</label>
+                {{form.photos}}
+              <div class="form-group">
+                 {% if form.photos.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.photos.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+              <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Language</h6>
+              <div class="form-group">
+                <label for="" class="text-black mb-3">Language</label>
+
+                {{form.language}} {% if form.language.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.language.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+              <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Guide Status </h6>
+              <div class="form-group">
+                <label for="" class="text-black mb-4">Status</label>
+
+                {{form.status}} {% if form.status.errors %}
+                <ul class="errorlist text-primary text-bold">
+                  {% for error in form.status.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+           
+          </div>
+
+
+
+          <div class="row mt-5">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <button type="submit" class="btn btn-rose w-100">
+                Edit Guide
+              </button>
+            </div>
+            <div class="col-3"></div>
+          </div>
     </form>
 </div>
 </div>

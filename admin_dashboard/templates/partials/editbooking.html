@@ -83,7 +83,7 @@
                     <h5 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h5>
 
                     {% for field in form %}
-                        {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' %}
+                        {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' and field.name != 'total_amount' and field.name != 'vat' and field.name != 'include' and field.name != 'exclude'%}
                         <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
                             <div class="form-group">
                                 {% if field.name != 'booking_trip_id' and field.name != 'booking' and field.name != 'is_deleted' %}
@@ -102,6 +102,41 @@
                             {{ form.remark }}
                         </div>
                     </div>
+                    <div class="col-5 mb-3 dynamic-field" data-field-name="total_amount">
+                      <div class="form-group">
+                          <label for="{{ form.total_amount.id_for_label }}" class="text-black">{{ form.total_amount.label }}</label>
+                          {{ form.total_amount }}
+                      </div>
+                  </div>
+                  <div class="col-2 mb-3 dynamic-field">
+                          
+                  </div>
+                    <div class="col-5 mb-3 dynamic-field" data-field-name="vat">
+                      <div class="form-group">
+                          <label for="{{ form.vat.id_for_label }}" class="text-black">{{ form.vat.label }}</label>
+                          {{ form.vat }}
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col-6 mb-3 dynamic-field" data-field-name="include">
+                          <div class="form-check">
+                            <label class="form-check-label text-black">
+                                {{ form.include }}  Include VAT<span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                      </div>
+                      <div class="col-6 mb-3 dynamic-field" data-field-name="exclude">
+                        <div class="form-check">
+                          <label class="form-check-label text-black">
+                              {{ form.exclude }}  Exclude VAT<span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      </div>
+                  </div>
                 </div>
 
                 {% if forloop.counter|divisibleby:3 %}

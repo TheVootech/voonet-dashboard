@@ -60,6 +60,111 @@
         Guide Deleted successfully!
         </div>
 
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <div class="card mt-5">
+              <div class="card-header card-header-rose card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">filter_alt</i>
+                </div>
+              </div>
+              <div class="card-body ">
+                <form action="" method="get" id="filter-form">
+                <div class="row d-flex justify-content-center gap-5">
+            
+                  <div class="col-4">
+                    <div class="row">
+                      <label class="form-check-label text-black mb-4">Licensed Area</label>
+      
+                      <div class="col-2">
+                        <div class="form-check">
+                          <label class="form-check-label text-black">
+                              {{ form.abudhabi_license }}  Abu Dhabi<span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-check">
+                          <label class="form-check-label text-black">
+                              {{ form.dubai_license }}Dubai<span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-check">
+                          <label class="form-check-label text-black">
+                              {{ form.rak_license }}RAK<span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-check">
+                          <label class="form-check-label text-black">
+                              {{ form.sharjah_license }}Sharjah<span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-check">
+                          <label class="form-check-label text-black">
+                              {{ form.fujairah_license }}Fujairah<span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                     
+                    </div>
+                  
+                  <div class="col-4">
+        
+                    <div class="form-group">
+                      <label for="" class="bmd-label-floating text-black mb-2">Status</label>
+        
+        
+        
+                      {{form.status}} {% if form.status.errors %}
+                      <ul class="errorlist text-primary text-bold">
+                        {% for error in form.status.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </div>
+                  </div>
+                 
+                  
+                </div>
+                
+                <div class="row mt-4 mb-2  d-flex justify-content-center">
+                  
+                  <div class="col-2">
+                    <button type="submit" class="btn w-100"  style="background-color:#023817;color:white;">Filter</button>
+        
+                  </div>
+                  <div class="col-2">
+                    <button type="reset" class="btn w-100"  style="background-color:#380202;color:white;">Reset</button>
+        
+                  </div>
+                  
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+
         <div class="row" id="supplier-allocation-content">
           <div class="col-2"></div>
           <div class="col-lg-8 col-md-12 col-md-12">
@@ -80,6 +185,8 @@
                        
                         <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >LICENSED AREAS</th>
+
                         
                         <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
@@ -96,6 +203,17 @@
                           
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.mobile1}}</td>
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;">
+                            {% if i.abudhabi_license == True %}Abudhabi,{% endif %}
+                            {% if i.dubai_license == True %}Dubai,{% endif %}
+                            {% if i.rak_license == True %}RAK,{% endif %}
+                            {% if i.sharjah_license == True %}Sharjah,{% endif %}
+                            {% if i.fujairah_license == True %}Fujairah{% endif %}
+
+
+
+                          </td>
+
                           
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.status}}</td>
 
@@ -251,52 +369,6 @@
   }
 
 
-
- 
-  
-  
-
-
-
-  $(document).on("submit", "#supp-form", function (e) {
-    e.preventDefault(); // Prevent default form submission
-
-    var form = $(this);
-    var url = form.attr("action");
-
-    // Show a loading spinner or indicator
-    $("#modal-content-" + form.data("id")).html("<p>Submitting...</p>");
-
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: form.serialize(), // Serialize the form data
-      success: function (response) {
-        if (response.status === "success") {
-          
-          // Replace the whole table with updated table
-          $("#supplier-allocation-content").html(response.updated_table_html);
-
-          // Close the modal
-          $("#editModal" + form.data("id")).modal("hide");
-
-          // Optionally, show success message in the table or somewhere else
-          $("#success-message").fadeIn().delay(3000).fadeOut();
-
-        } else {
-          alert(
-            "An error occurred while submitting the form. Please try again."
-          );
-        }
-      },
-      error: function (xhr, status, error) {
-        alert("Error: " + error);
-        console.error("There was an error submitting the form:", error);
-      },
-    });
-  });
-
-
   
   function openDeleteModal(id) {
     // Set the delete button in the modal to call deleteItem with the correct ID
@@ -352,6 +424,38 @@
   });
 
 
+</script>
+
+
+<script>
+  $(document).ready(function() {
+      // Handle form submission
+      $('#filter-form').on('submit', function(event) {
+          event.preventDefault();  // Prevent normal form submission
+
+          // Serialize the form data to send as GET parameters
+          var formData = $(this).serialize();
+
+          // Send the AJAX request
+          $.ajax({
+              url: "{% url 'filter_guide' %}",
+              method: "GET",
+              data: formData,
+              success: function(response) {
+                  if (response.status === 'success') {
+                      // Update the bookings container with the new HTML
+                      $('#supplier-allocation-content').html(response.bookings_html);
+                  } else {
+                      alert('Error: ' + response.message);
+                  }
+              },
+              error: function(xhr, errmsg, err) {
+                  alert('An error occurred. Please try again.');
+                  console.error(xhr.status + ': ' + xhr.responseText);
+              }
+          });
+      });
+  });
 </script>
 
 {% endblock content %}

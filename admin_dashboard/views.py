@@ -7,6 +7,8 @@ from django.views.generic.edit import UpdateView
 from django.http import JsonResponse,HttpResponse
 from django.template.loader import render_to_string
 from django.middleware.csrf import get_token
+from django.utils import timezone
+import json
 
 def dashboard_view(request):
     return render(request,'dashboard.html')
@@ -76,7 +78,67 @@ def addpackages_view(request):
 
 def view_package(request):
     data=Package.objects.filter(is_deleted=False)
-    return render(request,'viewpackage.html',{'data':data})
+    return render(request,'viewpackage.html',{'data':data,'form':Package_filter_form})
+
+
+
+def filter_Package(request):
+    form = Package_filter_form(request.GET)  # Initialize the form with GET data
+    package = Package.objects.filter(is_deleted=False)
+
+
+    if form.is_valid():
+        category = form.cleaned_data.get('category')
+        sunday = form.cleaned_data.get('sunday')
+        monday = form.cleaned_data.get('monday')
+        tuesday = form.cleaned_data.get('tuesday')
+        wednesday = form.cleaned_data.get('wednesday')
+        thursday = form.cleaned_data.get('thursday')
+        friday = form.cleaned_data.get('friday')
+        saturday = form.cleaned_data.get('saturday')
+        transportation = form.cleaned_data.get('transportation')
+        status = form.cleaned_data.get('status')
+        
+
+        if category:
+            package = package.filter(package_category=category)
+            
+        if sunday:
+            package = package.filter(sunday=True)
+            
+        if monday:
+            package = package.filter(monday=True)
+            
+        if tuesday:
+            package = package.filter(tuesday=True)
+            
+        if wednesday:
+            package = package.filter(wednesday=True)
+            
+        if thursday:
+            package = package.filter(thursday=True)
+            
+        if friday:
+            package = package.filter(friday=True)
+            
+        if saturday:
+            package = package.filter(saturday=True)
+            
+        if not sunday and not monday and not tuesday and not wednesday and not thursday and not friday and not saturday:
+            package = package
+            
+        if transportation and transportation != '______':
+            package = package.filter(transportation=transportation)
+            
+        if status:
+            package = package.filter(status=status)
+        
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/package_table.html', {'data':package})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
 
 
 def package_detail_view(request,pk):
@@ -431,6 +493,75 @@ def filter_Supplier(request):
 
 
 
+def filter_Driver(request):
+    form = Driver_filter_form(request.GET)  # Initialize the form with GET data
+    driver = Driver.objects.filter(is_deleted=False)
+
+
+    if form.is_valid():
+        type = form.cleaned_data.get('driver_type')
+        status = form.cleaned_data.get('status')
+        
+
+        if type and type != '______':
+            driver = driver.filter(driver_type=type)
+       
+        if status:
+            driver = driver.filter(status=status)
+        
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/driver_table.html', {'data': driver})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
+
+
+
+def filter_Guide(request):
+    form = Guide_filter_form(request.GET)  # Initialize the form with GET data
+    guide = Guide.objects.filter(is_deleted=False)
+
+
+    if form.is_valid():
+        abudhabi = form.cleaned_data.get('abudhabi_license')
+        dubai = form.cleaned_data.get('dubai_license')
+        rak = form.cleaned_data.get('rak_license')
+        sharjah = form.cleaned_data.get('sharjah_license')
+        fujairah = form.cleaned_data.get('fujairah_license')
+        status = form.cleaned_data.get('status')
+        
+
+        if abudhabi:
+            guide = guide.filter(abudhabi_license=True)
+            
+        if dubai:
+            guide = guide.filter(dubai_license=True)
+            
+        if rak:
+            guide = guide.filter(rak_license=True)
+            
+        if sharjah:
+            guide = guide.filter(sharjah_license=True)
+            
+        if fujairah:
+            guide = guide.filter(fujairah_license=True)
+            
+        if not abudhabi and not dubai and not rak and not sharjah and not fujairah:
+            guide = guide
+            
+        if status:
+            guide = guide.filter(status=status)
+        
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/guide_table.html', {'data':guide})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
+
+
+
 
 
 
@@ -712,7 +843,31 @@ def addcompany_view(request):
 
 def view_company(request):
     data=Company.objects.filter(is_deleted=False)
-    return render(request,'viewcompany.html',{'data':data})
+    return render(request,'viewcompany.html',{'data':data,'form':Customer_filter_form})
+
+
+def filter_Customer(request):
+    form = Customer_filter_form(request.GET)  # Initialize the form with GET data
+    customer = Company.objects.filter(is_deleted=False)
+
+
+    if form.is_valid():
+        type = form.cleaned_data.get('customer_type')
+        status = form.cleaned_data.get('status')
+        
+
+        if type:
+            customer = customer.filter(company_type=type)
+            
+        if status:
+            customer = customer.filter(status=status)
+        
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/companytable.html', {'data':customer})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
 
 
 
@@ -926,7 +1081,7 @@ def adddriver_view(request):
 
 def view_driver(request):
     data=Driver.objects.filter(is_deleted=False)
-    return render(request,'viewdriver.html',{'data':data})
+    return render(request,'viewdriver.html',{'data':data,'form':Driver_filter_form})
 
 
 def driver_details_view(request,pk):
@@ -1056,7 +1211,7 @@ def addguide_view(request):
 
 def view_guide(request):
     data=Guide.objects.filter(is_deleted=False)
-    return render(request,'viewguide.html',{'data':data})
+    return render(request,'viewguide.html',{'data':data,'form':Guide_filter_form})
 
 
 
@@ -1190,7 +1345,36 @@ def addreminder_view(request):
     
 def view_reminder(request):
     data=Reminder.objects.all()
-    return render(request,'viewreminder.html',{'data':data})
+    expired=data.filter(date__lt=timezone.now()).exclude(status='Expired')
+    expired.update(status="Expired")
+    
+    return render(request,'viewreminder.html',{'data':data,'form':Reminder_filter_form})
+
+
+def filter_reminder(request):
+    form = Reminder_filter_form(request.GET)  # Initialize the form with GET data
+    reminder = Reminder.objects.all()
+
+
+    if form.is_valid():
+        date_from = form.cleaned_data.get('date_from')
+        date_to = form.cleaned_data.get('date_to')
+        status = form.cleaned_data.get('status')
+        
+
+        if date_from:
+            reminder = reminder.filter(date__gte=date_from)
+        if date_to:
+            reminder = reminder.filter(date__lte=date_to)
+        if status and status != '______':
+            reminder = reminder.filter(status=status)
+       
+
+    # Render the updated table as a partial HTML
+    bookings_html = render_to_string('partials/reminder_table.html', {'data': reminder})
+
+    # Return the HTML as a response
+    return JsonResponse({'status': 'success', 'bookings_html': bookings_html})
 
 
 
@@ -1208,6 +1392,14 @@ def edit_reminder_view(request,pk):
 
         # Check if both the form and the formset are valid
         if form.is_valid():
+            
+            date_value=form.cleaned_data.get('date')
+            today = timezone.now().date()
+            
+            if date_value > today:
+                reminder.status='Active'
+            else:
+                reminder.status='Expired'
             # Save the supplier form
             form.save()
 
@@ -1423,7 +1615,7 @@ def filter_bookings(request):
             
         if payment_mode:
             bookings = bookings.filter(booking__payment_mode_id=payment_mode)
-        if payment_status:
+        if payment_status and payment_status != '______':
             bookings = bookings.filter(booking__payment_status=payment_status)
         if status:
             bookings = bookings.filter(booking__status=status)
@@ -1543,6 +1735,102 @@ def recover_booking_view(request,pk):
         
         except Booking_Trip_details.DoesNotExist:
             return JsonResponse({'status':'error','message':'item not found'})
+        
+        
+def recover_multiple_bookings(request):
+    if request.method == 'POST':
+        try:
+            print(request.body)
+            # Get the list of booking_trip_ids from the request
+            data = json.loads(request.body)
+            booking_trip_ids = data.get('booking_trip_ids', [])
+
+            if booking_trip_ids:
+                # Update 'is_deleted' to False for all selected booking_trip_ids
+                Booking_Trip_details.objects.filter(booking_trip_id__in=booking_trip_ids).update(is_deleted=False)
+
+                # Fetch the updated table HTML
+                updated_table_html = render_to_string('partials/booking_trash_table.html', {
+                    'data': Booking_Trip_details.objects.filter(is_deleted=True),  # Modify this to get the updated list of bookings
+                })
+
+                return JsonResponse({
+                    'status': 'success',
+                    'updated_table_html': updated_table_html,
+                })
+            else:
+                return JsonResponse({'status': 'error', 'message': 'No IDs provided.'})
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+
+
+def delete_multiple_bookings_forever(request):
+    if request.method == 'POST':
+        try:
+            print(request.body)
+            # Get the list of booking_trip_ids from the request
+            data = json.loads(request.body)
+            booking_trip_ids = data.get('booking_trip_ids', [])
+
+            if booking_trip_ids:
+                # Update 'is_deleted' to False for all selected booking_trip_ids
+                Booking_Trip_details.objects.filter(booking_trip_id__in=booking_trip_ids).delete()
+
+                # Fetch the updated table HTML
+                updated_table_html = render_to_string('partials/booking_trash_table.html', {
+                    'data': Booking_Trip_details.objects.filter(is_deleted=True),  # Modify this to get the updated list of bookings
+                })
+
+                return JsonResponse({
+                    'status': 'success',
+                    'updated_table_html': updated_table_html,
+                })
+            else:
+                return JsonResponse({'status': 'error', 'message': 'No IDs provided.'})
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+
+
+
+def delete_multiple_bookings(request):
+    if request.method == 'POST':
+        try:
+            print(request.body)
+            # Get the list of booking_trip_ids from the request
+            data = json.loads(request.body)
+            booking_trip_ids = data.get('booking_trip_ids', [])
+
+            if booking_trip_ids:
+                # Update 'is_deleted' to False for all selected booking_trip_ids
+                Booking_Trip_details.objects.filter(booking_trip_id__in=booking_trip_ids).update(is_deleted=True)
+
+                # Fetch the updated table HTML
+                updated_table_html = render_to_string('partials/bookingtable.html', {
+                    'data': Booking_Trip_details.objects.filter(is_deleted=False),  # Modify this to get the updated list of bookings
+                })
+
+                return JsonResponse({
+                    'status': 'success',
+                    'updated_table_html': updated_table_html,
+                })
+            else:
+                return JsonResponse({'status': 'error', 'message': 'No IDs provided.'})
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
         
         
 def delete_booking_forever_view(request,pk):

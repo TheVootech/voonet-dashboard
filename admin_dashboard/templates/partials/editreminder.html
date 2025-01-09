@@ -9,46 +9,54 @@
 
         <form action="{% url "edit_reminder" form.instance.reminder_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
             {% csrf_token %}
-                <div class="text-black align-items-center">
-                    <div class="col-md-12">
+            <div class="text-black align-items-center">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-3">
+                    <h6 class="text-center font-weight-bold mb-3 mt-2">Name & Description</h6>
+                <div class="col-md-12">
+
+                    <div class="form-group">
                         <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Name</label>
 
-                        <div class="form-group">
-                            {{ form.name }}
-                        </div>
+                        {{ form.name }}
                     </div>
-                    <div class="col-md-12">
+                </div>
+                <div class="col-md-12">
+
+                    <div class="form-group mt-3">
                         <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Description</label>
 
-                        <div class="form-group">
-                            {{ form.description }}
-                        </div>
+                        {{ form.description }}
                     </div>
-                    <div class="row pl-3 pr-3">
+                </div>
+                </div>
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-4">
+                    <h6 class="text-center font-weight-bold mb-3 mt-2">Date & Time</h6>
+                    <div class="row pl-3 pr-3 mt-2">
                         <div class="col-md-6">
-                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Date</label>
 
                             <div class="form-group">
+                                <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Date</label>
+
                                 {{ form.date }}
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Time</label>
-
                             <div class="form-group">
+                                <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Reminder Time</label>
                                 {{ form.time }}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <button class="btn btn-square btn-rose w-100 mt-4" type="submit">EDIT</button>
-                    </div>
-                    <div class="col-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <button class="btn btn-square btn-rose w-100 mt-4" type="submit">EDIT REMINDER</button>
                 </div>
+                <div class="col-4"></div>
+            </div>
             </form>
 </div>
 </div>

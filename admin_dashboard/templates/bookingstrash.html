@@ -7,8 +7,8 @@
 {% block content %}
 
 <style>
-  .extra-large-modal {
-    max-width: 60%;  
+  .large-modal {
+    max-width: 30%;  
   }
 
 
@@ -69,6 +69,38 @@
       Booking Recovered successfully!
       </div>
 
+      <div
+        id="recover-success-message"
+        class="alert alert-success text-center font-weight-bold alertmessage"
+        role="alert"
+        style="display: none; margin-top: 20px"
+      >
+      Bookings Recovered successfully!
+      </div>
+
+      <div
+        id="delete-success-message"
+        class="alert alert-success text-center font-weight-bold alertmessage"
+        role="alert"
+        style="display: none; margin-top: 20px"
+      >
+      Bookings Deleted successfully!
+      </div>
+
+
+        <div class="row">
+          <div class="col-6"></div>
+          <div class="col-4"></div>
+          <div class="col-1 Allrecover" style="display:none;"><button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#recoverallModal">
+            <i class="material-icons">replay</i> RECOVER
+            </button>
+          </div>
+          <div class="col-1 Alldelete" style="display:none;"><button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteallModal">
+            <i class="material-icons">delete</i> DELETE
+           </button>
+          </div>
+          
+        </div>
         <div class="row" id="supplier-allocation-content">
           <div class="col-lg-12 col-md-12 col-md-12">
             <div class="card">
@@ -82,57 +114,84 @@
                   <table class="table">
                     <thead>
                       <tr>
+                        <th class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="checkAll" value=""> 
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div></th>
+
                         <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >GUEST NAME</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
-                       
-                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP DATE</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >CONTACT PERSON</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >SUPPLIER</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP DATE</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP CATEGORY</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >CATEGORY</th>
                         
-                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP PACKAGE</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >PACKAGE</th> 
+                        <th class="text-center  text-rose" style="font-weight: 900;" >GUEST NAME</th>
+                       
+                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+
 
                         <th class="text-center  text-rose" style="font-weight: 900;" >NO : ADULT</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >NO : CHILD</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >NO : INFANT</th> 
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TOTAL AMOUNT</th>
+
                         <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
 
                         <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED DATE</th>
-                        <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >REMARK</th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>
+                         <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
 
                         <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for i in data %}
+                          <tr>
                       
-                        <tr>
-                          <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking_trip_id}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.guest_name}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.email}}</td>
+                          <td class="text-center" style="font-weight: 500; {% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}"><div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input row-checkbox" data-booking-trip-id="{{i.booking_trip_id}}" type="checkbox" value=""> 
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div></td>
+                          <td class="text-center" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{forloop.counter}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking_trip_id}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.trip_date}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.company}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.contact_person.name}} ( {{i.booking.contact_person.designation}} )</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.supplier.name}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.category}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.package.package_title}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.guest_name}}</td>
                           
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.contact_number}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.company}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.contact_person.name}} ( {{i.booking.contact_person.designation}} )</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.supplier}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.trip_date}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.category}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.package}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_adult}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_child}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_infant}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_mode}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_status}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_date}}</td>
-                          <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_by}}</td>
-                          
-                          
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.contact_number}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.no_of_adult}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.no_of_child}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.no_of_infant}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.total_amount}}</td>
+
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.payment_mode}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %} {% if i.booking.payment_status|lower == 'unpaid' %} color:orange;{% endif %} {% if i.booking.payment_status|lower == 'paid' %} color:green;{% endif %}">{{i.booking.payment_status}}</td>
+                          <td class="td-actions text-center" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">
+                            {% if i.remark %}
+                            <button type="button" rel="tooltip" class="btn btn-primary" data-toggle="modal" data-target="#remarkModal{{i.booking_trip_id}}" onclick="openremarkModal('{{i.booking_trip_id}}')"> <i class="material-icons">star</i> </button>
+                            <p id="remark_{{i.booking_trip_id}}" style="display:none;">{{i.remark}}</p>
+
+                            {% endif %}
+                          </td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.booked_by}}</td>
+
                             {% if i.booking.status|lower  == "active" %}
                             <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;">{{i.booking.status}}</td>
                             {% endif %}
@@ -157,6 +216,114 @@
                           <td class="text-center text-capitalize" style="font-weight: 500;"></td>
 
                       </tr>
+                      <div
+                class="modal "
+                id="recoverallModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="recoverallModalLabel"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog large-modal" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="recoverallModalLabel"
+                      >
+                        Recover Selected Bookings
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content"
+                    >
+                      <h3 class="text-center font-weight-bold">Do You Want to Recover Selected Bookings ?</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success font-weight-bold"
+                        id="recoverallBtn"
+                        
+                      >
+                        Recover
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div
+                class="modal "
+                id="deleteallModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="deleteallModalLabel"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog large-modal" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="deleteallModalLabel"
+                      >
+                        Delete Selected Bookings
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content"
+                    >
+                      <h3 class="text-center font-weight-bold">Are You Sure that you Want to Delete Selected Bookings ? You Can't retrive it later.</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger font-weight-bold"
+                        id="deleteallBtn"
+                        
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
                       <div
                       class="modal "
@@ -167,7 +334,7 @@
                       aria-hidden="true"
                       
                     >
-                      <div class="modal-dialog" role="document">
+                      <div class="modal-dialog large-modal" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h3
@@ -221,7 +388,7 @@
                       aria-hidden="true"
                       
                     >
-                      <div class="modal-dialog" role="document">
+                      <div class="modal-dialog large-modal" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h3
@@ -282,12 +449,11 @@
 <script>
 
 
-
-
   function openRecoverModal(id) {
     // Set the delete button in the modal to call deleteItem with the correct ID
     $("#recoverBtn" + id).attr("onclick", "recoverItem('" + id + "')");
   }
+  
 
   function recoverItem(id) {
     // Perform the AJAX request to delete the item
@@ -301,6 +467,8 @@
         if (response.status === "success") {
           // Update the table with the new data
           $("#supplier-allocation-content").html(response.updated_table_html);
+
+          checkboxevents();
 
           // Hide the modal
           $("#recoverModal" + id).modal("hide");
@@ -346,6 +514,8 @@
 
           $(".modal-backdrop").remove();
 
+          checkboxevents();
+
           // Show success message
           $("#dltsuccess-message").fadeIn().delay(3000).fadeOut();
         } else {
@@ -367,5 +537,198 @@
   
 
 </script>
+
+<script>
+// Handle "Select All" checkbox (id="checkAll")
+function checkboxevents(){
+  // "Select All" checkbox functionality
+  document.getElementById('checkAll').addEventListener('change', function() {
+      var checkboxes = document.querySelectorAll('.row-checkbox');
+      var isChecked = this.checked; // Get the state of the "Select All" checkbox
+      var recoverBtn = document.querySelector('.Allrecover');  
+      var deleteBtn = document.querySelector('.Alldelete');
+      // Recover button
+  
+      // Check or uncheck all row checkboxes based on the "Select All" checkbox state
+      checkboxes.forEach(function(checkbox) {
+          checkbox.checked = isChecked;
+      });
+  
+      // Show or hide the "Recover" button based on whether any checkboxes are selected
+      if (isChecked) {
+          recoverBtn.style.display = 'inline-block';
+          deleteBtn.style.display = 'inline-block';  // Show the recover button
+      } else {
+          recoverBtn.style.display = 'none';
+          deleteBtn.style.display = 'none';  // Hide the recover button
+      }
+  });
+
+  // Add event listener for individual checkboxes
+  document.querySelectorAll('.row-checkbox').forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+          fetchCheckedBookingTripIds();  // Re-fetch the IDs
+      });
+  });
+
+  // Function to fetch checked IDs
+  function fetchCheckedBookingTripIds() {
+      var checkedIds = [];
+      document.querySelectorAll('.row-checkbox:checked').forEach(function(checkbox) {
+          checkedIds.push(checkbox.getAttribute('data-booking-trip-id'));
+      });
+      console.log('Checked Booking Trip IDs:', checkedIds);
+
+      // Show or hide the "Recover" button based on whether any checkboxes are selected
+      var recoverBtn = document.querySelector('.Allrecover');
+      var deleteBtn = document.querySelector('.Alldelete');
+      if (checkedIds.length > 0) {
+          recoverBtn.style.display = 'inline-block';
+          deleteBtn.style.display = 'inline-block';  // Show the recover button
+          // Show the recover button
+      } else {
+          recoverBtn.style.display = 'none'; 
+          deleteBtn.style.display = 'none';  // Show the recover button
+          // Hide the recover button
+      }
+  }
+}
+
+// Call the checkboxevents function to bind the events initially
+checkboxevents();
+
+// Utility function to get the CSRF token from cookies
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+// Handle the "Recover" button click
+$(document).on('click','#recoverallBtn', function() {
+  var checkedIds = [];
+  
+  // Get all checked checkboxes
+  document.querySelectorAll('.row-checkbox:checked').forEach(function(checkbox) {
+      checkedIds.push(checkbox.getAttribute('data-booking-trip-id'));
+      console.log('Selected IDs for recovery:', checkedIds);  // Log selected IDs
+  });
+
+  // Check if there are any selected checkboxes
+  if (checkedIds.length > 0) {
+      // Perform the AJAX request to recover the selected items
+      $.ajax({
+          url: "/recover-multiple-bookings/",  // URL to recover bookings
+          type: "POST",  // Using POST to send data
+          contentType: "application/json",  // Important to set content type as JSON
+          data: JSON.stringify({
+              booking_trip_ids: checkedIds,  // Send the selected IDs
+          }),
+          headers: {
+              'X-CSRFToken': getCookie('csrftoken'),  // Include the CSRF token in the request headers
+          },
+          success: function(response) {
+              if (response.status === "success") {
+                  // Update the table with the new data
+                  $("#supplier-allocation-content").html(response.updated_table_html);
+
+                  // Reinitialize events for the new content
+                  checkboxevents();
+
+                  // Optionally, hide the "Recover" button or uncheck the checkboxes
+                  $(".row-checkbox:checked").prop("checked", false);
+                  $(".Allrecover").hide();
+                  $(".Alldelete").hide();
+                  $("#recoverallModal").modal("hide");
+                  $(".modal-backdrop").remove();  // Hide the recover button
+
+                  // Show success message
+                  $("#recover-success-message").fadeIn().delay(3000).fadeOut();
+              } else {
+                  alert("An error occurred while recovering the items.");
+              }
+          },
+          error: function(xhr, status, error) {
+              console.log("XHR response: ", xhr.responseText);  // Log the response from the server
+              alert("Error: " + error);
+              console.error("There was an error recovering the items:", error);
+          }
+
+
+      });
+  } else {
+      alert("No checkboxes are selected.");
+  }
+});
+
+$(document).on('click','#deleteallBtn', function() {
+  var checkedIds = [];
+  
+  // Get all checked checkboxes
+  document.querySelectorAll('.row-checkbox:checked').forEach(function(checkbox) {
+      checkedIds.push(checkbox.getAttribute('data-booking-trip-id'));
+      console.log('Selected IDs for recovery:', checkedIds);  // Log selected IDs
+  });
+
+  // Check if there are any selected checkboxes
+  if (checkedIds.length > 0) {
+      // Perform the AJAX request to recover the selected items
+      $.ajax({
+          url: "/delete-multiple-bookings-forever/",  // URL to recover bookings
+          type: "POST",  // Using POST to send data
+          contentType: "application/json",  // Important to set content type as JSON
+          data: JSON.stringify({
+              booking_trip_ids: checkedIds,  // Send the selected IDs
+          }),
+          headers: {
+              'X-CSRFToken': getCookie('csrftoken'),  // Include the CSRF token in the request headers
+          },
+          success: function(response) {
+              if (response.status === "success") {
+                  // Update the table with the new data
+                  $("#supplier-allocation-content").html(response.updated_table_html);
+
+                  // Reinitialize events for the new content
+                  checkboxevents();
+
+                  // Optionally, hide the "Recover" button or uncheck the checkboxes
+                  $(".row-checkbox:checked").prop("checked", false);
+                  $(".Allrecover").hide();
+                  $(".Alldelete").hide();
+                  $("#recoverallModal").modal("hide");
+                  $(".modal-backdrop").remove();  // Hide the recover button
+
+                  // Show success message
+                  $("#delete-success-message").fadeIn().delay(3000).fadeOut();
+              } else {
+                  alert("An error occurred while delete the items.");
+              }
+          },
+          error: function(xhr, status, error) {
+              console.log("XHR response: ", xhr.responseText);  // Log the response from the server
+              alert("Error: " + error);
+              console.error("There was an error delete the items:", error);
+          }
+
+
+      });
+  } else {
+      alert("No checkboxes are selected.");
+  }
+});
+
+
+
+</script>
+
 
 {% endblock content %}

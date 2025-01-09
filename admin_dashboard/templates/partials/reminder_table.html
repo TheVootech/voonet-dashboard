@@ -1,4 +1,4 @@
-<div class="row" id="supplier-allocation-content">
+
     <div class="col-2"></div>
     <div class="col-lg-8 col-md-12 col-md-12">
       <div class="card">
@@ -10,38 +10,39 @@
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
-                    <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
-                    <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
-                   
-                    <th class="text-center  text-rose" style="font-weight: 900;" >DESCRIPTION</th>
-                    <th class="text-center  text-rose" style="font-weight: 900;" >DATE</th>
-                    
-                    <th class="text-center  text-rose" style="font-weight: 900;" >TIME</th>
-                    <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
-                    <th class="text-center  text-rose" style="font-weight: 900;" ></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for i in data %}
-                  <tr>
-                    <tr>
-                      <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
-                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.reminder_id}}</td>
-                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
-                      
-                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.description}}</td>
-                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.date}}</td>
-                      
-                      <td class="text-center text-capitalize" style="font-weight: 500;">{{i.time}}</td>
+              <thead>
+                <tr>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                 
+                  <th class="text-center  text-rose" style="font-weight: 900;" >DESCRIPTION</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >DATE</th>
+                  
+                  <th class="text-center  text-rose" style="font-weight: 900;" >TIME</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
 
-                      <td class="td-actions text-center">
-                        
-                        
-                        
-                        
+                  <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
+                  <th class="text-center  text-rose" style="font-weight: 900;" ></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in data %}
+                <tr>
+                  <tr>
+                    <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.reminder_id}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
+                    
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.description}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.date}}</td>
+                    
+                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.time}}</td>
+                    <td class="text-center text-capitalize" style="font-weight: 500; {% if i.status == "Active" %}color:blue; {% else %} color:red;{% endif %}">{{i.status}}</td>
+
+
+                    <td class="td-actions text-center">
+                      
 
                         <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.reminder_id}}" onclick="openEditModal('{{i.reminder_id}}')"> <i class="material-icons">edit</i> </button>
 
@@ -63,7 +64,7 @@
                       
                       
                     >
-                      <div class="modal-dialog " role="document">
+                      <div class="modal-dialog extra-large-modal" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h3
@@ -153,4 +154,3 @@
       </div>
     </div>
     <div class="col-2"></div>
-  </div>

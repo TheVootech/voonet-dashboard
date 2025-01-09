@@ -10,30 +10,24 @@
     
   <form action="{% url "editpaymentmode" form.instance.payment_id %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supp-form">
     {% csrf_token %}
-    <div class="row mt-3">
-      
-        <label for="" class="text-black">Payment Mode</label>
 
-        <div class="form-group">
+    <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-3">
+    
+        <div class="col-md-12">
+            <div class=" form-group">
+                <label for="id_payment_mode" class="text-black">Payment Mode</label>
 
-          {{form.payment_mode}} {% if form.payment_mode.errors %}
-          <ul class="errorlist text-primary text-bold">
-            {% for error in form.payment_mode.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
+                {{ form.payment_mode }}
+            </div>
         </div>
-      
-      
-    <div class="row mt-5">
-      <div class="col-3"></div>
-      <div class="col-6">
-        <button type="submit" class="btn btn-rose w-100">
-          Edit Payment Mode
-        </button>
-      </div>
-      <div class="col-3"></div>
+    </div>
+        
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-lg-4 col-md-4 col-12">
+            <button class="btn btn-square btn-rose w-100 mt-4" type="submit">EDIT PAYMENT MODE</button>
+        </div>
+        <div class="col-4"></div>
     </div>
   </form>
 </div>

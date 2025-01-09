@@ -1,4 +1,3 @@
-<div class="row" id="supplier-allocation-content">
     <div class="col-lg-12 col-md-12 col-md-12">
       <div class="card">
         <div class="card-header card-header-rose card-header-icon">
@@ -13,7 +12,7 @@
                 <tr>
                   <th class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
                     <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" value=""> 
+                      <input class="form-check-input" id="checkAll" type="checkbox" value=""> 
                       <span class="form-check-sign">
                         <span class="check"></span>
                       </span>
@@ -39,7 +38,6 @@
                   <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
 
                   <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
-                  <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED DATE</th>
                   <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>                        <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
 
                   <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
@@ -51,7 +49,7 @@
                   <tr>
                     <td class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
                       <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value=""> 
+                        <input class="form-check-input row-checkbox" data-booking-trip-id="{{i.booking_trip_id}}" type="checkbox" value=""> 
                         <span class="form-check-sign">
                           <span class="check"></span>
                         </span>
@@ -74,7 +72,6 @@
                     <td class="text-center text-capitalize" style="font-weight: 500;">{{i.no_of_infant}}</td>
                     <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_mode}}</td>
                     <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.payment_status}}</td>
-                    <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_date}}</td>
                     <td class="text-center text-capitalize" style="font-weight: 500;">{{i.booking.booked_by}}</td>
                     
                     
@@ -106,6 +103,116 @@
 
                 </tr>
 
+
+                <div
+                class="modal "
+                id="recoverallModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="recoverallModalLabel"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog large-modal" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="recoverallModalLabel"
+                      >
+                        Recover Selected Bookings
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content"
+                    >
+                      <h3 class="text-center font-weight-bold">Do You Want to Recover Selected Bookings ?</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success font-weight-bold"
+                        id="recoverallBtn"
+                        
+                      >
+                        Recover
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div
+                class="modal "
+                id="deleteallModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="deleteallModalLabel"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog large-modal" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="deleteallModalLabel"
+                      >
+                        Delete Selected Bookings
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content"
+                    >
+                      <h3 class="text-center font-weight-bold">Are You Sure that you Want to Delete Selected Bookings ? You Can't retrive it later.</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger font-weight-bold"
+                        id="deleteallBtn"
+                        
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
                 <div
                 class="modal "
                 id="recoverModal{{i.booking_trip_id}}"
@@ -115,7 +222,7 @@
                 aria-hidden="true"
                 
               >
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog large-modal" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h3
@@ -169,7 +276,7 @@
                 aria-hidden="true"
                 
               >
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog large-modal" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h3
@@ -221,4 +328,3 @@
         </div>
       </div>
     </div>
-  </div>

@@ -14,6 +14,11 @@ urlpatterns = [
     path('recoverbooking/<str:pk>/',recover_booking_view,name='recoverbooking'),
     path('bookingtrash',view_booking_trash,name="bookingtrash"),
     path('deletebookingforver/<str:pk>/',delete_booking_forever_view,name='deletebookingforver'),
+    path('recover-multiple-bookings/',recover_multiple_bookings, name='recover_multiple_bookings'),
+    path('delete-multiple-bookings-forever/',delete_multiple_bookings_forever, name='recover_multiple_bookings_forever'),
+    path('delete-multiple-bookings/',delete_multiple_bookings, name='recover_multiple_bookings'),
+
+    
     
     path('viewdriverallocation',viewdriverallocation_view,name="view_driverallocation"),
     path('viewjobcard',view_jobcard_view,name="view_jobcard"),
@@ -37,7 +42,11 @@ urlpatterns = [
     path('locations/save/', save_location, name='save_location'),
     path('filter-bookings/', filter_bookings, name='filter_bookings'),
     path('filter-supplier/', filter_Supplier, name='filter_supplier'),
-
+    path('filter-driver/', filter_Driver, name='filter_driver'),
+    path('filter-guide/', filter_Guide, name='filter_guide'),
+    path('filter-reminder/', filter_reminder, name='filter_reminder'),
+    path('filter-customer/', filter_Customer, name='filter_customer'),
+    path('filter-package/', filter_Package, name='filter_package'),
     
     path('addcategory',addcategory_view,name="add_category"),
     path('viewcategory',View_category,name="view_category"),

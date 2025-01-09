@@ -73,6 +73,8 @@
           
         <form action="{% url 'add_guide' %}" method="post" enctype="multipart/form-data" class="form-horizontal text-black" id="supform">
           {% csrf_token %}
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Guide Details</h6>
           <div class="row mt-4">
             <div class="col-4">
 
@@ -90,19 +92,56 @@
             </div>
             
             <div class="col-4">
-                <label for="" class="text-black">License</label>
-                <div class="form-group pr-5">
-                  {{form.abudhabi_license}}
-                  <span class="font-weight-bold mr-2">Abu Dhabi</span>
-                  {{form.dubai_license}}
-                  <span class="font-weight-bold mr-2">Dubai</span>
-                  {{form.rak_license}}
-                  <span class="font-weight-bold mr-2">RAK</span>
-                  {{form.sharjah_license}}
-                  <span class="font-weight-bold mr-3">Sharjah</span>
-                  {{form.fujairah_license}}
-                  <span class="font-weight-bold mr-2">Fujairah</span>
+              <div class="row">
+                <label class="form-check-label text-black mb-3">Licensed Area</label>
+
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.abudhabi_license }}  Abu Dhabi<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
                 </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.dubai_license }}Dubai<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.rak_license }}RAK<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.sharjah_license }}Sharjah<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-check">
+                    <label class="form-check-label text-black">
+                        {{ form.fujairah_license }}Fujairah<span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+               
               </div>
 
 
@@ -196,13 +235,10 @@
 
           </div>
 
-          <hr>
-
-          
-          <hr>
+        </div>
+        <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+          <h6 class="text-center font-weight-bold mb-4 mt-2">License Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">License</h4>
-            <div class="row">
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">License Number</label>
@@ -245,10 +281,10 @@
             </div> 
           </div>
           
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Passport Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Passport</h4>
-            <div class="row">
+           
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Passport Number</label>
@@ -290,10 +326,10 @@
               </div>
             </div> 
           </div>
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Emirates ID Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Emirates ID</h4>
-            <div class="row">
+            
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Emirates ID Number</label>
@@ -335,10 +371,10 @@
               </div>
             </div> 
           </div>
-          <hr>
+          <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+            <h6 class="text-center font-weight-bold mb-4 mt-2">Visa Details</h6>
           <div class="row mt-4">
-            <h4 class="text-center font-weight-bold">Visa</h4>
-            <div class="row">
+            
               <div class="col-4">
               <div class="form-group">
                 <label for="" class="text-black">Visa Number</label>
@@ -381,12 +417,14 @@
             </div>
            
           </div>
-          <hr>
-          <div class="row mt-4">
-            <div class="row">
+          
+          <div class="row mt-1">
+            
               
-              <div class="col-4 mt-2">
-                <label for="" class="text-black mb-3">Upload Photos</label>
+              <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Photo</h6>
+                <label for="" class="text-black mb-3">Upload Photo</label>
                 {{form.photos}}
               <div class="form-group">
                  {% if form.photos.errors %}
@@ -398,9 +436,12 @@
                 {% endif %}
               </div>
               </div>
+            </div>
               <div class="col-4">
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Language</h6>
               <div class="form-group">
-                <label for="" class="text-black">Language</label>
+                <label for="" class="text-black mb-3">Language</label>
 
                 {{form.language}} {% if form.language.errors %}
                 <ul class="errorlist text-primary text-bold">
@@ -411,9 +452,12 @@
                 {% endif %}
               </div>
               </div>
+            </div>
               <div class="col-4">
-              <div class="form-group mt-3">
-                <label for="" class="text-black">Status</label>
+                <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                  <h6 class="text-center font-weight-bold mb-4 mt-2">Guide Status </h6>
+              <div class="form-group">
+                <label for="" class="text-black mb-4">Status</label>
 
                 {{form.status}} {% if form.status.errors %}
                 <ul class="errorlist text-primary text-bold">
