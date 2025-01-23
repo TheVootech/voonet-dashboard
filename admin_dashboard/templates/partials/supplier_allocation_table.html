@@ -1,4 +1,4 @@
-<div class="row">
+
   <div class="col-2"></div>
   <div class="col-lg-8 col-md-12 col-md-12">
     <div class="card">
@@ -13,19 +13,55 @@
           <table class="table">
             <thead>
               <tr>
-                <th class="text-center text-rose" style="font-weight: 900">
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
                   SL.NO
                 </th>
-                <th class="text-center text-rose" style="font-weight: 900">
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
                   PACKAGE ID
                 </th>
-                <th class="text-center text-rose" style="font-weight: 900">
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
                   PACKAGE TITLE
                 </th>
-                <th class="text-center text-rose" style="font-weight: 900">
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
                   SUPPLIER
                 </th>
-                <th class="text-center text-rose" style="font-weight: 900">
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
+                  ADULT PRICE
+                </th>
+
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
+                  CHILD PRICE
+                </th>
+
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
+                  INFANT PRICE
+                </th>
+
+                <th
+                  class="text-center text-rose"
+                  style="font-weight: 900"
+                >
                   ACTIONS
                 </th>
               </tr>
@@ -34,28 +70,62 @@
               {% for i in data %}
               <tr>
                 <td class="text-center" style="font-weight: 500">
-                  {{ forloop.counter }}
+                  {{forloop.counter}}
                 </td>
                 <td
                   class="text-center text-capitalize"
                   style="font-weight: 500"
                 >
-                  {{ i.package.package_id }}
+                  {{i.package.package_id}}
                 </td>
                 <td
                   class="text-center text-capitalize"
                   style="font-weight: 500"
                 >
-                  {{ i.package.package_title }}
+                  {{i.package.package_title}}
                 </td>
+
                 <td
                   class="text-center text-capitalize"
                   style="font-weight: 500"
                 >
-                  <ol class="mt-2 text-center">
-                    {% for j in i.supplier.all %}
-                    <li class="mt-1 pl-0 ml-0">{{ j.name }}</li>
-                    {% endfor %}
+                  <ol class="mt-2">
+                    
+                    {{i.supplier.name}} ( {{i.supplier.supplier_id}} )
+                    
+                  </ol>
+                </td>
+
+                <td
+                  class="text-center text-capitalize"
+                  style="font-weight: 500"
+                >
+                  <ol class="mt-2">
+                    
+                    {{i.adultprice}}
+                    
+                  </ol>
+                </td>
+
+                <td
+                  class="text-center text-capitalize"
+                  style="font-weight: 500"
+                >
+                  <ol class="mt-2">
+                    
+                    {{i.childprice}}
+                    
+                  </ol>
+                </td>
+
+                <td
+                  class="text-center text-capitalize"
+                  style="font-weight: 500"
+                >
+                  <ol class="mt-2">
+                    
+                    {{i.infantprice}}
+                    
                   </ol>
                 </td>
                 <td class="td-actions text-center">
@@ -90,7 +160,7 @@
                 aria-hidden="true"
                 data-backdrop=""
               >
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog extra-large-modal" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h3 class="modal-title" id="editModalLabel{{i.id}}">
@@ -170,4 +240,4 @@
     </div>
   </div>
   <div class="col-2"></div>
-</div>
+

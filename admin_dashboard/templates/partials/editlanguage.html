@@ -65,6 +65,11 @@ $.ajax({
             
             // Optionally show a success message
             $('#success-message').fadeIn().delay(3000).fadeOut();
+
+            $('body').removeClass('modal-open');
+
+            document.body.style.paddingRight = '0';
+    
         } else {
             // Handle error message (you can show a message inside the modal or elsewhere)
             alert('There was an error editing the allocation.');

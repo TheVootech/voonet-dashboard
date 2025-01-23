@@ -51,105 +51,161 @@
 
   <div class="row mt-5 mb-1">
     <div class="formset-container">
-        <!-- Management form for the formset -->
-        {{ formset.management_form }}
+      <!-- Management form for the formset -->
+      {{ formset.management_form }}
+      
+      <!-- Iterate over each form in the formset -->
+      {% for form in formset %}
+      <div class="formset mt-2 pl-3 pr-2">
         
-        <!-- Iterate over each form in the formset -->
-        {% for form in formset %}
-        <div class="formset mt-2 pl-3 pr-2">
-          
-            <h3 class="text-center font-weight-bold mb-3">Booking Details</h3>
-            
+          <h3 class="text-center font-weight-bold mb-3">Booking Details</h3>
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"><i class="material-icons delete-form" style="cursor: pointer; color: #4b0000; font-size: 36px; letter-spacing: 1px;">close</i>
+            </div>
+          </div>
 
-            <div class="row pl-3">
-                <!-- Guest details section -->
-                <div class="row guest-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
-                    <h5 class="text-center font-weight-bold mb-5 mt-2">Guest Details</h5>
+          <div class="row pl-3">
+              <!-- Guest details section -->
+              <div class="row guest-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+                  <h5 class="text-center font-weight-bold mb-5 mt-2">Guest Details</h5>
 
-                    {% for field in form %}
-                        {% if field.name == 'guest_name' or field.name == 'email' or field.name == 'contact_number' or field.name == 'whatsapp_number' %}
-                        <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
-                            <div class="form-group">
-                                <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
-                                {{ field }}
-                            </div>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-
-                <!-- Trip details section -->
-                <div class="row trip-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
-                    <h5 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h5>
-
-                    {% for field in form %}
-                        {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' and field.name != 'total_amount' and field.name != 'vat' and field.name != 'include' and field.name != 'exclude'%}
-                        <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
-                            <div class="form-group">
-                                {% if field.name != 'booking_trip_id' and field.name != 'booking' and field.name != 'is_deleted' %}
-                                <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
-                                {% endif %}
-                                {{ field }}
-                            </div>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-
-                    <!-- Add remark field at the bottom of the trip details section with col-12 (full width) -->
-                    <div class="col-12 mb-3 dynamic-field" data-field-name="remark">
-                        <div class="form-group">
-                            <label for="{{ form.remark.id_for_label }}" class="text-black">{{ form.remark.label }}</label>
-                            {{ form.remark }}
-                        </div>
-                    </div>
-                    <div class="col-5 mb-3 dynamic-field" data-field-name="total_amount">
-                      <div class="form-group">
-                          <label for="{{ form.total_amount.id_for_label }}" class="text-black">{{ form.total_amount.label }}</label>
-                          {{ form.total_amount }}
-                      </div>
-                  </div>
-                  <div class="col-2 mb-3 dynamic-field">
-                          
-                  </div>
-                    <div class="col-5 mb-3 dynamic-field" data-field-name="vat">
-                      <div class="form-group">
-                          <label for="{{ form.vat.id_for_label }}" class="text-black">{{ form.vat.label }}</label>
-                          {{ form.vat }}
-                      </div>
-                      <div class="row mt-2">
-                        <div class="col-6 mb-3 dynamic-field" data-field-name="include">
-                          <div class="form-check">
-                            <label class="form-check-label text-black">
-                                {{ form.include }}  Include VAT<span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
+                  {% for field in form %}
+                      {% if field.name == 'guest_name' or field.name == 'email' or field.name == 'contact_number' or field.name == 'whatsapp_number' %}
+                      <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
+                          <div class="form-group">
+                              <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                              {{ field }}
                           </div>
                       </div>
-                      <div class="col-6 mb-3 dynamic-field" data-field-name="exclude">
-                        <div class="form-check">
-                          <label class="form-check-label text-black">
-                              {{ form.exclude }}  Exclude VAT<span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                          </label>
-                        </div>
+                      {% endif %}
+                  {% endfor %}
+              </div>
+
+              <!-- Trip details section -->
+              <div class="row trip-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+                  <h5 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h5>
+
+                  {% for field in form %}
+                      {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' and field.name != 'total_amount' and field.name != 'vat' and field.name != 'exclude' and field.name != 'include'%}
+                      <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
+                          <div class="form-group">
+                              {% if field.name != 'booking_trip_id' and field.name != 'booking' and field.name != 'is_deleted' %}
+                              <label for="{{ field.id_for_label }}" class="text-black">{{ field.label }}</label>
+                              {% endif %}
+                              {{ field }}
+                          </div>
                       </div>
+                      {% endif %}
+                  {% endfor %}
+
+                  <!-- Add remark field at the bottom of the trip details section with col-12 (full width) -->
+                  <div class="col-12 dynamic-field mb-2" data-field-name="remark">
+                      <div class="form-group">
+                          <label for="{{ form.remark.id_for_label }}" class="text-black">{{ form.remark.label }}</label>
+                          {{ form.remark }}
                       </div>
                   </div>
+
+                  <div class="col-5 dynamic-field" data-field-name="total_amount" hidden>
+                    <div class="form-group">
+                        <label for="{{ form.total_amount.id_for_label }}" class="text-black">{{ form.total_amount.label }}</label>
+                        {{ form.total_amount }}
+                    </div>
+
+                    
+
                 </div>
 
-                {% if forloop.counter|divisibleby:3 %}
-                <div class="row">
-                {% endif %}
+                <div class="col-3 mb-3 dynamic-field" data-field-name="vat">
+                  <div class="form-group">
+                      <label for="{{ form.vat.id_for_label }}" class="text-black">VAT %</label>
+                      {{ form.vat }}
+                  </div>
+                </div>
+                <div class="col-6 mb-3 dynamic-field">
+                  
+                </div>
                 
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+                
+                  
+                  <div class="col-3 dynamic-field mt-3" data-field-name="exclude">
+                    <div class="form-check">
+                      <label class="form-check-label text-black font-weight-bold">
+                          {{ form.exclude }}  Exclude VAT<span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
 
-    <!-- Add Button to dynamically add new contact forms -->
-    
+                  
+                  
+                <div class="row pl-5 ">
+                <div class="card">
+                  <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">account_balance_wallet </i>
+                    </div>
+                  </div>
+                <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >ADULT</th>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >CHILD</th>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >INFANT</th>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >TOTAL AMOUNT</th>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >VAT AMOUNT</th>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >GRAND TOTAL</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                        {% for i in data %}
+                        <tr>
+                        <td class="text-center" style="font-weight: 500;" id="adulttable-0">{{i.no_of_adult}} X {{i.rate_of_adult}} = {{i.total_adult_cost}}</td>
+                        <td class="text-center" style="font-weight: 500;" id="childtable-0">{{i.no_of_child}} X {{i.rate_of_child}} = {{i.total_child_cost}}</td>
+                        <td class="text-center" style="font-weight: 500;" id="infanttable-0">{{i.no_of_infant}} X {{i.rate_of_infant}} = {{i.total_infant_cost}}</td>
+                        <td class="text-center" style="font-weight: 500;" id="totalamount-0">{{ i.total_amount_}}</td>
+
+                        <td class="text-center" style="font-weight: 500;" id="vattable-0">{{ i.vat_amount}}</td>
+                        <td class="text-center" style="font-weight: 500;" id="grandtotal-0">{{i.grand_total}}</td>
+                        </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+ 
+              
+              </div>
+
+              {% if forloop.counter|divisibleby:3 %}
+              <div class="row">
+              {% endif %}
+              
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+
+  <!-- Add Button to dynamically add new contact forms -->
+  
 </div>
 
 
@@ -164,6 +220,21 @@
 <div class="row pl-3 pr-3">
   <div class="payment rounded border pt-3 pl-2 pr-2 pb-5 mb-5">
     <h5 class="text-center font-weight-bold mb-3">Payment Details</h5>
+
+
+
+    <div class="col-12 mt-2" hidden>
+      <label for="" class="text-black">Grand Total :</label>
+      <div class="form-group">
+        {{form.grand_total}} {% if form.grand_total.errors %}
+        <ul class="errorlist text-primary text-bold">
+          {% for error in form.grand_total.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
 
     <div class="col-12 mt-2">
       <label for="" class="text-black">Payment ref No :</label>
@@ -268,6 +339,10 @@ $.ajax({
             
             // Update the supplier allocation table dynamically
             $('#supplier-allocation-content').html(response.updated_table_html);
+
+            $('body').removeClass('modal-open');
+
+            document.body.style.paddingRight = '0';
             
             // Optionally show a success message
             $('#success-message').fadeIn().delay(3000).fadeOut();

@@ -550,6 +550,11 @@
                         
                         // Remove the backdrop
                         $('.modal-backdrop').remove(); 
+
+
+                        $('body').removeClass('modal-open');
+
+                        document.body.style.paddingRight = '0';
                         
                         // Update the supplier allocation table dynamically
                         $('#supplier-allocation-content').html(response.updated_table_html);

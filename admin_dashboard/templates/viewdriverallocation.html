@@ -1,187 +1,1120 @@
-{% extends "base.html" %}
+
+
+
+
+
+{% extends "base.html" %} 
 {% block content %}
 
+<style>
+  .extra-large-modal {
+    max-width: 60%;  
+  }
+
+  .large-modal {
+    max-width: 30%;  
+  }
+
+
+
+    .alertmessage{
+        position: fixed; 
+        top: 1px; 
+        left:55%;
+        transform: translateX(-50%); 
+        padding: 30px 30px; 
+        background-color: #4CAF50; 
+        color: white; 
+        font-size: 16px; 
+        border-radius: 3px; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        z-index: 1000; 
+        width: 50%; /* This makes the alert have the same width as col-6 */
+    }
+
+</style>
 
 <div class="content">
-    <div class="container-fluid">
-        <div class="row text-center">
-            <h2 class="font-weight-bold" style="font-family:poppins,serif;color:#4b0000;">Driver Allocation</h2>
+  <div class="container-fluid">
+    <div class="col-1">
+      <button class="btn" onclick="window.history.back()" style="background-color:#01052b;color:white;">            <i class="material-icons">arrow_back</i>
+      </button>
+      </div>
+    <div class="row text-center">
+      
+      <h2
+        class="font-weight-bold mb-2"
+        style="font-family: poppins, serif; color: #000"
+      >
+        View Driver/Guide/Supplier Allocations
+      </h2>
+    </div>
+    
+
+    <div class="card mt-5">
+      <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">filter_alt</i>
+        </div>
+      </div>
+      <div class="card-body ">
+        <form action="" method="get" id="filter-form">
+        <div class="row d-flex justify-content-center gap-5">
+    
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black mb-3">Date from</label>
+
+
+              {{form.date_from}} {% if form.date_from.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.date_from.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black mb-3">Date to</label>
+
+
+              {{form.date_to}} {% if form.date_to.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.date_to.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black mb-2">Category</label>
+
+
+
+              {{form.category}} {% if form.category.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.category.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Package</label>
+
+
+              {{form.package}} {% if form.package.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.package.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Customer/Company</label>
+
+
+              {{form.customer}} {% if form.customer.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.customer.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center gap-5">
+          
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Payment Mode</label>
+
+
+              {{form.payment_mode}} {% if form.payment_mode.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.payment_mode.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black ">Payment Status</label>
+
+
+              {{form.payment_status}} {% if form.payment_status.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.payment_status.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Supplier</label>
+
+
+              {{form.supplier}} {% if form.supplier.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.supplier.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Booked by</label>
+
+
+              {{form.booked_by}} {% if form.booked_by.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.booked_by.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="bmd-label-floating text-black">Status</label>
+
+
+              {{form.status}} {% if form.status.errors %}
+              <ul class="errorlist text-primary text-bold">
+                {% for error in form.status.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          
+        </div>
+        <div class="row mt-4 mb-2  d-flex justify-content-center">
+          
+          <div class="col-1">
+            <button type="submit" class="btn w-100"  style="background-color:#023817;color:white;">Filter</button>
+
+          </div>
+          <div class="col-1">
+            <button type="reset" class="btn w-100"  style="background-color:#380202;color:white;">Reset</button>
+
+          </div>
+          
+        </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      
+        <div
+          id="assign-success-message"
+          class="alert alert-success text-center font-weight-bold alertmessage"
+          role="alert"
+          style="display: none; margin-top: 20px"
+        >
+        Driver/Guide/Supplier Assigned Successfully
         </div>
 
-        <div class="border border-primary searchsection mt-3">
-            <div class="row text-center mt-2">
-                <h6>Search</h6>
-            </div>
-            <form>
-                <div class="row mt-2 pl-3 pr-3">
-                    <div class="col-4">
-                        <div class="row text-black align-items-center">
-                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Ref no</label>
-                            <div class="col-md-9">
-                              <div class="form-group ">
-                                  <input type="text" class="form-control border border-primary pl-4 pr-4" data-style="btn btn-primary btn-square">
-                              </div>
-                            </div>
-                          </div>
-                        
-                    </div>
-    
-                    <div class="col-4">
-                        <div class="row text-black align-items-center">
-                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Package</label>
-                            <div class="col-md-9">
-                              <div class="form-group ">
-                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                                  <option selected disabled>Select</option>
-                                  <option value="1">One</option>
-                                </select>
-                                     </div>
-                            </div>
-                          </div>
-                    </div>
-    
-                    <div class="col-4">
-                        <div class="row text-black align-items-center">
-                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Company/ Hotel</label>
-                            <div class="col-md-9">
-                              <div class="form-group ">
-                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                                  <option selected disabled>Select</option>
-                                  <option value="1">One</option>
-                                </select>
-                                     </div>
-                            </div>
-                          </div>
-                    </div>
-    
-                    
+
+        <div
+          id="delete-success-message"
+          class="alert alert-success text-center font-weight-bold alertmessage"
+          role="alert"
+          style="display: none; margin-top: 20px"
+        >
+        Bookings Deleted successfully!
+        </div>
+
+        <div
+          id="dltsuccess-message"
+          class="alert alert-success text-center font-weight-bold alertmessage"
+          role="alert"
+          style="display: none; margin-top: 20px"
+        >
+        Booking Deleted successfully!
+        </div>
+
+        <div class="row">
+          <div class="col-6"></div>
+          <div class="col-4"></div>
+          
+          <div class="col-2 Assignbtn w-100"><button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#deleteallModal">
+            <i class="material-icons">settings</i> Assign Driver/Guide/Supplier
+           </button>
+          </div>
+          
+        </div>
+      </div>
+
+        <div class="row" id="supplier-allocation-content">
+          <div class="col-lg-12 col-md-12 col-md-12">
+            <div class="card">
+              <div class="card-header card-header-rose card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">assignment</i>
                 </div>
-                <div class="row mt-2 pl-3 pr-3">
-                    <div class="col-4">
-                        <div class="row text-black align-items-center">
-                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Tour Date</label>
-                            <div class="col-md-9">
-                              <div class="form-group ">
-                                  <input type="text" class="form-control border border-primary">
-                              </div>
-                            </div>
-                          </div>
-                        
-                    </div>
-    
-                    <div class="col-4">
-                        <div class="row text-black align-items-center">
-                            <label class="col-md-3 col-form-label text-black" style="font-size: 15px;">Billing Mode</label>
-                            <div class="col-md-9">
-                              <div class="form-group ">
-                                <select class="form-select bg-none border border-primary" aria-label="Default select example" style="background-color: transparent;border-radius: 0;">
-                                  <option selected disabled>Select</option>
-                                  <option value="1">One</option>
-                                </select>
-                                     </div>
-                            </div>
-                          </div>
-                    </div>
-    
-                    <div class="col-4">
-                        <div class="row text-black align-items-center">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary w-100 mt-2">Search</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="reset" class="btn btn-primary w-100 mt-2">Reset</button>
-
-                            </div>
-
-                          </div>
-                    </div>
-    
-                    
-                
-            </form>
-            </div>
-        </div>
-
-        <div class="tablesection mt-4">
-            <div class="card-body">
+              </div>
+              <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table-bordered table-stripened">
+                  <table class="table">
                     <thead>
-                      <tr style="background-color: #381111;color:#ffffff;">
-                        <th class="text-center p-2 border-secondary"></th>
-                        <th class="text-center p-2 border-secondary">Ref No</th>
-                        <th class="text-center p-2 border-secondary">Date</th>
-                        <th class="text-center p-2 border-secondary">Tour Package</th>
-                        <th class="text-center p-2 border-secondary">Customer</th>
-                        <th class="text-center p-2 border-secondary">PickUp location</th>
-                        <th class="text-center p-2 border-secondary">PickUp Time</th>
-                        <th class="text-center p-2 border-secondary">Contact</th>
-                        <th class="text-center p-2 border-secondary">Contact no</th>
-                        <th class="text-center p-2 border-secondary">Room no</th>
-                        <th class="text-center p-2 border-secondary">Name/Ticket</th>
-                        <th class="text-center p-2 border-secondary">Guest Ref no</th>
-                        <th class="text-center p-2 border-secondary">Adult</th>
-                        <th class="text-center p-2 border-secondary">Price</th>
-                        <th class="text-center p-2 border-secondary">Child</th>
-                        <th class="text-center p-2 border-secondary">Price</th>
-                        <th class="text-center p-2 border-secondary">Infant</th>
-                        <th class="text-center p-2 border-secondary">Foc</th>
-                        <th class="text-center p-2 border-secondary">Sub Total</th>
-                        <th class="text-center p-2 border-secondary">VAT</th>
-                        <th class="text-center p-2 border-secondary">Grand Total</th>
-                        <th class="text-center p-2 border-secondary">Billing Mode</th>
-                        <th class="text-center p-2 border-secondary">Special</th>
-                        <th class="text-center p-2 border-secondary">Package Status</th>
-                        <th class="text-center p-2 border-secondary">Booked by</th>
-                        <th class="text-center p-2 border-secondary">Edit</th>
+                      <tr>
+                        <th class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" id="checkAll" type="checkbox" value=""> 
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div></th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TRIP DATE</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >CUSTOMER</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >CONTACT PERSON</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >SUPPLIER</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >GUIDE</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >DRIVER</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >CATEGORY</th>
+                        
+                        <th class="text-center  text-rose" style="font-weight: 900;" >PACKAGE</th> 
+                        <th class="text-center  text-rose" style="font-weight: 900;" >GUEST NAME</th>
+                       
+                        <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NO : ADULT</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NO : CHILD</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >NO : INFANT</th> 
+                        <th class="text-center  text-rose" style="font-weight: 900;" >TOTAL AMOUNT</th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT MODE</th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >PAYMENT STATUS</th>
+                        <th class="text-center  text-rose" style="font-weight: 900;" >REMARK</th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >BOOKED BY</th>
+                         <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+                        <th class="text-center  text-rose" style="font-weight: 900;" >ACTIONS</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><div class="form-check">
+                      {% for i in data %}
+                          <tr>
+                      
+                          <td class="text-center" style="font-weight: 500; {% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}"><div class="form-check">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
+                              <input class="form-check-input row-checkbox" type="checkbox" data-booking-trip-id="{{i.booking_trip_id}}" value=""> 
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>
                             </label>
                           </div></td>
-                        <td class="text-center">1</td>
-                        
-                        </td>
-                        <td>Moleskine Agenda</td>
-                        <td>Office</td>
-                        <td>25</td>
-                        <td class="text-right">&euro; 49</td>
-                        <td class="text-right">&euro; 1,225</td>
-                        <td>Moleskine Agenda</td>
-                        <td>Office</td>
-                        <td>25</td>
-                        <td class="text-right">&euro; 49</td>
-                        <td class="text-right">&euro; 1,225</td>
-                        <td>Moleskine Agenda</td>
-                        <td>Office</td>
-                        <td>25</td>
-                        <td class="text-right">&euro; 49</td>
-                        <td class="text-right">&euro; 1,225</td>
-                        <td>Moleskine Agenda</td>
-                        <td>Office</td>
-                        <td>25</td>
-                        <td class="text-right">&euro; 49</td>
-                        <td class="text-right">&euro; 1,225</td>
-                        <td>Moleskine Agenda</td>
-                        <td>Office</td>
-                        <td>25</td>
-                        <td class="text-right">&euro; 49</td>
+                          <td class="text-center" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{forloop.counter}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking_trip_id}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.trip_date}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.company}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.contact_person.name}} ( {{i.booking.contact_person.designation}} )</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.supplier.name}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.guide.name}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.driver.name}}</td>
+
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.category}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.package.package_title}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.guest_name}}</td>
+                          
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.contact_number}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.no_of_adult}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.no_of_child}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.no_of_infant}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.total_amount}}</td>
+
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.payment_mode}}</td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %} {% if i.booking.payment_status|lower == 'unpaid' %} color:orange;{% endif %} {% if i.booking.payment_status|lower == 'paid' %} color:green;{% endif %}">{{i.booking.payment_status}}</td>
+                          <td class="td-actions text-center" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">
+                            {% if i.remark %}
+                            <button type="button" rel="tooltip" class="btn btn-primary" data-toggle="modal" data-target="#remarkModal{{i.booking_trip_id}}" onclick="openremarkModal('{{i.booking_trip_id}}')"> <i class="material-icons">star</i> </button>
+                            <p id="remark_{{i.booking_trip_id}}" style="display:none;">{{i.remark}}</p>
+
+                            {% endif %}
+                          </td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.booked_by}}</td>
+                          
+                          
+                            {% if i.booking.status|lower  == "active" %}
+                            <td class="text-center text-capitalize" style="font-weight: 800;color:#000080;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.status}}</td>
+                            {% endif %}
+                            {% if i.booking.status|lower  == "inactive" %}
+                            <td class="text-center text-capitalize" style="font-weight: 800;color:red;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.status}}</td>
+                            {% endif %}
+                            {% if i.booking.status|lower  == "blocked" %}
+                            <td class="text-center text-capitalize" style="font-weight: 800;color:#ff0000;{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">{{i.booking.status}}</td>
+                            {% endif %}
+
+                          <td class="td-actions text-center" style="{% if i.booking.status|lower == 'inactive' %} background-color: #EEDC82; {% endif %}">
+                            
+                            <button type="button" rel="tooltip" class="btn btn-info" >
+                                <i class="material-icons"><a href="{% url "booking_details" i.booking_trip_id %}" style="color: white;">visibility</a></i>
+                            </button>
+                            
+                            
+
+                            <button type="button" rel="tooltip" class="btn btn-success" data-toggle="modal" data-target="#editModal{{i.booking.booking_id}}" onclick="openEditModal('{{i.booking.booking_id}}','{{i.booking_trip_id}}')"> <i class="material-icons">edit</i> </button>
+
+
+                            
+                          </td>
+                          <td class="text-center text-capitalize" style="font-weight: 500;"></td>
+
                       </tr>
-                     
+                      <div
+                class="modal "
+                id="deleteallModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="deleteallModalLabel"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog large-modal" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="deleteallModalLabel"
+                      >
+                        Assign Driver/Guide/Supplier
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content"
+                    >
+                    <form  enctype="multipart/form-data" method="post" id="assign-form">
+                      {% csrf_token %}
+
+                      <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-3">
+                      <h6 class="text-center mb-2">Select Driver</h6>
+                          <div class="col-md-12">
+                              <div class=" form-group">
+                                  <label for="id_payment_mode" class="text-black">Driver</label>
+
+                                  {{ assignform.driver }}
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                        <h6 class="text-center mb-2">Select Guide</h6>
+
+                        <div class="col-md-12">
+                            <div class=" form-group">
+                                <label for="id_payment_mode" class="text-black">Guide</label>
+
+                                {{ assignform.guide }}
+                            </div>
+                        </div>
+                      </div>
+
+
+                      <div class="package rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                        <h6 class="text-center mb-2">Select Supplier</h6>
+
+                        <div class="col-md-12">
+                            <div class=" form-group">
+                                <label for="id_payment_mode" class="text-black">Supplier</label>
+
+                                {{ assignform.suppliers }}
+                            </div>
+                        </div>
+                      </div>
+                          
+                      <div class="row">
+                          <div class="col-4"></div>
+                          <div class="col-lg-4 col-md-4 col-12">
+                              <button class="btn btn-square btn-rose w-100 mt-4" type="submit">Assign</button>
+                          </div>
+                          <div class="col-4"></div>
+                      </div>
+                  </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                      <div
+                          class="modal"
+                          id="remarkModal{{i.booking_trip_id}}"
+                          tabindex="-1"
+                          role="dialog"
+                          aria-labelledby="remarkModalLabel{{i.booking_trip_id}}"
+                          aria-hidden="true"
+                          
+                          
+                        >
+                          <div class="modal-dialog extra-large-modal" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h3
+                                  class="modal-title font-weight-bold"
+                                  id="remarkModalLabel{{i.booking_trip_id}}"
+                                >
+                                  Remark 
+                                </h3>
+                                <button
+                                  type="button"
+                                  class="close"
+                                  data-dismiss="modal"
+                                  aria-label="Close"
+                                >
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div
+                                class="modal-body"
+                                id="modal-content-{{i.booking_trip_id}}"
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      <div
+                          class="modal"
+                          id="editModal{{i.booking.booking_id}}"
+                          tabindex="-1"
+                          role="dialog"
+                          aria-labelledby="editModalLabel{{i.booking.booking_id}}"
+                          aria-hidden="true"
+                          
+                          
+                        >
+                          <div class="modal-dialog extra-large-modal" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h3
+                                  class="modal-title font-weight-bold"
+                                  id="editModalLabel{{i.booking.booking_id}}"
+                                >
+                                  Edit Booking 
+                                </h3>
+                                <button
+                                  type="button"
+                                  class="close"
+                                  data-dismiss="modal"
+                                  aria-label="Close"
+                                >
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div
+                                class="modal-body"
+                                id="modal-content-{{i.booking.booking_id}}"
+                              >
+                                <!-- Form will be loaded here -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                      
+
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<script>
+  function openremarkModal(bookingTripId) {
+    // Get the remark content dynamically from the data or DOM
+    var remarkContent = document.getElementById('remark_' + bookingTripId).textContent;
+
+    // Get the modal content container
+    var modalContent = document.getElementById('modal-content-' + bookingTripId);
+    
+    // Update the modal's content with the remark
+    modalContent.innerHTML = `<div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8 text-center font-weight-bold">
+                                  <h3>${remarkContent}</h3>
+                                </div>
+                                <div class="col-2"></div>
+                              </div>`;
+  
+    // Show the modal using Bootstrap's modal method
+}
+
+
+
+  
+
+  function openEditModal(id,trip_id) {
+    
+    $.ajax({
+      url: "/edit_booking/" + id + "/",
+      type: "GET",
+      data: { trip_id: trip_id },
+      success: function (response) {
+        // On success, load the form HTML into the modal body
+        $("#modal-content-" + id).html(response.form_html);
+  
+        // Reinitialize modal scripts after the new content is injected
+        initializeModalScripts();
+        catfields();
+        packageselect();
+        contact();
+      },
+      error: function (xhr, status, error) {
+        // Handle error and show an error message in the modal
+        $("#modal-content-" + id).html("<p>There was an error fetching the form. Please try again later.</p>");
+        console.error("There was an error fetching the form: ", error);
+      },
+    });
+  }
+
+  function catfields() {
+    
+    // When the category is changed, show the fields dynamically based on the selected category
+    $(document).off('change', '[id^="id_bookingtripdetails-"][id$="-category"]').on('change', '[id^="id_bookingtripdetails-"][id$="-category"]', function () {
+        var $categoryField = $(this);  // The category dropdown that was changed
+        var categoryId = $categoryField.val();  // Get the selected category ID
+
+        // Get the form this category field belongs to
+        var $form = $categoryField.closest('#supp-form');
+
+        if (categoryId) {
+            // AJAX call to get field visibility based on the selected category
+            $.ajax({
+                url: "{% url 'get_category_fields' %}",
+                data: { category_id: categoryId },
+                success: function (response) {
+                    if (response.success) {
+                        var fields = response.fields;
+
+                        // Show all fields in the form by default
+                        $form.find(".dynamic-field").hide();
+                        $form.find("[data-field-name='category'], [data-field-name='package'],[data-field-name='supplier'],[data-field-name='guest_name'],[data-field-name='email'],[data-field-name='whatsapp_number'],[data-field-name='contact_number']").show();
+
+                        // Show or hide fields based on the response data
+                        for (var fieldName in fields) {
+                            if (fields[fieldName]) {
+                                $form.find("[data-field-name='" + fieldName + "']").show();
+                            } else {
+                                $form.find("[data-field-name='" + fieldName + "']").hide();
+                            }
+                        }
+                    } else {
+                        alert(response.error || 'Unable to fetch category field data.');
+                    }
+                },
+                error: function () {
+                    alert('Unable to fetch category field data. Please try again.');
+                }
+            });
+        } else {
+            // If no category is selected, hide all fields
+            $form.find(".dynamic-field").hide();
+        }
+    });
+}
+
+
+function packageselect(){
+
+  $(document).on('change', '[id^="id_bookingtripdetails-"][id$="-category"]', function () {
+    var $categoryField = $(this);
+    var categoryId = $categoryField.val();
+
+    // Dynamically determine the package dropdown related to the changed category field
+    var packageFieldId = $categoryField.attr('id').replace('-category', '-package');
+    var $packageDropdown = $('#' + packageFieldId);
+
+    $packageDropdown.empty(); // Clear existing options
+
+    if (categoryId) {
+        $.ajax({
+            url: "{% url 'get_package' %}",
+            data: { category_id: categoryId },
+            success: function (data) {
+                $packageDropdown.append('<option value="">Select Package</option>');
+                data.forEach(function (package) {
+                    $packageDropdown.append('<option value="' + package.package_id + '">' + package.package_title + '</option>');
+                });
+            },
+            error: function () {
+                alert('Unable to fetch packages. Please try again later.');
+            }
+        });
+    }
+});
+}
+
+function contact(){
+  
+  $(document).on('change', '[id^="id_company"]', function () {
+    var $companyField = $(this);
+    var companyId = $companyField.val();
+
+    // Dynamically determine the contact person dropdown related to the changed company field
+    var contactPersonFieldId = $companyField.attr('id').replace('_company', '_contact_person');
+    var $contactPersonDropdown = $('#' + contactPersonFieldId);
+
+    $contactPersonDropdown.empty(); // Clear existing options
+
+    if (companyId) {
+        $.ajax({
+            url: "{% url 'get_contact_persons' %}",
+            data: { company_id: companyId },
+            success: function (data) {
+                $contactPersonDropdown.append('<option value="">Select Contact Person</option>');
+                data.forEach(function (contact) {
+                    $contactPersonDropdown.append('<option value="' + contact.id + '">' + contact.name + ' (' + contact.designation + ')</option>');
+                });
+            },
+            error: function () {
+                alert('Unable to fetch contact persons. Please try again later.');
+            }
+        });
+    }
+});
+}
+
+  function initializeModalScripts() {
+    $(document).off('click', '#add-form').on('click', '#add-form', function(event){
+          // Get the next form index (based on the current number of forms)
+          var formIdx = document.querySelectorAll('.formset').length;  // Start from 0 for the first form
+          console.log(formIdx);
+  
+          // Clone the first form in the formset
+          var newForm = document.querySelector('.formset').cloneNode(true);
+  
+          // Replace __prefix__ in name and id with the new form index
+          const regex = /__prefix__/g;
+          newForm.innerHTML = newForm.innerHTML.replace(regex, formIdx);
+  
+          // Set the new ID for the form
+          newForm.setAttribute('id', `formset${formIdx}`);
+
+          // Select all input, select, and textarea elements in the cloned form
+          var inputs = newForm.querySelectorAll('input, select, textarea');
+
+          // Loop through each input field and reset its value
+          inputs.forEach(function(input) {
+              // Skip the 'id' field (exclude resetting the id field)
+              if (input.id.includes('id_')) {
+                  // Only reset the value for fields other than the 'id' field
+                  if (input.id !== 'id_booking_trip_details_set-0-booking_trip_id') { // Example for id field
+                      input.value = '';
+
+                      // For checkboxes or radio buttons, uncheck them
+                      if (input.type === 'checkbox' || input.type === 'radio') {
+                          input.checked = false;
+                      }
+                  }
+              }
+          });
+
+  
+          // Reset all input values in the new form (clear values)
+          var category = newForm.querySelector('#id_booking_trip_details_set-0-category');
+          
+          // Update the ID and name attributes
+          category.setAttribute('id', `id_booking_trip_details_set-${formIdx}-category`);
+          category.setAttribute('name', `booking_trip_details_set-${formIdx}-category`);
+  
+          var package = newForm.querySelector('#id_booking_trip_details_set-0-package');
+          
+          // Update the ID and name attributes
+          package.setAttribute('id', `id_booking_trip_details_set-${formIdx}-package`);
+          package.setAttribute('name', `booking_trip_details_set-${formIdx}-package`);
+  
+  
+          var trip_date = newForm.querySelector('#id_booking_trip_details_set-0-trip_date');
+          
+          // Update the ID and name attributes
+          trip_date.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_date`);
+          trip_date.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_date`);
+  
+  
+          var trip_time = newForm.querySelector('#id_booking_trip_details_set-0-trip_time');
+          
+          // Update the ID and name attributes
+          trip_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-trip_time`);
+          trip_time.setAttribute('name', `booking_trip_details_set-${formIdx}-trip_time`);
+  
+  
+          var no_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-no_of_adult');
+          
+          // Update the ID and name attributes
+          no_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_adult`);
+          no_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_adult`);
+  
+  
+          var no_of_child = newForm.querySelector('#id_booking_trip_details_set-0-no_of_child');
+          
+          // Update the ID and name attributes
+          no_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_child`);
+          no_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_child`);
+  
+          var no_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-no_of_infant');
+          
+          // Update the ID and name attributes
+          no_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_infant`);
+          no_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_infant`);
+  
+  
+          var rate_of_adult = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_adult');
+          
+          // Update the ID and name attributes
+          rate_of_adult.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_adult`);
+          rate_of_adult.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_adult`);
+  
+  
+          var rate_of_child = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_child');
+          
+          // Update the ID and name attributes
+          rate_of_child.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_child`);
+          rate_of_child.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_child`);
+  
+  
+          var rate_of_infant = newForm.querySelector('#id_booking_trip_details_set-0-rate_of_infant');
+          
+          // Update the ID and name attributes
+          rate_of_infant.setAttribute('id', `id_booking_trip_details_set-${formIdx}-rate_of_infant`);
+          rate_of_infant.setAttribute('name', `booking_trip_details_set-${formIdx}-rate_of_infant`);
+  
+  
+          var transfer_type = newForm.querySelector('#id_booking_trip_details_set-0-transfer_type');
+          
+          // Update the ID and name attributes
+          transfer_type.setAttribute('id', `id_booking_trip_details_set-${formIdx}-transfer_type`);
+          transfer_type.setAttribute('name', `booking_trip_details_set-${formIdx}-transfer_type`);
+  
+  
+          
+          var vehicle_type = newForm.querySelector('#id_booking_trip_details_set-0-vehicle_type');
+          
+          // Update the ID and name attributes
+          vehicle_type.setAttribute('id', `id_booking_trip_details_set-${formIdx}-vehicle_type`);
+          vehicle_type.setAttribute('name', `booking_trip_details_set-${formIdx}-vehicle_type`);
+  
+  
+          var vehicle_name = newForm.querySelector('#id_booking_trip_details_set-0-vehicle_name');
+          
+          // Update the ID and name attributes
+          vehicle_name.setAttribute('id', `id_booking_trip_details_set-${formIdx}-vehicle_name`);
+          vehicle_name.setAttribute('name', `booking_trip_details_set-${formIdx}-vehicle_name`);
+  
+  
+          var no_of_luggage = newForm.querySelector('#id_booking_trip_details_set-0-no_of_luggage');
+          
+          // Update the ID and name attributes
+          no_of_luggage.setAttribute('id', `id_booking_trip_details_set-${formIdx}-no_of_luggage`);
+          no_of_luggage.setAttribute('name', `booking_trip_details_set-${formIdx}-no_of_luggage`);
+  
+  
+          var flight_time = newForm.querySelector('#id_booking_trip_details_set-0-flight_time');
+          
+          // Update the ID and name attributes
+          flight_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-flight_time`);
+          flight_time.setAttribute('name', `booking_trip_details_set-${formIdx}-flight_time`);
+  
+  
+          var remark = newForm.querySelector('#id_booking_trip_details_set-0-remark');
+          
+          // Update the ID and name attributes
+          remark.setAttribute('id', `id_booking_trip_details_set-${formIdx}-remark`);
+          remark.setAttribute('name', `booking_trip_details_set-${formIdx}-remark`);
+  
+  
+  
+          var room_no = newForm.querySelector('#id_booking_trip_details_set-0-room_no');
+          
+          // Update the ID and name attributes
+          room_no.setAttribute('id', `id_booking_trip_details_set-${formIdx}-room_no`);
+          room_no.setAttribute('name', `booking_trip_details_set-${formIdx}-room_no`);
+  
+          
+  
+          var pickup_location = newForm.querySelector('#id_booking_trip_details_set-0-pickup_location');
+          
+          // Update the ID and name attributes
+          pickup_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_location`);
+          pickup_location.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_location`);
+  
+  
+          var drop_location = newForm.querySelector('#id_booking_trip_details_set-0-drop_location');
+          
+          // Update the ID and name attributes
+          drop_location.setAttribute('id', `id_booking_trip_details_set-${formIdx}-drop_location`);
+          drop_location.setAttribute('name', `booking_trip_details_set-${formIdx}-drop_location`);
+  
+  
+          var pickup_time = newForm.querySelector('#id_booking_trip_details_set-0-pickup_time');
+          
+          // Update the ID and name attributes
+          pickup_time.setAttribute('id', `id_booking_trip_details_set-${formIdx}-pickup_time`);
+          pickup_time.setAttribute('name', `booking_trip_details_set-${formIdx}-pickup_time`);
+  
+          // Append the new form to the container (formset-container is assumed to be the container for forms)
+          document.querySelector('.formset-container').appendChild(newForm);
+  
+          // Update the TOTAL_FORMS field (management form)
+          updateManagementForm();
+      });
+  
+      // Handle form deletion
+      document.addEventListener('click', function(event) {
+          if (event.target && event.target.matches('.delete-form')) {
+              event.preventDefault();
+              var formToDelete = event.target.closest('.formset');
+              formToDelete.remove();
+              updateManagementForm();
+          }
+      });
+  
+      // Function to update the TOTAL_FORMS field in the management form
+      function updateManagementForm() {
+          var forms = document.querySelectorAll('.formset');
+          var managementForm = document.getElementById('id_booking_trip_details_set-TOTAL_FORMS');
+          managementForm.value = forms.length;
+      }
+  }  
+
+  
+    // Reinitialize the add-form functionality with event delegation
+  
+
+  
+  
+
+</script>
+
+
+<script>
+  $(document).ready(function() {
+      // Handle form submission
+      $('#filter-form').on('submit', function(event) {
+          event.preventDefault();  // Prevent normal form submission
+
+          // Serialize the form data to send as GET parameters
+          var formData = $(this).serialize();
+
+          // Send the AJAX request
+          $.ajax({
+              url: "{% url 'filter_bookings' %}",
+              method: "GET",
+              data: formData,
+              success: function(response) {
+                  if (response.status === 'success') {
+                      // Update the bookings container with the new HTML
+                      $('#supplier-allocation-content').html(response.bookings_html);
+                      checkboxevents();
+                  } else {
+                      alert('Error: ' + response.message);
+                  }
+              },
+              error: function(xhr, errmsg, err) {
+                  alert('An error occurred. Please try again.');
+                  console.error(xhr.status + ': ' + xhr.responseText);
+              }
+          });
+      });
+  });
+</script>
+
+<script>
+  // Handle "Select All" checkbox (id="checkAll")
+  function checkboxevents(){
+    // "Select All" checkbox functionality
+    document.getElementById('checkAll').addEventListener('change', function() {
+        var checkboxes = document.querySelectorAll('.row-checkbox');
+        var isChecked = this.checked; // Get the state of the "Select All" checkbox
+        var assignBtn = document.querySelector('.Assignbtn');
+        // Recover button
+    
+        // Check or uncheck all row checkboxes based on the "Select All" checkbox state
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = isChecked;
+        });
+    
+        // Show or hide the "Recover" button based on whether any checkboxes are selected
+    });
+  
+    // Add event listener for individual checkboxes
+    document.querySelectorAll('.row-checkbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            fetchCheckedBookingTripIds();  // Re-fetch the IDs
+        });
+    });
+  
+    // Function to fetch checked IDs
+    function fetchCheckedBookingTripIds() {
+        var checkedIds = [];
+        document.querySelectorAll('.row-checkbox:checked').forEach(function(checkbox) {
+            checkedIds.push(checkbox.getAttribute('data-booking-trip-id'));
+            
+        });
+        console.log('Checked Booking Trip IDs:', checkedIds);
+  
+        // Show or hide the "Recover" button based on whether any checkboxes are selected
+    }
+  }
+  
+  // Call the checkboxevents function to bind the events initially
+  checkboxevents();
+  
+  // Utility function to get the CSRF token from cookies
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+  
+  
+ 
+  $(document).ready(function() {
+    // Event delegation for dynamic form submission
+    $(document).on('submit', '#assign-form', function(event) {
+        event.preventDefault();  // Prevent the default form submission behavior
+        
+        console.log("Assign form submitted");
+
+        var supplier = $('#id_suppliers').val();
+
+        var driver = $('#id_driver').val();  // Get the selected driver ID (if any)
+        var guide = $('#id_guide').val();
+
+        console.log(driver,guide,supplier)
+       
+
+          // Get the selected guide ID (if any)
+
+        // Fetch the selected booking trip IDs (you can get them from checked checkboxes)
+        var checkedIds = [];
+        document.querySelectorAll('.row-checkbox:checked').forEach(function(checkbox) {
+            checkedIds.push(checkbox.getAttribute('data-booking-trip-id'));
+        });
+
+        // Check if there are any selected checkboxes
+        if (checkedIds.length > 0) {
+            // Create the data object to send to the server
+            var data = {
+                booking_trip_ids: checkedIds,  // Send the selected IDs
+                driver_id: driver ? driver : null,  // Send the driver ID if selected, else null
+                guide_id: guide ? guide : null,
+                supplier_id: supplier ? supplier : null  // Send the guide ID if selected, else null
+            };
+            
+            console.log("Data to be sent:", data);
+
+            // Perform the AJAX request to assign driver and guide
+            $.ajax({
+                url: "/assign-driver-guide-supplier/",  // Your URL endpoint for the assignment
+                type: "POST",  // Using POST method
+                contentType: "application/json",  // Send the data as JSON
+                data: JSON.stringify(data),  // Send the data object
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),  // Include the CSRF token
+                },
+                success: function(response) {
+                    if (response.status === "success") {
+                        // Optionally, you can update the table with new data
+                        $("#supplier-allocation-content").html(response.updated_table_html);
+                        checkboxevents();
+                        
+                        // Reset checkboxes and close modal
+                        $(".row-checkbox:checked").prop("checked", false);
+                        $("#deleteallModal").modal("hide"); 
+                        $('body').removeClass('modal-open');
+                        document.body.style.paddingRight = '0';
+                        $(".modal-backdrop").remove();
+                        // Close the modal
+                        
+                        // Show success message
+                        $("#assign-success-message").fadeIn().delay(3000).fadeOut();
+                    } else {
+                        alert("An error occurred while assigning the driver and guide.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("XHR response: ", xhr.responseText);
+                    alert("Error: " + error);
+                    console.error("There was an error assigning the driver and guide:", error);
+                }
+            });
+        } else {
+            alert("Please select at least one checkbox.");
+        }
+    });
+});
+
+
+  
+  
+  </script>
 
 
 {% endblock content %}

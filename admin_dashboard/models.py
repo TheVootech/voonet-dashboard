@@ -277,7 +277,15 @@ class Video(models.Model):
     
 class Supplier_allocation(models.Model):
     package=models.ForeignKey(Package,on_delete=models.CASCADE)
-    supplier=models.ManyToManyField(Supplier)
+    supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    adultprice=models.PositiveIntegerField(default=0)
+    childprice=models.PositiveIntegerField(default=0)
+    infantprice=models.PositiveIntegerField(default=0)
+
+
+    
+    class Meta:
+        unique_together = ('package', 'supplier')  
     
     def __str__(self):
         return self.package.package_id
@@ -561,6 +569,7 @@ class Booking(models.Model):
     payment_status=models.CharField(choices=payment_status_choices,max_length=20)
     payment_mode=models.ForeignKey(Payment_mode,on_delete=models.CASCADE)
     status=models.ForeignKey(Status_type,on_delete=models.CASCADE)
+    grand_total=models.FloatField(default=0)
     is_deleted=models.BooleanField(default=False)
 
 
@@ -596,7 +605,9 @@ class Booking_Trip_details(models.Model):
     booking=models.ForeignKey(Booking,on_delete=models.CASCADE,related_name='bookingtripdetails')
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     package=models.ForeignKey(Package,on_delete=models.CASCADE)
-    supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE,blank=True,null=True)
+    driver=models.ForeignKey(Driver,on_delete=models.CASCADE,blank=True,null=True)
+    guide=models.ForeignKey(Guide,on_delete=models.CASCADE,blank=True,null=True)
     trip_date=models.DateField()
     trip_time=models.TimeField()
     no_of_adult=models.PositiveIntegerField()
@@ -617,7 +628,8 @@ class Booking_Trip_details(models.Model):
     remark=models.CharField(max_length=500,null=True,blank=True)
     total_amount=models.FloatField(default=0)
     vat=models.FloatField(default=5)
-    include=models.BooleanField(default=False)
+    vat_amount=models.FloatField(default=0)
+    grand_total=models.FloatField(default=0)
     exclude=models.BooleanField(default=False)
     is_deleted=models.BooleanField(default=False)
     

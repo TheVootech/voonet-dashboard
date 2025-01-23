@@ -473,6 +473,10 @@
           // Hide the modal
           $("#recoverModal" + id).modal("hide");
 
+          $('body').removeClass('modal-open');
+
+          document.body.style.paddingRight = '0';
+
           $(".modal-backdrop").remove();
 
           // Show success message
@@ -511,6 +515,11 @@
 
           // Hide the modal
           $("#deleteModal" + id).modal("hide");
+
+
+          $('body').removeClass('modal-open');
+
+          document.body.style.paddingRight = '0';
 
           $(".modal-backdrop").remove();
 
@@ -649,10 +658,12 @@ $(document).on('click','#recoverallBtn', function() {
                   $(".Allrecover").hide();
                   $(".Alldelete").hide();
                   $("#recoverallModal").modal("hide");
+                  $('body').removeClass('modal-open');
+                  document.body.style.paddingRight = '0';
                   $(".modal-backdrop").remove();  // Hide the recover button
 
                   // Show success message
-                  $("#recover-success-message").fadeIn().delay(3000).fadeOut();
+                  $("#recover-success-message").fadeIn(300).delay(3000).fadeOut(300);
               } else {
                   alert("An error occurred while recovering the items.");
               }
@@ -705,10 +716,12 @@ $(document).on('click','#deleteallBtn', function() {
                   $(".Allrecover").hide();
                   $(".Alldelete").hide();
                   $("#recoverallModal").modal("hide");
+                  $('body').removeClass('modal-open');
+                  document.body.style.paddingRight = '0';
                   $(".modal-backdrop").remove();  // Hide the recover button
 
                   // Show success message
-                  $("#delete-success-message").fadeIn().delay(3000).fadeOut();
+                  $("#delete-success-message").fadeIn(300).delay(3000).fadeOut(300);
               } else {
                   alert("An error occurred while delete the items.");
               }

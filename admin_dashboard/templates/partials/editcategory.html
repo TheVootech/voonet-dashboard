@@ -266,6 +266,10 @@ $(document).ready(function() {
                   $('#supplier-allocation-content').html(response.updated_table_html);
                   
                   // Optionally show a success message
+                  $('body').removeClass('modal-open');
+
+                  document.body.style.paddingRight = '0';
+                  
                   $('#success-message').fadeIn().delay(3000).fadeOut();
               } else {
                   // Handle error message (you can show a message inside the modal or elsewhere)

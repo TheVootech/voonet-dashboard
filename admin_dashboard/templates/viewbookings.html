@@ -2,16 +2,16 @@
 
 
 
-
 {% extends "base.html" %} 
 {% block content %}
+
+
+
 
 <style>
   .extra-large-modal {
     max-width: 60%;  
   }
-
-
 
     .alertmessage{
         position: fixed; 
@@ -967,7 +967,12 @@ function contact(){
           // Hide the modal
           $("#deleteModal" + id).modal("hide");
 
+          $('body').removeClass('modal-open'); 
+
+
           $(".modal-backdrop").remove();
+
+          document.body.style.paddingRight = '0';
 
           // Show success message
           $("#dltsuccess-message").fadeIn().delay(3000).fadeOut();
@@ -1129,10 +1134,14 @@ function contact(){
                     $(".row-checkbox:checked").prop("checked", false);
                     $(".Alldelete").hide();
                     $("#deleteallModal").modal("hide");
-                    $(".modal-backdrop").remove();  // Hide the recover button
+                    $(".modal-backdrop").remove(); 
+                    $('body').removeClass('modal-open');
+                    document.body.style.paddingRight = '0';
+                    // Hide the recover button
   
                     // Show success message
-                    $("#delete-success-message").fadeIn().delay(3000).fadeOut();
+                    $("#delete-success-message").fadeIn(300).delay(3000).fadeOut(300);
+
                 } else {
                     alert("An error occurred while delete the items.");
                 }
@@ -1149,6 +1158,11 @@ function contact(){
         alert("No checkboxes are selected.");
     }
   });
+
+
+ 
+
+
   
   
   

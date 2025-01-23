@@ -17,6 +17,11 @@ urlpatterns = [
     path('recover-multiple-bookings/',recover_multiple_bookings, name='recover_multiple_bookings'),
     path('delete-multiple-bookings-forever/',delete_multiple_bookings_forever, name='recover_multiple_bookings_forever'),
     path('delete-multiple-bookings/',delete_multiple_bookings, name='recover_multiple_bookings'),
+    path('get-company-details/<str:company_id>/',get_company_details, name='get_company_details'),
+    path('get-package-details/<str:package_id>/',get_package_details, name='get_package_details'),
+    path('assign-driver-guide-supplier/',assign_driver_guide_supplier,name="assign-driver-guide-supplier"),
+
+
 
     
     
@@ -106,7 +111,8 @@ urlpatterns = [
     path('drivertrash',view_driver_trash,name="drivertrash"),
     path('recoverdriver/<str:pk>/',recover_driver_view,name='recoverdriver'),
     path('deletedriverforver/<str:pk>/',delete_driver_forever_view,name='deletedriverforver'),
-    
+    path('delete-multiple-driver/',delete_multiple_driver, name='recover_multiple_driver'),
+
     
     
     path('add_guide',addguide_view,name='add_guide'),

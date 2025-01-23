@@ -280,6 +280,10 @@
           // Hide the modal
           $("#recoverModal" + id).modal("hide");
 
+          $('body').removeClass('modal-open');
+
+          document.body.style.paddingRight = '0';
+
           $(".modal-backdrop").remove();
 
           // Show success message
@@ -318,6 +322,11 @@
 
           // Hide the modal
           $("#deleteModal" + id).modal("hide");
+
+
+          $('body').removeClass('modal-open');
+
+          document.body.style.paddingRight = '0';
 
           $(".modal-backdrop").remove();
 

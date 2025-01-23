@@ -257,6 +257,10 @@
 
           $(".modal-backdrop").remove();
 
+          $('body').removeClass('modal-open');
+
+          document.body.style.paddingRight = '0';
+
           // Show success message
           $("#dltsuccess-message").fadeIn().delay(3000).fadeOut();
         } else {

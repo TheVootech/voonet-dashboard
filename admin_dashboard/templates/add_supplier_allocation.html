@@ -1,17 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<style>
-  /* Container style */
-  .select2-container .select2-selection--multiple {
-      height: 40px !important; /* Set height */
-      border: none !important; /* Remove border */
-      border-bottom: 2px solid #ccc !important;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-  }
-</style>
+
 
 
 <div class="content">
@@ -44,15 +34,7 @@
             {% endfor %}
         {% endif %}
 
-        {% if not packagelength %}
-            <h3 class="text-primary text-center font-weight-bold mt-5">No Packages left to Allocate New Supplier</h3>
-            <div class="row">
-              <div class="col-4"></div>
-              <div class="col-4 text-center">
-                <button onclick="goBackAndReload()" type="submit" class="btn btn-rose mt-2">Go Back</button>               <div class="col-4"></div>
-            </div>
-            
-        {% else %}
+        
             <div class="col-3"></div>
             
             <div class="col-lg-6 col-md-12 col-md-12  pt-3 text-black">
@@ -66,6 +48,8 @@
                     <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'new_supplier_allocation' %}" method="post" id="supp-form">
                         {% csrf_token %}
                         <div class="text-black align-items-center">
+                          <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                            <h6 class="text-center font-weight-bold mb-3 mt-2">package & supplier</h6>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Package</label>
@@ -88,7 +72,55 @@
                                       {% endfor %}
                                     </ul>
                                   {% endif %}
+                                </div>
                               </div>
+                            </div>
+                              <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                                <h6 class="text-center font-weight-bold mb-3 mt-2">price details</h6>
+                                <div class="row">
+                                  <div class="col-4">
+                                    <div class="form-group">
+                                      <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Adult price</label>
+                                      {{form.adultprice}} 
+                                      {% if form.adultprice.errors %}
+                                        <ul class="errorlist text-primary text-bold">
+                                          {% for error in form.adultprice.errors %}
+                                            <li>{{ error }}</li>
+                                          {% endfor %}
+                                        </ul>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-4">
+                                    <div class="form-group">
+                                      <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Child Price</label>
+                                      {{form.childprice}} 
+                                      {% if form.childprice.errors %}
+                                        <ul class="errorlist text-primary text-bold">
+                                          {% for error in form.childprice.errors %}
+                                            <li>{{ error }}</li>
+                                          {% endfor %}
+                                        </ul>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                  <div class="col-4">
+                                    <div class="form-group">
+                                      <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Infant Price</label>
+                                      {{form.infantprice}} 
+                                      {% if form.infantprice.errors %}
+                                        <ul class="errorlist text-primary text-bold">
+                                          {% for error in form.infantprice.errors %}
+                                            <li>{{ error }}</li>
+                                          {% endfor %}
+                                        </ul>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                </div>
+
+
+                              
                             </div>
                         </div>
                         <div class="row">
@@ -103,7 +135,7 @@
                 </div>
             </div>
           </div>
-            {% endif %}
+           
 
             <div class="col-3"></div>
     </div>
@@ -112,12 +144,7 @@
 
 <script>
 
-  function goBackAndReload() {
-    // Navigate back to the previous page
-    window.history.go(-1);
-
-  
-}
+ 
 
  
   let form = document.getElementById('supp-form');
@@ -131,12 +158,6 @@ form.addEventListener('submit', function(event) {
         success: function(response) {
             console.log("AJAX request successful:", response);
             if (response.success) {
-                // Inject the new form HTML into the #supplierallocation container
-                $('#supplierallocation').html(response.new_form_html);
-
-                // After injecting the new HTML, rebind the CSRF token and form submit action
-                rebindForm();
-
                 showSuccessMessage();
                 form.reset();
             } else {
@@ -152,37 +173,7 @@ form.addEventListener('submit', function(event) {
     });
 });
 
-// Rebind form and its CSRF token after form replacement
-function rebindForm() {
-    // Reattach the event listener for the form submission
-    let newForm = document.getElementById('supp-form');
-    newForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "{% url 'new_supplier_allocation' %}",
-            data: $(newForm).serialize(),
-            dataType: "json",
-            success: function(response) {
-                console.log("AJAX request successful:", response);
-                if (response.success) {
-                    $('#supplierallocation').html(response.new_form_html);
-                    rebindForm();  // Rebind again after injecting
-                    showSuccessMessage();
-                    newForm.reset();
-                } else {
-                    showErrorMessage(response.errors);
-                    console.log("Form submission errors:", response.errors);
-                }
-            },
-            error: function(xhr, status, error) {
-                showErrorMessage("An Unexpected Error Occurs Please Try Again Later");
-                console.error("AJAX request failed:", status, error);
-                console.log("Response Text:", xhr.responseText);
-            }
-        });
-    });
-}
+
 
 function showSuccessMessage() {
     let successMessage = document.getElementById('success-message');
@@ -217,7 +208,7 @@ function showErrorMessage(errors) {
 }
 
 
-$('#id_supplier').select2();
+
 
   </script>
 

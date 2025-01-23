@@ -37,7 +37,7 @@
       
         <!-- Success message container -->
         <div id="success-message" class="alert alert-success text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
-          Booking added successfully!
+         
         </div>
 
         <div id="error-message" class="alert alert-danger text-center font-weight-bold alertmessage" role="alert" style="display: none; margin-top: 20px;">
@@ -45,10 +45,8 @@
         </div>
       
     </div>
-    <div class="row mt-4">
-      
-
-      <div class="col-lg-6 col-md-12 col-md-12  pt-3 text-black">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 pt-3 text-black">
         <div class="card">
           <div class="card-header card-header-rose card-header-icon">
             <div class="card-icon">
@@ -64,7 +62,7 @@
           
           <div class="company rounded border pt-3 pl-3 pr-3 pb-5">
             <div class="col-12">
-              <h5 class="text-center font-weight-bold mb-3">Company Details</h5>
+              <h6 class="text-center font-weight-bold mb-3">Company Details</h6>
 
               <div class="form-group">
                 <label for="id_company" class="bmd-label-floating text-black">Company/Customer</label>
@@ -107,7 +105,7 @@
               {% for form in formset %}
               <div class="formset mt-2 pl-3 pr-2">
                 
-                  <h3 class="text-center font-weight-bold mb-3">Booking Details</h3>
+                  <h3 class="text-center font-weight-bold mb-3 text-uppercase">Booking Details</h3>
                   <div class="row">
                     <div class="col-1"></div>
                     <div class="col-1"></div>
@@ -127,7 +125,7 @@
                   <div class="row pl-3">
                       <!-- Guest details section -->
                       <div class="row guest-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
-                          <h5 class="text-center font-weight-bold mb-5 mt-2">Guest Details</h5>
+                          <h6 class="text-center font-weight-bold mb-5 mt-2">Guest Details</h6>
       
                           {% for field in form %}
                               {% if field.name == 'guest_name' or field.name == 'email' or field.name == 'contact_number' or field.name == 'whatsapp_number' %}
@@ -143,10 +141,10 @@
       
                       <!-- Trip details section -->
                       <div class="row trip-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
-                          <h5 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h5>
+                          <h6 class="text-center font-weight-bold mb-5 mt-2">Trip Details</h6>
       
                           {% for field in form %}
-                              {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' and field.name != 'total_amount' and field.name != 'vat' and field.name != 'exclude' and field.name != 'include'%}
+                              {% if field.name != 'guest_name' and field.name != 'email' and field.name != 'contact_number' and field.name != 'whatsapp_number' and field.name != 'remark' and field.name != 'total_amount' and field.name != 'vat' and field.name != 'exclude' and field.name != 'grand_total' and field.name != 'vat_amount' %}
                               <div class="col-md-6 mb-3 dynamic-field" data-field-name="{{ field.name }}">
                                   <div class="form-group">
                                       {% if field.name != 'booking_trip_id' and field.name != 'booking' and field.name != 'is_deleted' %}
@@ -159,49 +157,103 @@
                           {% endfor %}
       
                           <!-- Add remark field at the bottom of the trip details section with col-12 (full width) -->
-                          <div class="col-12 mb-3 dynamic-field" data-field-name="remark">
+                          <div class="col-12 dynamic-field mb-2" data-field-name="remark">
                               <div class="form-group">
                                   <label for="{{ form.remark.id_for_label }}" class="text-black">{{ form.remark.label }}</label>
                                   {{ form.remark }}
                               </div>
                           </div>
 
-                          <div class="col-5 mb-3 dynamic-field" data-field-name="total_amount">
+                          <div class="col-5 dynamic-field" data-field-name="total_amount" hidden>
                             <div class="form-group">
                                 <label for="{{ form.total_amount.id_for_label }}" class="text-black">{{ form.total_amount.label }}</label>
                                 {{ form.total_amount }}
                             </div>
+
+                            
       
                         </div>
-                        <div class="col-2 mb-3 dynamic-field">
-                          
-                      </div>
-                        <div class="col-5 mb-3 dynamic-field" data-field-name="vat">
+
+                        <div class="col-5 dynamic-field" data-field-name="grand_total" hidden>
                           <div class="form-group">
-                              <label for="{{ form.vat.id_for_label }}" class="text-black">{{ form.vat.label }}</label>
+                              <label for="{{ form.grand_total.id_for_label }}" class="text-black">{{ form.grand_total.label }}</label>
+                              {{ form.grand_total }}
+                          </div>
+
+                          
+    
+                      </div>
+
+                        <div class="col-3 mb-3 dynamic-field" data-field-name="vat">
+                          <div class="form-group">
+                              <label for="{{ form.vat.id_for_label }}" class="text-black">VAT %</label>
                               {{ form.vat }}
                           </div>
-                          <div class="row mt-2">
-                            <div class="col-6 mb-3 dynamic-field" data-field-name="include">
-                              <div class="form-check">
-                                <label class="form-check-label text-black">
-                                    {{ form.include }}  Include VAT<span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
+                        </div>
+
+                        <div class="col-3 mb-3 dynamic-field" data-field-name="vat_amount" hidden>
+                          <div class="form-group">
+                              <label for="{{ form.vat_amount.id_for_label }}" class="text-black">VAT amount</label>
+                              {{ form.vat_amount }}
                           </div>
-                          <div class="col-6 mb-3 dynamic-field" data-field-name="exclude">
+                        </div>
+                        <div class="col-6 mb-3 dynamic-field">
+                          
+                        </div>
+                        
+                        
+                          
+                          <div class="col-3 dynamic-field mt-3" data-field-name="exclude">
                             <div class="form-check">
-                              <label class="form-check-label text-black">
-                                  {{ form.exclude }}  Exclude VAT<span class="form-check-sign">
+                              <label class="form-check-label text-black font-weight-bold">
+                                  {{ form.exclude }}  Include VAT<span class="form-check-sign">
                                   <span class="check"></span>
                                 </span>
                               </label>
                             </div>
                           </div>
+
+                          
+                          
+                        <div class="row pl-5 ">
+                        <div class="card">
+                          <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">account_balance_wallet </i>
+                            </div>
                           </div>
+                        <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >ADULT</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >CHILD</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >INFANT</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >TOTAL AMOUNT</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >VAT AMOUNT</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >GRAND TOTAL</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                                <tr>
+                                <td class="text-center" style="font-weight: 500;" id="adulttable-0"></td>
+                                <td class="text-center" style="font-weight: 500;" id="childtable-0"></td>
+                                <td class="text-center" style="font-weight: 500;" id="infanttable-0"></td>
+                                <td class="text-center" style="font-weight: 500;" id="totalamount-0"></td>
+
+                                <td class="text-center" style="font-weight: 500;" id="vattable-0"></td>
+                                <td class="text-center" style="font-weight: 500;" id="grandtotal-0"></td>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
+                    </div>
+         
                       
                       </div>
       
@@ -221,20 +273,64 @@
                   <button type="button" class="btn w-100" id="add-form" style="background-color:#002f75;color:white;">Add Another Trip</button>
               </div>
           </div>
-      </div>
-      
-      
-      
-            
-          
-
-          
+        </div>
 
 
           
-      <div class="row pl-3 pr-3">
+      <div class="row pl-3 pr-3 mt-4" >
         <div class="payment rounded border pt-3 pl-2 pr-2 pb-5 mb-5">
-          <h5 class="text-center font-weight-bold mb-3">Payment Details</h5>
+          <h6 class="text-center font-weight-bold mb-4 mt-2">Payment Details</h6>
+
+          <div class="row pl-5 pr-5 mb-3">
+
+              <div class="col-2"></div>
+              <div class="col-8">
+                <div class="card">
+                  <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">account_balance_wallet </i>
+                    </div>
+                  </div>
+                <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >NO : PACKAGES</th>
+                      <th class="text-center  text-rose" style="font-weight: 900;" >TOTAL AMOUNT</th>
+                      
+        
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                        <tr>
+                        <td class="text-center" style="font-weight: 500;" id="no_of_package"></td>
+                        <td class="text-center" style="font-weight: 500;" id="alltotal"></td>
+                        
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="col-2"></div>
+          
+      </div>
+
+      <div class="col-12 mt-2" hidden>
+        <label for="" class="text-black">Grand Total :</label>
+        <div class="form-group">
+          {{form.grand_total}} {% if form.grand_total.errors %}
+          <ul class="errorlist text-primary text-bold">
+            {% for error in form.grand_total.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
 
           <div class="col-12 mt-2">
             <label for="" class="text-black">Payment ref No :</label>
@@ -278,8 +374,10 @@
         </div>
       </div>
 
-        <div class="pl-2 pr-2">
+        <div class="">
           <div class="col-12 mt-2 ">
+            <div class="row guest-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+              <h6 class="text-center font-weight-bold mb-3 mt-2">Booking Status</h6>
             <label for="" class="text-black">Status</label>
             <div class="form-group">
               {{form.status}} {% if form.status.errors %}
@@ -291,6 +389,7 @@
               {% endif %}
             </div>
           </div>
+        </div>
         </div>
 
           
@@ -307,12 +406,70 @@
           </div>
         </form>
       </div>
-    </div>
+      
+        </div>
       </div>
+      <div class="col-lg-6 col-md-12 pt-3 text-black" id="right-section">
+        <div class="pt-3 text-black" id="company-details" style="display: none;">
+          <div class="card">
+            <div class="card-header card-header-rose card-header-icon">
+              
+              <div class="card-icon">
+                <i class="material-icons">business</i>
+            </div>
+            <div class="row mt-2">
+              <div class="col-3"></div>
+              <div class="col-3"></div>
+              <div class="col-3"></div>
+              <div class="col-3 "><button id="closebtn" class="btn btn-rose mx-auto d-block">
+                Close
+              </button></div>
+            </div>
+            </div>
+            <h5 class="text-center font-weight-bold text-uppercase">Company Details</h5>
+
+            <div class="card-body">
+              <div id="company-info">
+  
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pt-3 text-black package-details" id="package-details-0" style="display: none;">
+          <div class="card">
+            <div class="card-header card-header-rose card-header-icon">
+              
+              <div class="card-icon">
+                <i class="material-icons">luggage</i>
+            </div>
+            <div class="row mt-2">
+              <div class="col-3"></div>
+              <div class="col-3"></div>
+              <div class="col-3"></div>
+              <div class="col-3 "><button id="packageclosebtn-0" class="btn btn-rose mx-auto d-block packageclosebtn">
+                Close
+              </button></div>
+            </div>
+            </div>
+            <h5 class="text-center font-weight-bold text-uppercase">Package Details</h5>
+
+            <div class="card-body">
+              <div id="package-info-0" class="package-info">
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
     </div>
-    <div class="col-6"></div>
-  </div>
-</div>
+
+
+   
+   
 
 
 
@@ -469,7 +626,7 @@
 
 
 <script>
-  
+
   document.addEventListener('DOMContentLoaded', function() {
     // Function to handle form cloning
     document.querySelector('#add-form').addEventListener('click', function() {
@@ -478,8 +635,11 @@
         console.log(formIdx); // Debugging the current form index
 
         // Clone the last form in the formset (instead of the first)
-        var lastForm = document.querySelector('.formset:last-of-type');
+        var lastForm = document.querySelector('.formset');
         var newForm = lastForm.cloneNode(true);
+
+        
+      
 
         // Replace __prefix__ in name and id with the new form index
         const regex = /__prefix__/g;
@@ -494,15 +654,67 @@
         // Reset input values for the new form
         resetFormValues(newForm);
 
+
         // Append the new form to the container (formset-container is assumed to be the container for forms)
         document.querySelector('.formset-container').appendChild(newForm);
 
         // Attach event listeners to new form fields to calculate total_amount dynamically
         attachInputListeners(formIdx);
 
+
+        appendPackageDetails(formIdx);
+
+
         // Update the TOTAL_FORMS field (management form)
         updateManagementForm();
     });
+
+
+    function appendPackageDetails(formIdx) {
+      var packagedetails = document.querySelector('.package-details');
+      var rightSection = document.querySelector('#right-section');
+      
+      if (packagedetails) {
+          console.log('Element found');
+          
+          // Clone the package-details element
+          var newpackagedetails = packagedetails.cloneNode(true);
+          newpackagedetails.id = `package-details-${formIdx}`;
+          newpackagedetails.style.cssText = `display:none`;
+
+          newpackagedetails.querySelector('button').addEventListener('click', function () {
+            newpackagedetails.style.display = 'none'; // Hide the cloned div when button is clicked
+          });
+          
+          // Modify the ID of the package-info div
+          var packageInfo = newpackagedetails.querySelector('.package-info');
+          if (packageInfo) {
+              packageInfo.id = `package-info-${formIdx}`;
+          }
+  
+          // Modify the ID of the package close button
+          var packageclosebtn = newpackagedetails.querySelector('.packageclosebtn');
+          if (packageclosebtn) {  // Check for packageclosebtn, not packageInfo
+              packageclosebtn.id = `packageclosebtn-${formIdx}`;
+          }
+  
+          // Append the new package details to the right section
+          rightSection.appendChild(newpackagedetails);
+          console.log('Element created');
+          // Reattach the event listener to the dropdown in the cloned formset
+          const packageDropdown = document.querySelector(`#id_bookingtripdetails-${formIdx}-package`);
+          if (packageDropdown) {
+              packageDropdown.addEventListener('change', function () {
+                  const selectedPackageID = packageDropdown.value;
+                  fetchPackageDetails(selectedPackageID, formIdx); // Fetch package details for the selected package in this formset
+              });
+          }
+      } else {
+          console.log('Element not found');
+      }
+  }
+
+   
 
     // Function to handle form deletion
     document.addEventListener('click', function(event) {
@@ -517,6 +729,8 @@
 
                 // Update management form (if necessary)
                 updateManagementForm();
+                calculateGrandTotal();
+
             }
         }
     });
@@ -532,7 +746,7 @@
     function updateFieldIdsAndNames(newForm, formIdx) {
         var fields = ['guest_name', 'email', 'contact_number', 'whatsapp_number', 'supplier', 'category', 'package', 'trip_date', 'trip_time', 
                       'no_of_adult', 'no_of_child', 'no_of_infant', 'rate_of_adult', 'rate_of_child', 'rate_of_infant', 'transfer_type', 
-                      'vehicle_type', 'vehicle_name', 'no_of_luggage', 'flight_time', 'remark', 'room_no', 'pickup_location', 'drop_location', 'pickup_time','total_amount','vat','include','exclude'];
+                      'vehicle_type', 'vehicle_name', 'no_of_luggage', 'flight_time', 'remark', 'room_no', 'pickup_location', 'drop_location', 'pickup_time','total_amount','vat','exclude','grand_total','vat_amount'];
 
         fields.forEach(function(field) {
             var fieldElement = newForm.querySelector(`#id_bookingtripdetails-0-${field}`);
@@ -541,6 +755,38 @@
                 fieldElement.setAttribute('name', `bookingtripdetails-${formIdx}-${field}`);
             }
         });
+
+       
+
+        var adultTable = newForm.querySelector('#adulttable-0');
+        if (adultTable) {
+            adultTable.setAttribute('id', `adulttable-${formIdx}`);
+        }
+
+        var childTable = newForm.querySelector('#childtable-0');
+        if (childTable) {
+            childTable.setAttribute('id', `childtable-${formIdx}`);
+        }
+
+        var infantTable = newForm.querySelector('#infanttable-0');
+        if (infantTable) {
+            infantTable.setAttribute('id', `infanttable-${formIdx}`);
+        }
+
+        var vatTable = newForm.querySelector('#vattable-0');
+        if (vatTable) {
+            vatTable.setAttribute('id', `vattable-${formIdx}`);
+        }
+
+        var totalAmountTable = newForm.querySelector('#totalamount-0');
+        if (totalAmountTable) {
+            totalAmountTable.setAttribute('id', `totalamount-${formIdx}`);
+        }
+
+        var grandtotalTable = newForm.querySelector('#grandtotal-0');
+        if (totalAmountTable) {
+          grandtotalTable.setAttribute('id', `grandtotal-${formIdx}`);
+        }
     }
 
     // Function to reset input values for the new form
@@ -556,10 +802,8 @@
         }
 
         // Reset include/exclude checkboxes
-        var includeField = newForm.querySelector('input[name$="include"]');
         var excludeField = newForm.querySelector('input[name$="exclude"]');
-        if (includeField) includeField.checked = false;
-        if (excludeField) excludeField.checked = false;
+        
     }
 
     // Function to attach event listeners to the form fields for total_amount calculation
@@ -572,7 +816,6 @@
             `id_bookingtripdetails-${formIdx}-rate_of_infant`,
             `id_bookingtripdetails-${formIdx}-no_of_infant`,
             `id_bookingtripdetails-${formIdx}-vat`,
-            `id_bookingtripdetails-${formIdx}-include`,
             `id_bookingtripdetails-${formIdx}-exclude`,
             `id_bookingtripdetails-${formIdx}-package`,
 
@@ -593,17 +836,9 @@
 
     // Function to reset include/exclude and recalculate total_amount
     function resetIncludeExcludeAndRecalculate(formIdx) {
-        var includeField = document.getElementById(`id_bookingtripdetails-${formIdx}-include`);
         var excludeField = document.getElementById(`id_bookingtripdetails-${formIdx}-exclude`);
+        
 
-        // Ensure only one checkbox is checked
-        if (includeField.checked) {
-            excludeField.checked = false;  // Uncheck exclude if include is checked
-        } else if (excludeField.checked) {
-            includeField.checked = false;  // Uncheck include if exclude is checked
-        }
-
-        // Recalculate the total amount
         calculateTotalAmount(formIdx);
     }
 
@@ -620,22 +855,53 @@
 
         // Calculate the total_amount before VAT
         var total_amount = (rate_of_adult * no_of_adult) + (rate_of_child * no_of_child) + (rate_of_infant * no_of_infant);
+        {% comment %} total_amount = total_amount * (1 + (vat / 100)); {% endcomment %}
+
+        var total_amount_before_vat = (rate_of_adult * no_of_adult) + (rate_of_child * no_of_child) + (rate_of_infant * no_of_infant);
+
+
+        $('#adulttable-'+formIdx).html(no_of_adult + ' X ' + rate_of_adult + ' = ' + rate_of_adult * no_of_adult);
+        $('#childtable-'+formIdx).html(no_of_child + ' X ' + rate_of_child + ' = ' + rate_of_child * no_of_child);
+        $('#infanttable-'+formIdx).html(no_of_infant + ' X ' + rate_of_infant + ' = ' + rate_of_infant * no_of_infant);
+        var vat_amount=0;
+        $('#vattable-'+formIdx).html(vat_amount.toFixed(2));
+        $('#totalamount-'+formIdx).html(total_amount_before_vat.toFixed(2));
+
+        $('#grandtotal-'+formIdx).html(total_amount.toFixed(2));
+
+        $(`#id_bookingtripdetails-${formIdx}-vat_amount`).val(vat_amount);
+        $(`#id_bookingtripdetails-${formIdx}-grand_total`).val(total_amount.toFixed(2));
+        $('.formset .grandtotal').trigger('input');
+
+
+
+
 
         // Check if include or exclude is checked
-        var includeField = document.getElementById(`id_bookingtripdetails-${formIdx}-include`);
         var excludeField = document.getElementById(`id_bookingtripdetails-${formIdx}-exclude`);
         
-        if (includeField.checked) {
-            // Calculate VAT with the include value
-            total_amount = total_amount * (1 + (vat / 100));
-          } else if (excludeField.checked) {
+        if (excludeField.checked) {
             // Calculate VAT with the exclude value (VAT excluded)
-            var vatExcludedAmount = total_amount / (1 + (vat / 100));  // Reverse calculation to exclude VAT
-            var vatAmount = total_amount - vatExcludedAmount;  // Calculate the VAT amount
-            vatAmount = Math.round(vatAmount * 100) / 100;  // Round to 2 decimal places
+            var vatincludedAmount = total_amount * (1 + (vat / 100));  // Reverse calculation to exclude VAT
+            var vatAmount = vatincludedAmount-total_amount; 
+            var vat_amount = vatincludedAmount-total_amount; // Calculate the VAT amount
+            vatAmount = Math.round(vatAmount * 100) / 100; 
+            
+            $('#vattable-'+formIdx).html(vat_amount.toFixed(2));
+            // Round to 2 decimal places
             
 
-            total_amount = vatExcludedAmount;  // Update total_amount to be the VAT excluded amount
+            total_amount = vatincludedAmount; 
+            $('#grandtotal-'+formIdx).html(total_amount.toFixed(2));
+
+            $(`#id_bookingtripdetails-${formIdx}-vat_amount`).val(vat_amount);
+
+
+            $(`#id_bookingtripdetails-${formIdx}-grand_total`).val(total_amount.toFixed(2));
+            $('.formset .grandtotal').trigger('input');
+
+
+            // Update total_amount to be the VAT excluded amount
         }
 
         // Update the total_amount field dynamically
@@ -646,52 +912,122 @@
     document.querySelectorAll('.formset').forEach(function(form, idx) {
         attachInputListeners(idx);
     });
+
+    function calculateGrandTotal() {
+      var formIdx = document.querySelectorAll('.formset').length;  // Get number of formsets
+      var total = 0;
+  
+      // Loop through each formset and sum the grandtotal values
+      $('.formset').each(function() {
+          var grandtotalvalue = parseFloat($(this).find('.grandtotal').val()) || 0; // Get grandtotal value or 0 if not a number
+          total += grandtotalvalue;
+      });
+  
+      // Update the number of formsets and the total
+      $('#no_of_package').html(formIdx);
+      $('#alltotal').html(total.toFixed(2));
+      $('#id_grand_total').val(total.toFixed(2));  // Format total to 2 decimal places
+  }
+  
+  $(document).ready(function() {
+
+      $(document).on('input', '.formset .grandtotal', function() {
+          console.log("Grandtotal input changed");
+          calculateGrandTotal();  // Recalculate grand total on input change
+      });
+  
+      // Trigger recalculation when the add-form button is clicked
+      $('#add-form').on('click', function() {
+          console.log("Add form button clicked");
+          // Recalculate grand total after adding new formset
+          setTimeout(function() {
+              calculateGrandTotal();
+          }, 0);  // Use setTimeout to ensure the new formset is fully added before recalculating
+      });
+  
+      // Initial calculation when the page loads
+      calculateGrandTotal();
+  });
+  
+    
 });
+
+
+
 
 
     
 
-
-let supform=document.getElementById('supform');
-supform.addEventListener('submit',function(event){
+let supform = document.getElementById('supform');
+supform.addEventListener('submit', function (event) {
     event.preventDefault();
     let formData = new FormData(supform);
+
     $.ajax({
-        type:"POST",
-        url:"{% url "add_booking" %}",
+        type: "POST",
+        url: "{% url 'add_booking' %}",
         data: formData,
         processData: false,
         contentType: false,
-        dataType:'json',
-        success:function(response){
-          console.log('AJAX request Successfull');
-          if(response.success){
-            showSuccessMessage();
-            supform.reset();
-          }
-          else{
-            showErrorMessage(response.errors);
-            console.log("form Submission errors :", response.errors);
-          }
+        dataType: 'json',
+        success: function (response) {
+            console.log('AJAX request Successful');
+            if (response.success) {
+                supform.reset();
+
+                // Store success message in sessionStorage
+                sessionStorage.setItem('successMessage', 'Booking submitted successfully!');
+                console.log('Success message stored in sessionStorage');
+                
+                // Reload the page after successful submission
+                window.location.reload();
+            } else {
+                showErrorMessage(response.errors);
+                console.log("Form submission errors:", response.errors);
+            }
         },
-        error:function(xhr,Status,error){
-          showErrorMessage("An Unexpected Error Occurs Please Try again Later");
-          console.error("AJAX request failed:",status,error);
-          console.log("Response Text :",xhr.responseText)
+        error: function (xhr, status, error) {
+            showErrorMessage("An unexpected error occurred. Please try again later.");
+            console.error("AJAX request failed:", status, error);
+            console.log("Response Text:", xhr.responseText);
         }
     });
 });
 
+// Check for success message in sessionStorage after page reload
+window.addEventListener('load', function () {
+    const successMessage = sessionStorage.getItem('successMessage');
+    console.log('Session Storage Value:', successMessage);  // Debugging line
+    
+    if (successMessage) {
+        // Display the success message
+        showSuccessMessage(successMessage);
 
-function showSuccessMessage() {
-  let successMessage = document.getElementById('success-message');
-  successMessage.style.display = 'block';
+        // Remove the success message from sessionStorage after it's shown
+        sessionStorage.removeItem('successMessage');
+    }
+});
 
-  // Hide the message after 3 seconds
-  setTimeout(function() {
-      successMessage.style.display = 'none';
-  }, 3000);
+// Function to show the success message
+function showSuccessMessage(message) {
+    let successMessageDiv = document.getElementById('success-message');
+    if (!successMessageDiv) {
+        console.error('Success message div not found!');
+        return;
+    }
+
+    // Set the message text
+    successMessageDiv.textContent = message || 'Action was successful!';
+
+    // Display the success message
+    successMessageDiv.style.display = 'block';
+
+    // Hide the message after 3 seconds
+    setTimeout(function () {
+        successMessageDiv.style.display = 'none';
+    }, 3000);
 }
+
 
 function showErrorMessage(errors) { 
 let errorMessage = document.getElementById('error-message'); 
@@ -715,6 +1051,498 @@ else {
 
 
 </script> 
+
+<script>
+  const companydropdown=document.getElementById('id_company');
+  const companydetails=document.getElementById('company-details');
+  const companyinfo=document.getElementById('company-info');
+
+  function fetchCompanyDetails(companyID){
+    if (companyID){
+      companyinfo.innerHTML='<p>Company Details Loading .....</p> '
+
+      fetch(`get-company-details/${companyID}/`)
+      .then(response => response.json())
+      .then(data =>{
+        if(data.success){
+          let companyStatusHtml = '';
+            // Check if the company status is 'active'
+            if (data.company.status === 'active') {
+                companyStatusHtml = `<span style="color: green;">${data.company.status}</span>`;
+            } else if (data.company.status === 'inactive'){
+                companyStatusHtml = `<span style="color: orange;">${data.company.status}</span>`;
+            }
+            else{
+              companyStatusHtml = `<span style="color: red;">${data.company.status}</span>`;
+          }
+          companyinfo.innerHTML=`
+                                     <h3 class="text-center text-rose mt-2 mb-3 text-uppercase" style="font-weight: 900;">${data.company.name} ( ${data.company.id} )</h3>
+                                                                          <h5 class="text-center mt-2 mb-3 text-uppercase" style="font-weight: 900;">Type : ${data.company.type}</h5>
+                                                                          <h5 class="text-center mt-2 mb-3 text-uppercase" style="font-weight: 900;">Status : ${companyStatusHtml}</h5>
+
+                        
+                      {% comment %} <div class="table-responsive mt-2">
+                        <table class="table">
+
+                          <thead>
+                            <tr>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >TYPE</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >MOBILE</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >EMAIL</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >STATUS</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                                <tr>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.id}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.name}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.type}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.phone}</td>
+
+                                <td class="text-center" style="font-weight: 500;" >${data.company.email}</td>
+                                ${companyStatusHtml}
+
+                              </tbody>
+                            </table>
+                          </div> {% endcomment %}
+
+                    <ul class="nav nav-pills nav-pills-warning mt-5 d-flex justify-content-center" role="tablist" style="font-size:1.25rem;">
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+                        ADDRESS
+                      </a>
+                    </li>
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+                        DOCUMENTS
+                      </a>
+                    </li>
+                    
+                  </ul>
+
+                  <div class="tab-content tab-space">
+                    <div class="tab-pane active" id="link1">
+                      <div class="table-responsive mt-3">
+                        <table class="table">
+
+                          <thead>
+                            <tr>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >ADDRESS</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >CITY</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >STATE</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >PINCODE</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >COUNTRY</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                                <tr>
+                                <td class="text-center" style="font-weight: 500;" >1</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.address1}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.city1}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.state1}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.pincode1}</td>
+
+                                <td class="text-center" style="font-weight: 500;" >${data.company.country1}</td>
+                                </tr>
+                                <tr>
+                                <td class="text-center" style="font-weight: 500;" >2</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.address2}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.city2}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.state2}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.pincode2}</td>
+
+                                <td class="text-center" style="font-weight: 500;" >${data.company.country2}</td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                    </div>
+                    <div class="tab-pane" id="link2">
+                      <div class="table-responsive mt-3">
+                        <table class="table">
+
+                          <thead>
+                            <tr>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >DOCUMENT TYPE</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >DOCUMENT ID</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                                <tr>
+                                <td class="text-center" style="font-weight: 500;" >1</td>
+                                <td class="text-center" style="font-weight: 500;" >VAT CERTIFICATE</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.vat_no}</td>
+
+                                </tr>
+                                <tr>
+                                <td class="text-center" style="font-weight: 500;" >2</td>
+                                <td class="text-center" style="font-weight: 500;" >TRADE LICENSE</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.company.tl_no}</td>
+                                
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                    </div>
+                    
+                  </div>
+                    
+                      
+                      `
+                      ;
+        
+        companydetails.style.display='block';
+        }
+        else{
+          companydetails.innerHTML='<p>No details available for the selected company.</p>';
+        }
+      })
+      .catch(error=>{
+        companyinfo.innerHTML='<p>Error fetching company details.</p>';
+        console.log('Error :',error)
+      });
+    }
+    else{
+      companydetails.style.display='none';
+    }
+    
+  }
+
+  companydropdown.addEventListener('change',function(){
+    const selectedcompanyID=companydropdown.value;
+    fetchCompanyDetails(selectedcompanyID);
+  });
+  document.getElementById('closebtn').addEventListener('click',function(){
+    companydetails.style.display='none';
+
+  });
+
+  function fetchPackageDetails(packageID, formIdx) {
+    const packageInfo = document.getElementById(`package-info-${formIdx}`);
+    const packageDetails = document.getElementById(`package-details-${formIdx}`);
+  
+    if (packageID) {
+        // Display loading message
+        packageInfo.innerHTML = '<p>Package Details Loading...</p>';
+  
+        // Make the fetch request to get package details
+        fetch(`get-package-details/${packageID}/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let packageStatusHtml = '';
+
+                    var openDays = [];
+
+    // Check each day and add to the array if it's open
+                    if (data.package.monday == true) openDays.push('Monday');
+                    if (data.package.tuesday == true) openDays.push('Tuesday');
+                    if (data.package.wednesday == true) openDays.push('Wednesday');
+                    if (data.package.thursday == true) openDays.push('Thursday');
+                    if (data.package.friday == true) openDays.push('Friday');
+                    if (data.package.saturday == true) openDays.push('Saturday');
+                    if (data.package.sunday == true) openDays.push('Sunday');
+
+                    
+
+                    // Ensure data.package.supplier is defined and is an array
+                    setTimeout(() => {
+                      const supplierDetailsContainer = document.getElementById(`plink6-${formIdx}`);
+                      const pricecontainer=document.getElementById(`tbody1-${formIdx}`);
+
+                  
+                      if (supplierDetailsContainer) {
+                          const suppliers = Array.isArray(data.package.supplier) ? data.package.supplier : [];
+                  
+                          if (suppliers.length > 0) {
+                              // Loop through each supplier and generate the HTML content
+                              suppliers.forEach(sup => {
+                                if (sup.status === 'active') {
+                                  supplierStatusHtml = `<td class="text-center" style="font-weight: 500; color: green;">${sup.status}</td>`;
+                              } else if (sup.status === 'inactive'){
+                                supplierStatusHtml = `<td class="text-center" style="font-weight: 500; color: orange;">${sup.status}</td>`;
+                              } else {
+                                supplierStatusHtml = `<td class="text-center" style="font-weight: 500; color: red;">${sup.status}</td>`;
+                              }
+            
+                              // Display the package details
+          
+                                  const supplierHTML = `
+                                      <div class="pl-3 pr-3">
+                                      <div class="row supplier-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+                                      <h4 class="text-center text-rose mt-2 mb-3 text-uppercase" style="font-weight: 900;">${sup.supplier_name} (${sup.supplier_id})</h4>
+                                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center text-rose" style="font-weight: 900;">ID</th>
+                                        <th class="text-center text-rose" style="font-weight: 900;">NAME</th>
+                                        <th class="text-center text-rose" style="font-weight: 900;">CATEGORY</th>
+                                        <th class="text-center text-rose" style="font-weight: 900;">TYPE</th>
+                                        <th class="text-center text-rose" style="font-weight: 900;">STATUS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center" style="font-weight: 500;">${sup.supplier_id}</td>
+                                        <td class="text-center" style="font-weight: 500;">${sup.supplier_name}</td>
+                                        <td class="text-center" style="font-weight: 500;">${sup.supplier_category}</td>
+                                        <td class="text-center" style="font-weight: 500;">${sup.supplier_type}</td>
+                                        ${supplierStatusHtml}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                                      </div>
+                                      </div>
+                                  `;
+                  
+                                  // Append the generated HTML to the container
+                                  supplierDetailsContainer.innerHTML += supplierHTML;
+                              });
+                          } else {
+                              console.log("No suppliers found or supplier data is not an array.");
+                          }
+                      }
+                      if(pricecontainer){
+
+                        const suppliers = Array.isArray(data.package.supplier) ? data.package.supplier : []; 
+                  
+                          if (suppliers.length > 0) {
+                              // Loop through each supplier and generate the HTML content
+                              suppliers.forEach(sup => {
+                                
+            
+                              // Display the package details
+          
+                                  const priceHTML = `
+                                      
+                                      
+                                    <tr>
+                                    <td class="text-center" style="font-weight: 500;">${sup.supplier_name} ( ${sup.supplier_id} )</td>
+                                        <td class="text-center" style="font-weight: 500;">${sup.adult_price}</td>
+                                        <td class="text-center" style="font-weight: 500;">${sup.child_price}</td>
+                                        <td class="text-center" style="font-weight: 500;">${sup.infant_price}</td>
+                                    </tr>
+                                
+                                     
+                                  `;
+                  
+                                  pricecontainer.innerHTML += priceHTML;// Append the generated HTML to the container
+                                  
+                              });
+                          } else {
+                              console.log("No suppliers found or supplier data is not an array.");
+                          }
+
+                      }
+                       else {
+                          console.log(`Element with ID plink1-${formIdx} not found.`);
+                      }
+                  }, 500); 
+                  
+                  
+                  
+                  
+
+                  
+  
+                    // Check if the package status is 'active', 'inactive', or other
+                    if (data.package.status === 'active') {
+                        packageStatusHtml = `<span style="color: green;">${data.package.status}</span>`;
+                    } else if (data.package.status === 'inactive'){
+                        packageStatusHtml = `<span style="color: orange;">${data.package.status}</span>`;
+                    } else {
+                        packageStatusHtml = `<span style="color: red;">${data.package.status}</span>`;
+                    }
+  
+                    // Display the package details
+                    packageInfo.innerHTML = `
+                        <h3 class="text-center text-rose mt-2 mb-3 text-uppercase" style="font-weight: 900;">${data.package.title} ( ${data.package.id} ) </h3>
+                        <h5 class="text-center mt-2 mb-3 text-uppercase" style="font-weight: 900;">category : ${data.package.category}</h5>
+                        <h5 class="text-center mt-2 mb-3 text-uppercase" style="font-weight: 900;">Status : ${packageStatusHtml}</h5>
+
+                        
+
+                        <ul class="nav nav-pills nav-pills-warning mt-5 d-flex justify-content-center" role="tablist" style="font-size:1.25rem;">
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link active" data-toggle="tab" href="#plink1-${formIdx}" role="tablist">
+                        PRICE & AGE
+                      </a>
+                    </li>
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link" data-toggle="tab" href="#plink2-${formIdx}" role="tablist">
+                        DESCRIPTION
+                      </a>
+                    </li>
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link" data-toggle="tab" href="#plink3-${formIdx}" role="tablist">
+                        HIGHLIGHTS
+                      </a>
+                    </li>
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link" data-toggle="tab" href="#plink4-${formIdx}" role="tablist">
+                        INCLUSIONS & EXCLUSIONS
+                      </a>
+                    </li>
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link" data-toggle="tab" href="#plink5-${formIdx}" role="tablist">
+                        OPEN DAYS
+                      </a>
+                    </li>
+                    <li class="nav-item" style="font-size:1.25rem;">
+                      <a class="nav-link" data-toggle="tab" href="#plink6-${formIdx}" role="tablist">
+                        SUPPLIERS
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  
+                  <div class="tab-content tab-space">
+                    <div class="tab-pane active" id="plink1-${formIdx}">
+
+                      <div class="table-responsive mt-3">
+                        <table class="table">
+
+                          <thead>
+                            <tr>
+                              <th class="text-center  text-rose" style="font-weight: 900;" ></th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >ADULT</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >CHILD</th>
+                              <th class="text-center  text-rose" style="font-weight: 900;" >INFANT</th>
+                              
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                                <tr>
+                                <td class="text-center text-rose" style="font-weight: 900;" >PRICE</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.package.adult_price}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.package.child_price}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.package.infant_price}</td>
+                                
+                                </tr>
+                                <tr>
+                                <td class="text-center text-rose" style="font-weight: 900;" >AGE</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.package.adult_age}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.package.child_age}</td>
+                                <td class="text-center" style="font-weight: 500;" >${data.package.infant_age}</td>
+                                
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                                    <div class="pl-3 pr-3">
+                                                              <h4 class="mt-4 mb-4 text-center   text-uppercase" style="font-weight: 900;">Price By Suppliers</h4>
+
+                                      <div class="row supplier-details rounded border pt-3 pl-2 pr-2 pb-4 mb-5">
+                          <table class="table">
+                          <thead>
+                            <tr>
+                                <th class="text-center text-rose" style="font-weight: 900;">SUPPLIER</th>
+                                <th class="text-center text-rose" style="font-weight: 900;">ADULT</th>
+                                <th class="text-center text-rose" style="font-weight: 900;">CHILD</th>
+                                <th class="text-center text-rose" style="font-weight: 900;">INFANT</th>
+                              
+
+                            </tr>
+                          </thead>
+                          <tbody id="tbody1-${formIdx}">
+                            
+                                
+
+                          </tbody>
+                            </table>
+                          </div>
+                           </div>
+                            </div>
+
+
+                    
+
+                    
+                    <div class="tab-pane" id="plink2-${formIdx}">
+                      <p class="mt-3" style="font-weight: 500;">${data.package.description}</p>
+                    </div>
+
+                    <div class="tab-pane" id="plink3-${formIdx}">
+                      <p class="mt-3" style="font-weight: 500;">${data.package.highlights}</p>
+                    </div>
+
+                    <div class="tab-pane" id="plink4-${formIdx}">
+
+                    <h4 class="text-center text-rose text-uppercase font-weight-bold mb-2 mt-2" style="font-weight: 900;">Inclusions</h4>
+                      <p class="mt-3 mb-3" style="font-weight: 500;">${data.package.inclusions}</p>
+                      <h4 class="text-center text-rose text-uppercase font-weight-bold mb-2 mt-2" style="font-weight: 900;">exclusions</h4>
+                      <p class="mt-3 mb-3" style="font-weight: 500;">${data.package.exclusions}</p>
+                    </div>
+
+
+                    <div class="tab-pane" id="plink5-${formIdx}">
+                    <h4 class="text-center text-rose text-uppercase font-weight-bold mb-2 mt-2" style="font-weight: 900;">open days</h4>
+                      <p class="mt-3 mb-3 text-center" style="font-weight: 500;" id="open-days">${openDays}</p>
+                      <h4 class="text-center text-rose text-uppercase font-weight-bold mb-2 mt-2" style="font-weight: 900;">open hours</h4>
+                      <p class="mt-3 mb-3 text-center" style="font-weight: 500;">${data.package.open_hours}</p>
+                    </div>
+
+                    <div class="tab-pane" id="plink6-${formIdx}">
+                      
+                    </div>
+                    
+                  </div>
+                    `;
+                    // Show the package details section for the selected formset
+                    packageDetails.style.display = 'block';
+                } else {
+                    packageInfo.innerHTML = '<p>No details available for the selected package.</p>';
+                }
+            })
+            .catch(error => {
+                packageInfo.innerHTML = '<p>Error fetching package details.</p>';
+                console.error('Error:', error);
+            });
+    } else {
+        packageDetails.style.display = 'none'; // Hide package details if no package is selected
+    }
+  }
+  
+  // Add event listeners for package selection in each formset
+  const formsets = document.querySelectorAll('.formset');
+  formsets.forEach((formset, idx) => {
+    const packageDropdown = formset.querySelector(`#id_bookingtripdetails-${idx}-package`);
+    if (packageDropdown) {
+        packageDropdown.addEventListener('change', function () {
+            const selectedPackageID = packageDropdown.value;
+            fetchPackageDetails(selectedPackageID, idx); // Fetch package details for the selected package in this formset
+        });
+    }
+  });
+  
+  // Close button for the package details section
+  document.querySelectorAll('.package-details button').forEach(button => {
+    button.addEventListener('click', function () {
+      if (event.target && event.target.matches('.package-details button')) {
+        const packageDetails = event.target.closest('.package-details');
+        packageDetails.style.display = 'none'; // Hide the .package-details
+    }
+    });
+  });
+
+</script>
 
 
 

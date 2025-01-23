@@ -60,6 +60,15 @@
         Driver Deleted successfully!
         </div>
 
+        <div
+          id="delete-success-message"
+          class="alert alert-success text-center font-weight-bold alertmessage"
+          role="alert"
+          style="display: none; margin-top: 20px"
+        >
+        Drivers Deleted successfully!
+        </div>
+
 
         <div class="row">
           <div class="col-2"></div>
@@ -129,6 +138,25 @@
           <div class="col-2"></div>
         </div>
 
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-lg-8 col-md-12 col-md-12">
+            <div class="row">
+              <div class="col-6"></div>
+              <div class="col-4"></div>
+              
+              
+              <div class="col-1 Alldelete" style="display:none;"><button type="button" rel="tooltip" class="btn btn-danger" data-toggle="modal" data-target="#deleteallModal">
+                <i class="material-icons">delete</i> DELETE
+               </button>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-2"></div>
+        </div>
+        
+
         <div class="row" id="supplier-allocation-content">
           <div class="col-2"></div>
           <div class="col-lg-8 col-md-12 col-md-12">
@@ -143,6 +171,14 @@
                   <table class="table">
                     <thead>
                       <tr>
+                        <th class="text-center  text-rose" style="font-weight: 900;" ><div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" id="checkAll" type="checkbox" value=""> 
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div></th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >SL.NO</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >ID</th>
                         <th class="text-center  text-rose" style="font-weight: 900;" >NAME</th>
@@ -160,6 +196,14 @@
                       {% for i in data %}
                       <tr>
                         <tr>
+                          <td class="text-center" style="font-weight: 500;"><div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input row-checkbox" type="checkbox" data-driver-id="{{i.driver_id}}" value=""> 
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div></td>
                           <td class="text-center" style="font-weight: 500;">{{forloop.counter}}</td>
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.driver_id}}</td>
                           <td class="text-center text-capitalize" style="font-weight: 500;">{{i.name}}</td>
@@ -187,6 +231,60 @@
                           <td class="text-center text-capitalize" style="font-weight: 500;"></td>
 
                       </tr>
+
+                      <div
+                class="modal "
+                id="deleteallModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="deleteallModalLabel"
+                aria-hidden="true"
+                
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3
+                        class="modal-title text-primary font-weight-bold"
+                        id="deleteallModalLabel"
+                      >
+                        Delete Selected Drivers
+                      </h3>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div
+                      class="modal-body"
+                      id="modal-content"
+                    >
+                      <h3 class="text-center font-weight-bold">Are You Sure that you Want to Delete Selected Drivers ?</h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary font-weight-bold"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger font-weight-bold"
+                        id="deleteallBtn"
+                        
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
                       <div
                           class="modal"
@@ -341,6 +439,10 @@
           // Hide the modal
           $("#deleteModal" + id).modal("hide");
 
+          $('body').removeClass('modal-open');
+
+          document.body.style.paddingRight = '0';
+
           $(".modal-backdrop").remove();
 
           // Show success message
@@ -365,6 +467,126 @@
     location.reload(true);
  }
 
+
+ function checkboxevents(){
+  document.getElementById('checkAll').addEventListener('change',function(){
+    var checkboxes=document.querySelectorAll('.row-checkbox');
+    var isChecked=this.checked;
+    var deletebutton=document.querySelector('.Alldelete')
+
+    checkboxes.forEach(checkbox =>{
+      checkbox.checked=isChecked
+    })
+
+    if(isChecked){
+      deletebutton.style.display='inline-block';
+    }
+    else{
+      deletebutton.style.display='none';
+    }
+
+
+  });
+
+  document.querySelectorAll('.row-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change',function(){
+      fetchCheckedIDs();
+    });
+  });
+
+
+  function fetchCheckedIDs(){
+    var checkedIds=[];
+    document.querySelectorAll('.row-checkbox:checked').forEach(checkbox => {
+      checkedIds.push(checkbox.getAttribute('data-driver-id'));
+    });
+    console.log('checked ids :',checkedIds)
+
+    var deleteBtn=document.querySelector('.Alldelete');
+    if(checkedIds.length > 0){
+      deleteBtn.style.display = 'inline-block';
+    }
+    else{
+      deleteBtn.style.display = 'none';
+
+    }
+  }
+
+
+ }
+
+ checkboxevents();
+
+
+ function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+
+$(document).on('click','#deleteallBtn',function(){
+  var checkedIds=[];
+  document.querySelectorAll('.row-checkbox:checked').forEach(checkbox => {
+    checkedIds.push(checkbox.getAttribute('data-driver-id'));
+  });
+  if (checkedIds.length > 0){
+    $.ajax({
+      url:"/delete-multiple-driver/",
+      type:"POST",
+      contentType:"application/json",
+      data:JSON.stringify({
+        driver_ids:checkedIds
+      }),
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken'),  // Include the CSRF token in the request headers
+      },
+      success:function(response){
+        if(response.status == 'success'){
+          $("#supplier-allocation-content").html(response.updated_table_html);
+  
+                    // Reinitialize events for the new content
+                    checkboxevents();
+  
+                    // Optionally, hide the "Recover" button or uncheck the checkboxes
+                    $(".row-checkbox:checked").prop("checked", false);
+                    $(".Alldelete").hide();
+                    $("#deleteallModal").modal("hide");
+                    $(".modal-backdrop").remove(); 
+                    $('body').removeClass('modal-open');
+                    document.body.style.paddingRight = '0';
+                    // Hide the recover button
+  
+                    // Show success message
+                    $("#delete-success-message").fadeIn(300).delay(3000).fadeOut(300);
+        }
+        else{
+          alert("an error occured while deleting items")
+        }
+      },
+      error: function(xhr,status,error){
+        console.log(" XHR Responce : ",xhr.responseText);
+        alert( "Error : " + error);
+        console.error("There was an error delete the items:", error);
+      }
+
+    });
+  }
+  else{
+    alert("No Checkboxes are Selected !");
+  }
+});
+
+
 </script>
 
 
@@ -386,6 +608,7 @@
                   if (response.status === 'success') {
                       // Update the bookings container with the new HTML
                       $('#supplier-allocation-content').html(response.bookings_html);
+                      checkboxevents();
                   } else {
                       alert('Error: ' + response.message);
                   }

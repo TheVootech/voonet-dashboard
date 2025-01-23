@@ -465,18 +465,25 @@ class Supplier_form(forms.ModelForm):
 class Allocate_supplier_form(forms.ModelForm):
     class Meta:
         model = Supplier_allocation
-        fields = ['package', 'supplier']
+        fields = ['package', 'supplier','adultprice', 'childprice','infantprice']
         widgets = {
             'package': forms.Select(attrs={                    
                     'class': 'form-select',
                     'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
                 }),
-            'supplier': forms.SelectMultiple(attrs={'class': 'form-select'}),
+            'supplier': forms.Select(attrs={                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+}),
+            
+            'adultprice': forms.NumberInput(attrs={ 'class': 'form-control',
+                    'placeholder': 'Enter adultprice'}),
+            'childprice': forms.NumberInput(attrs={ 'class': 'form-control',
+                    'placeholder': 'Enter child price'}),
+            'infantprice': forms.NumberInput(attrs={ 'class': 'form-control',
+                    'placeholder': 'Enter infant price'}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['package'].queryset = Package.objects.filter(supplier_allocation__isnull=True).distinct()
+    
 
         
         
@@ -485,19 +492,24 @@ class Allocate_supplier_form(forms.ModelForm):
         
 class Edit_allocate_supplier_form(forms.ModelForm):
     class Meta:
-        model=Supplier_allocation
-        fields=['package','supplier']
-        
-        widgets={
-            'package':forms.TextInput(attrs={
-                 'class': 'form-select bg-none border border-secondary',
-                 'style': 'background-color: transparent; border-radius: 5px;',
-                 'readonly': 'readonly',
-            }),
-            'supplier':forms.SelectMultiple(attrs={
-                 'class': 'form-select bg-none border border-secondary',
-                 'style': 'background-color: transparent; border-radius: 5px;'
-            })
+        model = Supplier_allocation
+        fields = ['package', 'supplier','adultprice', 'childprice','infantprice']
+        widgets = {
+            'package': forms.Select(attrs={                    
+                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+                    
+                }),
+            'supplier': forms.Select(attrs={                    'class': 'form-select',
+                    'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+}),
+            
+            'adultprice': forms.NumberInput(attrs={ 'class': 'form-control',
+                    'placeholder': 'Enter adultprice'}),
+            'childprice': forms.NumberInput(attrs={ 'class': 'form-control',
+                    'placeholder': 'Enter child price'}),
+            'infantprice': forms.NumberInput(attrs={ 'class': 'form-control',
+                    'placeholder': 'Enter infant price'}),
         }
                 
         
@@ -1194,6 +1206,11 @@ class Booking_form(forms.ModelForm):
 
                 }),
                 
+                'grand_total':forms.NumberInput(
+                    attrs={
+                    'class':'form-control',
+                }),
+                
         
         }
         
@@ -1227,7 +1244,7 @@ class Booking_form(forms.ModelForm):
 class booking_trip_form(forms.ModelForm):
     class Meta:
         model=Booking_Trip_details
-        exclude=['booking','booking_trip_id','is_deleted']
+        exclude=['booking','booking_trip_id','is_deleted','driver','guide']
         
         widgets={
                 'guest_name': forms.TextInput(attrs={
@@ -1356,16 +1373,18 @@ class booking_trip_form(forms.ModelForm):
                 }),
                 'vat':forms.NumberInput(
                     attrs={
-                    'class': 'form-control pl-2',
-                }),
-                'include':forms.CheckboxInput(
-                    attrs={
-                    'class':'form-check-input',
+                    'class': 'ml-2 pl-2',
+                    'style':'width:70px;'
                 }),
                 
                 'exclude':forms.CheckboxInput(
                     attrs={
-                    'class':'form-check-input',
+                    'class':'form-check-input mt-2',
+                }),
+                
+                'grand_total':forms.NumberInput(
+                    attrs={
+                    'class':'form-control grandtotal',
                 }),
                 
          }
@@ -1738,3 +1757,56 @@ class Package_filter_form(forms.Form):
             'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
         })                    
     )
+    
+    
+    
+class Assign_form(forms.Form):
+    
+    guide=forms.ModelChoiceField(
+         queryset=Guide.objects.filter(is_deleted=False),
+         required=False,
+         
+         widget=forms.Select(attrs={
+            'class': 'form-select',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+    driver=forms.ModelChoiceField(
+         queryset=Driver.objects.filter(is_deleted=False),
+         required=False,
+         widget=forms.Select(attrs={
+            'class': 'form-select',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+    suppliers=forms.ModelChoiceField(
+         queryset=Supplier.objects.filter(is_deleted=False),
+         required=False,
+         widget=forms.Select(attrs={
+            'class': 'form-select',
+            'style': 'background-color: transparent; border: none; border-bottom: 2px solid #D3D3D3; border-radius: 0;',
+        })                    
+    )
+    
+    
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Customizing the Guide choices to display name + id
+        self.fields['guide'].queryset = Guide.objects.filter(is_deleted=False)
+        self.fields['guide'].label_from_instance = lambda obj: f"{obj.name} ({obj.guide_id})"
+
+        # Customizing the Driver choices to display name + id
+        self.fields['driver'].queryset = Driver.objects.filter(is_deleted=False)
+        self.fields['driver'].label_from_instance = lambda obj: f"{obj.name} ({obj.driver_id})"
+        
+        
+        self.fields['suppliers'].queryset = Supplier.objects.filter(is_deleted=False)
+        self.fields['suppliers'].label_from_instance = lambda obj: f"{obj.name} ({obj.supplier_id})"
+    
+    

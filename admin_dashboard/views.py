@@ -32,7 +32,66 @@ def viewbooking_view(request):
     return render(request,'viewbooking.html')
 
 def viewdriverallocation_view(request):
-    return render(request,'viewdriverallocation.html')
+    data=Booking_Trip_details.objects.filter(is_deleted=False)
+    return render(request,'viewdriverallocation.html',{'data':data,'form':Booking_filter_form,'assignform':Assign_form})
+
+def assign_driver_guide_supplier(request):
+    if request.method == 'POST':
+        try:
+            print(request.body)
+            # Get the list of booking_trip_ids from the request
+            data = json.loads(request.body)
+            booking_trip_ids = data.get('booking_trip_ids', [])
+            driver_id=data.get('driver_id')
+            guide_id=data.get('guide_id')
+            supplier_id=data.get('supplier_id')
+            
+            
+            driver = Driver.objects.get(driver_id=driver_id) if driver_id else None
+            guide = Guide.objects.get(guide_id=guide_id) if guide_id else None
+            supplier = Supplier.objects.get(supplier_id=supplier_id) if supplier_id else None
+
+            for trip_id in booking_trip_ids:
+                try:
+                    trip=Booking_Trip_details.objects.get(booking_trip_id=trip_id)
+                    
+                    if driver:
+                        trip.driver=driver
+                    if guide:
+                        trip.guide=guide
+                    if supplier:
+                        trip.supplier=supplier
+                        
+                    trip.save()
+                    
+                except trip.DoesNotExist:
+                    messages.error(request, 'Booking does not exist.')
+                    return redirect('viewdriverallocation') 
+                    
+
+            updated_table_html = render_to_string('partials/driverallocationtable.html', {
+            'data': Booking_Trip_details.objects.filter(is_deleted=False) ,'assignform' :Assign_form
+        })
+
+            # Return a success response with the updated table HTML
+            return JsonResponse({
+                'status': 'success',
+                'updated_table_html': updated_table_html
+            })
+
+        except (Driver.DoesNotExist, Guide.DoesNotExist, Supplier.DoesNotExist) as e:
+            # Handle the case where any of the referenced objects (driver, guide, supplier) do not exist
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+        except Exception as e:
+            # Handle any unexpected error
+            return JsonResponse({'status': 'error', 'message': 'An error occurred: ' + str(e)})
+
+    else:
+        # Return an error if the request is not POST
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+    
+
 
 def view_jobcard_view(request):
     return render (request,'viewjobcard.html')
@@ -455,7 +514,7 @@ def addsupplier_view(request):
     
     
 def Supplier_allocation_view(request):
-    data=Supplier_allocation.objects.all()
+    data=Supplier_allocation.objects.all().order_by('package')
     form=Edit_allocate_supplier_form()
     return render(request,'supplierallocation.html',{'data':data,'form':form})
 
@@ -573,16 +632,13 @@ def Allocate_new_supplier_view(request):
             form=Allocate_supplier_form(request.POST)
             if form.is_valid():
                 form.save()
-                packages_without_suppliers = Package.objects.filter(supplier_allocation__isnull=True)
-                newform=Allocate_supplier_form()
-                new_form_html = render_to_string('partials/supplierallocateformajax.html', {'form': newform,'packagelength':packages_without_suppliers,'csrf_token': get_token(request),})
-                return JsonResponse({'success': True, 'new_form_html': new_form_html})
+                return JsonResponse({'success': True})
             else:
                 return JsonResponse({'success': False, 'errors': form.errors})
         else:
-            packages_without_suppliers = Package.objects.filter(supplier_allocation__isnull=True)
+            
             form=Allocate_supplier_form()
-            return render(request,'add_supplier_allocation.html',{'form':form,'packagelength':packages_without_suppliers})
+            return render(request,'add_supplier_allocation.html',{'form':form})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)}, status=500)
         
@@ -593,7 +649,7 @@ def Edit_supplier_allocation_view(request, pk):
     data = get_object_or_404(Supplier_allocation, pk=pk)
     
     if request.method == 'POST':
-        form = Edit_allocate_supplier_form(request.POST, instance=data)
+        form = form=Edit_allocate_supplier_form(request.POST, instance=data)
         
         if form.is_valid():
             form.save()
@@ -611,10 +667,10 @@ def Edit_supplier_allocation_view(request, pk):
         
         else:
             messages.error(request, 'Supplier Allocation Editing Failed')
-            return JsonResponse({'status': 'error', 'message': 'Form is invalid'}, status=400)
+            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
 
     else:
-        form = Edit_allocate_supplier_form(instance=data)
+        form = form=Edit_allocate_supplier_form(instance=data)
         form_html = render_to_string('partials/editsupplierallocationform.html', {'form': form, 'csrf_token': get_token(request)})
         return JsonResponse({'form_html': form_html})
     
@@ -1574,7 +1630,7 @@ def addbooking_view(request):
     
 
 def view_bookings(request):
-    data=Booking_Trip_details.objects.filter(is_deleted=False)
+    data=Booking_Trip_details.objects.filter(is_deleted=False).order_by('-booking_trip_id')
     booking = Booking.objects.filter(bookingtripdetails__isnull=True)
     booking.delete()
     a=Booking.objects.all()
@@ -1659,7 +1715,7 @@ def edit_booking_view(request, pk):
             # Provide success feedback
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 # Fetch all supplier allocation data and render the updated table
-                all_data = Booking_Trip_details.objects.filter(is_deleted=False)  # or you can filter as needed
+                all_data = Booking_Trip_details.objects.filter(is_deleted=False).order_by('-booking_trip_id')  # or you can filter as needed
                 updated_table_html = render_to_string('partials/bookingtable.html', {'data': all_data})
                 
                 return JsonResponse({'status': 'success', 'updated_table_html': updated_table_html})
@@ -1677,7 +1733,15 @@ def edit_booking_view(request, pk):
         # For GET request, populate the forms with existing data
         form = Booking_form(instance=booking)
         formset = edit_booking_trip_formset(instance=booking,queryset=Booking_Trip_details.objects.filter(booking_trip_id=trip_id))
-        form_html = render_to_string('partials/editbooking.html', {'form': form,'formset':formset, 'csrf_token': get_token(request)})
+        trip_details=Booking_Trip_details.objects.filter(booking_trip_id=trip_id)
+        
+        for i in trip_details:
+            i.total_adult_cost = i.no_of_adult * i.rate_of_adult
+            i.total_child_cost = i.no_of_child * i.rate_of_child
+            i.total_infant_cost = i.no_of_infant * i.rate_of_infant
+            i.total_amount_=i.grand_total-i.vat_amount
+            
+        form_html = render_to_string('partials/editbooking.html', {'form': form,'formset':formset, 'csrf_token': get_token(request),'data':trip_details})
         return JsonResponse({'form_html': form_html})
 
 
@@ -1714,7 +1778,7 @@ def delete_bookings_view(request,pk):
             data.is_deleted = True
             data.save()
             
-            all_data=Booking_Trip_details.objects.filter(is_deleted=False)
+            all_data=Booking_Trip_details.objects.filter(is_deleted=False).order_by('-booking_trip_id')
             updated_table_html=render_to_string('partials/bookingtable.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
@@ -1729,7 +1793,7 @@ def recover_booking_view(request,pk):
             data.is_deleted = False
             data.save()
             
-            all_data=Booking_Trip_details.objects.filter(is_deleted=True)
+            all_data=Booking_Trip_details.objects.filter(is_deleted=True).order_by('-booking_trip_id')
             updated_table_html=render_to_string('partials/booking_trash_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
@@ -1751,7 +1815,7 @@ def recover_multiple_bookings(request):
 
                 # Fetch the updated table HTML
                 updated_table_html = render_to_string('partials/booking_trash_table.html', {
-                    'data': Booking_Trip_details.objects.filter(is_deleted=True),  # Modify this to get the updated list of bookings
+                    'data': Booking_Trip_details.objects.filter(is_deleted=True).order_by('-booking_trip_id'),  # Modify this to get the updated list of bookings
                 })
 
                 return JsonResponse({
@@ -1783,7 +1847,7 @@ def delete_multiple_bookings_forever(request):
 
                 # Fetch the updated table HTML
                 updated_table_html = render_to_string('partials/booking_trash_table.html', {
-                    'data': Booking_Trip_details.objects.filter(is_deleted=True),  # Modify this to get the updated list of bookings
+                    'data': Booking_Trip_details.objects.filter(is_deleted=True).order_by('-booking_trip_id'),  # Modify this to get the updated list of bookings
                 })
 
                 return JsonResponse({
@@ -1816,7 +1880,7 @@ def delete_multiple_bookings(request):
 
                 # Fetch the updated table HTML
                 updated_table_html = render_to_string('partials/bookingtable.html', {
-                    'data': Booking_Trip_details.objects.filter(is_deleted=False),  # Modify this to get the updated list of bookings
+                    'data': Booking_Trip_details.objects.filter(is_deleted=False).order_by('-booking_trip_id'),  # Modify this to get the updated list of bookings
                 })
 
                 return JsonResponse({
@@ -1838,7 +1902,7 @@ def delete_booking_forever_view(request,pk):
         try:
             data=Booking_Trip_details.objects.get(pk=pk)
             data.delete()
-            all_data=Booking_Trip_details.objects.filter(is_deleted=True)
+            all_data=Booking_Trip_details.objects.filter(is_deleted=True).order_by('-booking_trip_id')
             updated_table_html=render_to_string('partials/booking_trash_table.html',{'data':all_data})
             return JsonResponse({'status':'success','updated_table_html':updated_table_html})
         
@@ -1848,7 +1912,7 @@ def delete_booking_forever_view(request,pk):
     
      
 def view_booking_trash(request):
-    data=Booking_Trip_details.objects.filter(is_deleted=True)
+    data=Booking_Trip_details.objects.filter(is_deleted=True).order_by('-booking_trip_id')
     return render(request,'bookingstrash.html',{'data':data})
 
 
@@ -1880,3 +1944,154 @@ def save_location(request):
             return JsonResponse({"success": True, "message": "Location already exists."})
     
     return JsonResponse({"success": False, "message": "No location name provided."})
+
+
+
+def get_company_details(request,company_id):
+    try:
+        company=Company.objects.get(pk=company_id)
+        company_data={
+            'id':company.company_id,
+            'type':company.company_type.type_name,
+            'status':company.status.status,
+            'name':company.name,
+            'address1':company.address1,
+            'city1':company.city1,
+            'state1':company.state1,
+            'pincode1':company.pincode1,
+            'country1':company.country1,
+            'address2':company.address2,
+            'city2':company.city2,
+            'state2':company.state2,
+            'pincode2':company.pincode2,
+            'country2':company.country2,
+            'email': company.email,
+            'phone': company.mobile,
+            'vat_no': company.vat_number,
+            'tl_no': company.tl_number,
+        }
+        return JsonResponse({'success':True,'company':company_data})
+    except Company.DoesNotExist:
+        return JsonResponse({'success':False,'message':'Company not Found'},status=404)
+    
+    
+
+def get_package_details(request, package_id):
+    try:
+        # Fetch the package object
+        package = Package.objects.get(pk=package_id)
+
+        try:
+            # Try to get the supplier allocation for the package
+            supplier_allocation = Supplier_allocation.objects.filter(package=package)
+            
+            # Debugging: Check the supplier_allocation object
+            print(f"Supplier allocation found for package {package.package_id}: {supplier_allocation}")
+            
+            suppliers = []
+            
+            for allocation in supplier_allocation :
+                if allocation.supplier:
+                    # If supplier is a ForeignKey (one-to-one relationship)
+                    suppliers.append(allocation.supplier)
+                else:
+                    # If supplier is a ManyToManyField (many-to-many relationship)
+                    suppliers.extend(allocation.supplier.all())
+
+            # Debugging: Check if suppliers are being fetched
+            if suppliers:
+                print(f"Found {len(suppliers)} suppliers for package {package.package_id}")
+            else:
+                print(f"No suppliers found for package {package.package_id}")
+
+            # Prepare the supplier data
+            supplier_data = []
+            for supplier in suppliers:
+                supplier_data.append({
+                    'supplier_id': supplier.supplier_id,
+                    'supplier_name': supplier.name,
+                    'supplier_category': supplier.category.category_name,
+                    'supplier_type': supplier.supplier_type.type_name,
+                    'status': supplier.status.status,
+                    'adult_price':allocation.adultprice,
+                    'child_price':allocation.childprice,
+                    'infant_price':allocation.infantprice,
+
+
+                    
+                })
+        except Supplier_allocation.DoesNotExist:
+            # Logging when no supplier allocation is found
+            print(f"No supplier allocation found for package {package.package_id}")
+            supplier_data = []
+
+        # Prepare the package data
+        package_data = {
+            'id': package.package_id,
+            'title': package.package_title,
+            'category': package.package_category.category_name,
+            'city': package.package_city,
+            'status': package.status.status,
+            'adult_price': package.adult_rate,
+            'child_price': package.child_rate,
+            'infant_price': package.infant_rate,
+            'adult_age': package.adult_age,
+            'child_age': package.child_age,
+            'infant_age': package.infant_age,
+            'description': package.description,
+            'highlights': package.highlights,
+            'inclusions': package.inclusions,
+            'exclusions': package.exclusions,
+            'open_hours': package.open_hours,
+            'sunday': package.sunday,
+            'monday': package.monday,
+            'tuesday': package.tuesday,
+            'wednesday': package.wednesday,
+            'thursday': package.thursday,
+            'friday': package.friday,
+            'saturday': package.saturday,
+            'supplier': supplier_data,
+        }
+
+        # Return the package data as JSON response
+        return JsonResponse({'success': True, 'package': package_data})
+
+    except Package.DoesNotExist:
+        # Return error response if the package is not found
+        return JsonResponse({'success': False, 'message': 'Package not found'}, status=404)
+
+    except Exception as e:
+        # Catch other errors and return a generic error response
+        return JsonResponse({'success': False, 'message': str(e)}, status=500)
+
+    
+    
+def delete_multiple_driver(request):
+    if request.method == 'POST':
+        try:
+            print(request.body)
+            # Get the list of booking_trip_ids from the request
+            data = json.loads(request.body)
+            driver_ids = data.get('driver_ids', [])
+
+            if driver_ids:
+                # Update 'is_deleted' to False for all selected booking_trip_ids
+                Driver.objects.filter(driver_id__in=driver_ids).update(is_deleted=True)
+
+                # Fetch the updated table HTML
+                updated_table_html = render_to_string('partials/driver_table.html', {
+                    'data': Driver.objects.filter(is_deleted=False),  # Modify this to get the updated list of bookings
+                })
+
+                return JsonResponse({
+                    'status': 'success',
+                    'updated_table_html': updated_table_html,
+                })
+            else:
+                return JsonResponse({'status': 'error', 'message': 'No IDs provided.'})
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})

@@ -6,41 +6,91 @@
     </div>
     <div class="card-body">
         <form class="form-horizontal text-black" enctype="multipart/form-data" action="{% url 'edit_supplier' form.instance.id %}" method="post" id="supp-form">
-            {% csrf_token %}
-            <div class="text-black align-items-center">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Package</label>
-                        {{ form.package }}
-                        {% if form.package.errors %}
-                          <ul class="errorlist text-primary text-bold">
-                            {% for error in form.package.errors %}
-                              <li>{{ error }}</li>
-                            {% endfor %}
-                          </ul>
-                        {% endif %}
+                {% csrf_token %}
+                <div class="text-black align-items-center">
+                  <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                    <h6 class="text-center font-weight-bold mb-3 mt-2">package & supplier</h6>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Package</label>
+                            {{form.package}}
+                            {% if form.package.errors %}
+                              <ul class="errorlist text-primary text-bold">
+                                {% for error in form.package.errors %}
+                                  <li>{{ error }}</li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Supplier</label>
+                          {{form.supplier}} 
+                          {% if form.supplier.errors %}
+                            <ul class="errorlist text-primary text-bold">
+                              {% for error in form.supplier.errors %}
+                                <li>{{ error }}</li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Supplier</label>
-                      {{ form.supplier }} 
-                      {% if form.supplier.errors %}
-                        <ul class="errorlist text-primary text-bold">
-                          {% for error in form.supplier.errors %}
-                            <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
-                  </div>
+                      <div class="Supplier rounded border pt-3 pl-3 pr-3 pb-5 mt-5">
+                        <h6 class="text-center font-weight-bold mb-3 mt-2">price details</h6>
+                        <div class="row">
+                          <div class="col-4">
+                            <div class="form-group">
+                              <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Adult price</label>
+                              {{form.adultprice}} 
+                              {% if form.adultprice.errors %}
+                                <ul class="errorlist text-primary text-bold">
+                                  {% for error in form.adultprice.errors %}
+                                    <li>{{ error }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="form-group">
+                              <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Child Price</label>
+                              {{form.childprice}} 
+                              {% if form.childprice.errors %}
+                                <ul class="errorlist text-primary text-bold">
+                                  {% for error in form.childprice.errors %}
+                                    <li>{{ error }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="form-group">
+                              <label for="exampleEmail" class="bmd-label-floating text-bold text-black">Infant Price</label>
+                              {{form.infantprice}} 
+                              {% if form.infantprice.errors %}
+                                <ul class="errorlist text-primary text-bold">
+                                  {% for error in form.infantprice.errors %}
+                                    <li>{{ error }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+
+
+                      
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <button class="btn btn-square btn-rose w-100 mt-4" type="submit">Edit Allocation</button>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <button class="btn btn-square btn-rose w-100 mt-4" type="submit">Edit  Allocation</button>
+                    </div>
+                    <div class="col-4"></div>
                 </div>
-                <div class="col-3"></div>
-            </div>
-        </form>
+            </form>
     </div>
 </div>
 
@@ -67,6 +117,11 @@
                         
                         // Remove the backdrop
                         $('.modal-backdrop').remove(); 
+
+
+                        $('body').removeClass('modal-open');
+
+                        document.body.style.paddingRight = '0';
                         
                         // Update the supplier allocation table dynamically
                         $('#supplier-allocation-content').html(response.updated_table_html);
@@ -80,7 +135,22 @@
                 },
                 error: function(xhr, status, error) {
                     console.error("Error: " + error);
-                    alert('An error occurred. Please try again later.');
+    
+                    // Handle form validation errors returned by Django
+                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        var errorMessages = '';
+                        $.each(xhr.responseJSON.errors, function(field, messages) {
+                            // Each field can have multiple error messages
+                            $.each(messages, function(index, message) {
+                                errorMessages += message + '\n';
+                            });
+                        });
+    
+                        // Display the errors in an alert
+                        alert('There were errors with the form submission:\n\n' + errorMessages);
+                    } else {
+                        alert('An error occurred. Please try again later.');
+                    }
                 }
             });
         });
